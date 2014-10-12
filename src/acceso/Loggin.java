@@ -31,6 +31,7 @@ import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import com.jgoodies.forms.factories.DefaultComponentFactory;
+import java.awt.Toolkit;
 
 public class Loggin extends JFrame {
 
@@ -58,6 +59,7 @@ public class Loggin extends JFrame {
 	 * Create the frame.
 	 */
 	public Loggin() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Ariel\\Documents\\GitHub\\DogsLovers\\imgs\\Icono.png"));
 		setTitle("Login");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
