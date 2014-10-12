@@ -46,6 +46,9 @@ import java.awt.event.KeyEvent;
 import javax.swing.JToolBar;
 import javax.swing.Box;
 import javax.swing.JButton;
+import javax.swing.JTextArea;
+import java.awt.Point;
+import javax.swing.JScrollBar;
 
 public class NuevoUsuario extends JFrame {
 
@@ -61,6 +64,15 @@ public class NuevoUsuario extends JFrame {
 	private JPasswordField passwordFieldNewPass;
 	private JPasswordField passwordFieldRepeatPass;
 	private JComboBox comboBoxMes; 
+	private JCheckBox CheckBoxCasaCuna;
+	private JTextArea textAreaDireccionCC;
+	private JLabel lblDireccionCasaCuna;
+	private JLabel lblCantidadDeMascotas;
+	private JSpinner spinnerCantidadDeMascota;
+	private JComboBox comboBoxTipoMascota;
+	private JLabel lblTipoDeMascota;
+	private JLabel lblTamaoDeMascota;
+	private JComboBox comboBoxTamanoMascota;
 
 	/**
 	 * Launch the application.
@@ -71,7 +83,8 @@ public class NuevoUsuario extends JFrame {
 				try {
 					NuevoUsuario frame = new NuevoUsuario();
 					frame.setVisible(true);
-					
+					frame.setSize(frame.getMaximumSize());
+					frame.setLocation(50,0);
 					
 					
 					
@@ -86,10 +99,14 @@ public class NuevoUsuario extends JFrame {
 	 * Create the frame.
 	 */
 	public NuevoUsuario() {
-		setTitle("Nuevo Usuario");
+		setResizable(true);
+		
+		setLocation(new Point(0, 0));
 		setRootPaneCheckingEnabled(false);
+		setAlwaysOnTop(false);
+		setTitle("Nuevo Usuario");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 970, 652);
+		setBounds(100, 100, 1364, 689);
 		contentPane = new JPanel();
 		contentPane.addKeyListener(new KeyAdapter() {
 			@Override
@@ -129,8 +146,12 @@ public class NuevoUsuario extends JFrame {
 				}
 				//Faltan Validaciones
 				else{
+					
 					JOptionPane.showMessageDialog(null, "Usuario registrado correctamente");
 					dispose();
+						
+					
+					
 					Loggin loguearse= new Loggin();
 					loguearse.setVisible(true);
 					
@@ -227,20 +248,36 @@ public class NuevoUsuario extends JFrame {
 		lbldeseaSerCasa.setBounds(29, 544, 236, 31);
 		panelAgregarPersona.add(lbldeseaSerCasa);
 		
-		JCheckBox CheckBoxCasaCuna = new JCheckBox("S\u00ED");
+		CheckBoxCasaCuna = new JCheckBox("S\u00ED");
 		CheckBoxCasaCuna.setBackground(new Color(255, 140, 0));
 		CheckBoxCasaCuna.setBounds(278, 551, 40, 23);
 		CheckBoxCasaCuna.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (!CheckBoxCasaCuna.isSelected()){
 					CheckBoxCasaCuna.setText("No");
+					textAreaDireccionCC.setEnabled(false);
+					spinnerCantidadDeMascota.setEnabled(false);
+					comboBoxTamanoMascota.setEnabled(false);
+					comboBoxTipoMascota.setEnabled(false);
+					lblTipoDeMascota.setEnabled(false);
+					lblTamaoDeMascota.setEnabled(false);
+					lblDireccionCasaCuna.setEnabled(false);
+					lblCantidadDeMascotas.setEnabled(false);
 				}
 				else{
 					CheckBoxCasaCuna.setText("S\u00ED");
+					textAreaDireccionCC.setEnabled(true);
+					spinnerCantidadDeMascota.setEnabled(true);
+					comboBoxTamanoMascota.setEnabled(true);
+					comboBoxTipoMascota.setEnabled(true);
+					lblTipoDeMascota.setEnabled(true);
+					lblTamaoDeMascota.setEnabled(true);
+					lblDireccionCasaCuna.setEnabled(true);
+					lblCantidadDeMascotas.setEnabled(true);
+				
 				}
 			}
 		});
-		CheckBoxCasaCuna.setSelected(true);
 		panelAgregarPersona.add(CheckBoxCasaCuna);
 		
 		textFieldNombre = new JTextField();
@@ -318,18 +355,62 @@ public class NuevoUsuario extends JFrame {
 		passwordFieldRepeatPass.setBounds(275, 510, 253, 23);
 		panelAgregarPersona.add(passwordFieldRepeatPass);
 		
+		lblDireccionCasaCuna = new JLabel("Direccion Casa Cuna");
+		lblDireccionCasaCuna.setEnabled(false);
+		lblDireccionCasaCuna.setFont(new Font("Batang", Font.BOLD, 19));
+		lblDireccionCasaCuna.setBounds(691, 237, 203, 31);
+		panelAgregarPersona.add(lblDireccionCasaCuna);
+		
+		lblTamaoDeMascota = new JLabel("Tama\u00F1o de Mascota a Recibir");
+		lblTamaoDeMascota.setEnabled(false);
+		lblTamaoDeMascota.setFont(new Font("Batang", Font.BOLD, 19));
+		lblTamaoDeMascota.setBounds(691, 112, 270, 31);
+		panelAgregarPersona.add(lblTamaoDeMascota);
+		
+		lblTipoDeMascota = new JLabel("Tipo de Mascota");
+		lblTipoDeMascota.setEnabled(false);
+		lblTipoDeMascota.setFont(new Font("Batang", Font.BOLD, 19));
+		lblTipoDeMascota.setBounds(691, 159, 146, 31);
+		panelAgregarPersona.add(lblTipoDeMascota);
+		
+		lblCantidadDeMascotas = new JLabel("\u00BFCu\u00E1ntas Mascotas Podr\u00E9 Recibir? ");
+		lblCantidadDeMascotas.setEnabled(false);
+		lblCantidadDeMascotas.setFont(new Font("Batang", Font.BOLD, 19));
+		lblCantidadDeMascotas.setBounds(691, 195, 338, 31);
+		panelAgregarPersona.add(lblCantidadDeMascotas);
+		
+		comboBoxTamanoMascota = new JComboBox();
+		comboBoxTamanoMascota.setEnabled(false);
+		comboBoxTamanoMascota.setModel(new DefaultComboBoxModel(new String[] {"Peque\u00F1a(s)", "Mediana(s)", "Grande(s)"}));
+		comboBoxTamanoMascota.setBounds(1016, 109, 203, 23);
+		panelAgregarPersona.add(comboBoxTamanoMascota);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(690, 269, 503, 197);
+		panelAgregarPersona.add(scrollPane);
+		
+		textAreaDireccionCC = new JTextArea();
+		textAreaDireccionCC.setEnabled(false);
+		scrollPane.setViewportView(textAreaDireccionCC);
+		
+		spinnerCantidadDeMascota = new JSpinner();
+		spinnerCantidadDeMascota.setEnabled(false);
+		spinnerCantidadDeMascota.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
+		spinnerCantidadDeMascota.setBounds(1016, 195, 54, 20);
+		panelAgregarPersona.add(spinnerCantidadDeMascota);
+		
+		comboBoxTipoMascota = new JComboBox();
+		comboBoxTipoMascota.setEnabled(false);
+		comboBoxTipoMascota.setModel(new DefaultComboBoxModel(new String[] {"Caninos", "Felinos", "Aves", "Roedores", "Otros (Especifique)"}));
+		comboBoxTipoMascota.setBounds(1016, 156, 203, 20);
+		panelAgregarPersona.add(comboBoxTipoMascota);
+		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon("./imgs/huelloshuesos.png"));
 		lblNewLabel.setLabelFor(contentPane);
 		lblNewLabel.setBounds(0, 0, 1372, 1280);
 		panelAgregarPersona.add(lblNewLabel);
 		
-		/*JLabel lblFondo = new JLabel("");
-		lblFondo.setIcon(new ImageIcon("./imgs/huelloshuesos.png"));
-		lblFondo.setBounds(0, 0, 1397, 1280);
-		panelAgregarPersona.add(lblFondo);
-		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{textFieldNombre, textFieldApellidoUno, textFieldApellidoDos, rdbtnMasculino, rdbtnFemenino, spinnerDia, comboBoxMes, spinnerAnio, textFieldCorreo, textFieldTelefono, textFieldUsuario, passwordFieldNewPass, passwordFieldRepeatPass, CheckBoxCasaCuna}));
-		*/
-		
+	
 	}
 }
