@@ -113,7 +113,7 @@ public class VentanaPrincipal extends JFrame {
 		panelPrincipal.updateUI();
 		panelAgregarMascota.setLayout(null);
 		
-		JCheckBox chckbxRecompensa = new JCheckBox("Recompensa");
+		final JCheckBox chckbxRecompensa = new JCheckBox("Recompensa");
 		chckbxRecompensa.setForeground(Color.WHITE);
 		chckbxRecompensa.setFont(new Font("Batang", Font.BOLD, 19));
 		chckbxRecompensa.setContentAreaFilled(false);
@@ -138,7 +138,7 @@ public class VentanaPrincipal extends JFrame {
 			}
 		});
 		
-		JLabel lblDer = new JLabel("Der");
+		final JLabel lblDer = new JLabel("Der");
 		lblDer.setVisible(false);
 		
 		buttonGuardar = new JButton("");
@@ -188,7 +188,7 @@ public class VentanaPrincipal extends JFrame {
 		
 		panelAgregarMascota.add(comboBoxCanton);
 		
-		JComboBox comboBoxProvincia = new JComboBox();
+		final JComboBox comboBoxProvincia = new JComboBox();
 		comboBoxProvincia.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(comboBoxProvincia.getSelectedIndex()==0){
@@ -227,20 +227,20 @@ public class VentanaPrincipal extends JFrame {
 		lblDer.setBounds(699, 360, 46, 14);
 		panelAgregarMascota.add(lblDer);
 		
-		JComboBox comboBoxOjoDerecho = new JComboBox();
+		final JComboBox comboBoxOjoDerecho = new JComboBox();
 		comboBoxOjoDerecho.setModel(new DefaultComboBoxModel(new String[] {"Cafe", "Azul", "Negro", "Gris", "Amarillo", "Verde", "Celeste"}));
 		comboBoxOjoDerecho.setVisible(false);
 		comboBoxOjoDerecho.setEnabled(false);
 		comboBoxOjoDerecho.setBounds(670, 375, 75, 20);
 		panelAgregarMascota.add(comboBoxOjoDerecho);
 		
-		JLabel lblIzq = new JLabel("Izq");
+		final JLabel lblIzq = new JLabel("Izq");
 		lblIzq.setVisible(false);
 		lblIzq.setEnabled(false);
 		lblIzq.setBounds(585, 360, 46, 14);
 		panelAgregarMascota.add(lblIzq);
 		
-		JComboBox comboBoxOjoIzquierdo = new JComboBox();
+		final JComboBox comboBoxOjoIzquierdo = new JComboBox();
 		comboBoxOjoIzquierdo.setModel(new DefaultComboBoxModel(new String[] {"Negro", "Cafe", "Azul", "Gris", "Amarillo", "Verde", "Celeste"}));
 		comboBoxOjoIzquierdo.setVisible(false);
 		comboBoxOjoIzquierdo.setEnabled(false);
@@ -283,7 +283,7 @@ public class VentanaPrincipal extends JFrame {
 		lblsiAplica_1.setBounds(187, 275, 61, 14);
 		panelAgregarMascota.add(lblsiAplica_1);
 		
-		JLabel lblsiAplica = new JLabel("(Si Aplica)");
+		final JLabel lblsiAplica = new JLabel("(Si Aplica)");
 		lblsiAplica.setBounds(240, 226, 61, 14);
 		panelAgregarMascota.add(lblsiAplica);
 		
@@ -305,13 +305,13 @@ public class VentanaPrincipal extends JFrame {
 		lblRaza.setBounds(34, 169, 186, 23);
 		panelAgregarMascota.add(lblRaza);
 		
-		JLabel lblNombreDeLa = new JLabel("Nombre de la Mascota");
+		final JLabel lblNombreDeLa = new JLabel("Nombre de la Mascota");
 		lblNombreDeLa.setForeground(Color.WHITE);
 		lblNombreDeLa.setFont(new Font("Batang", Font.BOLD, 19));
 		lblNombreDeLa.setBounds(34, 219, 214, 23);
 		panelAgregarMascota.add(lblNombreDeLa);
 		
-		JLabel lblNumeroDeChip = new JLabel("N\u00FAmero de Chip");
+		final JLabel lblNumeroDeChip = new JLabel("N\u00FAmero de Chip");
 		lblNumeroDeChip.setForeground(Color.WHITE);
 		lblNumeroDeChip.setFont(new Font("Batang", Font.BOLD, 19));
 		lblNumeroDeChip.setBounds(34, 271, 225, 23);
@@ -329,13 +329,13 @@ public class VentanaPrincipal extends JFrame {
 		lblColorDeOjos.setBounds(34, 374, 186, 23);
 		panelAgregarMascota.add(lblColorDeOjos);
 		
-		JLabel lblSitioDeHallazgoperdida = new JLabel("Sitio de P\u00E9rdida");
+		final JLabel lblSitioDeHallazgoperdida = new JLabel("Sitio de P\u00E9rdida");
 		lblSitioDeHallazgoperdida.setForeground(Color.WHITE);
 		lblSitioDeHallazgoperdida.setFont(new Font("Batang", Font.BOLD, 19));
 		lblSitioDeHallazgoperdida.setBounds(34, 473, 177, 23);
 		panelAgregarMascota.add(lblSitioDeHallazgoperdida);
 		
-		JLabel lblFechaDeHallazgoperdida = new JLabel("Fecha de P\u00E9rdida");
+		final JLabel lblFechaDeHallazgoperdida = new JLabel("Fecha de P\u00E9rdida");
 		lblFechaDeHallazgoperdida.setForeground(Color.WHITE);
 		lblFechaDeHallazgoperdida.setFont(new Font("Batang", Font.BOLD, 19));
 		lblFechaDeHallazgoperdida.setBounds(34, 420, 163, 23);
@@ -425,7 +425,7 @@ public class VentanaPrincipal extends JFrame {
 		estadoMascota.add(rdbtnEncontrada);
 		panelAgregarMascota.add(rdbtnEncontrada);
 		
-		JComboBox comboBoxTipoMascota = new JComboBox();
+		final JComboBox comboBoxTipoMascota = new JComboBox();
 		comboBoxTipoMascota.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(comboBoxTipoMascota.getSelectedIndex() == 0){
@@ -494,10 +494,10 @@ public class VentanaPrincipal extends JFrame {
 		comboBoxColorPelaje.setBounds(322, 325, 233, 20);
 		panelAgregarMascota.add(comboBoxColorPelaje);
 		
-		JComboBox comboBoxColorOjos = new JComboBox();
+		final JComboBox comboBoxColorOjos = new JComboBox();
 		comboBoxColorOjos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(comboBoxColorOjos.getSelectedIndex()== 5){
+				if(comboBoxColorOjos.getSelectedIndex()== 7){
 					lblDer.setVisible(true);
 					lblIzq.setVisible(true);
 					comboBoxOjoDerecho.setVisible(true);
