@@ -54,7 +54,7 @@ import java.awt.SystemColor;
 import java.awt.ComponentOrientation;
 import java.awt.Frame;
 
-public class NuevoUsuario extends JFrame {
+public class VentanaNuevoUsuario extends JFrame {
 
 	private JPanel contentPane;
 	private final ButtonGroup buttonGroupSexo = new ButtonGroup();
@@ -91,7 +91,7 @@ public class NuevoUsuario extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					NuevoUsuario frame = new NuevoUsuario();
+					VentanaNuevoUsuario frame = new VentanaNuevoUsuario();
 					frame.setVisible(true);
 					frame.setSize(frame.getMaximumSize());
 					frame.setLocation(50,0);
@@ -109,7 +109,7 @@ public class NuevoUsuario extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public NuevoUsuario() {
+	public VentanaNuevoUsuario() {
 		setName("frameRegistroUsuario");
 		setLocationByPlatform(true);
 		setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);

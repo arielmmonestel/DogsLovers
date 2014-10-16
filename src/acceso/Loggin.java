@@ -36,6 +36,10 @@ import java.awt.Cursor;
 
 public class Loggin extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textFieldNombreUsuario;
 	private JPasswordField passwordFieldContrasenaUsuario;
@@ -77,11 +81,11 @@ public class Loggin extends JFrame {
 		btnIngresar.setFocusPainted(false);
 		btnIngresar.setFocusTraversalKeysEnabled(false);
 		btnIngresar.setFocusable(false);
-		btnIngresar.setRolloverIcon(new ImageIcon("C:\\Users\\Ariel\\Documents\\GitHub\\DogsLovers\\imgs\\BotonIngresarTamanioGrande.png"));
-		btnIngresar.setPressedIcon(new ImageIcon("C:\\Users\\Ariel\\Documents\\GitHub\\DogsLovers\\imgs\\BotonIngresarTamanioPequenio.png"));
+		btnIngresar.setRolloverIcon(new ImageIcon("./imgs/BotonIngresarTamanioGrande.png"));
+		btnIngresar.setPressedIcon(new ImageIcon("./imgs/BotonIngresarTamanioPequenio.png"));
 		btnIngresar.setBorderPainted(false);
 		btnIngresar.setBorder(null);
-		btnIngresar.setIcon(new ImageIcon("C:\\Users\\Ariel\\Documents\\GitHub\\DogsLovers\\imgs\\BotonIngresarTamanioMedio.png"));
+		btnIngresar.setIcon(new ImageIcon("./imgs/BotonIngresarTamanioMedio.png"));
 		btnIngresar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				VentanaPrincipal VP = new VentanaPrincipal();
@@ -95,7 +99,7 @@ public class Loggin extends JFrame {
 		contentPane.add(btnIngresar);
 		
 		JLabel lblUsuario = DefaultComponentFactory.getInstance().createLabel("");
-		lblUsuario.setIcon(new ImageIcon("C:\\Users\\Ariel\\Documents\\GitHub\\DogsLovers\\imgs\\EtiquetaUsuario.png"));
+		lblUsuario.setIcon(new ImageIcon("./imgs/EtiquetaUsuario.png"));
 		lblUsuario.setForeground(Color.WHITE);
 		lblUsuario.setFont(new Font("Batang", Font.BOLD, 18));
 		lblUsuario.setBounds(112, 180, 138, 29);
@@ -114,17 +118,17 @@ public class Loggin extends JFrame {
 		
 		JButton btnDeseoRegistrarme = new JButton("");
 		btnDeseoRegistrarme.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnDeseoRegistrarme.setRolloverIcon(new ImageIcon("C:\\Users\\Ariel\\Documents\\GitHub\\DogsLovers\\imgs\\BotonRegistarseM2yM3.png"));
+		btnDeseoRegistrarme.setRolloverIcon(new ImageIcon("./imgs/BotonRegistarseM2yM3.png"));
 		btnDeseoRegistrarme.setRequestFocusEnabled(false);
 		btnDeseoRegistrarme.setFocusTraversalKeysEnabled(false);
 		btnDeseoRegistrarme.setFocusPainted(false);
 		btnDeseoRegistrarme.setDefaultCapable(false);
 		btnDeseoRegistrarme.setBorderPainted(false);
-		btnDeseoRegistrarme.setIcon(new ImageIcon("C:\\Users\\Ariel\\Documents\\GitHub\\DogsLovers\\imgs\\BotonRegistarseM1.png"));
+		btnDeseoRegistrarme.setIcon(new ImageIcon("./imgs/BotonRegistarseM1.png"));
 		btnDeseoRegistrarme.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent arg0) {
 				dispose();
-				NuevoUsuario NU = new NuevoUsuario();
+				VentanaNuevoUsuario NU = new VentanaNuevoUsuario();
 				NU.setVisible(true);
 				NU.setExtendedState(MAXIMIZED_BOTH);
 				
@@ -136,7 +140,7 @@ public class Loggin extends JFrame {
 		contentPane.add(btnDeseoRegistrarme);
 		
 		JLabel lblContrasea = DefaultComponentFactory.getInstance().createLabel("");
-		lblContrasea.setIcon(new ImageIcon("C:\\Users\\Ariel\\Documents\\GitHub\\DogsLovers\\imgs\\EtiquetaContrasenia.png"));
+		lblContrasea.setIcon(new ImageIcon("./imgs/EtiquetaContrasenia.png"));
 		lblContrasea.setForeground(Color.WHITE);
 		lblContrasea.setFont(new Font("Batang", Font.BOLD, 18));
 		lblContrasea.setBounds(112, 230, 125, 42);

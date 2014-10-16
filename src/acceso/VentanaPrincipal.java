@@ -549,15 +549,7 @@ public class VentanaPrincipal extends JFrame {
 		labelFondo.setIcon(new ImageIcon("./imgs/fondoRegistro.png"));
 		labelFondo.setBounds(0, 0, 2508, 1246);
 		panelAgregarMascota.add(labelFondo);
-
 		
-		
-		
-		
-
-		
-		
-				
 	}
 
 	private static void addPopup(Component component, final JPopupMenu popup) {

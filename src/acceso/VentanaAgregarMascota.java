@@ -12,12 +12,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.BorderLayout;
 
-public class PanelAgregarMascota extends JPanel {
+public class VentanaAgregarMascota extends JPanel {
 
 	/**
 	 * Create the panel.
 	 */
-	public PanelAgregarMascota() {
+	public VentanaAgregarMascota() {
 		
 		JButton btnNewButton = new JButton("comaCC");
 		btnNewButton.addActionListener(new ActionListener() {
