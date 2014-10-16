@@ -32,6 +32,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import com.jgoodies.forms.factories.DefaultComponentFactory;
 import java.awt.Toolkit;
+import java.awt.Cursor;
 
 public class Loggin extends JFrame {
 
@@ -59,11 +60,10 @@ public class Loggin extends JFrame {
 	 * Create the frame.
 	 */
 	public Loggin() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Ariel\\Documents\\GitHub\\DogsLovers\\imgs\\Icono.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("./imgs/Icono.png"));
 		setTitle("Login");
-		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 403, 487);
+		setBounds(100, 100, 558, 487);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(102, 204, 255));
 		contentPane.setOpaque(false);
@@ -72,72 +72,87 @@ public class Loggin extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JPanel panel = new JPanel();
-		panel.setBorder(null);
-		panel.setBackground(new Color(255, 255, 255));
-		panel.setBounds(116, 178, 148, 101);
-		contentPane.add(panel);
-		panel.setLayout(null);
-		
-		JButton btnLogin = new JButton("");
-		btnLogin.setBounds(36, 11, 82, 67);
-		panel.add(btnLogin);
-		btnLogin.setVerticalTextPosition(SwingConstants.TOP);
-		btnLogin.setToolTipText("Ingresar Al Sistema");
-		btnLogin.setSelected(true);
-		btnLogin.setHorizontalTextPosition(SwingConstants.CENTER);
-		btnLogin.setFocusPainted(false);
-		btnLogin.setRolloverIcon(new ImageIcon("./imgs/Login-in-i48a.png"));
-		btnLogin.setPressedIcon(new ImageIcon("./imgs/Login-in-24.png"));
-		btnLogin.setIconTextGap(-3);
-		btnLogin.setContentAreaFilled(false);
-		btnLogin.setIcon(new ImageIcon("./imgs/Login-in-32a.png"));
-		btnLogin.setBorderPainted(false);
-		btnLogin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		JButton btnIngresar = new JButton("");
+		btnIngresar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnIngresar.setFocusPainted(false);
+		btnIngresar.setFocusTraversalKeysEnabled(false);
+		btnIngresar.setFocusable(false);
+		btnIngresar.setRolloverIcon(new ImageIcon("C:\\Users\\Ariel\\Documents\\GitHub\\DogsLovers\\imgs\\BotonIngresarTamanioGrande.png"));
+		btnIngresar.setPressedIcon(new ImageIcon("C:\\Users\\Ariel\\Documents\\GitHub\\DogsLovers\\imgs\\BotonIngresarTamanioPequenio.png"));
+		btnIngresar.setBorderPainted(false);
+		btnIngresar.setBorder(null);
+		btnIngresar.setIcon(new ImageIcon("C:\\Users\\Ariel\\Documents\\GitHub\\DogsLovers\\imgs\\BotonIngresarTamanioMedio.png"));
+		btnIngresar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				VentanaPrincipal VP = new VentanaPrincipal();
+				VP.setVisible(true);
+				VP.setExtendedState(MAXIMIZED_BOTH);
+				
+				
 			}
 		});
-		btnLogin.setAlignmentX(Component.RIGHT_ALIGNMENT);
-		btnLogin.setBorder(null);
+		btnIngresar.setBounds(154, 302, 245, 62);
+		contentPane.add(btnIngresar);
 		
-		JLabel lblUsuario = DefaultComponentFactory.getInstance().createLabel("Usuario");
+		JLabel lblUsuario = DefaultComponentFactory.getInstance().createLabel("");
+		lblUsuario.setIcon(new ImageIcon("C:\\Users\\Ariel\\Documents\\GitHub\\DogsLovers\\imgs\\EtiquetaUsuario.png"));
+		lblUsuario.setForeground(Color.WHITE);
 		lblUsuario.setFont(new Font("Batang", Font.BOLD, 18));
-		lblUsuario.setBounds(116, 77, 107, 14);
+		lblUsuario.setBounds(112, 180, 138, 29);
 		contentPane.add(lblUsuario);
 		
 		textFieldNombreUsuario = new JTextField();
-		textFieldNombreUsuario.setBounds(116, 102, 155, 20);
+		textFieldNombreUsuario.setBounds(198, 187, 155, 20);
 		contentPane.add(textFieldNombreUsuario);
 		textFieldNombreUsuario.setColumns(10);
 		
 		
 		
 		passwordFieldContrasenaUsuario = new JPasswordField();
-		passwordFieldContrasenaUsuario.setBounds(116, 159, 155, 20);
+		passwordFieldContrasenaUsuario.setBounds(198, 243, 155, 20);
 		contentPane.add(passwordFieldContrasenaUsuario);
 		
-		JButton btnDeseoRegistrarme = new JButton("Deseo Registrarme");
+		JButton btnDeseoRegistrarme = new JButton("");
+		btnDeseoRegistrarme.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnDeseoRegistrarme.setRolloverIcon(new ImageIcon("C:\\Users\\Ariel\\Documents\\GitHub\\DogsLovers\\imgs\\BotonRegistarseM2yM3.png"));
+		btnDeseoRegistrarme.setRequestFocusEnabled(false);
+		btnDeseoRegistrarme.setFocusTraversalKeysEnabled(false);
+		btnDeseoRegistrarme.setFocusPainted(false);
+		btnDeseoRegistrarme.setDefaultCapable(false);
+		btnDeseoRegistrarme.setBorderPainted(false);
+		btnDeseoRegistrarme.setIcon(new ImageIcon("C:\\Users\\Ariel\\Documents\\GitHub\\DogsLovers\\imgs\\BotonRegistarseM1.png"));
 		btnDeseoRegistrarme.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent arg0) {
 				dispose();
 				NuevoUsuario NU = new NuevoUsuario();
 				NU.setVisible(true);
+				NU.setExtendedState(MAXIMIZED_BOTH);
 				
 				
 			}
 		});
 		btnDeseoRegistrarme.setBackground(new Color(102, 153, 255));
-		btnDeseoRegistrarme.setBounds(205, 393, 160, 29);
+		btnDeseoRegistrarme.setBounds(186, 386, 183, 36);
 		contentPane.add(btnDeseoRegistrarme);
 		
-		JLabel lblContrasea = DefaultComponentFactory.getInstance().createLabel("Contrase\u00F1a");
+		JLabel lblContrasea = DefaultComponentFactory.getInstance().createLabel("");
+		lblContrasea.setIcon(new ImageIcon("C:\\Users\\Ariel\\Documents\\GitHub\\DogsLovers\\imgs\\EtiquetaContrasenia.png"));
+		lblContrasea.setForeground(Color.WHITE);
 		lblContrasea.setFont(new Font("Batang", Font.BOLD, 18));
-		lblContrasea.setBounds(116, 134, 125, 14);
+		lblContrasea.setBounds(112, 230, 125, 42);
 		contentPane.add(lblContrasea);
 		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("./imgs/huelloshuesos.png"));
-		lblNewLabel.setBounds(-81, 0, 1372, 1280);
-		contentPane.add(lblNewLabel);
+		JLabel labelIcono = new JLabel("");
+		labelIcono.setIcon(new ImageIcon("./imgs/Logo.png"));
+		labelIcono.setBounds(0, 0, 552, 135);
+		contentPane.add(labelIcono);
+		
+		JLabel labelFondo = new JLabel("");
+		labelFondo.setHorizontalAlignment(SwingConstants.CENTER);
+		labelFondo.setHorizontalTextPosition(SwingConstants.CENTER);
+		labelFondo.setIconTextGap(-3);
+		labelFondo.setIcon(new ImageIcon("./imgs/fondoRegistro.png"));
+		labelFondo.setBounds(0, 0, 552, 458);
+		contentPane.add(labelFondo);
 	}
 }
