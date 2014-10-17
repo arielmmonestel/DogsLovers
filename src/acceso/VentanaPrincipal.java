@@ -137,7 +137,7 @@ public class VentanaPrincipal extends JFrame {
 			lblMonto.setVisible(true);
 			textFieldMontoRecompensa.setEnabled(true);
 			}
-			}
+			} /***/
 		});
 		
 		final JLabel lblDer = new JLabel("Der");
