@@ -94,14 +94,16 @@ public class VentanaPrincipal extends JFrame {
 		menuBar.add(mnRegistro);
 		
 		JMenuItem mntmMascota = new JMenuItem("Mascota");
-		mntmMascota.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-			}
-		});
 		mntmMascota.setIcon(new ImageIcon("./imgs/Pets-30.png"));
 		mntmMascota.setSelected(true);
 		mnRegistro.add(mntmMascota);
+		mntmMascota.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			
+			}});
+		
+		
+		/*Esto va dentro del action Performed de mntnMascota*/
 		panelPrincipal = new JPanel();
 		panelPrincipal.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(panelPrincipal);
@@ -549,7 +551,7 @@ public class VentanaPrincipal extends JFrame {
 		labelFondo.setIcon(new ImageIcon("./imgs/fondoRegistro.png"));
 		labelFondo.setBounds(0, 0, 2508, 1246);
 		panelAgregarMascota.add(labelFondo);
-		
+		/*Esto va dentro del action Performed de mntnMascota (Hasta Aqui)*/
 	}
 
 	private static void addPopup(Component component, final JPopupMenu popup) {
