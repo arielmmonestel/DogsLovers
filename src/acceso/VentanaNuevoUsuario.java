@@ -153,36 +153,14 @@ public class VentanaNuevoUsuario extends JFrame {
 		btnRegistrarme.setIcon(new ImageIcon("./imgs/save-48.png"));
 		btnRegistrarme.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(!textFieldCorreo.getText().contains("@")){ //Si el correo Ingresado no contiene "@"
-					JOptionPane.showMessageDialog(null, "Por Favor,introduzca adecuadamente su correo(Falta \"@\")", "Error",1);
-				}
-				if(textFieldCorreo.getText().contains(" ")){//Si el correo Ingresado contiene espacios
-					JOptionPane.showMessageDialog(null, "Por Favor,introduzca adecuadamente su correo", "Error",3);
-				}
-				//System.out.println(passwordFieldNewPass.getPassword()+ "\n" + passwordFieldRepeatPass.getPassword());
-				if (!passwordFieldNewPass.getText().equals(passwordFieldRepeatPass.getText())){ //Si las contraseñas no concuerdan
-					JOptionPane.showMessageDialog(null, "Su contraseñas no concuerdan, porfavor reingrese las contraseñas", "Error",3);
-					passwordFieldNewPass.setText(null);
-					passwordFieldRepeatPass.setText(null);
-				}
-				if(comboBoxMes.getSelectedIndex()==0){
-					JOptionPane.showMessageDialog(null, "Seleccione su mes de nacimiento", "Error",3);
+				JOptionPane.showMessageDialog(contentPane, "Usuario registrado correctamente");
+				dispose();
 					
-				}
-				//Faltan Validaciones
-				else{
-					
-					JOptionPane.showMessageDialog(null, "Usuario registrado correctamente");
-					dispose();
-						
-					
-					
-					loguearse= new Loggin();
-					loguearse.setVisible(true);
-					
-				}
-			}
-		});
+				
+				
+				loguearse= new Loggin();
+				loguearse.setVisible(true);
+			}});
 		
 		textFieldOtros = new JTextField();
 		textFieldOtros.setVisible(false);

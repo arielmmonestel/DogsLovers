@@ -18,7 +18,7 @@ public class ListaNegra {
 	public static int getListaSize(){
 		return listaNegra.size();
 	}
-
+/*
 	public static void agregarAListaNegra(Usuario pUsuario){
 		listaNegra.add(pUsuario.getID());
 	}
@@ -35,5 +35,5 @@ public class ListaNegra {
 		}
 		return false;
 	}
-
+*/
 }

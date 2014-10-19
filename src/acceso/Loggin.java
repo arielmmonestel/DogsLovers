@@ -91,6 +91,7 @@ public class Loggin extends JFrame {
 				VentanaPrincipal VP = new VentanaPrincipal();
 				VP.setVisible(true);
 				VP.setExtendedState(MAXIMIZED_BOTH);
+				dispose();
 				
 				
 			}
