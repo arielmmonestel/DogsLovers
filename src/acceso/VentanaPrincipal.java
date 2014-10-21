@@ -168,6 +168,13 @@ public class VentanaPrincipal {
         });
         
         JButton buttonCancelar = new JButton("");
+        buttonCancelar.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		panelPrincipal.setVisible(true);
+				panelAgregarCasaCuna.setVisible(false);
+				panelAgregarMascota.setVisible(false);
+        	}
+        });
         buttonCancelar.setToolTipText("Cancelar Registro de Mascota");
         buttonCancelar.setPressedIcon(new ImageIcon("./imgs/Cancel-32.png"));
         buttonCancelar.setRolloverIcon(new ImageIcon("./imgs/Cancel-64.png"));
@@ -581,6 +588,13 @@ public class VentanaPrincipal {
 		});
 		
 		JButton CancelarOperacion = new JButton("");
+		CancelarOperacion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panelPrincipal.setVisible(true);
+				panelAgregarCasaCuna.setVisible(false);
+				panelAgregarMascota.setVisible(false);
+			}
+		});
 		CancelarOperacion.setToolTipText("Cancelar Registro de Mascota");
 		CancelarOperacion.setPressedIcon(new ImageIcon("./imgs/Cancel-32.png"));
 		CancelarOperacion.setRolloverIcon(new ImageIcon("./imgs/Cancel-64.png"));
