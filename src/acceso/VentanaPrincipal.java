@@ -140,9 +140,9 @@ public class VentanaPrincipal {
 		btnCerrarSesin.setDefaultCapable(false);
 		btnCerrarSesin.setHorizontalTextPosition(SwingConstants.CENTER);
 		btnCerrarSesin.setIconTextGap(-3);
-		btnCerrarSesin.setIcon(new ImageIcon("C:\\Users\\Ariel\\Documents\\GitHub\\DogsLovers\\imgs\\sign-out-20.png"));
-		btnCerrarSesin.setPressedIcon(new ImageIcon("C:\\Users\\Ariel\\Documents\\GitHub\\DogsLovers\\imgs\\sign-out-16.png"));
-		btnCerrarSesin.setRolloverIcon(new ImageIcon("C:\\Users\\Ariel\\Documents\\GitHub\\DogsLovers\\imgs\\sign-out-24.png"));
+		btnCerrarSesin.setIcon(new ImageIcon("./imgs/sign-out-20.png"));
+		btnCerrarSesin.setPressedIcon(new ImageIcon("./imgs/sign-out-16.png"));
+		btnCerrarSesin.setRolloverIcon(new ImageIcon("./imgs/sign-out-24.png"));
 		btnCerrarSesin.setContentAreaFilled(false);
 		btnCerrarSesin.setBorderPainted(false);
 		btnCerrarSesin.setBorder(null);
@@ -714,10 +714,10 @@ public class VentanaPrincipal {
 		
 		
 		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon("C:\\Users\\Ariel\\Documents\\GitHub\\DogsLovers\\imgs\\fondoRegistro.png"));
+		label.setIcon(new ImageIcon("./imgs/fondoRegistro.png"));
 		label.setBounds(0, 0, 2508, 1246);
 		panelAgregarCasaCuna.add(label);
-		labelFondo.setIcon(new ImageIcon("./imgs/fondoRegistro.png"));
+		
         
 		
 		
@@ -752,7 +752,7 @@ public class VentanaPrincipal {
 				panelAgregarCasaCuna.setVisible(true);
 			}
 		});
-		mntmCasaCuna.setIcon(new ImageIcon("C:\\Users\\Ariel\\Documents\\GitHub\\DogsLovers\\imgs\\casaCuna.png"));
+		mntmCasaCuna.setIcon(new ImageIcon("./imgs/casaCuna.png"));
 		mnRegistro.add(mntmCasaCuna);
 		panelAgregarCasaCuna.setVisible(false);
 	}
