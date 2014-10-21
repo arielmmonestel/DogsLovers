@@ -3,10 +3,10 @@ package logicaDeNegocios;
 import java.util.ArrayList;
 
 public class Usuario extends Persona{
-	private int iD;
+	private int id;
 	private String nombreUsuario;
 	private String contrasenia;
-	private CasaCuna esCasaCuna= null;
+	private CasaCuna casaCuna= null;
 	private boolean esAdministrador = false;
 	private boolean estaEnListaNegra=false;
 	private ArrayList<Usuario> personasCalificables;
@@ -22,128 +22,91 @@ public class Usuario extends Persona{
 			String pEmail,int pDiaNacimiento, String pMesNacimiento, int pAnioNacimiento,int pID, String pNombreUsuario, String pContrasenia) {
 		super( pNombre,pPrimerApellido, pSegundoApellido, pSexo, pTelefono,
 				pEmail,pDiaNacimiento,pMesNacimiento,pAnioNacimiento);
-		setiD(pID);
+		setID(pID);
 		setNombreUsuario(pNombreUsuario);
 		setContrasenia(pContrasenia);
 		
 	}
 
 
-	public int getiD() {
-		return iD;
+	public int getID() {
+		return id;
 	}
 
-
-
-	public void setiD(int iD) {
-		this.iD = iD;
+	public void setID(int pId) {
+		id = pId;
 	}
-
-
 
 	public String getNombreUsuario() {
 		return nombreUsuario;
 	}
 
-
-
-	public void setNombreUsuario(String nombreUsuario) {
-		this.nombreUsuario = nombreUsuario;
+	public void setNombreUsuario(String pNombreUsuario) {
+		nombreUsuario = pNombreUsuario;
 	}
-
-
 
 	public String getContrasenia() {
 		return contrasenia;
 	}
 
-
-
-	public void setContrasenia(String contrasenia) {
-		this.contrasenia = contrasenia;
+	public void setContrasenia(String pContrasenia) {
+		contrasenia = pContrasenia;
 	}
 
-
-
-	public CasaCuna getEsCasaCuna() {
-		return esCasaCuna;
+	public CasaCuna getCasaCuna() {
+		return casaCuna;
 	}
 
-
-
-	public void setEsCasaCuna(CasaCuna esCasaCuna) {
-		this.esCasaCuna = esCasaCuna;
+	public void setEsCasaCuna(CasaCuna pCasaCuna) {
+		casaCuna = pCasaCuna;
 	}
 	
-	
-	public boolean isEsAdministrador() {
+	public boolean esAdministrador() {
 		return esAdministrador;
 	}
 
-
-	public void setEsAdministrador(boolean esAdministrador) {
-		this.esAdministrador = esAdministrador;
+	public void setEsAdministrador(boolean pEsAdministrador) {
+		esAdministrador = pEsAdministrador;
 	}
 
-
-
-
-	public boolean isEstaEnListaNegra() {
+	public boolean estaEnListaNegra() {
 		return estaEnListaNegra;
 	}
 
-
-
-	public void setEstaEnListaNegra(boolean estaEnListaNegra) {
-		this.estaEnListaNegra = estaEnListaNegra;
+	public void setEstaEnListaNegra(boolean pEstaEnListaNegra) {
+		estaEnListaNegra = pEstaEnListaNegra;
 	}
-
-
 
 	public ArrayList<Usuario> getPersonasCalificables() {
 		return personasCalificables;
 	}
 
-
-
-	public void setPersonasCalificables(ArrayList<Usuario> personasCalificables) {
-		this.personasCalificables = personasCalificables;
+	public void setPersonasCalificables(ArrayList<Usuario> pPersonasCalificables) {
+		personasCalificables = pPersonasCalificables;
 	}
-
-
 
 	public ArrayList<Mascota> getMascotasAdoptadas() {
 		return mascotasAdoptadas;
 	}
 
-
-
-	public void setMascotasAdoptadas(ArrayList<Mascota> mascotasAdoptadas) {
-		this.mascotasAdoptadas = mascotasAdoptadas;
+	public void setMascotasAdoptadas(ArrayList<Mascota> pMascotasAdoptadas) {
+		mascotasAdoptadas = pMascotasAdoptadas;
 	}
-
-
 
 	public int getCalificacion() {
 		return calificacion;
 	}
 
-
-
-	public void setCalificacion(int calificacion) {
-		this.calificacion = calificacion;
+	public void setCalificacion(int pCalificacion) {
+		calificacion = pCalificacion;
 	}
-
-
 
 	public static ArrayList<Usuario> getListaUsuarios() {
 		return listaUsuarios;
 	}
 
-
-
-	public static void setListaUsuarios(ArrayList<Usuario> listaUsuarios) {
-		Usuario.listaUsuarios = listaUsuarios;
+	public static void setListaUsuarios(ArrayList<Usuario> pListaUsuarios) {
+		listaUsuarios = pListaUsuarios;
 	}
 
 

@@ -12,7 +12,18 @@ public class Asociacion {
 	private String paginaWeb;
 	private static ArrayList<ArrayList<Integer>> donaciones = new ArrayList<ArrayList<Integer>>();
 	
-	public Asociacion() {
+	public Asociacion(int pId,
+					  String pNombre,
+					  String pDireccion,
+					  String pTelefono,
+					  String pNumeroDeCuenta,
+					  String pPaginaWeb) {
+		setId(pId);
+		setNombre(pNombre);
+		setDireccion(pDireccion);
+		setTelefono(pTelefono);
+		setNumeroDeCuenta(pNumeroDeCuenta);
+		setPaginaWeb(pPaginaWeb);
 	}
 	
 	public ArrayList<ArrayList<Integer>> ArrayLisgetListaDeDonaciones(){
