@@ -89,8 +89,8 @@ public class Loggin extends JFrame {
 		btnIngresar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				VentanaPrincipal VP = new VentanaPrincipal();
-				VP.setVisible(true);
-				VP.setExtendedState(MAXIMIZED_BOTH);
+				
+				//VP.setExtendedState(MAXIMIZED_BOTH);
 				dispose();
 				
 				
