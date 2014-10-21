@@ -1,5 +1,7 @@
 package acceso;
 
+import acceso.*;
+
 import java.awt.EventQueue;
 
 
@@ -59,19 +61,20 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JMenu;
 
+import sun.util.logging.resources.logging;
+
 public class VentanaPrincipal {
 
-	private static final Component CheckBoxCasaCuna = null;
-	private JFrame frame;
+	private JFrame VentanaPrincipal;
 	private JPanel panelPrincipal;
 	private JPanel panelAgregarMascota;
 	private JPanel panelAgregarCasaCuna;
 	
     private JTextField textFieldNombreMascota;
     private JTextField textFieldNumChip;
-    JTextField textFieldMontoRecompensa;
-    private final ButtonGroup estadoMascota = new ButtonGroup() ;
-    private final ButtonGroup monedaDePago = new ButtonGroup() ;
+    private JTextField textFieldMontoRecompensa;
+    private  ButtonGroup estadoMascota = new ButtonGroup() ;
+    private  ButtonGroup monedaDePago = new ButtonGroup() ;
     private JRadioButton rdbtnColones;
     private JRadioButton radioButtonDolares;
     private JLabel lblMonto;
@@ -81,6 +84,7 @@ public class VentanaPrincipal {
     private JComboBox comboBoxCanton;
     private JButton buttonGuardar;
     private JComboBox comboBoxTipoMascota;
+    private JLabel labelDL;
     
 
 	/**
@@ -91,7 +95,7 @@ public class VentanaPrincipal {
 			public void run() {
 				try {
 					VentanaPrincipal window = new VentanaPrincipal();
-					window.frame.setVisible(true);
+					window.VentanaPrincipal.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -110,23 +114,54 @@ public class VentanaPrincipal {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(0, 0, 1435, 735);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(new CardLayout(0, 0));
+		VentanaPrincipal = new JFrame();
+		VentanaPrincipal.setBounds(0, 0, 1435, 735);
+		VentanaPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		VentanaPrincipal.getContentPane().setLayout(new CardLayout(0, 0));
 		
 		panelPrincipal = new JPanel();
-		frame.getContentPane().add(panelPrincipal, "name_27977974667427");
+		VentanaPrincipal.getContentPane().add(panelPrincipal, "name_27977974667427");
 		panelPrincipal.setLayout(null);
+		
+		JButton btnCerrarSesin = new JButton("");
+		btnCerrarSesin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				VentanaPrincipal.dispose();
+				Loggin loguearse = new Loggin();
+				loguearse.setVisible(true);
+			}
+		});
+		btnCerrarSesin.setToolTipText("Cerrar Sesi\u00F3n");
+		btnCerrarSesin.setFocusable(false);
+		btnCerrarSesin.setFocusTraversalKeysEnabled(false);
+		btnCerrarSesin.setFocusPainted(false);
+		btnCerrarSesin.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnCerrarSesin.setDefaultCapable(false);
+		btnCerrarSesin.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnCerrarSesin.setIconTextGap(-3);
+		btnCerrarSesin.setIcon(new ImageIcon("C:\\Users\\Ariel\\Documents\\GitHub\\DogsLovers\\imgs\\sign-out-20.png"));
+		btnCerrarSesin.setPressedIcon(new ImageIcon("C:\\Users\\Ariel\\Documents\\GitHub\\DogsLovers\\imgs\\sign-out-16.png"));
+		btnCerrarSesin.setRolloverIcon(new ImageIcon("C:\\Users\\Ariel\\Documents\\GitHub\\DogsLovers\\imgs\\sign-out-24.png"));
+		btnCerrarSesin.setContentAreaFilled(false);
+		btnCerrarSesin.setBorderPainted(false);
+		btnCerrarSesin.setBorder(null);
+		btnCerrarSesin.setBounds(1322, 0, 40, 34);
+		panelPrincipal.add(btnCerrarSesin);
 		panelPrincipal.setVisible(true);
 		
 		
 		panelAgregarMascota = new JPanel();
-		frame.getContentPane().add(panelAgregarMascota, "name_27990074221032");
+		VentanaPrincipal.getContentPane().add(panelAgregarMascota, "name_27990074221032");
 		panelAgregarMascota.setLayout(null);
 		panelAgregarMascota.setVisible(false);
 		
 		/*Inicio Codigo del Panel Agregar Mascota*/
+		
+		labelDL = new JLabel("");
+		labelDL.setIcon(new ImageIcon("./imgs/Logo.png"));
+		labelDL.setBounds(375, 0, 552, 135);
+		panelAgregarMascota.add(labelDL);
 		
 		final JCheckBox chckbxRecompensa = new JCheckBox("Recompensa");
         chckbxRecompensa.setForeground(Color.WHITE);
@@ -152,9 +187,6 @@ public class VentanaPrincipal {
             }
             } 
         });
-        
-        final JLabel lblDer = new JLabel("Der");
-        lblDer.setVisible(false);
         
         buttonGuardar = new JButton("");
         buttonGuardar.setToolTipText("Guardar en el Registro del Mascota");
@@ -203,7 +235,7 @@ public class VentanaPrincipal {
         panelAgregarMascota.add(buttonGuardar);
         
         comboBoxCanton = new JComboBox();
-        comboBoxCanton.setBounds(500, 477, 168, 20);
+        comboBoxCanton.setBounds(1176, 192, 168, 20);
         comboBoxCanton.setModel(new DefaultComboBoxModel(new String[] {"Central","Escazú","Desamparados","Puriscal","Tarrazú","Aserrí","Mora","Goicoechea","Santa Ana","Alajuelita",
                                                                             "Coronado","Acosta","Tibás","Moravia","Montes de Oca","Turrubares",
                                                                             "Dota","Curridabat","Perez Zeledón","León Cortés"}))    ;           
@@ -242,131 +274,107 @@ public class VentanaPrincipal {
             }
         });
         comboBoxProvincia.setModel(new DefaultComboBoxModel(new String[] {"San Jose", "Alajuela", "Cartago", "Heredia", "Puntarenas", "Limon", "Guanacaste"}));
-        comboBoxProvincia.setBounds(322, 477, 168, 19);
+        comboBoxProvincia.setBounds(998, 192, 168, 19);
         panelAgregarMascota.add(comboBoxProvincia);
-        lblDer.setEnabled(false);
-        lblDer.setHorizontalAlignment(SwingConstants.RIGHT);
-        lblDer.setBounds(699, 360, 46, 14);
-        panelAgregarMascota.add(lblDer);
-        
-        final JComboBox comboBoxOjoDerecho = new JComboBox();
-        comboBoxOjoDerecho.setModel(new DefaultComboBoxModel(new String[] {"Cafe", "Azul", "Negro", "Gris", "Amarillo", "Verde", "Celeste"}));
-        comboBoxOjoDerecho.setVisible(false);
-        comboBoxOjoDerecho.setEnabled(false);
-        comboBoxOjoDerecho.setBounds(670, 375, 75, 20);
-        panelAgregarMascota.add(comboBoxOjoDerecho);
-        
-        final JLabel lblIzq = new JLabel("Izq");
-        lblIzq.setVisible(false);
-        lblIzq.setEnabled(false);
-        lblIzq.setBounds(585, 360, 46, 14);
-        panelAgregarMascota.add(lblIzq);
-        
-        final JComboBox comboBoxOjoIzquierdo = new JComboBox();
-        comboBoxOjoIzquierdo.setModel(new DefaultComboBoxModel(new String[] {"Negro", "Cafe", "Azul", "Gris", "Amarillo", "Verde", "Celeste"}));
-        comboBoxOjoIzquierdo.setVisible(false);
-        comboBoxOjoIzquierdo.setEnabled(false);
-        comboBoxOjoIzquierdo.setBounds(585, 375, 75, 20);
-        panelAgregarMascota.add(comboBoxOjoIzquierdo);
         
         JSpinner spinner = new JSpinner();
         spinner.setToolTipText("D\u00EDa");
         spinner.setModel(new SpinnerNumberModel(1, 1, 31, 1));
-        spinner.setBounds(322, 420, 39, 23);
+        spinner.setBounds(998, 135, 39, 23);
         panelAgregarMascota.add(spinner);
         
         JSpinner spinnerAnioPerdida = new JSpinner();
         spinnerAnioPerdida.setToolTipText("A\u00F1o");
-        spinnerAnioPerdida.setBounds(561, 419, 61, 23);
+        spinnerAnioPerdida.setBounds(1237, 134, 61, 23);
         spinnerAnioPerdida.setModel(new SpinnerNumberModel(2014.0, 1990.0, 2014.0, 1.0));
         panelAgregarMascota.add(spinnerAnioPerdida);
         
         JComboBox comboBoxMesPerdida = new JComboBox();
         comboBoxMesPerdida.setToolTipText("Mes");
         comboBoxMesPerdida.setModel(new DefaultComboBoxModel(new String[] {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre", "Octubre", "Noviembre", "Diciembre"}));
-        comboBoxMesPerdida.setBounds(381, 419, 163, 23);
+        comboBoxMesPerdida.setBounds(1057, 134, 163, 23);
         panelAgregarMascota.add(comboBoxMesPerdida);
         
         textFieldMontoRecompensa = new JTextField();
         textFieldMontoRecompensa.setColumns(10);
-        textFieldMontoRecompensa.setBounds(487, 526, 127, 23);
+        textFieldMontoRecompensa.setBounds(1019, 245, 127, 23);
         panelAgregarMascota.add(textFieldMontoRecompensa);
         
         lblMonto = new JLabel("Monto");
         lblMonto.setForeground(Color.WHITE);
         lblMonto.setFont(new Font("Batang", Font.BOLD, 19));
-        lblMonto.setBounds(415, 530, 75, 14);
+        lblMonto.setBounds(947, 249, 75, 14);
         panelAgregarMascota.add(lblMonto);
-        chckbxRecompensa.setBounds(34, 526, 163, 23);
+        chckbxRecompensa.setBounds(710, 245, 155, 23);
         chckbxRecompensa.setSelected(true);
         panelAgregarMascota.add(chckbxRecompensa);
         
         JLabel lblsiAplica_1 = new JLabel("(Si Aplica)");
-        lblsiAplica_1.setBounds(187, 275, 61, 14);
+        lblsiAplica_1.setBounds(186, 401, 61, 14);
         panelAgregarMascota.add(lblsiAplica_1);
         
         final JLabel lblsiAplica = new JLabel("(Si Aplica)");
-        lblsiAplica.setBounds(240, 226, 61, 14);
+        lblsiAplica.setBounds(239, 340, 61, 14);
         panelAgregarMascota.add(lblsiAplica);
         
         JLabel lblEstado = new JLabel("Estado de la Mascota");
         lblEstado.setForeground(Color.WHITE);
         lblEstado.setFont(new Font("Batang", Font.BOLD, 19));
-        lblEstado.setBounds(34, 58, 214, 23);
+        lblEstado.setBounds(32, 134, 214, 23);
         panelAgregarMascota.add(lblEstado);
         
         JLabel lblTipoDeMascota = new JLabel("Tipo de Mascota");
         lblTipoDeMascota.setForeground(Color.WHITE);
         lblTipoDeMascota.setFont(new Font("Batang", Font.BOLD, 19));
-        lblTipoDeMascota.setBounds(34, 117, 186, 23);
+        lblTipoDeMascota.setBounds(32, 207, 186, 23);
         panelAgregarMascota.add(lblTipoDeMascota);
         
         JLabel lblRaza = new JLabel("Raza");
         lblRaza.setForeground(Color.WHITE);
         lblRaza.setFont(new Font("Batang", Font.BOLD, 19));
-        lblRaza.setBounds(34, 169, 186, 23);
+        lblRaza.setBounds(32, 271, 186, 23);
         panelAgregarMascota.add(lblRaza);
         
         final JLabel lblNombreDeLa = new JLabel("Nombre de la Mascota");
         lblNombreDeLa.setForeground(Color.WHITE);
         lblNombreDeLa.setFont(new Font("Batang", Font.BOLD, 19));
-        lblNombreDeLa.setBounds(34, 219, 214, 23);
+        lblNombreDeLa.setBounds(33, 333, 214, 23);
         panelAgregarMascota.add(lblNombreDeLa);
         
         final JLabel lblNumeroDeChip = new JLabel("N\u00FAmero de Chip");
         lblNumeroDeChip.setForeground(Color.WHITE);
         lblNumeroDeChip.setFont(new Font("Batang", Font.BOLD, 19));
-        lblNumeroDeChip.setBounds(34, 271, 225, 23);
+        lblNumeroDeChip.setBounds(33, 397, 225, 23);
         panelAgregarMascota.add(lblNumeroDeChip);
         
         JLabel lblColorDelPelaje = new JLabel("Color del Pelaje");
         lblColorDelPelaje.setForeground(Color.WHITE);
         lblColorDelPelaje.setFont(new Font("Batang", Font.BOLD, 19));
-        lblColorDelPelaje.setBounds(34, 324, 186, 23);
+        lblColorDelPelaje.setBounds(32, 464, 186, 23);
         panelAgregarMascota.add(lblColorDelPelaje);
         
         JLabel lblColorDeOjos = new JLabel("Color de Ojos");
         lblColorDeOjos.setForeground(Color.WHITE);
         lblColorDeOjos.setFont(new Font("Batang", Font.BOLD, 19));
-        lblColorDeOjos.setBounds(34, 374, 186, 23);
+        lblColorDeOjos.setBounds(32, 527, 186, 23);
         panelAgregarMascota.add(lblColorDeOjos);
         
         final JLabel lblSitioDeHallazgoperdida = new JLabel("Sitio de P\u00E9rdida");
         lblSitioDeHallazgoperdida.setForeground(Color.WHITE);
         lblSitioDeHallazgoperdida.setFont(new Font("Batang", Font.BOLD, 19));
-        lblSitioDeHallazgoperdida.setBounds(34, 473, 177, 23);
+        lblSitioDeHallazgoperdida.setBounds(710, 188, 177, 23);
         panelAgregarMascota.add(lblSitioDeHallazgoperdida);
         
         final JLabel lblFechaDeHallazgoperdida = new JLabel("Fecha de P\u00E9rdida");
         lblFechaDeHallazgoperdida.setForeground(Color.WHITE);
         lblFechaDeHallazgoperdida.setFont(new Font("Batang", Font.BOLD, 19));
-        lblFechaDeHallazgoperdida.setBounds(34, 420, 163, 23);
+        lblFechaDeHallazgoperdida.setBounds(710, 135, 163, 23);
         panelAgregarMascota.add(lblFechaDeHallazgoperdida);
         
         JLabel lblNotas = new JLabel("Notas");
         lblNotas.setForeground(Color.WHITE);
         lblNotas.setFont(new Font("Batang", Font.BOLD, 19));
-        lblNotas.setBounds(861, 314, 384, 28);
+        lblNotas.setBounds(710, 313, 384, 28);
         panelAgregarMascota.add(lblNotas);
         
         rdbtnPerdida = new JRadioButton("Perdida");
@@ -400,7 +408,7 @@ public class VentanaPrincipal {
                 
             }
         });
-        rdbtnPerdida.setBounds(318, 58, 109, 23);
+        rdbtnPerdida.setBounds(316, 134, 109, 23);
         rdbtnPerdida.setSelected(true);
         estadoMascota.add(rdbtnPerdida);
         panelAgregarMascota.add(rdbtnPerdida);
@@ -438,14 +446,14 @@ public class VentanaPrincipal {
                 }
             }
         });
-        rdbtnEncontrada.setBounds(446, 58, 109, 23);
+        rdbtnEncontrada.setBounds(444, 134, 109, 23);
         estadoMascota.add(rdbtnEncontrada);
         panelAgregarMascota.add(rdbtnEncontrada);
         
          comboBoxTipoMascota = new JComboBox();
-        comboBoxTipoMascota.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-                if(comboBoxTipoMascota.getSelectedIndex() == 0){
+         comboBoxTipoMascota.addActionListener(new ActionListener() {
+         	public void actionPerformed(ActionEvent e) {
+         		if(comboBoxTipoMascota.getSelectedIndex() == 0){
                     comboBoxRazaMascota.setModel(new DefaultComboBoxModel(new String[] {"Airedale Terrier" ,"Akita inu" ,"Alaskan malamute", "American Stafford","Shire Terrier","Basenji",
                             "Basset Hound","Beagle","Bichón Maltés","Boxer","Braco de Weimar","Bull Terrier","Bulldog francés","Bulldog inglés","Caniche","Carlino","Chihuahua","Chow-chow","Cocker Spaniel Americano","Cocker Spaniel inglés",
                             "Crestado chino","Dálmata","Dobermann","Dogo Aleman","Dogo Argentino","Golden retriever","French Poodle",
@@ -460,6 +468,8 @@ public class VentanaPrincipal {
                       "Azul ruso","Balinés","Bengalí","Bogtail Japonés","Bosque de noruega","British shorthair","Burmilla","Burmés","Cornish rex","Cymric",
                       "Chartreux","Devon rex","Don sphynx","Gato bombay","Gato brasileño","Ceylon","Europeo","Exótico","Gato habana","Korat","Manx","Munchkin","Ocicat","Ojos azules","Oriental","Oriental de pelo largo","Persa","Siamés","Siberiano","Singapura","Somalí","Tonkinés","LaPerm","Maine coon","Mau egipcio","Peterbald",
                       "Pixiebob","Ragdoll","Sagrado de birmania","Scottish fold","Selkirk Rex","Sphynx","Van turco"}));
+                    
+                    
                     comboBoxRazaMascota.setVisible(true);
                     comboBoxRazaMascota.setEnabled(true);
                 }
@@ -468,22 +478,25 @@ public class VentanaPrincipal {
                             ,"Loro","Turaco","Cacatua","Guacamayo","Ninfa","Pato","Gallina"})); 
                     comboBoxRazaMascota.setVisible(true);
                     comboBoxRazaMascota.setEnabled(true);
+                    
                 }
                 if (comboBoxTipoMascota.getSelectedIndex() == 3){
                     comboBoxRazaMascota.setModel(new DefaultComboBoxModel(new String[] {"Ardilla Coreana",
                             "Cobaya","Conejos","Erizo","Hamster","Jerbo","Rata","Ratón"}));
                     comboBoxRazaMascota.setVisible(true);
                     comboBoxRazaMascota.setEnabled(true);
+                    
                 }
                 if (comboBoxTipoMascota.getSelectedIndex() == 4){
-                    //comboBoxRazaMascota.setVisible(false);
-                    comboBoxRazaMascota.setEnabled(false);
+                    
+                    comboBoxRazaMascota.setEnabled(false);System.out.println(comboBoxTipoMascota.getSelectedIndex());
                 }
 
                 }
-            
-        });
-        comboBoxTipoMascota.setBounds(322, 118, 233, 20);
+
+         	}
+         );
+        comboBoxTipoMascota.setBounds(320, 208, 233, 20);
         comboBoxTipoMascota.setModel(new DefaultComboBoxModel(new String[] {"Canino", "Felino", "Ave", "Roedor", "Otro"}));
         panelAgregarMascota.add(comboBoxTipoMascota);
         
@@ -492,68 +505,47 @@ public class VentanaPrincipal {
                 "Basset Hound","Beagle","Bichón Maltés","Boxer","Braco de Weimar","Bull Terrier","Bulldog francés","Bulldog inglés","Caniche","Carlino","Chihuahua","Chow-chow","Cocker Spaniel Americano","Cocker Spaniel inglés","Crestado chino","Dálmata","Dobermann","Dogo Aleman","Dogo Argentino","Golden retriever",
                 "Labrador Retrevier","Mastín Español","Mastín Napolitano","Pastor Alemán","Pequinés",
                 "Pinscher Pomerania","Rottweiler","Samoyedo","San Bernardo","Schnauzer","Setter inglés",
-                "Setter irlandés","Shar Pei","Shih Tzu","Siberian Husky"})) ;           
-        comboBoxRazaMascota.setBounds(322, 170, 233, 20);
+                "Setter irlandés","Shar Pei","Shih Tzu","Siberian Husky"})) ;         
+        comboBoxRazaMascota.setBounds(320, 272, 233, 20);
         panelAgregarMascota.add(comboBoxRazaMascota);
         
         textFieldNombreMascota = new JTextField();
-        textFieldNombreMascota.setBounds(322, 219, 233, 23);
+        textFieldNombreMascota.setBounds(321, 333, 233, 23);
         panelAgregarMascota.add(textFieldNombreMascota);
         textFieldNombreMascota.setColumns(10);
         
         textFieldNumChip = new JTextField();
-        textFieldNumChip.setBounds(322, 271, 233, 23);
+        textFieldNumChip.setBounds(321, 397, 233, 23);
         textFieldNumChip.setColumns(10);
         panelAgregarMascota.add(textFieldNumChip);
         
         JComboBox comboBoxColorPelaje = new JComboBox();
         comboBoxColorPelaje.setModel(new DefaultComboBoxModel(new String[] {"Negro", "Manchado", "Dos Tonalidades", "Amarillo", "Cafe", "Blanco", "Gris"}));
-        comboBoxColorPelaje.setBounds(322, 325, 233, 20);
+        comboBoxColorPelaje.setBounds(320, 465, 233, 20);
         panelAgregarMascota.add(comboBoxColorPelaje);
         
         final JComboBox comboBoxColorOjos = new JComboBox();
-        comboBoxColorOjos.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-                if(comboBoxColorOjos.getSelectedIndex()== 7){
-                    lblDer.setVisible(true);
-                    lblIzq.setVisible(true);
-                    comboBoxOjoDerecho.setVisible(true);
-                    comboBoxOjoDerecho.setEnabled(true);
-                    comboBoxOjoIzquierdo.setVisible(true);
-                    comboBoxOjoIzquierdo.setEnabled(true);
-                }
-                else{
-                    lblDer.setVisible(false);
-                    lblIzq.setVisible(false);
-                    comboBoxOjoDerecho.setVisible(false);
-                    comboBoxOjoDerecho.setEnabled(false);
-                    comboBoxOjoIzquierdo.setVisible(false);
-                    comboBoxOjoIzquierdo.setEnabled(false);
-                    
-                }
-            }
-        });
-        comboBoxColorOjos.setModel(new DefaultComboBoxModel(new String[] {"Cafes", "Azules", "Negros", "Grises", "Amarillos", "Verdes", "Celestes", "Dos Tonos (Especifique)"}));
-        comboBoxColorOjos.setBounds(322, 375, 233, 20);
+        comboBoxColorOjos.setModel(new DefaultComboBoxModel(new String[] {"Cafes", "Azules", "Negros", "Grises", "Amarillos", "Verdes", "Celestes", "Dos Tonos "}));
+        comboBoxColorOjos.setBounds(320, 528, 233, 20);
         panelAgregarMascota.add(comboBoxColorOjos);
         
         rdbtnColones = new JRadioButton("\u20A1");
         rdbtnColones.setForeground(Color.WHITE);
         rdbtnColones.setContentAreaFilled(false);
         rdbtnColones.setSelected(true);
-        rdbtnColones.setBounds(318, 526, 39, 23);
+        rdbtnColones.setBounds(850, 245, 39, 23);
         monedaDePago.add(rdbtnColones);
         panelAgregarMascota.add(rdbtnColones);
         
         radioButtonDolares = new JRadioButton("$");
         radioButtonDolares.setForeground(Color.WHITE);
         radioButtonDolares.setContentAreaFilled(false);
-        radioButtonDolares.setBounds(362, 526, 47, 23);
+        radioButtonDolares.setBounds(894, 245, 47, 23);
         monedaDePago.add(radioButtonDolares);
         panelAgregarMascota.add(radioButtonDolares);
         
         JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setBounds(861, 353, 384, 184);
+        scrollPane.setBounds(710, 352, 384, 184);
         panelAgregarMascota.add(scrollPane);
         
         JEditorPane editorPaneNotas = new JEditorPane();
@@ -573,7 +565,7 @@ public class VentanaPrincipal {
 	
 		
 		panelAgregarCasaCuna = new JPanel();
-		frame.getContentPane().add(panelAgregarCasaCuna, "name_28003406149630");
+		VentanaPrincipal.getContentPane().add(panelAgregarCasaCuna, "name_28003406149630");
 		panelAgregarCasaCuna.setLayout(null);
 /*Inicio codigo casa Cuna*/
 		buttonGuardar = new JButton("");
@@ -595,6 +587,16 @@ public class VentanaPrincipal {
 				panelAgregarMascota.setVisible(false);
 			}
 		});
+		
+		JComboBox comboBoxTipoMascotaCC = new JComboBox();
+		comboBoxTipoMascotaCC.setModel(new DefaultComboBoxModel(new String[] {"Canino", "Felino", "Ave", "Roedor", "Otro"}));
+		comboBoxTipoMascotaCC.setBounds(404, 280, 203, 19);
+		panelAgregarCasaCuna.add(comboBoxTipoMascotaCC);
+		
+		JLabel labelIcono = new JLabel("");
+		labelIcono.setIcon(new ImageIcon("./imgs/Logo.png"));
+		labelIcono.setBounds(378, 0, 552, 135);
+		panelAgregarCasaCuna.add(labelIcono);
 		CancelarOperacion.setToolTipText("Cancelar Registro de Mascota");
 		CancelarOperacion.setPressedIcon(new ImageIcon("./imgs/Cancel-32.png"));
 		CancelarOperacion.setRolloverIcon(new ImageIcon("./imgs/Cancel-64.png"));
@@ -623,7 +625,7 @@ public class VentanaPrincipal {
 		panelAgregarCasaCuna.add(buttonGuardar);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(64, 429, 399, 130);
+		scrollPane_1.setBounds(749, 340, 399, 130);
 		panelAgregarCasaCuna.add(scrollPane_1);
 		
 		JTextArea textArea = new JTextArea();
@@ -633,7 +635,7 @@ public class VentanaPrincipal {
 		chckbxNoAlimentos.setForeground(Color.WHITE);
 		chckbxNoAlimentos.setContentAreaFilled(false);
 		chckbxNoAlimentos.setFont(new Font("Batang", Font.BOLD, 11));
-		chckbxNoAlimentos.setBounds(443, 331, 97, 23);
+		chckbxNoAlimentos.setBounds(1128, 242, 97, 23);
 		panelAgregarCasaCuna.add(chckbxNoAlimentos);
 	    chckbxNoAlimentos.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -649,7 +651,7 @@ public class VentanaPrincipal {
 		JLabel lblnecesitarDonacionesDe_1 = new JLabel("\u00BFNecesitar\u00E9 Donaciones de Alimentos?");
 		lblnecesitarDonacionesDe_1.setForeground(Color.WHITE);
 		lblnecesitarDonacionesDe_1.setFont(new Font("Batang", Font.BOLD, 19));
-		lblnecesitarDonacionesDe_1.setBounds(64, 324, 373, 30);
+		lblnecesitarDonacionesDe_1.setBounds(749, 235, 373, 30);
 		panelAgregarCasaCuna.add(lblnecesitarDonacionesDe_1);
 		
 		JCheckBox chckbxNoMedicamentos = new JCheckBox("No");
@@ -666,57 +668,54 @@ public class VentanaPrincipal {
 		chckbxNoMedicamentos.setFont(new Font("Batang", Font.BOLD, 11));
 		chckbxNoMedicamentos.setForeground(Color.WHITE);
 		chckbxNoMedicamentos.setContentAreaFilled(false);
-		chckbxNoMedicamentos.setBounds(443, 271, 97, 23);
+		chckbxNoMedicamentos.setBounds(1128, 182, 97, 23);
 		panelAgregarCasaCuna.add(chckbxNoMedicamentos);
 		
 		JLabel lblnecesitarDonacionesDe = new JLabel("\u00BFNecesitar\u00E9 Donaciones de Medicamentos?");
 		lblnecesitarDonacionesDe.setForeground(Color.WHITE);
 		lblnecesitarDonacionesDe.setFont(new Font("Batang", Font.BOLD, 17));
-		lblnecesitarDonacionesDe.setBounds(64, 265, 373, 30);
+		lblnecesitarDonacionesDe.setBounds(749, 176, 373, 30);
 		panelAgregarCasaCuna.add(lblnecesitarDonacionesDe);
 
 		JLabel lblDireccionCasaCuna = new JLabel("Direccion Casa Cuna");
 		lblDireccionCasaCuna.setForeground(Color.WHITE);
 		lblDireccionCasaCuna.setFont(new Font("Batang", Font.BOLD, 19));
-		lblDireccionCasaCuna.setBounds(64, 401, 203, 23);
+		lblDireccionCasaCuna.setBounds(749, 312, 203, 23);
 		panelAgregarCasaCuna.add(lblDireccionCasaCuna);
 		
 		JLabel lblTamaoDeMascota = new JLabel("Tama\u00F1o de Mascota a Recibir");
 		lblTamaoDeMascota.setForeground(Color.WHITE);
 		lblTamaoDeMascota.setFont(new Font("Batang", Font.BOLD, 19));
-		lblTamaoDeMascota.setBounds(64, 61, 270, 23);
+		lblTamaoDeMascota.setBounds(69, 182, 270, 23);
 		panelAgregarCasaCuna.add(lblTamaoDeMascota);
 		
 		lblTipoDeMascota = new JLabel("Tipo de Mascota");
 		lblTipoDeMascota.setForeground(Color.WHITE);
 		lblTipoDeMascota.setFont(new Font("Batang", Font.BOLD, 19));
-		lblTipoDeMascota.setBounds(64, 130, 146, 23);
+		lblTipoDeMascota.setBounds(69, 276, 146, 23);
 		panelAgregarCasaCuna.add(lblTipoDeMascota);
 		
 		JLabel lblCantidadDeMascotas = new JLabel("\u00BFCu\u00E1ntas Mascotas Podr\u00E9 Recibir? ");
 		lblCantidadDeMascotas.setForeground(Color.WHITE);
 		lblCantidadDeMascotas.setFont(new Font("Batang", Font.BOLD, 19));
-		lblCantidadDeMascotas.setBounds(64, 201, 319, 23);
+		lblCantidadDeMascotas.setBounds(69, 372, 319, 23);
 		panelAgregarCasaCuna.add(lblCantidadDeMascotas);
 		
 		JComboBox comboBoxTamanoMascota = new JComboBox();
 		comboBoxTamanoMascota.setModel(new DefaultComboBoxModel(new String[] {"Peque\u00F1a(s)", "Mediana(s)", "Grande(s)"}));
-		comboBoxTamanoMascota.setBounds(399, 61, 203, 22);
+		comboBoxTamanoMascota.setBounds(404, 182, 203, 22);
 		panelAgregarCasaCuna.add(comboBoxTamanoMascota);
 		
 		JSpinner spinnerCantidadDeMascota = new JSpinner();
 		spinnerCantidadDeMascota.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
-		spinnerCantidadDeMascota.setBounds(399, 201, 54, 20);
+		spinnerCantidadDeMascota.setBounds(404, 372, 54, 20);
 		panelAgregarCasaCuna.add(spinnerCantidadDeMascota);
 		
-		comboBoxTipoMascota = new JComboBox();
-		comboBoxTipoMascota.setModel(new DefaultComboBoxModel(new String[] {"Caninos", "Felinos", "Aves", "Roedores", "Otros (Especifique)"}));
-		comboBoxTipoMascota.setBounds(399, 130, 153, 20);
-		panelAgregarCasaCuna.add(comboBoxTipoMascota);
+		
 		
 		JLabel label = new JLabel("");
 		label.setIcon(new ImageIcon("C:\\Users\\Ariel\\Documents\\GitHub\\DogsLovers\\imgs\\fondoRegistro.png"));
-		label.setBounds(0, 0, 1354, 675);
+		label.setBounds(0, 0, 2508, 1246);
 		panelAgregarCasaCuna.add(label);
 		labelFondo.setIcon(new ImageIcon("./imgs/fondoRegistro.png"));
         
@@ -726,7 +725,7 @@ public class VentanaPrincipal {
 /*fin codigo Casa Cuna*/
 		
 		JMenuBar menuBar = new JMenuBar();
-		frame.setJMenuBar(menuBar);
+		VentanaPrincipal.setJMenuBar(menuBar);
 		
 		JMenu mnRegistro = new JMenu("Registro");
         mnRegistro.setIcon(new ImageIcon("./imgs/Registro-40.png"));

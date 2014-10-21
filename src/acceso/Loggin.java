@@ -146,10 +146,10 @@ public class Loggin extends JFrame {
 		lblContrasea.setBounds(112, 230, 125, 42);
 		contentPane.add(lblContrasea);
 		
-		JLabel labelIcono = new JLabel("");
-		labelIcono.setIcon(new ImageIcon("./imgs/Logo.png"));
-		labelIcono.setBounds(0, 0, 552, 135);
-		contentPane.add(labelIcono);
+		JLabel labelDL = new JLabel("");
+		labelDL.setIcon(new ImageIcon("./imgs/Logo.png"));
+		labelDL.setBounds(0, 0, 552, 135);
+		contentPane.add(labelDL);
 		
 		JLabel labelFondo = new JLabel("");
 		labelFondo.setHorizontalAlignment(SwingConstants.CENTER);

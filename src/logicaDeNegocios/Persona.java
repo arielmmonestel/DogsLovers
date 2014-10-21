@@ -14,46 +14,30 @@ public class Persona {
 -CasaCuna CasaCuna //Si el usuario es casa cuna. aqui van todos los atributos de esa clase
 -boolean blackList
 */
-	private int iD = 0;
+
 	private String nombre;
 	private String primerApellido;
 	private String segundoApellido;
-	private String password;
-	private String nombreUsuario;
 	private String sexo;
 	private String telefono;
-	private String email;	
-	private String direccionResidencia;
-	protected CasaCuna casaCuna;
-	boolean listaNegra;
+	private String email;
+	private int diaNacimiento;
+	private String mesNacimiento;
+	private int anioNacimiento;
 	
-	public  Persona(String pNombre,String pPrimerApellido, String pSegundoApellido,String pPassword,String pNombreUsuario,String pSexo, String pTelefono,
-			String pEmail,String pDireccionResidencia,CasaCuna pCasaCuna,boolean pListaNegra)
-	{	iD++;	
+	public  Persona(String pNombre,String pPrimerApellido, String pSegundoApellido,String pSexo, String pTelefono,
+			String pEmail,int pDiaNacimiento, String pMesNacimiento, int pAnioNacimiento)
+	{		
 		setNombre(pNombre);
 		setPrimerApellido(pPrimerApellido);
 		setSegundoApellido(pSegundoApellido);
-		setPassword(pPassword);
-		setNombreUsuario(pNombreUsuario);
 		setSexo(pSexo);
 		setTelefono(pTelefono);
 		setEmail(pEmail);
-		setDireccionResidencia(pDireccionResidencia);
-		setCasaCuna(pCasaCuna);
-		setListaNegra(pListaNegra);
+		setDiaNacimiento(pDiaNacimiento);
+		setMesNacimiento(pMesNacimiento);
+		setAnioNacimiento(pAnioNacimiento);
 		
-	}
-	public String getNombreUsuario() {
-		return nombreUsuario;
-	}
-	public void setNombreUsuario(String nombreUsuario) {
-		this.nombreUsuario = nombreUsuario;
-	}
-	public int getiD() {
-		return iD;
-	}
-	public void setiD(int iD) {
-		this.iD = iD;
 	}
 	public String getNombre() {
 		return nombre;
@@ -73,12 +57,7 @@ public class Persona {
 	public void setSegundoApellido(String segundoApellido) {
 		this.segundoApellido = segundoApellido;
 	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
+
 	public String getSexo() {
 		return sexo;
 	}
@@ -97,23 +76,24 @@ public class Persona {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getDireccionResidencia() {
-		return direccionResidencia;
+
+	public int getDiaNacimiento() {
+		return diaNacimiento;
 	}
-	public void setDireccionResidencia(String pDireccionResidencia) {
-		direccionResidencia = pDireccionResidencia;
+	public void setDiaNacimiento(int diaNacimiento) {
+		this.diaNacimiento = diaNacimiento;
 	}
-	public CasaCuna getCasaCuna() {
-		return casaCuna;
+	public String getMesNacimiento() {
+		return mesNacimiento;
 	}
-	public void setCasaCuna(CasaCuna pCasaCuna) {
-		casaCuna = pCasaCuna;
+	public void setMesNacimiento(String mesNacimiento) {
+		this.mesNacimiento = mesNacimiento;
 	}
-	public boolean isListaNegra() {
-		return listaNegra;
+	public int getAnioNacimiento() {
+		return anioNacimiento;
 	}
-	public void setListaNegra(boolean listaNegra) {
-		this.listaNegra = listaNegra;
+	public void setAnioNacimiento(int anioNacimiento) {
+		this.anioNacimiento = anioNacimiento;
 	}
 
 }
