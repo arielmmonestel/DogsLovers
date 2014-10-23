@@ -46,6 +46,7 @@ import javax.swing.JPasswordField;
 
 
 
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -114,7 +115,7 @@ public class VentanaNuevoUsuario extends JFrame {
 			}
 		});
 	}
-
+	
 	/**
 	 * Create the frame.
 	 */
@@ -168,18 +169,16 @@ public class VentanaNuevoUsuario extends JFrame {
 				String sexo= (String) comboBoxSexo.getSelectedItem();
 				String telefono = textFieldTelefono.getText();
 				String correo = textFieldCorreo.getText();
-				int diaNacimiento = ((int)spinnerDia.getValue());
+				int diaNacimiento = (Integer) (spinnerDia.getValue());
 				String mesNacimiento =((String)comboBoxMes.getSelectedItem());
-				int anioNacimiento= ((int)spinnerAnio.getValue());
-				int idUsuario = IDUsuarios++;
+				int anioNacimiento= ((Integer)spinnerAnio.getValue());
 				String nickName = textFieldUsuario.getText();
 				String contrasenia=passwordFieldNewPass.getText();
 				
 				Usuario NuevoUsuario = new Usuario(nombre,apellidoUno,apellidoDos,sexo,
-						telefono,correo,diaNacimiento,mesNacimiento,anioNacimiento,idUsuario ,nickName,contrasenia);
+						telefono,correo,diaNacimiento,mesNacimiento,anioNacimiento,nickName,contrasenia);
 				
-				ArrayList<Usuario> listaUsuarios =Usuario.getListaUsuarios();
-						listaUsuarios.add(NuevoUsuario);// Agregar el Usuario al arreglo estatico de lista Usuarios
+				Usuario.agregarUsuario(NuevoUsuario);// Agregar el Usuario al arreglo estatico de lista Usuarios
 				
 				
 				JOptionPane.showMessageDialog(contentPane, "Usuario registrado correctamente");

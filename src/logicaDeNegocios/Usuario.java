@@ -12,17 +12,15 @@ public class Usuario extends Persona{
 	private ArrayList<Usuario> personasCalificables;
 	private ArrayList<Mascota> mascotasAdoptadas;
 	int calificacion;
-	private static ArrayList<Usuario> listaUsuarios = new ArrayList<Usuario>(1);
 	
-	
-
-
+	private static int IDUsuarios = 0;
+	private static ArrayList<Usuario> listaDeUsuarios = new ArrayList<Usuario>();
 
 	public Usuario(String pNombre,String pPrimerApellido, String pSegundoApellido,String pSexo, String pTelefono,
-			String pEmail,int pDiaNacimiento, String pMesNacimiento, int pAnioNacimiento,int pID, String pNombreUsuario, String pContrasenia) {
+			String pEmail,int pDiaNacimiento, String pMesNacimiento, int pAnioNacimiento, String pNombreUsuario, String pContrasenia) {
 		super( pNombre,pPrimerApellido, pSegundoApellido, pSexo, pTelefono,
 				pEmail,pDiaNacimiento,pMesNacimiento,pAnioNacimiento);
-		setID(pID);
+		setID(IDUsuarios++);
 		setNombreUsuario(pNombreUsuario);
 		setContrasenia(pContrasenia);
 		
@@ -101,14 +99,17 @@ public class Usuario extends Persona{
 		calificacion = pCalificacion;
 	}
 
-	public static ArrayList<Usuario> getListaUsuarios() {
-		return listaUsuarios;
+	public static ArrayList<Usuario> getListaDeUsuarios() {
+		return listaDeUsuarios;
 	}
 
-	public static void setListaUsuarios(ArrayList<Usuario> pListaUsuarios) {
-		listaUsuarios = pListaUsuarios;
+	public static void agregarUsuario(Usuario pUsuario) {
+		listaDeUsuarios.add(pUsuario);
 	}
-
+	
+	public static int getListaDeUsuariosSize(){
+		return listaDeUsuarios.size();
+	}
 
 
 	

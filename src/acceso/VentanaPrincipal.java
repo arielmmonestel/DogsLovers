@@ -3,8 +3,6 @@ package acceso;
 import acceso.*;
 
 import java.awt.EventQueue;
-
-
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.SystemColor;
@@ -50,17 +48,17 @@ import javax.swing.SwingConstants;
 import java.awt.Cursor;
 
 import javax.swing.DebugGraphics;
-
-
 import javax.swing.JFrame;
 
 import java.awt.CardLayout;
+import java.util.Calendar;
 
 import javax.swing.JPanel;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JMenu;
 
+import logicaDeNegocios.*;
 import sun.util.logging.resources.logging;
 
 public class VentanaPrincipal {
@@ -73,7 +71,7 @@ public class VentanaPrincipal {
     private JTextField textFieldNombreMascota;
     private JTextField textFieldNumChip;
     private JTextField textFieldMontoRecompensa;
-    private  ButtonGroup estadoMascota = new ButtonGroup() ;
+    private ButtonGroup estadoMascota = new ButtonGroup() ;
     private  ButtonGroup monedaDePago = new ButtonGroup() ;
     private JRadioButton rdbtnColones;
     private JRadioButton radioButtonDolares;
@@ -84,9 +82,25 @@ public class VentanaPrincipal {
     private JComboBox comboBoxCanton;
     private JButton buttonGuardar;
     private JComboBox comboBoxTipoMascota;
-    private JLabel labelDL;
-    
+    private JEditorPane editorPaneNotas;
+    private static estadoMascota estado;
+    private static String tipo;
+    private static String nombre;
+    private static String raza;
+    private static String chip;
+    private static String colorDePelo;
+    private static String colorDeOjos;
+    private static String foto;
+    private static String lugarVisto;
+    private static String nota;
+    private static Calendar fecha;
+    private static int recompensa;
+    private static int idEncargado;
+    private static boolean estaEnCasaCuna;
+	private JLabel labelDL;
 
+	
+	
 	/**
 	 * Launch the application.
 	 */
@@ -123,7 +137,6 @@ public class VentanaPrincipal {
 		panelPrincipal = new JPanel();
 		VentanaPrincipal.getContentPane().add(panelPrincipal, "name_27977974667427");
 		panelPrincipal.setLayout(null);
-		
 		JButton btnCerrarSesin = new JButton("");
 		btnCerrarSesin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -189,13 +202,28 @@ public class VentanaPrincipal {
         });
         
         buttonGuardar = new JButton("");
-        buttonGuardar.setToolTipText("Guardar en el Registro del Mascota");
+        buttonGuardar.setToolTipText("Guardar en el Registro de Mascota");
         buttonGuardar.setBorder(null);
         buttonGuardar.setFocusable(false);
         buttonGuardar.setFocusTraversalKeysEnabled(false);
         buttonGuardar.setFocusPainted(false);
         buttonGuardar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+            
+            	nombre = textFieldNombreMascota.getText();
+            	chip = textFieldNumChip.getText();
+            	foto = null; //Foto de Mascota
+            	nota = editorPaneNotas.getText();
+            	fecha = null; //Falta poner fecha
+            	recompensa = Integer.parseInt(textFieldMontoRecompensa.getText());
+            	idEncargado = 0; // Falta tomar el id del usuario que ejecuta la acción
+            	estaEnCasaCuna = false;
+            	
+            	Mascota NuevaMascota = new Mascota(estado, tipo, raza, nombre, chip, colorDePelo, colorDeOjos, foto,
+            			lugarVisto, nota, fecha, recompensa, idEncargado);
+       
+            	Mascota.agregarMascota(NuevaMascota);
+            	
             }
         });
         
@@ -276,6 +304,7 @@ public class VentanaPrincipal {
         comboBoxProvincia.setModel(new DefaultComboBoxModel(new String[] {"San Jose", "Alajuela", "Cartago", "Heredia", "Puntarenas", "Limon", "Guanacaste"}));
         comboBoxProvincia.setBounds(998, 192, 168, 19);
         panelAgregarMascota.add(comboBoxProvincia);
+        lugarVisto = comboBoxCanton.getSelectedItem().toString() + ", " + comboBoxProvincia.getSelectedItem().toString();
         
         JSpinner spinner = new JSpinner();
         spinner.setToolTipText("D\u00EDa");
@@ -402,6 +431,7 @@ public class VentanaPrincipal {
                     lblMonto.setVisible(true);
                     textFieldMontoRecompensa.setEnabled(true);
                     textFieldMontoRecompensa.setVisible(true);
+                    /* Cambiar aquí el estado de la mascota a Perdida*/
                     
                 }
                 
@@ -433,6 +463,10 @@ public class VentanaPrincipal {
                     lblMonto.setVisible(false);
                     textFieldMontoRecompensa.setEnabled(false);
                     textFieldMontoRecompensa.setVisible(false);
+                    /* Cambiar aquí el estado de la mascota a Encontrada*/
+                    estado = estado.ENCONTRADA;
+                    
+                    
                     
                     
                 }else{
@@ -443,6 +477,8 @@ public class VentanaPrincipal {
                     textFieldNombreMascota.setEnabled(true);
                     lblFechaDeHallazgoperdida.setText("Fecha de Pérdida");
                     lblSitioDeHallazgoperdida.setText("Sitio de Pérdida");
+                    estado = estado.PERDIDA;
+                    
                 }
             }
         });
@@ -461,35 +497,36 @@ public class VentanaPrincipal {
                             "Pinscher Pomerania","Rottweiler","Samoyedo","San Bernardo","Schnauzer","Setter inglés",
                             "Setter irlandés","Shar Pei","Shih Tzu","Siberian Husky"})) ;   
                     comboBoxRazaMascota.setVisible(true);
-                    comboBoxRazaMascota.setEnabled(true);   
+                    comboBoxRazaMascota.setEnabled(true);  
+                    tipo = "Canino";
                 }
                 if (comboBoxTipoMascota.getSelectedIndex() == 1){
                     comboBoxRazaMascota.setModel(new DefaultComboBoxModel(new String[] {"Abisinio","Aleman de pelo largo","Angora turco","American curl","American shorthair","American wirehair","Aphrodites giant","Australian mist",
                       "Azul ruso","Balinés","Bengalí","Bogtail Japonés","Bosque de noruega","British shorthair","Burmilla","Burmés","Cornish rex","Cymric",
                       "Chartreux","Devon rex","Don sphynx","Gato bombay","Gato brasileño","Ceylon","Europeo","Exótico","Gato habana","Korat","Manx","Munchkin","Ocicat","Ojos azules","Oriental","Oriental de pelo largo","Persa","Siamés","Siberiano","Singapura","Somalí","Tonkinés","LaPerm","Maine coon","Mau egipcio","Peterbald",
                       "Pixiebob","Ragdoll","Sagrado de birmania","Scottish fold","Selkirk Rex","Sphynx","Van turco"}));
-                    
-                    
                     comboBoxRazaMascota.setVisible(true);
                     comboBoxRazaMascota.setEnabled(true);
+                    tipo = "Felino";
                 }
                 if (comboBoxTipoMascota.getSelectedIndex() == 2){
                     comboBoxRazaMascota.setModel(new DefaultComboBoxModel(new String[] {"Canario","Cotorra","Angaporis(Pájaros de Amor)","Rosella","Loro de Bolsillo"
                             ,"Loro","Turaco","Cacatua","Guacamayo","Ninfa","Pato","Gallina"})); 
                     comboBoxRazaMascota.setVisible(true);
                     comboBoxRazaMascota.setEnabled(true);
-                    
+                    tipo = "Ave";
                 }
                 if (comboBoxTipoMascota.getSelectedIndex() == 3){
                     comboBoxRazaMascota.setModel(new DefaultComboBoxModel(new String[] {"Ardilla Coreana",
                             "Cobaya","Conejos","Erizo","Hamster","Jerbo","Rata","Ratón"}));
                     comboBoxRazaMascota.setVisible(true);
                     comboBoxRazaMascota.setEnabled(true);
-                    
+                    tipo = "Roedor";
                 }
                 if (comboBoxTipoMascota.getSelectedIndex() == 4){
                     
                     comboBoxRazaMascota.setEnabled(false);System.out.println(comboBoxTipoMascota.getSelectedIndex());
+                    tipo = "Otro";
                 }
 
                 }
@@ -505,7 +542,8 @@ public class VentanaPrincipal {
                 "Basset Hound","Beagle","Bichón Maltés","Boxer","Braco de Weimar","Bull Terrier","Bulldog francés","Bulldog inglés","Caniche","Carlino","Chihuahua","Chow-chow","Cocker Spaniel Americano","Cocker Spaniel inglés","Crestado chino","Dálmata","Dobermann","Dogo Aleman","Dogo Argentino","Golden retriever",
                 "Labrador Retrevier","Mastín Español","Mastín Napolitano","Pastor Alemán","Pequinés",
                 "Pinscher Pomerania","Rottweiler","Samoyedo","San Bernardo","Schnauzer","Setter inglés",
-                "Setter irlandés","Shar Pei","Shih Tzu","Siberian Husky"})) ;         
+                "Setter irlandés","Shar Pei","Shih Tzu","Siberian Husky"})) ; 
+        raza = (comboBoxRazaMascota.getSelectedItem()).toString();
         comboBoxRazaMascota.setBounds(320, 272, 233, 20);
         panelAgregarMascota.add(comboBoxRazaMascota);
         
@@ -519,15 +557,18 @@ public class VentanaPrincipal {
         textFieldNumChip.setColumns(10);
         panelAgregarMascota.add(textFieldNumChip);
         
+        
         JComboBox comboBoxColorPelaje = new JComboBox();
         comboBoxColorPelaje.setModel(new DefaultComboBoxModel(new String[] {"Negro", "Manchado", "Dos Tonalidades", "Amarillo", "Cafe", "Blanco", "Gris"}));
         comboBoxColorPelaje.setBounds(320, 465, 233, 20);
         panelAgregarMascota.add(comboBoxColorPelaje);
+        colorDePelo = (comboBoxColorPelaje.getSelectedItem()).toString();
         
         final JComboBox comboBoxColorOjos = new JComboBox();
         comboBoxColorOjos.setModel(new DefaultComboBoxModel(new String[] {"Cafes", "Azules", "Negros", "Grises", "Amarillos", "Verdes", "Celestes", "Dos Tonos "}));
         comboBoxColorOjos.setBounds(320, 528, 233, 20);
         panelAgregarMascota.add(comboBoxColorOjos);
+        colorDeOjos = (comboBoxColorOjos.getSelectedItem()).toString();
         
         rdbtnColones = new JRadioButton("\u20A1");
         rdbtnColones.setForeground(Color.WHITE);
@@ -548,7 +589,7 @@ public class VentanaPrincipal {
         scrollPane.setBounds(710, 352, 384, 184);
         panelAgregarMascota.add(scrollPane);
         
-        JEditorPane editorPaneNotas = new JEditorPane();
+        editorPaneNotas = new JEditorPane();
         scrollPane.setViewportView(editorPaneNotas);
         
         JLabel labelFondo = new JLabel("");
@@ -631,7 +672,7 @@ public class VentanaPrincipal {
 		JTextArea textArea = new JTextArea();
 		scrollPane_1.setViewportView(textArea);
 		
-		JCheckBox chckbxNoAlimentos = new JCheckBox("No");
+		final JCheckBox chckbxNoAlimentos = new JCheckBox("No");
 		chckbxNoAlimentos.setForeground(Color.WHITE);
 		chckbxNoAlimentos.setContentAreaFilled(false);
 		chckbxNoAlimentos.setFont(new Font("Batang", Font.BOLD, 11));
@@ -654,7 +695,7 @@ public class VentanaPrincipal {
 		lblnecesitarDonacionesDe_1.setBounds(749, 235, 373, 30);
 		panelAgregarCasaCuna.add(lblnecesitarDonacionesDe_1);
 		
-		JCheckBox chckbxNoMedicamentos = new JCheckBox("No");
+		final JCheckBox chckbxNoMedicamentos = new JCheckBox("No");
 		chckbxNoMedicamentos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(chckbxNoMedicamentos.isSelected()){
