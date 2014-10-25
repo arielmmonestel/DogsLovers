@@ -11,13 +11,13 @@ public class Mascota {
 	private int id;
 	private String tipo;
 	private String raza;
-	private String nombre;
-	private String chip;
+	private String nombre = null;
+	private String chip = null;
 	private String colorDePelo;
 	private String colorDeOjos;
 	private String foto;
 	private String lugarVisto;
-	private String nota;
+	private String nota=null;
 	private Calendar fecha;
 	private int recompensa;
 	private int idEncargado;

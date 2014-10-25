@@ -249,7 +249,7 @@ public class VentanaPrincipal {
         buttonCancelar.setContentAreaFilled(false);
         buttonCancelar.setBorderPainted(false);
         buttonCancelar.setBorder(null);
-        buttonCancelar.setBounds(1155, 558, 109, 78);
+        buttonCancelar.setBounds(1232, 534, 109, 78);
         panelAgregarMascota.add(buttonCancelar);
         buttonGuardar.setDefaultCapable(false);
         buttonGuardar.setContentAreaFilled(false);
@@ -259,11 +259,11 @@ public class VentanaPrincipal {
         buttonGuardar.setPressedIcon(new ImageIcon("./imgs/save-32.png"));
         buttonGuardar.setRolloverIcon(new ImageIcon("./imgs/save-64.png"));
         buttonGuardar.setIcon(new ImageIcon("./imgs/save-48.png"));
-        buttonGuardar.setBounds(1036, 558, 109, 78);
+        buttonGuardar.setBounds(1108, 534, 109, 78);
         panelAgregarMascota.add(buttonGuardar);
         
         comboBoxCanton = new JComboBox();
-        comboBoxCanton.setBounds(1176, 192, 168, 20);
+        comboBoxCanton.setBounds(1173, 294, 168, 20);
         comboBoxCanton.setModel(new DefaultComboBoxModel(new String[] {"Central","Escazú","Desamparados","Puriscal","Tarrazú","Aserrí","Mora","Goicoechea","Santa Ana","Alajuelita",
                                                                             "Coronado","Acosta","Tibás","Moravia","Montes de Oca","Turrubares",
                                                                             "Dota","Curridabat","Perez Zeledón","León Cortés"}))    ;           
@@ -302,39 +302,39 @@ public class VentanaPrincipal {
             }
         });
         comboBoxProvincia.setModel(new DefaultComboBoxModel(new String[] {"San Jose", "Alajuela", "Cartago", "Heredia", "Puntarenas", "Limon", "Guanacaste"}));
-        comboBoxProvincia.setBounds(998, 192, 168, 19);
+        comboBoxProvincia.setBounds(995, 294, 168, 19);
         panelAgregarMascota.add(comboBoxProvincia);
         lugarVisto = comboBoxCanton.getSelectedItem().toString() + ", " + comboBoxProvincia.getSelectedItem().toString();
         
         JSpinner spinner = new JSpinner();
         spinner.setToolTipText("D\u00EDa");
         spinner.setModel(new SpinnerNumberModel(1, 1, 31, 1));
-        spinner.setBounds(998, 135, 39, 23);
+        spinner.setBounds(995, 237, 39, 23);
         panelAgregarMascota.add(spinner);
         
         JSpinner spinnerAnioPerdida = new JSpinner();
         spinnerAnioPerdida.setToolTipText("A\u00F1o");
-        spinnerAnioPerdida.setBounds(1237, 134, 61, 23);
+        spinnerAnioPerdida.setBounds(1234, 236, 61, 23);
         spinnerAnioPerdida.setModel(new SpinnerNumberModel(2014.0, 1990.0, 2014.0, 1.0));
         panelAgregarMascota.add(spinnerAnioPerdida);
         
         JComboBox comboBoxMesPerdida = new JComboBox();
         comboBoxMesPerdida.setToolTipText("Mes");
         comboBoxMesPerdida.setModel(new DefaultComboBoxModel(new String[] {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre", "Octubre", "Noviembre", "Diciembre"}));
-        comboBoxMesPerdida.setBounds(1057, 134, 163, 23);
+        comboBoxMesPerdida.setBounds(1054, 236, 163, 23);
         panelAgregarMascota.add(comboBoxMesPerdida);
         
         textFieldMontoRecompensa = new JTextField();
         textFieldMontoRecompensa.setColumns(10);
-        textFieldMontoRecompensa.setBounds(1019, 245, 127, 23);
+        textFieldMontoRecompensa.setBounds(1016, 347, 127, 23);
         panelAgregarMascota.add(textFieldMontoRecompensa);
         
         lblMonto = new JLabel("Monto");
         lblMonto.setForeground(Color.WHITE);
         lblMonto.setFont(new Font("Batang", Font.BOLD, 19));
-        lblMonto.setBounds(947, 249, 75, 14);
+        lblMonto.setBounds(944, 351, 75, 14);
         panelAgregarMascota.add(lblMonto);
-        chckbxRecompensa.setBounds(710, 245, 155, 23);
+        chckbxRecompensa.setBounds(707, 347, 155, 23);
         chckbxRecompensa.setSelected(true);
         panelAgregarMascota.add(chckbxRecompensa);
         
@@ -391,19 +391,19 @@ public class VentanaPrincipal {
         final JLabel lblSitioDeHallazgoperdida = new JLabel("Sitio de P\u00E9rdida");
         lblSitioDeHallazgoperdida.setForeground(Color.WHITE);
         lblSitioDeHallazgoperdida.setFont(new Font("Batang", Font.BOLD, 19));
-        lblSitioDeHallazgoperdida.setBounds(710, 188, 177, 23);
+        lblSitioDeHallazgoperdida.setBounds(707, 290, 177, 23);
         panelAgregarMascota.add(lblSitioDeHallazgoperdida);
         
         final JLabel lblFechaDeHallazgoperdida = new JLabel("Fecha de P\u00E9rdida");
         lblFechaDeHallazgoperdida.setForeground(Color.WHITE);
         lblFechaDeHallazgoperdida.setFont(new Font("Batang", Font.BOLD, 19));
-        lblFechaDeHallazgoperdida.setBounds(710, 135, 163, 23);
+        lblFechaDeHallazgoperdida.setBounds(707, 237, 163, 23);
         panelAgregarMascota.add(lblFechaDeHallazgoperdida);
         
         JLabel lblNotas = new JLabel("Notas");
         lblNotas.setForeground(Color.WHITE);
         lblNotas.setFont(new Font("Batang", Font.BOLD, 19));
-        lblNotas.setBounds(710, 313, 384, 28);
+        lblNotas.setBounds(707, 389, 384, 28);
         panelAgregarMascota.add(lblNotas);
         
         rdbtnPerdida = new JRadioButton("Perdida");
@@ -574,19 +574,19 @@ public class VentanaPrincipal {
         rdbtnColones.setForeground(Color.WHITE);
         rdbtnColones.setContentAreaFilled(false);
         rdbtnColones.setSelected(true);
-        rdbtnColones.setBounds(850, 245, 39, 23);
+        rdbtnColones.setBounds(847, 347, 39, 23);
         monedaDePago.add(rdbtnColones);
         panelAgregarMascota.add(rdbtnColones);
         
         radioButtonDolares = new JRadioButton("$");
         radioButtonDolares.setForeground(Color.WHITE);
         radioButtonDolares.setContentAreaFilled(false);
-        radioButtonDolares.setBounds(894, 245, 47, 23);
+        radioButtonDolares.setBounds(891, 347, 47, 23);
         monedaDePago.add(radioButtonDolares);
         panelAgregarMascota.add(radioButtonDolares);
         
         JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setBounds(710, 352, 384, 184);
+        scrollPane.setBounds(707, 428, 384, 184);
         panelAgregarMascota.add(scrollPane);
         
         editorPaneNotas = new JEditorPane();
