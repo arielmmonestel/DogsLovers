@@ -25,6 +25,11 @@ public class Persona {
 	private String mesNacimiento;
 	private int anioNacimiento;
 	
+
+	public Persona() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	public  Persona(String pNombre,String pPrimerApellido, String pSegundoApellido,String pSexo, String pTelefono,
 			String pEmail,int pDiaNacimiento, String pMesNacimiento, int pAnioNacimiento)
 	{		
@@ -39,6 +44,13 @@ public class Persona {
 		setAnioNacimiento(pAnioNacimiento);
 		
 	}
+	
+	
+	
+
+
+
+
 	public String getNombre() {
 		return nombre;
 	}

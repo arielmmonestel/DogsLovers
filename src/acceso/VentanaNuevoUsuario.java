@@ -47,6 +47,7 @@ import javax.swing.JPasswordField;
 
 
 
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -66,6 +67,7 @@ import sun.security.util.Length;
 import java.awt.SystemColor;
 import java.awt.ComponentOrientation;
 import java.awt.Frame;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import logicaDeNegocios.Persona;
@@ -175,12 +177,17 @@ public class VentanaNuevoUsuario extends JFrame {
 				String nickName = textFieldUsuario.getText();
 				String contrasenia=passwordFieldNewPass.getText();
 				
-				Usuario NuevoUsuario = new Usuario(nombre,apellidoUno,apellidoDos,sexo,
-						telefono,correo,diaNacimiento,mesNacimiento,anioNacimiento,nickName,contrasenia);
-				
-				Usuario.agregarUsuario(NuevoUsuario);// Agregar el Usuario al arreglo estatico de lista Usuarios
-				
-				
+						Usuario NuevoUsuario = new Usuario(nombre,apellidoUno,apellidoDos,sexo,
+								telefono,correo,diaNacimiento,mesNacimiento,anioNacimiento,nickName,contrasenia);
+								try {
+									NuevoUsuario.leerUsuario();
+								} catch (IOException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+								Usuario.getListaDeUsuarios().add(NuevoUsuario);
+								NuevoUsuario.GuardarUsuario(Usuario.getListaDeUsuarios());
+								
 				JOptionPane.showMessageDialog(contentPane, "Usuario registrado correctamente");
 				dispose();
 				
