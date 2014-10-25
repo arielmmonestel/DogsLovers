@@ -137,7 +137,7 @@ public class Usuario extends Persona{
 	}
 	
 	/*Metodo que carga a los Usuarios en un arreglo*/
-	public void  leerUsuario() throws IOException
+	public static void  leerUsuario() throws IOException
     {
 		File archivo = new File (rutaUsuarios);
     	try
@@ -227,7 +227,45 @@ public class Usuario extends Persona{
     	}
     }
   
-
+	public  static boolean verificarNickname(String nickname)
+    {		    
+		// 
+		try {
+			leerUsuario();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		for(Usuario obj: listaDeUsuarios)
+		{	
+			if(obj.getNombreUsuario().equals(nickname))
+						
+			{	
+				return true;
+			}			
+		}   	
+		return false;
+    }
+	
+	public  static boolean verificarNombreUsuario(String nombre,String apellidoUno, String apellidoDos)
+    {		    
+		// 
+		try {
+			leerUsuario();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		for(Usuario obj: listaDeUsuarios)
+		{	
+			if(obj.getNombre().equals(nombre)||obj.getPrimerApellido().equals(apellidoUno)|| obj.getSegundoApellido().equals(apellidoDos))
+						
+			{	
+				return true;
+			}			
+		}   	
+		return false;
+    }
 
 
 	

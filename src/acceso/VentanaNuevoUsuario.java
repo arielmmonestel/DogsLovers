@@ -177,24 +177,38 @@ public class VentanaNuevoUsuario extends JFrame {
 				String nickName = textFieldUsuario.getText();
 				String contrasenia=passwordFieldNewPass.getText();
 				
-						Usuario NuevoUsuario = new Usuario(nombre,apellidoUno,apellidoDos,sexo,
-								telefono,correo,diaNacimiento,mesNacimiento,anioNacimiento,nickName,contrasenia);
-								try {
-									NuevoUsuario.leerUsuario();
-								} catch (IOException e1) {
-									// TODO Auto-generated catch block
-									e1.printStackTrace();
-								}
-								Usuario.getListaDeUsuarios().add(NuevoUsuario);
-								NuevoUsuario.GuardarUsuario(Usuario.getListaDeUsuarios());
-								
-				JOptionPane.showMessageDialog(contentPane, "Usuario registrado correctamente");
-				dispose();
+						if(Usuario.verificarNickname(nickName)){
+							JOptionPane.showMessageDialog(contentPane, "Error! el nombre de usuario ya existe");
+							textFieldUsuario.setText("");
+						}
+						if(Usuario.verificarNombreUsuario(nombre, apellidoUno, apellidoDos)){
+							JOptionPane.showMessageDialog(contentPane, "Error! Este usuario ya fue registrado");
+						}
 				
-				loguearse= new Loggin();
-				loguearse.setVisible(true);
-				
+						
+						
+						else{
+							Usuario NuevoUsuario = new Usuario(nombre,apellidoUno,apellidoDos,sexo,
+									telefono,correo,diaNacimiento,mesNacimiento,anioNacimiento,nickName,contrasenia);
+									try {
+										NuevoUsuario.leerUsuario();
+									} catch (IOException e1) {
+										// TODO Auto-generated catch block
+										e1.printStackTrace();
+									}
+									Usuario.getListaDeUsuarios().add(NuevoUsuario);
+									NuevoUsuario.GuardarUsuario(Usuario.getListaDeUsuarios());
+									
+					JOptionPane.showMessageDialog(contentPane, "Usuario registrado correctamente");
+					dispose();
+					
+					loguearse= new Loggin();
+					loguearse.setVisible(true);
+					
+					  }
 			}});
+					
+		
 		
 		JButton buttonCancelar = new JButton("");
 		buttonCancelar.addActionListener(new ActionListener() {
