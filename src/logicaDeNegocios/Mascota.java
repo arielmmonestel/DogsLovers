@@ -18,7 +18,7 @@ public class Mascota {
 	private String foto;
 	private String lugarVisto;
 	private String nota=null;
-	private Calendar fecha;
+	private Calendar fecha; //En la que se perdió o se encontró
 	private int recompensa;
 	private int idEncargado;
 	private boolean estaEnCasaCuna;
@@ -46,6 +46,10 @@ public class Mascota {
 	public static ArrayList<Mascota> getListaDeMascotas(){
 		return listaDeMascotas;
 	}
+	
+	public static Mascota getMascota(int pIndice){
+		return listaDeMascotas.get(pIndice);
+	}
 
 	public static int getListaDeMascotasSize(){
 		return listaDeMascotas.size();
@@ -67,8 +71,8 @@ public class Mascota {
 		return id;
 	}
 	
-	public estadoMascota getEstado() {
-		return estado;
+	public String getEstado() {
+		return estado.toString();
 	}
 
 	public void setEstado(estadoMascota pEstado) {
@@ -178,6 +182,41 @@ public class Mascota {
 	public void setEstaEnCasaCuna(boolean pEstaEnCasaCuna) {
 		estaEnCasaCuna = pEstaEnCasaCuna;
 	}
-
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////////////// Búsqueda
+	
+	public static final int opcionESTADO = 1;
+	public static final int opcionTIPO = 2;
+	public static final int opcionRAZA = 3;
+	public static final int opcionCHIP = 4;
+	public static final int opcionCOLORPELO = 5;
+	public static final int opcionCOLOROJOS = 6;
+	public static final int opcionLUGARVISTO = 7;
+	
+	public boolean contieneFiltro(String filtro, int opcion) {
+		
+		if (opcion == opcionESTADO){
+			return getEstado().toString().toLowerCase().contains(filtro.toLowerCase());
+		}
+		if (opcion == opcionTIPO){
+			return getTipo().toLowerCase().contains(filtro.toLowerCase());
+		}
+		if (opcion == opcionRAZA){
+			return getRaza().toLowerCase().contains(filtro.toLowerCase());
+		}
+		if (opcion == opcionCHIP){
+			return getChip().toLowerCase().contains(filtro.toLowerCase());
+		}
+		if (opcion == opcionCOLORPELO){
+			return getColorDePelo().toLowerCase().contains(filtro.toLowerCase());
+		}
+		if (opcion == opcionCOLOROJOS){
+			return getColorDeOjos().toLowerCase().contains(filtro.toLowerCase());
+		}
+		if (opcion == opcionLUGARVISTO){
+			return getLugarVisto().toLowerCase().contains(filtro.toLowerCase());
+		}		
+		return false;
+	}
 	
 }

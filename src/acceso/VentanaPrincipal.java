@@ -324,6 +324,7 @@ public class VentanaPrincipal {
         comboBoxMesPerdida.setBounds(1054, 236, 163, 23);
         panelAgregarMascota.add(comboBoxMesPerdida);
         
+        
         textFieldMontoRecompensa = new JTextField();
         textFieldMontoRecompensa.setColumns(10);
         textFieldMontoRecompensa.setBounds(1016, 347, 127, 23);
@@ -431,7 +432,7 @@ public class VentanaPrincipal {
                     lblMonto.setVisible(true);
                     textFieldMontoRecompensa.setEnabled(true);
                     textFieldMontoRecompensa.setVisible(true);
-                    /* Cambiar aquí el estado de la mascota a Perdida*/
+                    estado = logicaDeNegocios.estadoMascota.PERDIDA;
                     
                 }
                 
@@ -463,7 +464,6 @@ public class VentanaPrincipal {
                     lblMonto.setVisible(false);
                     textFieldMontoRecompensa.setEnabled(false);
                     textFieldMontoRecompensa.setVisible(false);
-                    /* Cambiar aquí el estado de la mascota a Encontrada*/
                     estado = estado.ENCONTRADA;
                     
                     

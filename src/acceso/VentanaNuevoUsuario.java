@@ -99,6 +99,14 @@ public class VentanaNuevoUsuario extends JFrame {
 	/**
 	 * Launch the application.
 	 */
+	public String convertirClave(char[] arreglo){
+		String respuesta = "";
+		for(int i = 0; i < arreglo.length; i++){
+			respuesta += arreglo[i]; 
+		}
+		return respuesta;
+	}
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -151,6 +159,7 @@ public class VentanaNuevoUsuario extends JFrame {
 		panelAgregarPersona.setBorder(null);
 		panelAgregarPersona.setLayout(null);
 		
+		
 		JButton btnRegistrarme = new JButton("");
 		btnRegistrarme.setToolTipText("Guardar");
 		btnRegistrarme.setFocusPainted(false);
@@ -164,6 +173,7 @@ public class VentanaNuevoUsuario extends JFrame {
 		btnRegistrarme.setPressedIcon(new ImageIcon("./imgs/save-32.png"));
 		btnRegistrarme.setIcon(new ImageIcon("./imgs/save-48.png"));
 		btnRegistrarme.addActionListener(new ActionListener() {
+	
 			public void actionPerformed(ActionEvent e) {
 				String nombre = textFieldNombre.getText();
 				String apellidoUno= textFieldApellidoUno.getText();
@@ -175,17 +185,16 @@ public class VentanaNuevoUsuario extends JFrame {
 				String mesNacimiento =((String)comboBoxMes.getSelectedItem());
 				int anioNacimiento= ((Integer)spinnerAnio.getValue());
 				String nickName = textFieldUsuario.getText();
-				String contrasenia=passwordFieldNewPass.getText();
+				String contrasenia= convertirClave(passwordFieldNewPass.getPassword()); // No probado aún
 				
 						if(Usuario.verificarNickname(nickName)){
 							JOptionPane.showMessageDialog(contentPane, "Error! el nombre de usuario ya existe");
 							textFieldUsuario.setText("");
 						}
+						
 						if(Usuario.verificarNombreUsuario(nombre, apellidoUno, apellidoDos)){
 							JOptionPane.showMessageDialog(contentPane, "Error! Este usuario ya fue registrado");
 						}
-				
-						
 						
 						else{
 							Usuario NuevoUsuario = new Usuario(nombre,apellidoUno,apellidoDos,sexo,
