@@ -16,7 +16,7 @@ public class Mascota {
 	
 	private static ArrayList<Mascota> listaDeMascotas = new ArrayList<Mascota>();
 	
-	private static String estado;
+	private  String estado;
 	private int id;
 	private String tipo;
 	private String raza;
@@ -251,7 +251,7 @@ public class Mascota {
     	try
     	{
     		listaDeMascotas.clear();    
-    		IDMascotas = 0;
+    		
     		if (archivo.exists())
     		{			
 	    		lectura = new FileReader (archivo);

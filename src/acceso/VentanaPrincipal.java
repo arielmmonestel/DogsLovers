@@ -100,7 +100,6 @@ public class VentanaPrincipal {
     private JComboBox comboBoxTipoMascota;
     private JEditorPane editorPaneNotas;
     private  String estado;
-    
 	private static String tipo;
     private static String nombre;
     private static String raza;
@@ -110,7 +109,7 @@ public class VentanaPrincipal {
     private static String foto;
     private static String lugarVisto;
     private static String nota;
-    private static String recompensa = null;
+    private static String recompensa;
     private static int idEncargado;
     private static String fechaSuceso;
 	private JLabel labelDL;
@@ -124,17 +123,33 @@ public class VentanaPrincipal {
 	private JSpinner spinnerAnioPerdida;
 	
 	
-	public String verificarEstado(){
+	public void verificarEstado(){
 		if(estadoMascota.isSelected( rdbtnEncontrada.getModel())){
-    		setEstado("ENCONTRADA");;
-    		System.out.println("ENcontrada");
+    		setEstado("ENCONTRADA");
+
+    		
+    		
     	}else{
     		setEstado("PERDIDA");
-    		System.out.println("PErdida");
+    		
     	}
-		return estado;
     	
 	}
+	public void verificarMoneda(){
+		if  (getEstado().equals("ENCONTRADA")){
+    		recompensa = null;
+    		
+    			
+    	}else{
+    		if(monedaDePago.isSelected(rdbtnColones.getModel())){
+    			recompensa = rdbtnColones.getText() +" " +textFieldMontoRecompensa.getText();
+        		
+    		}
+    		recompensa = rdbtnDolares.getText() +" " +textFieldMontoRecompensa.getText();
+    		
+    	}
+		}
+	
 	
 	public String getEstado() {
 		return estado;
@@ -330,6 +345,7 @@ public class VentanaPrincipal {
             	lugarVisto = (String)comboBoxCanton.getSelectedItem() + ", " + (String)comboBoxProvincia.getSelectedItem();
             	
             	verificarEstado();
+            	verificarMoneda();
             	
             	
             	Mascota NuevaMascota = new Mascota(estado, tipo, raza, nombre, chip, colorDePelo, colorDeOjos, foto, lugarVisto, nota, fechaSuceso, recompensa, idEncargado);
