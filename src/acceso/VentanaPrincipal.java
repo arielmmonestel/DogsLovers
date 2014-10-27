@@ -32,6 +32,7 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
+import javax.swing.ButtonModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -73,6 +74,7 @@ import javax.swing.SpinnerDateModel;
 
 import java.io.File;
 import java.util.Date;
+
 import javax.swing.UIManager;
 import javax.swing.border.EtchedBorder;
 
@@ -97,19 +99,20 @@ public class VentanaPrincipal {
     private JButton buttonGuardar;
     private JComboBox comboBoxTipoMascota;
     private JEditorPane editorPaneNotas;
-    private  String estado = "PERDIDA";
-    private String tipo;
-    private String nombre;
-    private String raza;
-    private String chip;
-    private String colorDePelo;
-    private String colorDeOjos;
-    private String foto;
-    private String lugarVisto;
-    private String nota;
-    private String recompensa = null;
-    private int idEncargado;
-    private String fechaSuceso;
+    private  String estado;
+    
+	private static String tipo;
+    private static String nombre;
+    private static String raza;
+    private static String chip;
+    private static String colorDePelo;
+    private static String colorDeOjos;
+    private static String foto;
+    private static String lugarVisto;
+    private static String nota;
+    private static String recompensa = null;
+    private static int idEncargado;
+    private static String fechaSuceso;
 	private JLabel labelDL;
 	private JTextField textFieldMontoRecompensa;
 	private JComboBox comboBoxProvincia;
@@ -121,7 +124,26 @@ public class VentanaPrincipal {
 	private JSpinner spinnerAnioPerdida;
 	
 	
+	public String verificarEstado(){
+		if(estadoMascota.isSelected( rdbtnEncontrada.getModel())){
+    		setEstado("ENCONTRADA");;
+    		System.out.println("ENcontrada");
+    	}else{
+    		setEstado("PERDIDA");
+    		System.out.println("PErdida");
+    	}
+		return estado;
+    	
+	}
 	
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
 	
 	public static void setIDUsuarioActivo(int id){
 		IDUsuarioActivo = id;
@@ -286,6 +308,12 @@ public class VentanaPrincipal {
         buttonGuardar.setFocusable(false);
         buttonGuardar.setFocusTraversalKeysEnabled(false);
         buttonGuardar.setFocusPainted(false);
+        
+
+    	
+    	
+    	
+    	
         buttonGuardar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             
@@ -294,15 +322,14 @@ public class VentanaPrincipal {
             	
             	nota = editorPaneNotas.getText();
             	
-            	if ( monedaDePago.getSelection().equals(rdbtnColones)){
-            		recompensa = rdbtnColones.getText() + " " + textFieldMontoRecompensa.getText() ;
-            	}else{recompensa = rdbtnDolares.getText() + "" + textFieldMontoRecompensa.getText() ;}
             	idEncargado = IDUsuarioActivo;
             	
             	fechaSuceso =  spinnerDiaPerdida.getValue().toString() + "/" + comboBoxMesPerdida.getSelectedItem().toString()+"/"+spinnerAnioPerdida.getValue().toString();
             	tipo = (String) comboBoxTipoMascota.getSelectedItem();
             	raza = (String) comboBoxRazaMascota.getSelectedItem();
             	lugarVisto = (String)comboBoxCanton.getSelectedItem() + ", " + (String)comboBoxProvincia.getSelectedItem();
+            	
+            	verificarEstado();
             	
             	
             	Mascota NuevaMascota = new Mascota(estado, tipo, raza, nombre, chip, colorDePelo, colorDeOjos, foto, lugarVisto, nota, fechaSuceso, recompensa, idEncargado);
@@ -527,8 +554,7 @@ public class VentanaPrincipal {
                     lblMonto.setVisible(true);
                     textFieldMontoRecompensa.setEnabled(true);
                     textFieldMontoRecompensa.setVisible(true);
-                    estado = "PERDIDA";
-                    
+                    	
                 }
                 
                 
@@ -559,9 +585,12 @@ public class VentanaPrincipal {
                     lblMonto.setVisible(false);
                     textFieldMontoRecompensa.setEnabled(false);
                     textFieldMontoRecompensa.setVisible(false);
-
+                    
+                	
+                
+                    
                     /* Cambiar aquí el estado de la mascota a Encontrada*/
-                    estado = "ENCONTRADA";
+                    
 
 
                     
@@ -576,7 +605,7 @@ public class VentanaPrincipal {
                     textFieldNombreMascota.setEnabled(true);
                     lblFechaDeHallazgoperdida.setText("Fecha de Pérdida");
                     lblSitioDeHallazgoperdida.setText("Sitio de Pérdida");
-                    estado = "PERDIDA";
+                    
                     
                 }
             }
@@ -670,6 +699,11 @@ public class VentanaPrincipal {
         colorDeOjos = (comboBoxColorOjos.getSelectedItem()).toString();
         
         rdbtnColones = new JRadioButton("\u20A1");
+        rdbtnColones.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        	
+        	}
+        });
         rdbtnColones.setForeground(Color.WHITE);
         rdbtnColones.setContentAreaFilled(false);
         rdbtnColones.setSelected(true);
@@ -678,6 +712,11 @@ public class VentanaPrincipal {
         panelAgregarMascota.add(rdbtnColones);
         
         rdbtnDolares = new JRadioButton("$");
+        rdbtnDolares.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		
+        	}
+        });
         rdbtnDolares.setForeground(Color.WHITE);
         rdbtnDolares.setContentAreaFilled(false);
         rdbtnDolares.setBounds(891, 347, 47, 23);
