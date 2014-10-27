@@ -1,5 +1,12 @@
 package logicaDeNegocios;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.*;
+
+import javax.swing.JOptionPane;
+
 
 public class Sistema {
 	
@@ -106,5 +113,22 @@ public class Sistema {
 		return resultados;
 	}
 
+	public static void copiarImagen(File imagenOriginal) {
+		File archivoOriginal = new File(imagenOriginal.getAbsolutePath());
+		File archivoNuevo	 = new File(System.getProperty("user.dir") + "./mascotas/" + String.valueOf(Mascota.getListaDeMascotasSize()) + ".jpg");
+		try {
+			FileInputStream inStream = new FileInputStream(archivoOriginal);
+			FileOutputStream outStream = new FileOutputStream(archivoNuevo);
+    	    byte[] buffer = new byte[1024]; 
+    	    int length; 
+    	    while ((length = inStream.read(buffer)) > 0){
+    	    	outStream.write(buffer, 0, length);
+    	    }
+    	    inStream.close();
+    	    outStream.close();
+		} catch (IOException noHayArchivo) {
+			JOptionPane.showMessageDialog(null, "No se pudo copiar la imagen seleccionada.\n" + noHayArchivo.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+		}
+	}
 }
 

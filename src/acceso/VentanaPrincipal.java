@@ -3,11 +3,14 @@ package acceso;
 import acceso.*;
 import logicaDeNegocios.*;
 
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Image;
 import java.awt.SystemColor;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -25,10 +28,12 @@ import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.image.BufferedImage;
 
 import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
@@ -66,6 +71,7 @@ import sun.util.logging.resources.logging;
 
 import javax.swing.SpinnerDateModel;
 
+import java.io.File;
 import java.util.Date;
 
 public class VentanaPrincipal {
@@ -103,11 +109,12 @@ public class VentanaPrincipal {
     private static int idEncargado;
     private static Object diaSuceso;
 	private JLabel labelDL;
-	private JTextField textFieldDireccionFotografia;
 	private JSpinner spinnerFechaSuceso;
 	private JTextField textFieldMontoRecompensa;
 	private JComboBox comboBoxProvincia;
-	private static int IDUsuarioActivo = -1;
+	private static int IDUsuarioActivo = -1; //Para iniciar en un valor distinto a los posibles
+	private File archivoSeleccionado;
+	private JLabel lblFotoMascota;
 	
 	
 	
@@ -190,6 +197,10 @@ public class VentanaPrincipal {
 		
 		/*Inicio Codigo del Panel Agregar Mascota*/
 		
+		lblFotoMascota = new JLabel("");
+		lblFotoMascota.setBounds(1130, 60, 142, 141);
+		panelAgregarMascota.add(lblFotoMascota);
+		
 		textFieldMontoRecompensa = new JTextField();
 		textFieldMontoRecompensa.setBounds(1017, 347, 86, 20);
 		panelAgregarMascota.add(textFieldMontoRecompensa);
@@ -202,6 +213,30 @@ public class VentanaPrincipal {
 		panelAgregarMascota.add(lblImagenDeLa);
 		
 		JButton btnAgregarFoto = new JButton("");
+		btnAgregarFoto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JFileChooser elegir = new JFileChooser();
+				int resultadoAbrir = elegir.showOpenDialog(VentanaPrincipal.getContentPane());
+				archivoSeleccionado = elegir.getSelectedFile();
+				if (resultadoAbrir == JFileChooser.APPROVE_OPTION) {
+					String pathArchivo = archivoSeleccionado.getAbsolutePath(); 	// Obtiene path del archivo
+		            String nombre = 	 archivoSeleccionado.getName(); 			// Obtiene nombre del archivo           
+		            System.out.println("El nombre del archivo es: "+ nombre);
+		            System.out.println("El path del archivo es: "+ pathArchivo);
+		            if (archivoSeleccionado != null) {
+		            	try {
+							BufferedImage imagenMostrada = ImageIO.read(archivoSeleccionado);
+							Dimension recuadro = lblFotoMascota.getSize();
+							lblFotoMascota.setIcon(new ImageIcon(imagenMostrada.getScaledInstance(recuadro.width, recuadro.height, Image.SCALE_AREA_AVERAGING)));
+						} catch (IOException ex) {
+							JOptionPane.showMessageDialog(VentanaPrincipal.getContentPane(), ex.getMessage(), "Advertencia", JOptionPane.WARNING_MESSAGE);
+						}
+		            }
+		            foto = pathArchivo;
+				}
+				
+			}
+		});
 		btnAgregarFoto.setToolTipText("Agregar imagen de la mascota");
 		btnAgregarFoto.setPressedIcon(new ImageIcon("./imgs/addPicture-24.png"));
 		btnAgregarFoto.setRolloverIcon(new ImageIcon("./imgs/addPicture-48.png"));
@@ -216,12 +251,7 @@ public class VentanaPrincipal {
 		btnAgregarFoto.setIcon(new ImageIcon("./imgs/addPicture-32.png"));
 		btnAgregarFoto.setBounds(902, 156, 75, 65);
 		panelAgregarMascota.add(btnAgregarFoto);
-		
-		textFieldDireccionFotografia = new JTextField();
-		textFieldDireccionFotografia.setEditable(false);
-		textFieldDireccionFotografia.setBounds(995, 178, 246, 28);
-		panelAgregarMascota.add(textFieldDireccionFotografia);
-		textFieldDireccionFotografia.setColumns(10);
+		foto = null;
 		
 		labelDL = new JLabel("");
 		labelDL.setIcon(new ImageIcon("./imgs/Logo.png"));
@@ -264,7 +294,7 @@ public class VentanaPrincipal {
             
             	nombre = textFieldNombreMascota.getText();
             	chip = textFieldNumChip.getText();
-            	foto = null; //Foto de Mascota
+            	
             	nota = editorPaneNotas.getText();
             	
             	recompensa = textFieldMontoRecompensa.getText();
@@ -275,8 +305,6 @@ public class VentanaPrincipal {
             	raza = (String) comboBoxRazaMascota.getSelectedItem();
             	lugarVisto = (String)comboBoxCanton.getSelectedItem() + ", " + (String)comboBoxProvincia.getSelectedItem();
             	recompensa = textFieldMontoRecompensa.getText();
-            	
-            	
             	
             	Mascota NuevaMascota = new Mascota(estado, tipo, raza, nombre, chip, colorDePelo, colorDeOjos, foto, lugarVisto, nota, diaSuceso, recompensa, idEncargado);
             			try {
