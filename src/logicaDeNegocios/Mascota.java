@@ -24,14 +24,11 @@ public class Mascota {
 	private String chip = null;
 	private String colorDePelo;
 	private String colorDeOjos;
-	private String foto;
+	private String foto=null;
 	private String lugarVisto;
 	private String nota=null;
-
-	private Object diaSuceso;
+	private String diaSuceso;//En la que se perdió o se encontró
 	private String recompensa;	
-	private Calendar fecha; //En la que se perdió o se encontró
-
 	private int idEncargado;
 	private boolean estaEnCasaCuna = false;
 	private static int IDMascotas = 0;
@@ -43,7 +40,7 @@ public class Mascota {
 	
 	
 	public Mascota(String pEstado, String pTipo, String pRaza, String pNombre, String pChip, String pColorDePelo, String pColorDeOjos,
-				   String pFoto, String pLugarVisto, String pNota, Object pDia, String pRecompensa, int pIdEncargado) {
+				   String pFoto, String pLugarVisto, String pNota, String pDia, String pRecompensa, int pIdEncargado) {
 		setID(IDMascotas++);
 		setEstado(pEstado);
 		setTipo(pTipo);
@@ -64,7 +61,6 @@ public class Mascota {
 	}
 	
 	public Mascota() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public static ArrayList<Mascota> getListaDeMascotas(){
@@ -171,12 +167,12 @@ public class Mascota {
 	}
 	
 
-	public Object getDiaSuceso() {
+	public String getDiaSuceso() {
 		return diaSuceso;
 	}
 
-	public void setDiaSuceso(Object pDia) {
-		this.diaSuceso = pDia;
+	public void setDiaSuceso(String pDia) {
+		diaSuceso = pDia;
 	}
 
 	
@@ -209,106 +205,7 @@ public class Mascota {
 		estaEnCasaCuna = pEstaEnCasaCuna;
 	}
 	
-	public static void  leerMascota() throws IOException
-    {
-          File archivo = new File (rutaMascotas);
-     try
-     {
-          listaDeMascotas.clear();    
-          IDMascotas = 0;
-          if (archivo.exists())
-          {              
-               lectura = new FileReader (archivo);
-               bufferLectura = new BufferedReader(lectura);
-               while((bufferLectura.readLine())!=null)   
-            	   
-               { 
-            	   
-                    Mascota obj = new Mascota();
-                    obj.setID(Integer.parseInt(bufferLectura.readLine()));
-                    IDMascotas ++;
-                    obj.setEstado(bufferLectura.readLine());
-                    obj.setTipo(bufferLectura.readLine());
-                    obj.setRaza(bufferLectura.readLine());
-                    obj.setNombre(bufferLectura.readLine());
-                    obj.setChip(bufferLectura.readLine());
-                    obj.setColorDePelo(bufferLectura.readLine());
-                    obj.setColorDeOjos(bufferLectura.readLine());
-                    obj.setFoto(bufferLectura.readLine());
-                    obj.setLugarVisto(bufferLectura.readLine());
-                    obj.setNota(bufferLectura.readLine());
-                    obj.setDiaSuceso(bufferLectura.readLine());
-                    obj.setRecompensa(bufferLectura.readLine());
-                    obj.setIdEncargado(0);
-                    listaDeMascotas.add(obj);       
-                    
-               }
-
-
-          }else
-               JOptionPane.showMessageDialog(frame, "No existen datos. O cambio el archivo de ruta. (Mascotas)");                      
-     }catch(Exception e){
-          e.printStackTrace();  
-     }finally
-     {
-          //  En el finally cerramos el fichero, para asegurarnos
-          // que se cierra tanto si todo va bien como si salta  una excepcion.
-          try
-          {
-               //if( null!= lectura )
-               if (archivo.exists())
-                    lectura.close();
- 
-          }catch (Exception e2)
-               {e2.printStackTrace();}
-     }
-    }
-     
-     public void GuardarMascota(ArrayList<Mascota> arrayMascotas1) 
-    {
-     FileWriter escribir = null;
-     PrintWriter pw = null;
-     try
-     {         
-          escribir = new FileWriter(rutaMascotas,false);
-          pw = new PrintWriter(escribir);
-          
-          for(Mascota obj: arrayMascotas1)
-          {    
-               pw.println("===>nuevo Mascota<===");
-               pw.println(obj.getID());
-               pw.println(obj.getEstado());
-               pw.println(obj.getTipo());
-               pw.println(obj.getRaza());
-               pw.println(obj.getNombre());
-               pw.println(obj.getChip());
-               pw.println(obj.getColorDePelo());
-               pw.println(obj.getColorDeOjos());
-               pw.println(obj.getFoto());
-               pw.println(obj.getLugarVisto());
-               pw.println(obj.getNota());
-               pw.println(obj.getDiaSuceso());
-               pw.println(obj.getRecompensa());
-               pw.println(obj.getIdEncargado());
-               
-               }
-          
-          
-     } catch (Exception e) {
-          e.printStackTrace();
-     } finally 
-     {
-          try 
-          {
-               //   Nuevamente aprovechamos el finally para
-               //   asegurarnos que se cierra el fichero.
-               //if (null != escribir)
-                    escribir.close();
-          } catch (Exception e2) 
-          {e2.printStackTrace();}
-     }
-    }
-
+	
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////// Búsqueda
 	
@@ -345,5 +242,107 @@ public class Mascota {
 		}		
 		return false;
 	}
+	
+	
+	/*Metodo que carga a los Mascotas en un arreglo*/
+	public static void  leerMascota() throws IOException
+    {
+		File archivo = new File (rutaMascotas);
+    	try
+    	{
+    		listaDeMascotas.clear();    
+    		IDMascotas = 0;
+    		if (archivo.exists())
+    		{			
+	    		lectura = new FileReader (archivo);
+	    		bufferLectura = new BufferedReader(lectura);
+	    		while((bufferLectura.readLine())!=null)    			
+	    		{ 
+	    			Mascota obj = new Mascota();   
+	    			obj.setEstado(bufferLectura.readLine());
+	    			IDMascotas ++;
+	    			obj.setID(Integer.parseInt(bufferLectura.readLine()));
+	    			obj.setTipo(bufferLectura.readLine());
+	    			obj.setRaza(bufferLectura.readLine());
+	    			obj.setNombre(bufferLectura.readLine());
+	    			obj.setChip(bufferLectura.readLine());
+	    			obj.setColorDePelo(bufferLectura.readLine());
+	    			obj.setColorDeOjos(bufferLectura.readLine());
+	    			obj.setFoto(bufferLectura.readLine());
+	    			obj.setLugarVisto(bufferLectura.readLine());
+	    			obj.setNota(bufferLectura.readLine());
+	    			obj.setDiaSuceso(bufferLectura.readLine());
+                    obj.setRecompensa(bufferLectura.readLine());
+                    obj.setIdEncargado(Integer.parseInt(bufferLectura.readLine()));
+                    obj.setEstaEnCasaCuna(Boolean.parseBoolean(bufferLectura.readLine()));
+
+	    			listaDeMascotas.add(obj);				
+	    		}
+
+
+    		}else
+        		JOptionPane.showMessageDialog(frame, "No existen datos. O cambio el archivo de ruta. (Mascotas)");                		
+    	}catch(Exception e){
+    		e.printStackTrace();  
+    	}finally
+    	{
+    		//  En el finally cerramos el fichero, para asegurarnos
+    		// que se cierra tanto si todo va bien como si salta  una excepcion.
+    		try
+    		{
+    			//if( null!= lectura )
+        		if (archivo.exists())
+    				lectura.close();
+ 
+    		}catch (Exception e2)
+    			{e2.printStackTrace();}
+    	}
+    }
+	
+	public void GuardarMascota(ArrayList<Mascota> arrayMascotas) 
+    {
+    	FileWriter escribir = null;
+    	PrintWriter pw = null;
+    	try
+    	{		
+    		escribir = new FileWriter(rutaMascotas,false);
+    		pw = new PrintWriter(escribir);
+    		
+    		for(Mascota obj: arrayMascotas)
+    		{	
+    			pw.println("===>nuevo Mascota<===");
+    			pw.println(obj.getEstado());
+    			pw.println(obj.getID());
+				pw.println(obj.getTipo());
+				pw.println(obj.getRaza());
+				pw.println(obj.getNombre());
+				pw.println(obj.getChip());
+				pw.println(obj.getColorDePelo());
+				pw.println(obj.getColorDeOjos());
+				pw.println(obj.getFoto());
+				pw.println(obj.getLugarVisto());
+				pw.println(obj.getNota());
+                pw.println(obj.getDiaSuceso());
+                pw.println(obj.getRecompensa());
+                pw.println(obj.getIdEncargado());
+                pw.println(obj.estaEnCasaCuna());
+
+    
+			}
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	} finally 
+    	{
+    		try 
+    		{
+    			// 	Nuevamente aprovechamos el finally para
+    			//	asegurarnos que se cierra el fichero.
+    			//if (null != escribir)
+    				escribir.close();
+    		} catch (Exception e2) 
+    		{e2.printStackTrace();}
+    	}
+    }
+  
 	
 }

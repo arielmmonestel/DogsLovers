@@ -88,7 +88,7 @@ public class VentanaPrincipal {
     private ButtonGroup estadoMascota = new ButtonGroup() ;
     private  ButtonGroup monedaDePago = new ButtonGroup() ;
     private JRadioButton rdbtnColones;
-    private JRadioButton radioButtonDolares;
+    private JRadioButton rdbtnDolares;
     private JLabel lblMonto;
     private JComboBox comboBoxRazaMascota;
     private JRadioButton rdbtnEncontrada;
@@ -97,32 +97,31 @@ public class VentanaPrincipal {
     private JButton buttonGuardar;
     private JComboBox comboBoxTipoMascota;
     private JEditorPane editorPaneNotas;
-    private static String estado = "PERDIDA";
-    private static String tipo;
-    private static String nombre;
-    private static String raza;
-    private static String chip;
-    private static String colorDePelo;
-    private static String colorDeOjos;
-    private static String foto;
-    private static String lugarVisto;
-    private static String nota;
-    private static String recompensa;
-    private static int idEncargado;
-    private static Object diaSuceso;
+    private  String estado = "PERDIDA";
+    private String tipo;
+    private String nombre;
+    private String raza;
+    private String chip;
+    private String colorDePelo;
+    private String colorDeOjos;
+    private String foto;
+    private String lugarVisto;
+    private String nota;
+    private String recompensa = null;
+    private int idEncargado;
+    private String fechaSuceso;
 	private JLabel labelDL;
-	private JSpinner spinnerFechaSuceso;
 	private JTextField textFieldMontoRecompensa;
 	private JComboBox comboBoxProvincia;
 	private static int IDUsuarioActivo = -1; //Para iniciar en un valor distinto a los posibles
 	private File archivoSeleccionado;
 	private JLabel lblFotoMascota;
+	private JSpinner spinnerDiaPerdida;
+	private JComboBox comboBoxMesPerdida;
+	private JSpinner spinnerAnioPerdida;
 	
 	
 	
-	/**
-	 * Launch the application.
-	 */
 	
 	public static void setIDUsuarioActivo(int id){
 		IDUsuarioActivo = id;
@@ -204,11 +203,6 @@ public class VentanaPrincipal {
 		lblFotoMascota.setBounds(995, 61, 142, 141);
 		panelAgregarMascota.add(lblFotoMascota);
 		
-		textFieldMontoRecompensa = new JTextField();
-		textFieldMontoRecompensa.setBounds(1017, 347, 86, 20);
-		panelAgregarMascota.add(textFieldMontoRecompensa);
-		textFieldMontoRecompensa.setColumns(10);
-		
 		JLabel lblImagenDeLa = new JLabel("Imagen de la Mascota");
 		lblImagenDeLa.setForeground(Color.WHITE);
 		lblImagenDeLa.setFont(new Font("Batang", Font.BOLD, 19));
@@ -270,7 +264,7 @@ public class VentanaPrincipal {
             if(!chckbxRecompensa.isSelected()){
             
                 rdbtnColones.setEnabled(false);
-                radioButtonDolares.setEnabled(false);
+                rdbtnDolares.setEnabled(false);
                 lblMonto.setEnabled(false);
                 textFieldMontoRecompensa.setEnabled(false);
                 lblMonto.setVisible(false);
@@ -278,7 +272,7 @@ public class VentanaPrincipal {
                         
             }else{
             rdbtnColones.setEnabled(true);
-            radioButtonDolares.setEnabled(true);
+            rdbtnDolares.setEnabled(true);
             lblMonto.setEnabled(true);
             lblMonto.setVisible(true);
             textFieldMontoRecompensa.setEnabled(true);
@@ -300,16 +294,18 @@ public class VentanaPrincipal {
             	
             	nota = editorPaneNotas.getText();
             	
-            	recompensa = textFieldMontoRecompensa.getText();
+            	if ( monedaDePago.getSelection().equals(rdbtnColones)){
+            		recompensa = rdbtnColones.getText() + " " + textFieldMontoRecompensa.getText() ;
+            	}else{recompensa = rdbtnDolares.getText() + "" + textFieldMontoRecompensa.getText() ;}
             	idEncargado = IDUsuarioActivo;
             	
-            	diaSuceso =  spinnerFechaSuceso.getValue();
+            	fechaSuceso =  spinnerDiaPerdida.getValue().toString() + "/" + comboBoxMesPerdida.getSelectedItem().toString()+"/"+spinnerAnioPerdida.getValue().toString();
             	tipo = (String) comboBoxTipoMascota.getSelectedItem();
             	raza = (String) comboBoxRazaMascota.getSelectedItem();
             	lugarVisto = (String)comboBoxCanton.getSelectedItem() + ", " + (String)comboBoxProvincia.getSelectedItem();
-            	recompensa = textFieldMontoRecompensa.getText();
             	
-            	Mascota NuevaMascota = new Mascota(estado, tipo, raza, nombre, chip, colorDePelo, colorDeOjos, foto, lugarVisto, nota, diaSuceso, recompensa, idEncargado);
+            	
+            	Mascota NuevaMascota = new Mascota(estado, tipo, raza, nombre, chip, colorDePelo, colorDeOjos, foto, lugarVisto, nota, fechaSuceso, recompensa, idEncargado);
             			try {
 							NuevaMascota.leerMascota();
 						} catch (IOException e1) {
@@ -318,7 +314,9 @@ public class VentanaPrincipal {
 						}
             	Mascota.getListaDeMascotas().add(NuevaMascota);
             	NuevaMascota.GuardarMascota(Mascota.getListaDeMascotas());
-            	JOptionPane.showMessageDialog(panelAgregarMascota, "Mascota registrada correctamente");
+            	
+            JOptionPane.showMessageDialog(panelAgregarMascota, "Mascota registrada correctamente");
+            
             }
         });
         
@@ -399,29 +397,22 @@ public class VentanaPrincipal {
         comboBoxProvincia.setModel(new DefaultComboBoxModel(new String[] {"San Jose", "Alajuela", "Cartago", "Heredia", "Puntarenas", "Limon", "Guanacaste"}));
         comboBoxProvincia.setBounds(995, 294, 168, 19);
         panelAgregarMascota.add(comboBoxProvincia);
-        
-        
-        spinnerFechaSuceso = new JSpinner();
-        spinnerFechaSuceso.setToolTipText("Fecha");
-        spinnerFechaSuceso.setModel(new SpinnerDateModel(new Date(1411624800000L), new Date(946706400000L), new Date(1419487200000L), Calendar.DAY_OF_YEAR));
-        spinnerFechaSuceso.setBounds(996, 237, 142, 23);
-        panelAgregarMascota.add(spinnerFechaSuceso);
 
         lugarVisto = comboBoxCanton.getSelectedItem().toString() + ", " + comboBoxProvincia.getSelectedItem().toString();
         
-        JSpinner spinner = new JSpinner();
-        spinner.setToolTipText("D\u00EDa");
-        spinner.setModel(new SpinnerNumberModel(1, 1, 31, 1));
-        spinner.setBounds(995, 237, 39, 23);
-        panelAgregarMascota.add(spinner);
+        spinnerDiaPerdida = new JSpinner();
+        spinnerDiaPerdida.setToolTipText("D\u00EDa");
+        spinnerDiaPerdida.setModel(new SpinnerNumberModel(1, 1, 31, 1));
+        spinnerDiaPerdida.setBounds(995, 237, 39, 23);
+        panelAgregarMascota.add(spinnerDiaPerdida);
         
-        JSpinner spinnerAnioPerdida = new JSpinner();
+        spinnerAnioPerdida = new JSpinner();
         spinnerAnioPerdida.setToolTipText("A\u00F1o");
         spinnerAnioPerdida.setBounds(1234, 236, 61, 23);
         spinnerAnioPerdida.setModel(new SpinnerNumberModel(2014.0, 1990.0, 2014.0, 1.0));
         panelAgregarMascota.add(spinnerAnioPerdida);
         
-        JComboBox comboBoxMesPerdida = new JComboBox();
+        comboBoxMesPerdida = new JComboBox();
         comboBoxMesPerdida.setToolTipText("Mes");
         comboBoxMesPerdida.setModel(new DefaultComboBoxModel(new String[] {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre", "Octubre", "Noviembre", "Diciembre"}));
         comboBoxMesPerdida.setBounds(1054, 236, 163, 23);
@@ -526,8 +517,8 @@ public class VentanaPrincipal {
                     textFieldNombreMascota.setEnabled(true);
                     lblFechaDeHallazgoperdida.setText("Fecha de Pérdida");
                     lblSitioDeHallazgoperdida.setText("Sitio de Pérdida");
-                    radioButtonDolares.setVisible(true);
-                    radioButtonDolares.setEnabled(true);
+                    rdbtnDolares.setVisible(true);
+                    rdbtnDolares.setEnabled(true);
                     rdbtnColones.setVisible(true);
                     rdbtnColones.setEnabled(true);
                     chckbxRecompensa.setVisible(true);
@@ -558,8 +549,8 @@ public class VentanaPrincipal {
                     lblsiAplica.setVisible(false);
                     lblFechaDeHallazgoperdida.setText("Fecha de Hallazgo");
                     lblSitioDeHallazgoperdida.setText("Sitio de Hallazgo");
-                    radioButtonDolares.setVisible(false);
-                    radioButtonDolares.setEnabled(false);
+                    rdbtnDolares.setVisible(false);
+                    rdbtnDolares.setEnabled(false);
                     rdbtnColones.setVisible(false);
                     rdbtnColones.setEnabled(false);
                     chckbxRecompensa.setVisible(false);
@@ -686,12 +677,12 @@ public class VentanaPrincipal {
         monedaDePago.add(rdbtnColones);
         panelAgregarMascota.add(rdbtnColones);
         
-        radioButtonDolares = new JRadioButton("$");
-        radioButtonDolares.setForeground(Color.WHITE);
-        radioButtonDolares.setContentAreaFilled(false);
-        radioButtonDolares.setBounds(891, 347, 47, 23);
-        monedaDePago.add(radioButtonDolares);
-        panelAgregarMascota.add(radioButtonDolares);
+        rdbtnDolares = new JRadioButton("$");
+        rdbtnDolares.setForeground(Color.WHITE);
+        rdbtnDolares.setContentAreaFilled(false);
+        rdbtnDolares.setBounds(891, 347, 47, 23);
+        monedaDePago.add(rdbtnDolares);
+        panelAgregarMascota.add(rdbtnDolares);
         
         JScrollPane scrollPane = new JScrollPane();
         scrollPane.setBounds(707, 428, 384, 184);
