@@ -247,7 +247,7 @@ public class Usuario extends Persona{
 		return false;
     }
 	
-	public  static boolean verificarNombreUsuario(String nombre,String apellidoUno, String apellidoDos)
+	public  static boolean verificarNombreUsuario(String nombre,String apellidoUno, String apellidoDos,String telefono)
     {		    
 		// 
 		try {
@@ -258,7 +258,7 @@ public class Usuario extends Persona{
 		}
 		for(Usuario obj: listaDeUsuarios)
 		{	
-			if(obj.getNombre().equals(nombre)||obj.getPrimerApellido().equals(apellidoUno)|| obj.getSegundoApellido().equals(apellidoDos))
+			if(obj.getNombre().equals(nombre)&&obj.getPrimerApellido().equals(apellidoUno)&&obj.getSegundoApellido().equals(apellidoDos)&&obj.getTelefono().equals(telefono))
 						
 			{	
 				return true;

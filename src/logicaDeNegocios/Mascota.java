@@ -1,13 +1,22 @@
 package logicaDeNegocios;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Calendar;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class Mascota {
 	
 	
 	private static ArrayList<Mascota> listaDeMascotas = new ArrayList<Mascota>();
 	
-	private estadoMascota estado;
+	private static String estado;
 	private int id;
 	private String tipo;
 	private String raza;
@@ -18,14 +27,20 @@ public class Mascota {
 	private String foto;
 	private String lugarVisto;
 	private String nota=null;
-	private Calendar fecha;
-	private int recompensa;
+	private Object diaSuceso;
+	private String recompensa;	
 	private int idEncargado;
-	private boolean estaEnCasaCuna;
+	private boolean estaEnCasaCuna = false;
 	private static int IDMascotas = 0;
+	private static String rutaMascotas = "./mascotas.poo";	
+	File archivo = null;
+	static FileReader lectura = null;
+	static BufferedReader bufferLectura = null;
+	static JFrame frame = new JFrame();
 	
-	public Mascota(estadoMascota pEstado, String pTipo, String pRaza, String pNombre, String pChip, String pColorDePelo, String pColorDeOjos,
-				   String pFoto, String pLugarVisto, String pNota, Calendar pFecha, int pRecompensa, int pIdEncargado) {
+	
+	public Mascota(String pEstado, String pTipo, String pRaza, String pNombre, String pChip, String pColorDePelo, String pColorDeOjos,
+				   String pFoto, String pLugarVisto, String pNota, Object pDia, String pRecompensa, int pIdEncargado) {
 		setID(IDMascotas++);
 		setEstado(pEstado);
 		setTipo(pTipo);
@@ -37,12 +52,18 @@ public class Mascota {
 		setFoto(pFoto);
 		setLugarVisto(pLugarVisto);
 		setNota(pNota);
-		setFecha(pFecha);
+		setDiaSuceso(pDia);
+		
+				
 		setRecompensa(pRecompensa);
 		setIdEncargado(pIdEncargado);
 		setEstaEnCasaCuna(false);
 	}
 	
+	public Mascota() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public static ArrayList<Mascota> getListaDeMascotas(){
 		return listaDeMascotas;
 	}
@@ -55,9 +76,7 @@ public class Mascota {
 		listaDeMascotas.add(pMascota);
 	}
 	
-	public void cargarMascotas(){
-		
-	}
+
 	
 	public void setID(int pId){
 		id = pId;
@@ -67,12 +86,12 @@ public class Mascota {
 		return id;
 	}
 	
-	public estadoMascota getEstado() {
+	public String getEstado() {
 		return estado;
 	}
 
-	public void setEstado(estadoMascota pEstado) {
-		estado = pEstado;
+	public void setEstado(String string) {
+		estado = string;
 	}
 
 	public String getTipo() {
@@ -142,24 +161,27 @@ public class Mascota {
 	public String getNota() {
 		return nota;
 	}
+	
+
+	public Object getDiaSuceso() {
+		return diaSuceso;
+	}
+
+	public void setDiaSuceso(Object pDia) {
+		this.diaSuceso = pDia;
+	}
+
+	
 
 	public void setNota(String pNota) {
 		nota = pNota;
 	}
 
-	public Calendar getFecha() {
-		return fecha;
-	}
-
-	public void setFecha(Calendar pFecha) {
-		fecha = pFecha;
-	}
-
-	public int getRecompensa() {
+	public String getRecompensa() {
 		return recompensa;
 	}
 
-	public void setRecompensa(int pRecompensa) {
+	public void setRecompensa(String pRecompensa) {
 		recompensa = pRecompensa;
 	}
 
@@ -178,6 +200,107 @@ public class Mascota {
 	public void setEstaEnCasaCuna(boolean pEstaEnCasaCuna) {
 		estaEnCasaCuna = pEstaEnCasaCuna;
 	}
+	
+	public static void  leerMascota() throws IOException
+    {
+          File archivo = new File (rutaMascotas);
+     try
+     {
+          listaDeMascotas.clear();    
+          IDMascotas = 0;
+          if (archivo.exists())
+          {              
+               lectura = new FileReader (archivo);
+               bufferLectura = new BufferedReader(lectura);
+               while((bufferLectura.readLine())!=null)   
+            	   
+               { 
+            	   
+                    Mascota obj = new Mascota();
+                    obj.setID(Integer.parseInt(bufferLectura.readLine()));
+                    IDMascotas ++;
+                    obj.setEstado(bufferLectura.readLine());
+                    obj.setTipo(bufferLectura.readLine());
+                    obj.setRaza(bufferLectura.readLine());
+                    obj.setNombre(bufferLectura.readLine());
+                    obj.setChip(bufferLectura.readLine());
+                    obj.setColorDePelo(bufferLectura.readLine());
+                    obj.setColorDeOjos(bufferLectura.readLine());
+                    obj.setFoto(bufferLectura.readLine());
+                    obj.setLugarVisto(bufferLectura.readLine());
+                    obj.setNota(bufferLectura.readLine());
+                    obj.setDiaSuceso(bufferLectura.readLine());
+                    obj.setRecompensa(bufferLectura.readLine());
+                    obj.setIdEncargado(0);
+                    listaDeMascotas.add(obj);       
+                    
+               }
+
+
+          }else
+               JOptionPane.showMessageDialog(frame, "No existen datos. O cambio el archivo de ruta. (Mascotas)");                      
+     }catch(Exception e){
+          e.printStackTrace();  
+     }finally
+     {
+          //  En el finally cerramos el fichero, para asegurarnos
+          // que se cierra tanto si todo va bien como si salta  una excepcion.
+          try
+          {
+               //if( null!= lectura )
+               if (archivo.exists())
+                    lectura.close();
+ 
+          }catch (Exception e2)
+               {e2.printStackTrace();}
+     }
+    }
+     
+     public void GuardarMascota(ArrayList<Mascota> arrayMascotas1) 
+    {
+     FileWriter escribir = null;
+     PrintWriter pw = null;
+     try
+     {         
+          escribir = new FileWriter(rutaMascotas,false);
+          pw = new PrintWriter(escribir);
+          
+          for(Mascota obj: arrayMascotas1)
+          {    
+               pw.println("===>nuevo Mascota<===");
+               pw.println(obj.getID());
+               pw.println(obj.getEstado());
+               pw.println(obj.getTipo());
+               pw.println(obj.getRaza());
+               pw.println(obj.getNombre());
+               pw.println(obj.getChip());
+               pw.println(obj.getColorDePelo());
+               pw.println(obj.getColorDeOjos());
+               pw.println(obj.getFoto());
+               pw.println(obj.getLugarVisto());
+               pw.println(obj.getNota());
+               pw.println(obj.getDiaSuceso());
+               pw.println(obj.getRecompensa());
+               pw.println(obj.getIdEncargado());
+               
+               }
+          
+          
+     } catch (Exception e) {
+          e.printStackTrace();
+     } finally 
+     {
+          try 
+          {
+               //   Nuevamente aprovechamos el finally para
+               //   asegurarnos que se cierra el fichero.
+               //if (null != escribir)
+                    escribir.close();
+          } catch (Exception e2) 
+          {e2.printStackTrace();}
+     }
+    }
+
 
 	
 }

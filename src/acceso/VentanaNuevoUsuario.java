@@ -181,7 +181,7 @@ public class VentanaNuevoUsuario extends JFrame {
 							JOptionPane.showMessageDialog(contentPane, "Error! el nombre de usuario ya existe");
 							textFieldUsuario.setText("");
 						}
-						if(Usuario.verificarNombreUsuario(nombre, apellidoUno, apellidoDos)){
+						if(Usuario.verificarNombreUsuario(nombre, apellidoUno, apellidoDos,telefono)){
 							JOptionPane.showMessageDialog(contentPane, "Error! Este usuario ya fue registrado");
 						}
 				
