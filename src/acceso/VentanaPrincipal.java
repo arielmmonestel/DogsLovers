@@ -252,7 +252,7 @@ public class VentanaPrincipal {
 		btnAgregarFoto.setBorderPainted(false);
 		btnAgregarFoto.setContentAreaFilled(false);
 		btnAgregarFoto.setIcon(new ImageIcon("./imgs/addPicture-32.png"));
-		btnAgregarFoto.setBounds(902, 156, 75, 65);
+		btnAgregarFoto.setBounds(1142, 150, 75, 65);
 		panelAgregarMascota.add(btnAgregarFoto);
 		foto = null;
 		
