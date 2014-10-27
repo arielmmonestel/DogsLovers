@@ -107,12 +107,22 @@ public class VentanaPrincipal {
 	private JSpinner spinnerFechaSuceso;
 	private JTextField textFieldMontoRecompensa;
 	private JComboBox comboBoxProvincia;
-
+	private static int IDUsuarioActivo = -1;
+	
 	
 	
 	/**
 	 * Launch the application.
 	 */
+	
+	public static void setIDUsuarioActivo(int id){
+		IDUsuarioActivo = id;
+	}
+	
+	public static int getIDUsuarioActivo(){
+		return IDUsuarioActivo;
+	}
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -258,7 +268,7 @@ public class VentanaPrincipal {
             	nota = editorPaneNotas.getText();
             	
             	recompensa = textFieldMontoRecompensa.getText();
-            	idEncargado = 0; // Falta tomar el id del usuario que ejecuta la acción
+            	idEncargado = IDUsuarioActivo;
             	
             	diaSuceso =  spinnerFechaSuceso.getValue();
             	tipo = (String) comboBoxTipoMascota.getSelectedItem();

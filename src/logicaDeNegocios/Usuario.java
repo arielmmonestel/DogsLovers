@@ -136,6 +136,53 @@ public class Usuario extends Persona{
 		return listaDeUsuarios.size();
 	}
 	
+	public static boolean existeNombreDeUsuario(String entrada){
+		for(Usuario obj : listaDeUsuarios){
+			if(obj.getNombreUsuario().equals(entrada)){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public  static boolean verificarUsuarioYContrasena(String nombreUsuario,String contrasena){      
+		// 
+		try {
+			leerUsuario();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		for(Usuario obj: listaDeUsuarios){ 
+			
+			if(obj.getNombreUsuario().equals(nombreUsuario)){
+				
+				if(obj.getContrasenia().equals(contrasena)){
+					return true;
+				}
+				else{
+					return false;
+				}
+			}   
+		}    
+			return false;
+	}
+	
+	public static int buscarIDDelUsuario(String nombreUsuario){
+		try {
+			leerUsuario();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		for(Usuario obj : listaDeUsuarios){
+			if(obj.getNombreUsuario().equals(nombreUsuario) ){
+				return obj.getID();
+			}
+		}
+		return -1;
+	}
+	
+	
+	
 	/*Metodo que carga a los Usuarios en un arreglo*/
 	public static void  leerUsuario() throws IOException
     {
@@ -187,7 +234,7 @@ public class Usuario extends Persona{
     	}
     }
 	
-	public void GuardarUsuario(ArrayList<Usuario> arrayUsuarios1) 
+	public void GuardarUsuario(ArrayList<Usuario> arrayUsuarios) 
     {
     	FileWriter escribir = null;
     	PrintWriter pw = null;
@@ -196,7 +243,7 @@ public class Usuario extends Persona{
     		escribir = new FileWriter(rutaUsuarios,false);
     		pw = new PrintWriter(escribir);
     		
-    		for(Usuario obj: arrayUsuarios1)
+    		for(Usuario obj: arrayUsuarios)
     		{	
     			pw.println("===>nuevo Usuario<===");
     			pw.println(obj.getID());
@@ -229,13 +276,14 @@ public class Usuario extends Persona{
   
 	public  static boolean verificarNickname(String nickname)
     {		    
-		// 
+		// TODO
 		try {
 			leerUsuario();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	
 		for(Usuario obj: listaDeUsuarios)
 		{	
 			if(obj.getNombreUsuario().equals(nickname))
@@ -245,6 +293,8 @@ public class Usuario extends Persona{
 			}			
 		}   	
 		return false;
+		
+		
     }
 	
 	public  static boolean verificarNombreUsuario(String nombre,String apellidoUno, String apellidoDos,String telefono)
