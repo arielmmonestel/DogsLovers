@@ -365,6 +365,33 @@ public class VentanaPrincipal {
         spinnerFechaSuceso.setModel(new SpinnerDateModel(new Date(1411624800000L), new Date(946706400000L), new Date(1419487200000L), Calendar.DAY_OF_YEAR));
         spinnerFechaSuceso.setBounds(996, 237, 142, 23);
         panelAgregarMascota.add(spinnerFechaSuceso);
+
+        lugarVisto = comboBoxCanton.getSelectedItem().toString() + ", " + comboBoxProvincia.getSelectedItem().toString();
+        
+        JSpinner spinner = new JSpinner();
+        spinner.setToolTipText("D\u00EDa");
+        spinner.setModel(new SpinnerNumberModel(1, 1, 31, 1));
+        spinner.setBounds(995, 237, 39, 23);
+        panelAgregarMascota.add(spinner);
+        
+        JSpinner spinnerAnioPerdida = new JSpinner();
+        spinnerAnioPerdida.setToolTipText("A\u00F1o");
+        spinnerAnioPerdida.setBounds(1234, 236, 61, 23);
+        spinnerAnioPerdida.setModel(new SpinnerNumberModel(2014.0, 1990.0, 2014.0, 1.0));
+        panelAgregarMascota.add(spinnerAnioPerdida);
+        
+        JComboBox comboBoxMesPerdida = new JComboBox();
+        comboBoxMesPerdida.setToolTipText("Mes");
+        comboBoxMesPerdida.setModel(new DefaultComboBoxModel(new String[] {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre", "Octubre", "Noviembre", "Diciembre"}));
+        comboBoxMesPerdida.setBounds(1054, 236, 163, 23);
+        panelAgregarMascota.add(comboBoxMesPerdida);
+        
+        
+        textFieldMontoRecompensa = new JTextField();
+        textFieldMontoRecompensa.setColumns(10);
+        textFieldMontoRecompensa.setBounds(1016, 347, 127, 23);
+        panelAgregarMascota.add(textFieldMontoRecompensa);
+
         
         lblMonto = new JLabel("Monto");
         lblMonto.setForeground(Color.WHITE);
@@ -468,7 +495,7 @@ public class VentanaPrincipal {
                     lblMonto.setVisible(true);
                     textFieldMontoRecompensa.setEnabled(true);
                     textFieldMontoRecompensa.setVisible(true);
-                    /* Cambiar aquí el estado de la mascota a Perdida*/
+                    estado = "PERDIDA";
                     
                 }
                 
@@ -500,8 +527,11 @@ public class VentanaPrincipal {
                     lblMonto.setVisible(false);
                     textFieldMontoRecompensa.setEnabled(false);
                     textFieldMontoRecompensa.setVisible(false);
+
                     /* Cambiar aquí el estado de la mascota a Encontrada*/
                     estado = "ENCONTRADA";
+
+
                     
                     
                     
