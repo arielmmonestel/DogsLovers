@@ -11,6 +11,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 
+
 //import com.jgoodies.forms.factories.DefaultComponentFactory;
 
 
@@ -101,6 +102,7 @@ public class Loggin extends JFrame {
 					VentanaPrincipal VP = new VentanaPrincipal();
 					VP.main(null);
 					VP.setIDUsuarioActivo(Usuario.buscarIDDelUsuario(entradaUsuario));
+					System.out.println(VP.getIDUsuarioActivo());
 				}
 				else{
 					JOptionPane.showMessageDialog(null, "Usuario y contraseña inválidos");

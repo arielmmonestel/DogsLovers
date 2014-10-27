@@ -198,7 +198,7 @@ public class VentanaPrincipal {
 		/*Inicio Codigo del Panel Agregar Mascota*/
 		
 		lblFotoMascota = new JLabel("");
-		lblFotoMascota.setBounds(1130, 60, 142, 141);
+		lblFotoMascota.setBounds(1153, 60, 142, 141);
 		panelAgregarMascota.add(lblFotoMascota);
 		
 		textFieldMontoRecompensa = new JTextField();
