@@ -73,6 +73,8 @@ import javax.swing.SpinnerDateModel;
 
 import java.io.File;
 import java.util.Date;
+import javax.swing.UIManager;
+import javax.swing.border.EtchedBorder;
 
 public class VentanaPrincipal {
 
@@ -198,7 +200,8 @@ public class VentanaPrincipal {
 		/*Inicio Codigo del Panel Agregar Mascota*/
 		
 		lblFotoMascota = new JLabel("");
-		lblFotoMascota.setBounds(1153, 60, 142, 141);
+		lblFotoMascota.setBorder(new EtchedBorder(EtchedBorder.RAISED, Color.WHITE, null));
+		lblFotoMascota.setBounds(995, 61, 142, 141);
 		panelAgregarMascota.add(lblFotoMascota);
 		
 		textFieldMontoRecompensa = new JTextField();
