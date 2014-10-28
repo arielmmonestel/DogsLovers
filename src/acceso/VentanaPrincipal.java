@@ -73,9 +73,8 @@ import sun.util.logging.resources.logging;
 import javax.swing.SpinnerDateModel;
 
 import java.io.File;
-import java.util.Date;
 
-import javax.swing.UIManager;
+
 import javax.swing.border.EtchedBorder;
 
 public class VentanaPrincipal {
@@ -123,50 +122,6 @@ public class VentanaPrincipal {
 	private JSpinner spinnerAnioPerdida;
 	
 	
-	public void verificarEstado(){
-		if(estadoMascota.isSelected( rdbtnEncontrada.getModel())){
-    		setEstado("ENCONTRADA");
-
-    		
-    		
-    	}else{
-    		setEstado("PERDIDA");
-    		
-    	}
-    	
-	}
-	public void verificarMoneda(){
-		if  (getEstado().equals("ENCONTRADA")){
-    		recompensa = null;
-    		
-    			
-    	}else{
-    		if(monedaDePago.isSelected(rdbtnColones.getModel())){
-    			recompensa = rdbtnColones.getText() +" " +textFieldMontoRecompensa.getText();
-        		
-    		}
-    		recompensa = rdbtnDolares.getText() +" " +textFieldMontoRecompensa.getText();
-    		
-    	}
-		}
-	
-	
-	public String getEstado() {
-		return estado;
-	}
-
-	public void setEstado(String estado) {
-		this.estado = estado;
-	}
-
-	
-	public static void setIDUsuarioActivo(int id){
-		IDUsuarioActivo = id;
-	}
-	
-	public static int getIDUsuarioActivo(){
-		return IDUsuarioActivo;
-	}
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -181,21 +136,14 @@ public class VentanaPrincipal {
 		});
 	}
 
-	/**
-	 * Create the application.
-	 */
 	public VentanaPrincipal() {
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	private void initialize() {
 		VentanaPrincipal = new JFrame();
 		VentanaPrincipal.setBounds(0, 0, 1435, 735);
 		VentanaPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
 		VentanaPrincipal.getContentPane().setLayout(new CardLayout(0, 0));
 		
 		panelPrincipal = new JPanel();
@@ -233,7 +181,7 @@ public class VentanaPrincipal {
 		panelAgregarMascota.setLayout(null);
 		panelAgregarMascota.setVisible(false);
 		
-		/*Inicio Codigo del Panel Agregar Mascota*/
+//////////////////////////////*Inicio Codigo del Panel Agregar Mascota*/////////////////////////////////////////////////////////////////////
 		
 		lblFotoMascota = new JLabel("");
 		lblFotoMascota.setBorder(new EtchedBorder(EtchedBorder.RAISED, Color.WHITE, null));
@@ -253,10 +201,8 @@ public class VentanaPrincipal {
 				int resultadoAbrir = elegir.showOpenDialog(VentanaPrincipal.getContentPane());
 				archivoSeleccionado = elegir.getSelectedFile();
 				if (resultadoAbrir == JFileChooser.APPROVE_OPTION) {
-					String pathArchivo = archivoSeleccionado.getAbsolutePath(); 	// Obtiene path del archivo
-		            String nombre = 	 archivoSeleccionado.getName(); 			// Obtiene nombre del archivo           
-		            System.out.println("El nombre del archivo es: "+ nombre);
-		            System.out.println("El path del archivo es: "+ pathArchivo);
+					String pathArchivo = archivoSeleccionado.getAbsolutePath(); 	
+		            String nombre = 	 archivoSeleccionado.getName(); 		           
 		            if (archivoSeleccionado != null) {
 		            	try {
 							BufferedImage imagenMostrada = ImageIO.read(archivoSeleccionado);
@@ -329,35 +275,37 @@ public class VentanaPrincipal {
             public void actionPerformed(ActionEvent e) {
             
             	nombre = textFieldNombreMascota.getText();
-            	
             	chip = textFieldNumChip.getText();
-            	
             	lugarVisto = comboBoxCanton.getSelectedItem().toString() + ", " + comboBoxProvincia.getSelectedItem().toString();
             	nota = editorPaneNotas.getText();
             	foto = "./mascotas/" + String.valueOf(Mascota.getListaDeMascotasSize());
             	idEncargado = IDUsuarioActivo;
-            	
             	fechaSuceso =  spinnerDiaPerdida.getValue().toString() + "/" + comboBoxMesPerdida.getSelectedItem().toString()+"/"+spinnerAnioPerdida.getValue().toString();
             	tipo = (String) comboBoxTipoMascota.getSelectedItem();
             	raza = (String) comboBoxRazaMascota.getSelectedItem();
             	lugarVisto = (String)comboBoxCanton.getSelectedItem() + ", " + (String)comboBoxProvincia.getSelectedItem();
-            	
+        
             	verificarEstado();
             	verificarMoneda();
             	
             	if(Mascota.verificarChip(chip, estado)){
+            	
             		JOptionPane.showMessageDialog(panelAgregarMascota, "Mascota ya ha sido registrada");
             
             	}else{
+            		
             		Mascota NuevaMascota = new Mascota(estado, tipo, raza, nombre, chip, colorDePelo, colorDeOjos, foto, lugarVisto, nota, fechaSuceso, recompensa, idEncargado);
-        			try {
+        			
+            		try {
 						NuevaMascota.leerMascota();
 					} catch (IOException e1) {
 						
 						e1.printStackTrace();
 					}
         			Mascota.getListaDeMascotas().add(NuevaMascota);
+        			
         			NuevaMascota.GuardarMascota(Mascota.getListaDeMascotas());
+        			
         			JOptionPane.showMessageDialog(panelAgregarMascota, "Mascota registrada correctamente");	
             	}
             }
@@ -366,9 +314,12 @@ public class VentanaPrincipal {
         JButton buttonCancelar = new JButton("");
         buttonCancelar.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
+        		
         		panelPrincipal.setVisible(true);
-				panelAgregarCasaCuna.setVisible(false);
-				panelAgregarMascota.setVisible(false);
+				
+        		panelAgregarCasaCuna.setVisible(false);
+				
+        		panelAgregarMascota.setVisible(false);
         	}
         });
         buttonCancelar.setToolTipText("Cancelar Registro de Mascota");
@@ -410,17 +361,19 @@ public class VentanaPrincipal {
         comboBoxProvincia.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if(comboBoxProvincia.getSelectedIndex()==0){
-                    comboBoxCanton.setModel(new DefaultComboBoxModel(new String[] {"Central","Escazú","Desamparados","Puriscal","Tarrazú","Aserrí","Mora","Goicoechea","Santa Ana","Alajuelita",
+                
+                	comboBoxCanton.setModel(new DefaultComboBoxModel(new String[] {"Central","Escazú","Desamparados","Puriscal","Tarrazú","Aserrí","Mora","Goicoechea","Santa Ana","Alajuelita",
                             "Coronado","Acosta","Tibás","Moravia","Montes de Oca","Turrubares",
                             "Dota","Curridabat","Perez Zeledón","León Cortés"}))    ;           
 
-                }if(comboBoxProvincia.getSelectedIndex()==1){
+                }
+                if(comboBoxProvincia.getSelectedIndex()==1){
                     
-
                     comboBoxCanton.setModel(new DefaultComboBoxModel(new String[] {"Central","San Ramón","Grecia","San Mateo","Atenas","Naranjo",
                             "Palmares","Poás","Orotina","San Carlos","Alfaro Ruíz","Valverde Vega",
                             "Upala","Los Chiles","Guatuzo"}))   ;
-                }if(comboBoxProvincia.getSelectedIndex()==2){
+                }
+                if(comboBoxProvincia.getSelectedIndex()==2){
                     comboBoxCanton.setModel(new DefaultComboBoxModel(new String[] {"Central","Paraiso","La Unión","Jimenez","Turrialba","Alvarado","Oreamuno","El Guarco"}))    ;
                 }
                 if(comboBoxProvincia.getSelectedIndex()==3){
@@ -458,7 +411,6 @@ public class VentanaPrincipal {
         comboBoxMesPerdida.setModel(new DefaultComboBoxModel(new String[] {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre", "Octubre", "Noviembre", "Diciembre"}));
         comboBoxMesPerdida.setBounds(1054, 236, 163, 23);
         panelAgregarMascota.add(comboBoxMesPerdida);
-        
         
         textFieldMontoRecompensa = new JTextField();
         textFieldMontoRecompensa.setColumns(10);
@@ -550,7 +502,8 @@ public class VentanaPrincipal {
         rdbtnPerdida.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 if (rdbtnPerdida.isSelected()){
-                    lblsiAplica.setVisible(true);
+                  
+                	lblsiAplica.setVisible(true);
                     textFieldNombreMascota.setEnabled(true);
                     lblNombreDeLa.setEnabled(true);
                     textFieldNumChip.setEnabled(true);
@@ -586,7 +539,8 @@ public class VentanaPrincipal {
         rdbtnEncontrada.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 if (rdbtnEncontrada.isSelected()){
-                    lblsiAplica.setVisible(false);
+                    
+                	lblsiAplica.setVisible(false);
                     lblFechaDeHallazgoperdida.setText("Fecha de Hallazgo");
                     lblSitioDeHallazgoperdida.setText("Sitio de Hallazgo");
                     rdbtnDolares.setVisible(false);
@@ -599,31 +553,19 @@ public class VentanaPrincipal {
                     lblMonto.setVisible(false);
                     textFieldMontoRecompensa.setEnabled(false);
                     textFieldMontoRecompensa.setVisible(false);
-                    
-                	
-                
-                    
-                    /* Cambiar aquí el estado de la mascota a Encontrada*/
-                    
-
-
-                    
-                    
-                    
-                    
-                }else{
+                }
+                else{
                     textFieldNombreMascota.setEnabled(true);
                     lblNombreDeLa.setEnabled(true);
                     textFieldNumChip.setEnabled(true);
                     lblNumeroDeChip.setEnabled(true);                   
                     textFieldNombreMascota.setEnabled(true);
                     lblFechaDeHallazgoperdida.setText("Fecha de Pérdida");
-                    lblSitioDeHallazgoperdida.setText("Sitio de Pérdida");
-                    
-                    
+                    lblSitioDeHallazgoperdida.setText("Sitio de Pérdida");   
                 }
             }
         });
+        
         rdbtnEncontrada.setBounds(444, 134, 109, 23);
         estadoMascota.add(rdbtnEncontrada);
         panelAgregarMascota.add(rdbtnEncontrada);
@@ -631,8 +573,10 @@ public class VentanaPrincipal {
          comboBoxTipoMascota = new JComboBox();
          comboBoxTipoMascota.addActionListener(new ActionListener() {
          	public void actionPerformed(ActionEvent e) {
+        
          		if(comboBoxTipoMascota.getSelectedIndex() == 0){
-                    comboBoxRazaMascota.setModel(new DefaultComboBoxModel(new String[] {"Airedale Terrier" ,"Akita inu" ,"Alaskan malamute", "American Stafford","Shire Terrier","Basenji",
+                    
+         			comboBoxRazaMascota.setModel(new DefaultComboBoxModel(new String[] {"Airedale Terrier" ,"Akita inu" ,"Alaskan malamute", "American Stafford","Shire Terrier","Basenji",
                             "Basset Hound","Beagle","Bichón Maltés","Boxer","Braco de Weimar","Bull Terrier","Bulldog francés","Bulldog inglés","Caniche","Carlino","Chihuahua","Chow-chow","Cocker Spaniel Americano","Cocker Spaniel inglés",
                             "Crestado chino","Dálmata","Dobermann","Dogo Aleman","Dogo Argentino","Golden retriever","French Poodle",
                             "Labrador Retrevier","Mastín Español","Mastín Napolitano","Pastor Alemán","Pequinés",
@@ -643,7 +587,8 @@ public class VentanaPrincipal {
 
                 }
                 if (comboBoxTipoMascota.getSelectedIndex() == 1){
-                    comboBoxRazaMascota.setModel(new DefaultComboBoxModel(new String[] {"Abisinio","Aleman de pelo largo","Angora turco","American curl","American shorthair","American wirehair","Aphrodites giant","Australian mist",
+                    
+                	comboBoxRazaMascota.setModel(new DefaultComboBoxModel(new String[] {"Abisinio","Aleman de pelo largo","Angora turco","American curl","American shorthair","American wirehair","Aphrodites giant","Australian mist",
                       "Azul ruso","Balinés","Bengalí","Bogtail Japonés","Bosque de noruega","British shorthair","Burmilla","Burmés","Cornish rex","Cymric",
                       "Chartreux","Devon rex","Don sphynx","Gato bombay","Gato brasileño","Ceylon","Europeo","Exótico","Gato habana","Korat","Manx","Munchkin","Ocicat","Ojos azules","Oriental","Oriental de pelo largo","Persa","Siamés","Siberiano","Singapura","Somalí","Tonkinés","LaPerm","Maine coon","Mau egipcio","Peterbald",
                       "Pixiebob","Ragdoll","Sagrado de birmania","Scottish fold","Selkirk Rex","Sphynx","Van turco"}));
@@ -652,14 +597,16 @@ public class VentanaPrincipal {
                     
                 }
                 if (comboBoxTipoMascota.getSelectedIndex() == 2){
-                    comboBoxRazaMascota.setModel(new DefaultComboBoxModel(new String[] {"Canario","Cotorra","Angaporis(Pájaros de Amor)","Rosella","Loro de Bolsillo"
+                    
+                	comboBoxRazaMascota.setModel(new DefaultComboBoxModel(new String[] {"Canario","Cotorra","Angaporis(Pájaros de Amor)","Rosella","Loro de Bolsillo"
                             ,"Loro","Turaco","Cacatua","Guacamayo","Ninfa","Pato","Gallina"})); 
                     comboBoxRazaMascota.setVisible(true);
                     comboBoxRazaMascota.setEnabled(true);
                     
                 }
                 if (comboBoxTipoMascota.getSelectedIndex() == 3){
-                    comboBoxRazaMascota.setModel(new DefaultComboBoxModel(new String[] {"Ardilla Coreana",
+                    
+                	comboBoxRazaMascota.setModel(new DefaultComboBoxModel(new String[] {"Ardilla Coreana",
                             "Cobaya","Conejos","Erizo","Hamster","Jerbo","Rata","Ratón"}));
                     comboBoxRazaMascota.setVisible(true);
                     comboBoxRazaMascota.setEnabled(true);
@@ -713,11 +660,6 @@ public class VentanaPrincipal {
         colorDeOjos = (comboBoxColorOjos.getSelectedItem()).toString();
         
         rdbtnColones = new JRadioButton("\u20A1");
-        rdbtnColones.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent arg0) {
-        	
-        	}
-        });
         rdbtnColones.setForeground(Color.WHITE);
         rdbtnColones.setContentAreaFilled(false);
         rdbtnColones.setSelected(true);
@@ -725,13 +667,7 @@ public class VentanaPrincipal {
         monedaDePago.add(rdbtnColones);
         panelAgregarMascota.add(rdbtnColones);
         
-        rdbtnDolares = new JRadioButton("$");
-        rdbtnDolares.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		
-        	}
-        });
-        rdbtnDolares.setForeground(Color.WHITE);
+        rdbtnDolares = new JRadioButton("$");rdbtnDolares.setForeground(Color.WHITE);
         rdbtnDolares.setContentAreaFilled(false);
         rdbtnDolares.setBounds(891, 347, 47, 23);
         monedaDePago.add(rdbtnDolares);
@@ -740,7 +676,6 @@ public class VentanaPrincipal {
         JScrollPane scrollPane = new JScrollPane();
         scrollPane.setBounds(707, 428, 384, 184);
         panelAgregarMascota.add(scrollPane);
-        
         editorPaneNotas = new JEditorPane();
         scrollPane.setViewportView(editorPaneNotas);
         
@@ -754,24 +689,24 @@ public class VentanaPrincipal {
         
 		
 		
-		/*Codigo panel Mascota fin*/
+		//////////////////////////////////Codigo panel Mascota fin///////////////////////////////////////////////////////////////
 	
 		
 		panelAgregarCasaCuna = new JPanel();
 		VentanaPrincipal.getContentPane().add(panelAgregarCasaCuna, "name_28003406149630");
 		panelAgregarCasaCuna.setLayout(null);
-/*Inicio codigo casa Cuna*/
+		
+		
+///////////////////////Inicio codigo casa Cuna//////////////////////////////////////////////
+		
+		
 		buttonGuardar = new JButton("");
 		buttonGuardar.setToolTipText("Guardar en el Registro del Mascota");
 		buttonGuardar.setBorder(null);
 		buttonGuardar.setFocusable(false);
 		buttonGuardar.setFocusTraversalKeysEnabled(false);
 		buttonGuardar.setFocusPainted(false);
-		buttonGuardar.addActionListener(new ActionListener() {
-		    public void actionPerformed(ActionEvent e) {
-		    }
-		});
-		
+				
 		JButton CancelarOperacion = new JButton("");
 		CancelarOperacion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -806,6 +741,7 @@ public class VentanaPrincipal {
 		CancelarOperacion.setBorder(null);
 		CancelarOperacion.setBounds(1155, 558, 109, 78);
 		panelAgregarCasaCuna.add(CancelarOperacion);
+		
 		buttonGuardar.setDefaultCapable(false);
 		buttonGuardar.setContentAreaFilled(false);
 		buttonGuardar.setBorderPainted(false);
@@ -832,7 +768,8 @@ public class VentanaPrincipal {
 		panelAgregarCasaCuna.add(chckbxNoAlimentos);
 	    chckbxNoAlimentos.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if(chckbxNoAlimentos.isSelected()){
+            
+            	if(chckbxNoAlimentos.isSelected()){
                     chckbxNoAlimentos.setText("Sí");
                 }
                 else{
@@ -851,9 +788,12 @@ public class VentanaPrincipal {
 		chckbxNoMedicamentos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(chckbxNoMedicamentos.isSelected()){
+				
 					chckbxNoMedicamentos.setText("Sí");
+				
 				}
 				else{
+				
 					chckbxNoMedicamentos.setText("No");
 				}
 			}
@@ -904,18 +844,14 @@ public class VentanaPrincipal {
 		spinnerCantidadDeMascota.setBounds(404, 372, 54, 20);
 		panelAgregarCasaCuna.add(spinnerCantidadDeMascota);
 		
-		
-		
 		JLabel label = new JLabel("");
 		label.setIcon(new ImageIcon("./imgs/fondoRegistro.png"));
 		label.setBounds(0, 0, 2508, 1246);
 		panelAgregarCasaCuna.add(label);
 		
         
-		
-		
-		
-/*fin codigo Casa Cuna*/
+//////////////////////////////////////*fin codigo Casa Cuna*/////////////////////////////////////////////////////////////////
+
 		
 		JMenuBar menuBar = new JMenuBar();
 		VentanaPrincipal.setJMenuBar(menuBar);
@@ -925,14 +861,15 @@ public class VentanaPrincipal {
         mnRegistro.setToolTipText("Registro");
         menuBar.add(mnRegistro);
 		
-		
 		JMenuItem mntmMascota = new JMenuItem("Mascota");
 		mntmMascota.setIcon(new ImageIcon("./imgs/Pets-30.png"));	       
 		mntmMascota.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+	
 				panelPrincipal.setVisible(false);
 				panelAgregarMascota.setVisible(true);
 				panelAgregarCasaCuna.setVisible(false);
+			
 			}
 		});
 		mnRegistro.add(mntmMascota);
@@ -949,4 +886,67 @@ public class VentanaPrincipal {
 		mnRegistro.add(mntmCasaCuna);
 		panelAgregarCasaCuna.setVisible(false);
 	}
-}
+	
+	public void verificarEstado(){
+		
+		if(estadoMascota.isSelected( rdbtnEncontrada.getModel())){
+    		
+			setEstado("ENCONTRADA");
+  	   		
+    	}
+		else{
+    	
+			setEstado("PERDIDA");
+    		
+    	}
+    	
+	}
+	
+	public void verificarMoneda(){
+		
+		if  (getEstado().equals("ENCONTRADA")){
+    	
+			recompensa = null;
+    			
+    	}
+		else{
+			
+    		if(monedaDePago.isSelected(rdbtnColones.getModel())){
+    		
+    			recompensa = rdbtnColones.getText() +" " +textFieldMontoRecompensa.getText();
+        		
+    		}
+    		else {
+    			
+    			recompensa = rdbtnDolares.getText() +" " +textFieldMontoRecompensa.getText();	
+			
+    		}
+    		
+    		
+    	}
+	
+	}
+	
+	
+	public String getEstado() {
+	
+		return estado;
+	
+	}
+
+	public void setEstado(String pEstado) {
+		estado = pEstado;
+	}
+
+	
+	public static void setIDUsuarioActivo(int id){
+		
+		IDUsuarioActivo = id;
+	}
+	
+	public static int getIDUsuarioActivo(){
+		
+		return IDUsuarioActivo;
+	}
+
+};;
