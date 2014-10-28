@@ -7,10 +7,16 @@
 	<classpathentry kind="lib" path="lib/dsn.jar"/>
 	<classpathentry kind="lib" path="lib/gimap.jar"/>
 	<classpathentry kind="lib" path="lib/imap.jar"/>
-	<classpathentry kind="lib" path="lib/javacsv.jar"/>
 	<classpathentry kind="lib" path="lib/mail.jar"/>
 	<classpathentry kind="lib" path="lib/mailapi.jar"/>
 	<classpathentry kind="lib" path="lib/pop3.jar"/>
 	<classpathentry kind="lib" path="lib/smtp.jar"/>
+	<classpathentry kind="lib" path="lib/lib/dsn.jar"/>
+	<classpathentry kind="lib" path="lib/lib/gimap.jar"/>
+	<classpathentry kind="lib" path="lib/lib/imap.jar"/>
+	<classpathentry kind="lib" path="lib/lib/mail.jar"/>
+	<classpathentry kind="lib" path="lib/lib/mailapi.jar"/>
+	<classpathentry kind="lib" path="lib/lib/pop3.jar"/>
+	<classpathentry kind="lib" path="lib/lib/smtp.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

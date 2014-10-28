@@ -9,6 +9,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Image;
 import java.awt.SystemColor;
+import java.awt.Toolkit;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
@@ -73,6 +74,7 @@ import sun.util.logging.resources.logging;
 import javax.swing.SpinnerDateModel;
 
 import java.io.File;
+
 
 
 import javax.swing.border.EtchedBorder;
@@ -146,6 +148,7 @@ public class VentanaPrincipal {
 		VentanaPrincipal.setBounds(0, 0, 1435, 735);
 		VentanaPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		VentanaPrincipal.getContentPane().setLayout(new CardLayout(0, 0));
+		VentanaPrincipal.setIconImage(Toolkit.getDefaultToolkit().getImage("./imgs/Icono.png"));
 		
 		panelPrincipal = new JPanel();
 		VentanaPrincipal.getContentPane().add(panelPrincipal, "name_27977974667427");

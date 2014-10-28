@@ -5,6 +5,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -48,6 +49,9 @@ import javax.swing.JPasswordField;
 
 
 
+
+
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -70,7 +74,9 @@ import java.awt.Frame;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import logicaDeNegocios.EnviarMail;
 import logicaDeNegocios.Persona;
+import logicaDeNegocios.Sistema;
 import logicaDeNegocios.Usuario;
 
 public class VentanaNuevoUsuario extends JFrame {
@@ -130,6 +136,7 @@ public class VentanaNuevoUsuario extends JFrame {
 	 * Create the frame.
 	 */
 	public VentanaNuevoUsuario() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("./imgs/Icono.png"));
 		setName("frameRegistroUsuario");
 		setLocationByPlatform(true);
 		setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
@@ -175,6 +182,7 @@ public class VentanaNuevoUsuario extends JFrame {
 		btnRegistrarme.addActionListener(new ActionListener() {
 	
 			public void actionPerformed(ActionEvent e) {
+				validarEmail();
 				String nombre = textFieldNombre.getText();
 				String apellidoUno= textFieldApellidoUno.getText();
 				String apellidoDos =  textFieldApellidoDos.getText();
@@ -187,9 +195,49 @@ public class VentanaNuevoUsuario extends JFrame {
 				String nickName = textFieldUsuario.getText();
 				String contrasenia= convertirClave(passwordFieldNewPass.getPassword()); // No probado aún
 				
+						
+						if(textFieldNombre.getText().isEmpty()){
+							JOptionPane.showMessageDialog(contentPane, "Error! el campo de nombre esta vacio");
+							return;
+						}
+						
+						if(textFieldApellidoUno.getText().isEmpty()){
+							JOptionPane.showMessageDialog(contentPane, "Error! el campo de Apellido Uno esta vacio");
+							return;
+						}
+						
+						if(textFieldApellidoDos.getText().isEmpty()){
+							JOptionPane.showMessageDialog(contentPane, "Error! el campo de Apellido Dos esta vacio");
+							return;
+						}
+						
+						
+						
+						if(textFieldUsuario.getText().isEmpty()){
+							JOptionPane.showMessageDialog(contentPane, "Error! el campo de Usuario esta vacio");
+							return;
+						}
+						
+						if(textFieldTelefono.getText().length() == 0){
+							JOptionPane.showMessageDialog(contentPane, "Error! el campo de Telefono esta vacio");
+							return;
+						}
+						if(passwordFieldRepeatPass.getPassword().length!= passwordFieldNewPass.getPassword().length){
+							JOptionPane.showMessageDialog(contentPane, "Error! Las contrasenas no concuerdan");
+							return;
+						
+						}
+						
+						
+						if(textFieldCorreo.getText().isEmpty()){
+							JOptionPane.showMessageDialog(contentPane, "Error! el campo de correo electronico esta vacio");
+							return;
+						}
+						
 						if(Usuario.verificarNickname(nickName)){
 							JOptionPane.showMessageDialog(contentPane, "Error! el nombre de usuario ya existe");
 							textFieldUsuario.setText("");
+							return;
 						}
 
 						if(Usuario.verificarNombreUsuario(nombre, apellidoUno, apellidoDos,telefono)){
@@ -197,6 +245,7 @@ public class VentanaNuevoUsuario extends JFrame {
 
 
 							JOptionPane.showMessageDialog(contentPane, "Error! Este usuario ya fue registrado");
+							return;
 						}
 						
 						else{
@@ -210,13 +259,22 @@ public class VentanaNuevoUsuario extends JFrame {
 									}
 									Usuario.getListaDeUsuarios().add(NuevoUsuario);
 									NuevoUsuario.GuardarUsuario(Usuario.getListaDeUsuarios());
+									String subject = "¡Bienvenido a Dogs Lovers " +nombre+ "!";
+									String mensaje = "¡Bienvenido a Dogs Lovers " +nombre+ "!." + "\n"+ 
+													 "Su nombre de Usuario es: "+nickName+ "."+ "\n" + 
+													 "Su contrasenia es: " +contrasenia + "." + "\n" + 
+													 "Fecha de Registro: " + Sistema.getFecha();
+									EnviarMail.correoDestinatario = correo;
+									EnviarMail.subject = subject;
+									EnviarMail.mensaje = mensaje;
 									
-					JOptionPane.showMessageDialog(contentPane, "Usuario registrado correctamente");
-					dispose();
-					
-					loguearse= new Loggin();
-					loguearse.setVisible(true);
-					
+									JOptionPane.showMessageDialog(contentPane, "Usuario registrado correctamente");
+									JOptionPane.showMessageDialog(contentPane, "Se enviará un correo electrónico con su usuario y contraseña");
+									EnviarMail.enviarMail();
+									dispose();
+									loguearse= new Loggin();
+									loguearse.setVisible(true);
+									
 					  }
 			}});
 					
@@ -421,5 +479,10 @@ public class VentanaNuevoUsuario extends JFrame {
 		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{textFieldNombre, textFieldApellidoUno, textFieldApellidoDos, spinnerDia, comboBoxMes, spinnerAnio, textFieldCorreo, textFieldTelefono, textFieldUsuario, passwordFieldNewPass, passwordFieldRepeatPass, lblFechaDeNacimiento, btnRegistrarme}));
 		
 	
+	}
+	public void validarEmail(){
+		if (textFieldCorreo.getText().isEmpty()){
+			textFieldCorreo.setText(null);
+		}
 	}
 }

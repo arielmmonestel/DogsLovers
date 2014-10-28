@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.*;
 
 import javax.swing.JOptionPane;
+
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -24,18 +25,25 @@ public class Sistema {
 	private static int mes = fecha.get(Calendar.MONTH)+1; 
 	private static int dia = fecha.get(Calendar.DATE);
 	
-	public static void main(String[] args){
-		System.out.println("Dia: "  +dia+"\n"+ "Mes: "+mes+"\n"+"Anio: "+anio);
-	}
+	
+	
 	
 
 	public Sistema() {
 	}
 	
+
+	public  static String getFecha(){
+		String fecha = dia +"/"+ mes +"/"+ anio;
+		return fecha;
+	}
+	
+	
 	public static String[][] tomarDatosDeBusqueda(ArrayList<Integer> indicesDeResultados){
 		String[][] matrizConDatos = new String[Mascota.getListaDeMascotasSize()][7];
 		for(int k = 0; k < indicesDeResultados.size(); k++){
 			int i = (int) indicesDeResultados.get(k);
+			
 			matrizConDatos[k][0] = String.valueOf(i);
 			matrizConDatos[k][1] = Mascota.getMascota(i).getEstado(); 
 			matrizConDatos[k][2] = Mascota.getMascota(i).getTipo(); 
@@ -181,3 +189,4 @@ public class Sistema {
 	
 }
 
+}
