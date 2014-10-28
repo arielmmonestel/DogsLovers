@@ -200,8 +200,7 @@ public class Sistema {
 	            // Cierre.
 	            t.close();
 	        }
-	        catch (Exception e)
-	        {
+	        catch (Exception e){
 	            e.printStackTrace();
 	        }
 	}
