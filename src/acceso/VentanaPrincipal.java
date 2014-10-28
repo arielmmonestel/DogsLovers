@@ -266,7 +266,7 @@ public class VentanaPrincipal {
 							JOptionPane.showMessageDialog(VentanaPrincipal.getContentPane(), ex.getMessage(), "Advertencia", JOptionPane.WARNING_MESSAGE);
 						}
 		            }
-		            foto = pathArchivo;
+		            foto = "./mascotas/" + String.valueOf(Mascota.getListaDeMascotasSize());
 				}
 				
 				Sistema.copiarImagen(archivoSeleccionado);
