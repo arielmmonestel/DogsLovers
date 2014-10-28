@@ -100,15 +100,15 @@ public class VentanaPrincipal {
     private JEditorPane editorPaneNotas;
     private  String estado;
 	private static String tipo;
-    private static String nombre;
+    private static String nombre = null;
     private static String raza;
-    private static String chip = "-1";
+    private static String chip = null;
     private static String colorDePelo;
     private static String colorDeOjos;
-    private static String foto;
+    private static String foto = null;
     private static String lugarVisto;
     private static String nota;
-    private static String recompensa;
+    private static String recompensa = null;
     private static int idEncargado;
     private static String fechaSuceso;
 	private JLabel labelDL;
@@ -120,6 +120,7 @@ public class VentanaPrincipal {
 	private JSpinner spinnerDiaPerdida;
 	private JComboBox comboBoxMesPerdida;
 	private JSpinner spinnerAnioPerdida;
+	private JButton btnAgregarFoto;
 	
 	
 	
@@ -194,7 +195,7 @@ public class VentanaPrincipal {
 		lblImagenDeLa.setBounds(707, 178, 208, 23);
 		panelAgregarMascota.add(lblImagenDeLa);
 		
-		JButton btnAgregarFoto = new JButton("");
+		btnAgregarFoto = new JButton("");
 		btnAgregarFoto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				JFileChooser elegir = new JFileChooser();
@@ -214,7 +215,7 @@ public class VentanaPrincipal {
 		            }
 		            
 				}
-				
+	           	asignarIDFoto();
 				Sistema.copiarImagen(archivoSeleccionado);
 			}
 			
@@ -278,21 +279,39 @@ public class VentanaPrincipal {
             	chip = textFieldNumChip.getText();
             	lugarVisto = comboBoxCanton.getSelectedItem().toString() + ", " + comboBoxProvincia.getSelectedItem().toString();
             	nota = editorPaneNotas.getText();
-            	foto = "./mascotas/" + String.valueOf(Mascota.getListaDeMascotasSize());
+            	
             	idEncargado = IDUsuarioActivo;
             	fechaSuceso =  spinnerDiaPerdida.getValue().toString() + "/" + comboBoxMesPerdida.getSelectedItem().toString()+"/"+spinnerAnioPerdida.getValue().toString();
             	tipo = (String) comboBoxTipoMascota.getSelectedItem();
-            	raza = (String) comboBoxRazaMascota.getSelectedItem();
             	lugarVisto = (String)comboBoxCanton.getSelectedItem() + ", " + (String)comboBoxProvincia.getSelectedItem();
-        
+            	
+            	verificarRaza();
             	verificarEstado();
             	verificarMoneda();
+            	verificartxtFieldChip();
+            	verificarNombre();
             	
+            	if(chckbxRecompensa.isSelected() &&textFieldMontoRecompensa.getText().isEmpty()){
+            		JOptionPane.showMessageDialog(panelAgregarMascota, "Ingrese un monto de recompensa");
+            		return;
+            	}
             	if(Mascota.verificarChip(chip, estado)){
             	
             		JOptionPane.showMessageDialog(panelAgregarMascota, "Mascota ya ha sido registrada");
-            
-            	}else{
+            		return ;
+            	}
+            	
+            	if(foto == null){
+            		
+            		JOptionPane.showMessageDialog(panelAgregarMascota, "Debe agregar fotografia");
+            		return;
+            	}
+            	if( nombre == null){
+            		JOptionPane.showMessageDialog(panelAgregarMascota, "Ingrese el nombre de la mascota");
+            		return;
+            	}
+            	
+            	else{
             		
             		Mascota NuevaMascota = new Mascota(estado, tipo, raza, nombre, chip, colorDePelo, colorDeOjos, foto, lugarVisto, nota, fechaSuceso, recompensa, idEncargado);
         			
@@ -305,10 +324,22 @@ public class VentanaPrincipal {
         			Mascota.getListaDeMascotas().add(NuevaMascota);
         			
         			NuevaMascota.GuardarMascota(Mascota.getListaDeMascotas());
-        			
+        			textFieldNombreMascota.setText(null);
+        			textFieldNumChip.setText(null);
+        			lblFotoMascota.setIcon(null);
+        			textFieldMontoRecompensa.setText(null);
+        			editorPaneNotas.setText(null);
+        			nombre = null;
+        			chip = null;
+        			recompensa = null;
+        			foto = null;
         			JOptionPane.showMessageDialog(panelAgregarMascota, "Mascota registrada correctamente");	
             	}
             }
+
+			
+
+			
         });
         
         JButton buttonCancelar = new JButton("");
@@ -432,6 +463,7 @@ public class VentanaPrincipal {
         panelAgregarMascota.add(lblsiAplica_1);
         
         final JLabel lblsiAplica = new JLabel("(Si Aplica)");
+        lblsiAplica.setVisible(false);
         lblsiAplica.setBounds(239, 340, 61, 14);
         panelAgregarMascota.add(lblsiAplica);
         
@@ -503,7 +535,7 @@ public class VentanaPrincipal {
             public void actionPerformed(ActionEvent arg0) {
                 if (rdbtnPerdida.isSelected()){
                   
-                	lblsiAplica.setVisible(true);
+                	lblsiAplica.setVisible(false);
                     textFieldNombreMascota.setEnabled(true);
                     lblNombreDeLa.setEnabled(true);
                     textFieldNumChip.setEnabled(true);
@@ -539,8 +571,8 @@ public class VentanaPrincipal {
         rdbtnEncontrada.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 if (rdbtnEncontrada.isSelected()){
-                    
-                	lblsiAplica.setVisible(false);
+                    chckbxRecompensa.setSelected(false);
+                	lblsiAplica.setVisible(true);
                     lblFechaDeHallazgoperdida.setText("Fecha de Hallazgo");
                     lblSitioDeHallazgoperdida.setText("Sitio de Hallazgo");
                     rdbtnDolares.setVisible(false);
@@ -615,6 +647,7 @@ public class VentanaPrincipal {
                 if (comboBoxTipoMascota.getSelectedIndex() == 4){
                     
                     comboBoxRazaMascota.setEnabled(false);
+                    raza= "Otro";
                     
                 }
 
@@ -648,13 +681,13 @@ public class VentanaPrincipal {
         
         
         JComboBox comboBoxColorPelaje = new JComboBox();
-        comboBoxColorPelaje.setModel(new DefaultComboBoxModel(new String[] {"Negro", "Manchado", "Dos Tonalidades", "Amarillo", "Cafe", "Blanco", "Gris"}));
+        comboBoxColorPelaje.setModel(new DefaultComboBoxModel(new String[] {"Negro", "Manchado", "Dos Tonalidades", "Amarillo", "Cafe", "Blanco", "Gris", "Otro"}));
         comboBoxColorPelaje.setBounds(320, 465, 233, 20);
         panelAgregarMascota.add(comboBoxColorPelaje);
         colorDePelo = (comboBoxColorPelaje.getSelectedItem()).toString();
         
         final JComboBox comboBoxColorOjos = new JComboBox();
-        comboBoxColorOjos.setModel(new DefaultComboBoxModel(new String[] {"Cafes", "Azules", "Negros", "Grises", "Amarillos", "Verdes", "Celestes", "Dos Tonos "}));
+        comboBoxColorOjos.setModel(new DefaultComboBoxModel(new String[] {"Cafes", "Azules", "Negros", "Grises", "Amarillos", "Verdes", "Celestes", "Dos Tonos ", "Otro"}));
         comboBoxColorOjos.setBounds(320, 528, 233, 20);
         panelAgregarMascota.add(comboBoxColorOjos);
         colorDeOjos = (comboBoxColorOjos.getSelectedItem()).toString();
@@ -887,6 +920,10 @@ public class VentanaPrincipal {
 		panelAgregarCasaCuna.setVisible(false);
 	}
 	
+	private void asignarIDFoto() {
+		foto = "./mascotas/" + String.valueOf(Mascota.getListaDeMascotasSize());
+	}
+	
 	public void verificarEstado(){
 		
 		if(estadoMascota.isSelected( rdbtnEncontrada.getModel())){
@@ -927,6 +964,18 @@ public class VentanaPrincipal {
 	
 	}
 	
+	public void verificartxtFieldChip(){
+		String chip =textFieldNumChip.getText();
+		if (chip.isEmpty()){
+			this.chip = null;
+		}
+	}
+	public void verificarRaza(){
+		if (comboBoxTipoMascota.getSelectedIndex() == 4){
+            raza= "Otro";
+		}
+	}
+	
 	
 	public String getEstado() {
 	
@@ -947,6 +996,14 @@ public class VentanaPrincipal {
 	public static int getIDUsuarioActivo(){
 		
 		return IDUsuarioActivo;
+	}
+	
+	private void verificarNombre() {
+		String nombreMascota = textFieldNombreMascota.getText();
+		if(estado == "PERDIDA" &&nombreMascota.isEmpty()){
+			 nombre=null;
+		}
+		
 	}
 
 };;

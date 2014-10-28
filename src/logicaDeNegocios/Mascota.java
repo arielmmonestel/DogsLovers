@@ -21,7 +21,7 @@ public class Mascota {
 	private String tipo;
 	private String raza;
 	private String nombre = null;
-	private String chip = "-1";
+	private String chip =null;
 	private String colorDePelo;
 	private String colorDeOjos;
 	private String foto = null;
@@ -345,15 +345,24 @@ public class Mascota {
     }
 	
 	public static boolean verificarChip(String numeroDeChip, String estado){
+		try {
+			leerMascota();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		for(Mascota obj : listaDeMascotas){
 			if(obj.getEstado().equals(estado)){
-				if(obj.getChip() != "" && obj.getChip().equals(numeroDeChip)){
-					return true;
+				if(obj.getChip().equals(numeroDeChip)&&obj.getChip() != null){
+										
+						return true;					
 				}
 				
 			}
 		}
+		
 		return false;
+
 	}
   
 	
