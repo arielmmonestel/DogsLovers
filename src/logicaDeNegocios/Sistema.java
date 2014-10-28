@@ -6,6 +6,15 @@ import java.io.IOException;
 import java.util.*;
 
 import javax.swing.JOptionPane;
+import java.util.Properties;
+
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
+
 
 
 public class Sistema {
@@ -130,5 +139,46 @@ public class Sistema {
 			JOptionPane.showMessageDialog(null, "No se pudo copiar la imagen seleccionada.\n" + noHayArchivo.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
 		}
 	}
+	
+	
+	public static void enviarMail(String correoDestinatario, String mensaje, String subject,String CorreoRemitente,String passwordRemitente){
+	        try
+	       { 
+	            // Propiedades de la conexión
+	            Properties props = new Properties();
+	            props.setProperty("mail.smtp.host", "smtp.gmail.com");
+	            props.setProperty("mail.smtp.starttls.enable", "true");
+	            props.setProperty("mail.smtp.port", "587");
+	            props.setProperty("mail.smtp.user", "alejandrinabiblioteca172@gmail.com");
+	            props.setProperty("mail.smtp.auth", "true");
+
+	            // Preparamos la sesion
+	            Session session = Session.getDefaultInstance(props);
+
+	            // Construimos el mensaje
+	            MimeMessage message = new MimeMessage(session);
+	            message.setFrom(new InternetAddress("alejandrinabiblioteca172@gmail.com"));
+	            message.addRecipient(
+	                Message.RecipientType.TO,
+	                new InternetAddress(correoDestinatario)); //Sitio de destino del msj
+	            
+	            message.setSubject(subject); //"Subject o motivo del correo"
+	            message.setText(mensaje); //Correo
+
+	            // Lo enviamos.
+	            Transport t = session.getTransport("smtp");
+	            t.connect(CorreoRemitente, passwordRemitente); //Aqui va el correo de donde se va a enviar y la contrasena
+	            t.sendMessage(message, message.getAllRecipients());
+
+	            // Cierre.
+	            t.close();
+	        }
+	        catch (Exception e)
+	        {
+	            e.printStackTrace();
+	        }
+	        	
+			
+	
 }
 
