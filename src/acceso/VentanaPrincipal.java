@@ -103,7 +103,7 @@ public class VentanaPrincipal {
 	private static String tipo;
     private static String nombre;
     private static String raza;
-    private static String chip;
+    private static String chip = "-1";
     private static String colorDePelo;
     private static String colorDeOjos;
     private static String foto;
@@ -266,7 +266,7 @@ public class VentanaPrincipal {
 							JOptionPane.showMessageDialog(VentanaPrincipal.getContentPane(), ex.getMessage(), "Advertencia", JOptionPane.WARNING_MESSAGE);
 						}
 		            }
-		            foto = "./mascotas/" + String.valueOf(Mascota.getListaDeMascotasSize());
+		            
 				}
 				
 				Sistema.copiarImagen(archivoSeleccionado);
@@ -287,7 +287,7 @@ public class VentanaPrincipal {
 		btnAgregarFoto.setIcon(new ImageIcon("./imgs/addPicture-32.png"));
 		btnAgregarFoto.setBounds(1142, 150, 75, 65);
 		panelAgregarMascota.add(btnAgregarFoto);
-		foto = null;
+		
 		
 		labelDL = new JLabel("");
 		labelDL.setIcon(new ImageIcon("./imgs/Logo.png"));
@@ -325,20 +325,16 @@ public class VentanaPrincipal {
         buttonGuardar.setFocusable(false);
         buttonGuardar.setFocusTraversalKeysEnabled(false);
         buttonGuardar.setFocusPainted(false);
-        
-
-    	
-    	
-    	
-    	
         buttonGuardar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             
             	nombre = textFieldNombreMascota.getText();
+            	
             	chip = textFieldNumChip.getText();
             	
+            	lugarVisto = comboBoxCanton.getSelectedItem().toString() + ", " + comboBoxProvincia.getSelectedItem().toString();
             	nota = editorPaneNotas.getText();
-            	
+            	foto = "./mascotas/" + String.valueOf(Mascota.getListaDeMascotasSize());
             	idEncargado = IDUsuarioActivo;
             	
             	fechaSuceso =  spinnerDiaPerdida.getValue().toString() + "/" + comboBoxMesPerdida.getSelectedItem().toString()+"/"+spinnerAnioPerdida.getValue().toString();
@@ -349,19 +345,21 @@ public class VentanaPrincipal {
             	verificarEstado();
             	verificarMoneda();
             	
-            	
-            	Mascota NuevaMascota = new Mascota(estado, tipo, raza, nombre, chip, colorDePelo, colorDeOjos, foto, lugarVisto, nota, fechaSuceso, recompensa, idEncargado);
-            			try {
-							NuevaMascota.leerMascota();
-						} catch (IOException e1) {
-							
-							e1.printStackTrace();
-						}
-            	Mascota.getListaDeMascotas().add(NuevaMascota);
-            	NuevaMascota.GuardarMascota(Mascota.getListaDeMascotas());
-            	
-            JOptionPane.showMessageDialog(panelAgregarMascota, "Mascota registrada correctamente");
+            	if(Mascota.verificarChip(chip, estado)){
+            		JOptionPane.showMessageDialog(panelAgregarMascota, "Mascota ya ha sido registrada");
             
+            	}else{
+            		Mascota NuevaMascota = new Mascota(estado, tipo, raza, nombre, chip, colorDePelo, colorDeOjos, foto, lugarVisto, nota, fechaSuceso, recompensa, idEncargado);
+        			try {
+						NuevaMascota.leerMascota();
+					} catch (IOException e1) {
+						
+						e1.printStackTrace();
+					}
+        			Mascota.getListaDeMascotas().add(NuevaMascota);
+        			NuevaMascota.GuardarMascota(Mascota.getListaDeMascotas());
+        			JOptionPane.showMessageDialog(panelAgregarMascota, "Mascota registrada correctamente");	
+            	}
             }
         });
         
@@ -442,8 +440,6 @@ public class VentanaPrincipal {
         comboBoxProvincia.setModel(new DefaultComboBoxModel(new String[] {"San Jose", "Alajuela", "Cartago", "Heredia", "Puntarenas", "Limon", "Guanacaste"}));
         comboBoxProvincia.setBounds(995, 294, 168, 19);
         panelAgregarMascota.add(comboBoxProvincia);
-
-        lugarVisto = comboBoxCanton.getSelectedItem().toString() + ", " + comboBoxProvincia.getSelectedItem().toString();
         
         spinnerDiaPerdida = new JSpinner();
         spinnerDiaPerdida.setToolTipText("D\u00EDa");
