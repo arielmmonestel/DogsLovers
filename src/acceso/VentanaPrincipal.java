@@ -269,7 +269,9 @@ public class VentanaPrincipal {
 		            foto = pathArchivo;
 				}
 				
+				Sistema.copiarImagen(archivoSeleccionado);
 			}
+			
 		});
 		btnAgregarFoto.setToolTipText("Agregar imagen de la mascota");
 		btnAgregarFoto.setPressedIcon(new ImageIcon("./imgs/addPicture-24.png"));
