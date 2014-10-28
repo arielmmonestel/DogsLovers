@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.*;
 
 import javax.swing.JOptionPane;
+
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -13,6 +14,10 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+
+import javax.activation.DataHandler;
+import javax.activation.FileDataSource;
+
 
 
 
@@ -23,6 +28,9 @@ public class Sistema {
 	private static int anio = fecha.get(Calendar.YEAR);
 	private static int mes = fecha.get(Calendar.MONTH)+1; 
 	private static int dia = fecha.get(Calendar.DATE);
+	private static String correoDestinatario;
+	private static String mensaje;
+	private static String asunto;
 	
 	public static void main(String[] args){
 		System.out.println("Dia: "  +dia+"\n"+ "Mes: "+mes+"\n"+"Anio: "+anio);
@@ -30,6 +38,22 @@ public class Sistema {
 	
 
 	public Sistema() {
+	}
+	
+	public void setMensaje(String pMensaje){
+		mensaje = pMensaje;
+	}
+	
+	public String getMensaje(){
+		return mensaje;
+	}
+	
+	public void setAsunto(String pAsunto){
+		asunto = pAsunto;
+	}
+	
+	public String getAsunto(){
+		return asunto;
 	}
 	
 	public static String[][] tomarDatosDeBusqueda(ArrayList<Integer> indicesDeResultados){
@@ -141,7 +165,7 @@ public class Sistema {
 	}
 	
 	
-	public static void enviarMail(String correoDestinatario, String mensaje, String subject,String CorreoRemitente,String passwordRemitente){
+	public static void enviarMail(String pCorreoDestinatario, String direccionImagen){
 	        try
 	       { 
 	            // Propiedades de la conexión
@@ -154,20 +178,23 @@ public class Sistema {
 
 	            // Preparamos la sesion
 	            Session session = Session.getDefaultInstance(props);
+	            BodyPart adjunto = new MimeBodyPart();
+	            adjunto.setDataHandler(new DataHandler(new FileDataSource(direccionImagen)));
+	            adjunto.setFileName("imagenMascota.png");
 
 	            // Construimos el mensaje
 	            MimeMessage message = new MimeMessage(session);
-	            message.setFrom(new InternetAddress("alejandrinabiblioteca172@gmail.com"));
+	            message.setFrom(new InternetAddress("dogsloverspoo@gmail.com"));
 	            message.addRecipient(
 	                Message.RecipientType.TO,
-	                new InternetAddress(correoDestinatario)); //Sitio de destino del msj
+	                new InternetAddres(pCorreoDestinatario)); //Destino del mensaje
 	            
-	            message.setSubject(subject); //"Subject o motivo del correo"
-	            message.setText(mensaje); //Correo
+	            message.setSubject(asunto); //Asunto del correo
+	            message.setText(mensaje); //Cuerpo del mensaje
 
 	            // Lo enviamos.
 	            Transport t = session.getTransport("smtp");
-	            t.connect(CorreoRemitente, passwordRemitente); //Aqui va el correo de donde se va a enviar y la contrasena
+	            t.connect("dogsloverspoo@gmail.com", "dogslovers1234"); //Aqui va el correo de donde se va a enviar y la contrasena
 	            t.sendMessage(message, message.getAllRecipients());
 
 	            // Cierre.
@@ -177,8 +204,12 @@ public class Sistema {
 	        {
 	            e.printStackTrace();
 	        }
-	        	
-			
+	}
+	
 	
 }
+
+	
+
+	
 
