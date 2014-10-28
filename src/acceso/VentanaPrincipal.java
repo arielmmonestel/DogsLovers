@@ -123,6 +123,7 @@ public class VentanaPrincipal {
 	private JComboBox comboBoxMesPerdida;
 	private JSpinner spinnerAnioPerdida;
 	private JButton btnAgregarFoto;
+	private String rutaImagenesMascotas = "./mascotas";
 	
 	
 	
@@ -218,6 +219,7 @@ public class VentanaPrincipal {
 		            }
 		            
 				}
+				crearCarpetaImagenesMascotas();
 	           	asignarIDFoto();
 				Sistema.copiarImagen(archivoSeleccionado);
 			}
@@ -922,6 +924,16 @@ public class VentanaPrincipal {
 		mnRegistro.add(mntmCasaCuna);
 		panelAgregarCasaCuna.setVisible(false);
 	}
+	
+    private void crearCarpetaImagenesMascotas()
+    {
+		File archivo = new File (rutaImagenesMascotas);
+
+    	if(!archivo.exists())
+    	{
+    		archivo.mkdir();
+    	}
+    }
 	
 	private void asignarIDFoto() {
 		foto = "./mascotas/" + String.valueOf(Mascota.getListaDeMascotasSize());
