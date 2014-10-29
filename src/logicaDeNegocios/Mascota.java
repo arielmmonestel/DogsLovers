@@ -41,7 +41,8 @@ public class Mascota {
 	
 	public Mascota(String pEstado, String pTipo, String pRaza, String pNombre, String pChip, String pColorDePelo, String pColorDeOjos,
 				   String pFoto, String pLugarVisto, String pNota, String pDia, String pRecompensa, int pIdEncargado) {
-		setID(IDMascotas++);
+		setID(IDMascotas);
+		IDMascotas ++;
 		setEstado(pEstado);
 		setTipo(pTipo);
 		setRaza(pRaza);
@@ -260,7 +261,6 @@ public class Mascota {
 	    		{ 
 	    			Mascota obj = new Mascota();   
 	    			obj.setEstado(bufferLectura.readLine());
-	    			IDMascotas ++;
 	    			obj.setID(Integer.parseInt(bufferLectura.readLine()));
 	    			obj.setTipo(bufferLectura.readLine());
 	    			obj.setRaza(bufferLectura.readLine());

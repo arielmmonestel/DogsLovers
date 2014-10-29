@@ -1,0 +1,112 @@
+===>nuevo Mascota<===
+ENCONTRADA
+6
+Canino
+null
+Zoe
+555-666-854
+Blanco
+Cafes
+./mascotas/0
+TibÃ¡s, San Jose
+La encontrÃ© buscando alimento en la entrada de mi casa. Es una cachorra, presenta desnutriciÃ³n pero se esta recuperando.
+20/Setiembre/2014.0
+null
+0
+false
+===>nuevo Mascota<===
+PERDIDA
+6
+Felino
+null
+Filiberto
+null
+Blanco
+Cafes
+./mascotas/1
+San Rafael, Heredia
+Es un gatito angora de ojos verde y azul, presenta un problema en los riÃ±ones y le cuesta digerir alimentos
+12/Octubre/2014.0
+? 50 000
+1
+false
+===>nuevo Mascota<===
+PERDIDA
+6
+Canino
+null
+Lucy
+null
+Amarillo
+Cafes
+./mascotas/2
+Desamparados, San Jose
+Es una perrita labrador, se desapareciÃ³ al perseguir un gato en la calle, por las cercanias de la iglesia de Desamparados.
+7/Julio/2014.0
+$  250
+2
+false
+===>nuevo Mascota<===
+PERDIDA
+6
+Canino
+null
+Moza Sofia
+566-998-885
+Blanco
+Amarillos
+./mascotas/3
+Central, Puntarenas
+Una perrita muy inquieta que se desapareciÃ³ cuando fuimos a visitar todos a mi  familia en Puntarenas. Tiene los ojos amarillos y las ppatas alargadas. Es muy vulnerable y delicada
+29/Agosto/2014.0
+? 1 000 000
+2
+false
+===>nuevo Mascota<===
+ENCONTRADA
+6
+Ave
+null
+
+null
+Otro
+Negros
+./mascotas/4
+San Isidro, Heredia
+Me lo encontré caminando hacia casa con una ala lastimada. Lo hé curado pero no he dado con su dueño.
+13/Abril/2014.0
+null
+-1
+false
+===>nuevo Mascota<===
+PERDIDA
+5
+Canino
+null
+Marley
+888-999-7897
+Amarillo
+Cafes
+./mascotas/5
+Aserrí, San Jose
+Hay recompensa de 80 000 por la mascota
+1/Mayo/2014.0
+? 80 000
+-1
+false
+===>nuevo Mascota<===
+PERDIDA
+0
+Canino
+null
+Marley
+888-889-98
+Amarillo
+Cafes
+./mascotas/6
+Central, San Jose
+Se da una recomenpensa de 80 000
+1/Enero/2014.0
+? 80 000
+-1
+false
