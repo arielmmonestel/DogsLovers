@@ -15,7 +15,7 @@ public class Usuario extends Persona{
 	private int id;
 	private String nombreUsuario;
 	private String contrasenia;
-	private CasaCuna casaCuna= null;
+	private boolean esCasaCuna= false;
 	private boolean esAdministrador = false;
 	private boolean estaEnListaNegra=false;
 	private ArrayList<Usuario> personasCalificables;
@@ -76,12 +76,12 @@ public class Usuario extends Persona{
 		contrasenia = pContrasenia;
 	}
 
-	public CasaCuna getCasaCuna() {
-		return casaCuna;
+	public boolean esCasaCuna() {
+		return esCasaCuna;
 	}
 
-	public void setEsCasaCuna(CasaCuna pCasaCuna) {
-		casaCuna = pCasaCuna;
+	public void setEsCasaCuna(boolean pCasaCuna) {
+		esCasaCuna = pCasaCuna;
 	}
 	
 	public boolean esAdministrador() {
@@ -211,6 +211,10 @@ public class Usuario extends Persona{
 	    			obj.setAnioNacimiento(Integer.parseInt(bufferLectura.readLine()));
 	    			obj.setNombreUsuario(bufferLectura.readLine());
 	    			obj.setContrasenia(bufferLectura.readLine());
+	    			obj.setEsCasaCuna(Boolean.getBoolean(bufferLectura.readLine()));
+	    			obj.setEsAdministrador(Boolean.getBoolean(bufferLectura.readLine()));
+	    			obj.setEstaEnListaNegra(Boolean.getBoolean(bufferLectura.readLine()));
+					obj.setCalificacion(Integer.parseInt(bufferLectura.readLine()));
 	    			listaDeUsuarios.add(obj);				
 	    		}
 
@@ -258,6 +262,11 @@ public class Usuario extends Persona{
 				pw.println(obj.getAnioNacimiento());
 				pw.println(obj.getNombreUsuario());
 				pw.println(obj.getContrasenia());
+				pw.println(obj.esCasaCuna());
+				pw.println(obj.esAdministrador());
+				pw.println(obj.estaEnListaNegra());
+				pw.println(obj.getCalificacion());
+				
 			}
     	} catch (Exception e) {
     		e.printStackTrace();

@@ -107,7 +107,7 @@ public class Loggin extends JFrame {
 					
 				}
 				else{
-					JOptionPane.showMessageDialog(null, "Usuario y contraseña inválidos");
+					JOptionPane.showMessageDialog(null, "Usuario y/o contraseña inválidos");
 				}
 			}
 		});

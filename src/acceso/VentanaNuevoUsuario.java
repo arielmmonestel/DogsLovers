@@ -269,7 +269,6 @@ public class VentanaNuevoUsuario extends JFrame {
 									EnviarMail.mensaje = mensaje;
 									
 									JOptionPane.showMessageDialog(contentPane, "Usuario registrado correctamente");
-									JOptionPane.showMessageDialog(contentPane, "Se enviará un correo electrónico con su usuario y contraseña");
 									EnviarMail.enviarMail();
 									dispose();
 									loguearse= new Loggin();
