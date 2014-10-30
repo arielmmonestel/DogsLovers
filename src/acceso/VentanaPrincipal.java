@@ -83,6 +83,7 @@ import javax.swing.JToolBar;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
+import java.awt.event.MouseMotionAdapter;
 
 public class VentanaPrincipal {
 
@@ -191,6 +192,38 @@ public class VentanaPrincipal {
 		JPanel panelPrincipal = new JPanel();
 		VentanaPrincipal.getContentPane().add(panelPrincipal, "name_154826621946393");
 		panelPrincipal.setLayout(null);
+		
+		JButton btnCerrarSesion = new JButton("Cerrar Sesi\u00F3n");
+		btnCerrarSesion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println(IDUsuarioActivo);
+				IDUsuarioActivo = -1;
+				VentanaPrincipal.dispose();
+				Loggin log  = new Loggin();
+				log.setVisible(true);
+				System.out.println(IDUsuarioActivo);
+				
+			}
+		});
+		btnCerrarSesion.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnCerrarSesion.setForeground(Color.WHITE);
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnCerrarSesion.setForeground(Color.BLUE);
+			}
+		});
+		btnCerrarSesion.setRolloverIcon(null);
+		btnCerrarSesion.setFocusable(false);
+		btnCerrarSesion.setFocusTraversalKeysEnabled(false);
+		btnCerrarSesion.setFocusPainted(false);
+		btnCerrarSesion.setForeground(Color.WHITE);
+		btnCerrarSesion.setContentAreaFilled(false);
+		btnCerrarSesion.setBorderPainted(false);
+		btnCerrarSesion.setBounds(1238, 0, 124, 23);
+		panelPrincipal.add(btnCerrarSesion);
 		
 		JLabel lblNewLabelFondo = new JLabel("");
 		lblNewLabelFondo.setBounds(449, 0, 540, 110);
@@ -1111,7 +1144,7 @@ public class VentanaPrincipal {
 						
 						mntmCasaCuna.setVisible(false);
 						mntmCasaCuna.setEnabled(false);
-					System.out.println(IDUsuarioActivo);
+					
 					}
 					
 					else{
