@@ -102,6 +102,7 @@ public class VentanaPrincipal {
     private JRadioButton rdbtnPerdida;
     private JComboBox comboBoxCanton;
     private JButton buttonGuardar;
+    private JButton buttonGuardarCC;
     private JComboBox comboBoxTipoMascota;
     private JEditorPane editorPaneNotas;
     private  String estado;
@@ -152,6 +153,12 @@ public class VentanaPrincipal {
 	private JLabel lblFondoPanelPrincipal;
 	private JComboBox comboBoxColorPelaje;
 	private JComboBox comboBoxColorOjos;
+	private JComboBox comboBoxTamanoMascotaCC;
+	private JComboBox comboBoxTipoMascotaCC;
+	private JCheckBox chckbxNoMedicamentosCC;
+	private JSpinner spinnerCantidadDeMascotaCC;
+	private JCheckBox chckbxNoAlimentosCC;
+	private JTextArea textAreaDireccionCC;
 	
 	
 	public static void main(String[] args) {
@@ -858,12 +865,45 @@ public class VentanaPrincipal {
 ///////////////////////Inicio codigo casa Cuna//////////////////////////////////////////////
 		
 		
-		buttonGuardar = new JButton("");
-		buttonGuardar.setToolTipText("Guardar en el Registro del Mascota");
-		buttonGuardar.setBorder(null);
-		buttonGuardar.setFocusable(false);
-		buttonGuardar.setFocusTraversalKeysEnabled(false);
-		buttonGuardar.setFocusPainted(false);
+		buttonGuardarCC = new JButton("");
+		buttonGuardarCC.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String tamanoMascota = (String) comboBoxTamanoMascotaCC.getSelectedItem();
+				String tipoMascota =(String) comboBoxTipoMascotaCC.getSelectedItem();
+				Boolean necesitaDonacion = verificarNecesitaDonacion();
+				Boolean necesitaMedicamentos = verificarNecesitaMedicamentos();
+				int cantMascotas =(int) spinnerCantidadDeMascotaCC.getValue();
+				int camposDisponibles =(int) spinnerCantidadDeMascotaCC.getValue();
+				String direccionCC = textAreaDireccionCC.getText();
+				int idUsuarioCasaCuna = IDUsuarioActivo;
+				
+				CasaCuna nuevaCasaCuna = new CasaCuna(tamanoMascota, tipoMascota,necesitaDonacion, necesitaMedicamentos, cantMascotas, camposDisponibles, direccionCC, idUsuarioCasaCuna);
+				
+			
+				try {
+					nuevaCasaCuna.leerCasaCuna();
+				} catch (IOException e1) {
+					
+					e1.printStackTrace();
+				}
+    			CasaCuna.getListaCasasCuna().add(nuevaCasaCuna);
+    			
+    			nuevaCasaCuna.GuardarCasaCuna(CasaCuna.getListaCasasCuna());
+    			
+    			JOptionPane.showMessageDialog(null, "Casa Cuna Registrada Correctamente");
+    			chckbxNoAlimentosCC.setSelected(false);
+    			chckbxNoMedicamentosCC.setSelected(false);
+    			spinnerCantidadDeMascotaCC.setValue(1);
+    			textAreaDireccionCC.setText(null);
+    			
+			
+			}
+		});
+		buttonGuardarCC.setToolTipText("Guardar en el Registro del Mascota");
+		buttonGuardarCC.setBorder(null);
+		buttonGuardarCC.setFocusable(false);
+		buttonGuardarCC.setFocusTraversalKeysEnabled(false);
+		buttonGuardarCC.setFocusPainted(false);
 				
 		JButton CancelarOperacion = new JButton("");
 		CancelarOperacion.addActionListener(new ActionListener() {
@@ -874,7 +914,7 @@ public class VentanaPrincipal {
 			}
 		});
 		
-		JComboBox comboBoxTipoMascotaCC = new JComboBox();
+		comboBoxTipoMascotaCC = new JComboBox();
 		comboBoxTipoMascotaCC.setModel(new DefaultComboBoxModel(new String[] {"Canino", "Felino", "Ave", "Roedor", "Otro"}));
 		comboBoxTipoMascotaCC.setBounds(404, 280, 203, 19);
 		panelAgregarCasaCuna.add(comboBoxTipoMascotaCC);
@@ -900,38 +940,38 @@ public class VentanaPrincipal {
 		CancelarOperacion.setBounds(1155, 558, 109, 78);
 		panelAgregarCasaCuna.add(CancelarOperacion);
 		
-		buttonGuardar.setDefaultCapable(false);
-		buttonGuardar.setContentAreaFilled(false);
-		buttonGuardar.setBorderPainted(false);
-		buttonGuardar.setIconTextGap(-3);
-		buttonGuardar.setHorizontalTextPosition(SwingConstants.CENTER);
-		buttonGuardar.setPressedIcon(new ImageIcon("./imgs/save-32.png"));
-		buttonGuardar.setRolloverIcon(new ImageIcon("./imgs/save-64.png"));
-		buttonGuardar.setIcon(new ImageIcon("./imgs/save-48.png"));
-		buttonGuardar.setBounds(1036, 558, 109, 78);
-		panelAgregarCasaCuna.add(buttonGuardar);
+		buttonGuardarCC.setDefaultCapable(false);
+		buttonGuardarCC.setContentAreaFilled(false);
+		buttonGuardarCC.setBorderPainted(false);
+		buttonGuardarCC.setIconTextGap(-3);
+		buttonGuardarCC.setHorizontalTextPosition(SwingConstants.CENTER);
+		buttonGuardarCC.setPressedIcon(new ImageIcon("./imgs/save-32.png"));
+		buttonGuardarCC.setRolloverIcon(new ImageIcon("./imgs/save-64.png"));
+		buttonGuardarCC.setIcon(new ImageIcon("./imgs/save-48.png"));
+		buttonGuardarCC.setBounds(1036, 558, 109, 78);
+		panelAgregarCasaCuna.add(buttonGuardarCC);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(749, 340, 399, 130);
 		panelAgregarCasaCuna.add(scrollPane_1);
 		
-		JTextArea textArea = new JTextArea();
-		scrollPane_1.setViewportView(textArea);
+		textAreaDireccionCC = new JTextArea();
+		scrollPane_1.setViewportView(textAreaDireccionCC);
 		
-		final JCheckBox chckbxNoAlimentos = new JCheckBox("No");
-		chckbxNoAlimentos.setForeground(Color.WHITE);
-		chckbxNoAlimentos.setContentAreaFilled(false);
-		chckbxNoAlimentos.setFont(new Font("Batang", Font.BOLD, 11));
-		chckbxNoAlimentos.setBounds(1128, 242, 97, 23);
-		panelAgregarCasaCuna.add(chckbxNoAlimentos);
-	    chckbxNoAlimentos.addActionListener(new ActionListener() {
+		chckbxNoAlimentosCC = new JCheckBox("No");
+		chckbxNoAlimentosCC.setForeground(Color.WHITE);
+		chckbxNoAlimentosCC.setContentAreaFilled(false);
+		chckbxNoAlimentosCC.setFont(new Font("Batang", Font.BOLD, 11));
+		chckbxNoAlimentosCC.setBounds(1128, 242, 97, 23);
+		panelAgregarCasaCuna.add(chckbxNoAlimentosCC);
+	    chckbxNoAlimentosCC.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             
-            	if(chckbxNoAlimentos.isSelected()){
-                    chckbxNoAlimentos.setText("Sí");
+            	if(chckbxNoAlimentosCC.isSelected()){
+                    chckbxNoAlimentosCC.setText("Sí");
                 }
                 else{
-                    chckbxNoAlimentos.setText("No");
+                    chckbxNoAlimentosCC.setText("No");
                 }
             }
 	    });
@@ -942,25 +982,25 @@ public class VentanaPrincipal {
 		lblnecesitarDonacionesDe_1.setBounds(749, 235, 373, 30);
 		panelAgregarCasaCuna.add(lblnecesitarDonacionesDe_1);
 		
-		final JCheckBox chckbxNoMedicamentos = new JCheckBox("No");
-		chckbxNoMedicamentos.addActionListener(new ActionListener() {
+		chckbxNoMedicamentosCC = new JCheckBox("No");
+		chckbxNoMedicamentosCC.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(chckbxNoMedicamentos.isSelected()){
+				if(chckbxNoMedicamentosCC.isSelected()){
 				
-					chckbxNoMedicamentos.setText("Sí");
+					chckbxNoMedicamentosCC.setText("Sí");
 				
 				}
 				else{
 				
-					chckbxNoMedicamentos.setText("No");
+					chckbxNoMedicamentosCC.setText("No");
 				}
 			}
 		});
-		chckbxNoMedicamentos.setFont(new Font("Batang", Font.BOLD, 11));
-		chckbxNoMedicamentos.setForeground(Color.WHITE);
-		chckbxNoMedicamentos.setContentAreaFilled(false);
-		chckbxNoMedicamentos.setBounds(1128, 182, 97, 23);
-		panelAgregarCasaCuna.add(chckbxNoMedicamentos);
+		chckbxNoMedicamentosCC.setFont(new Font("Batang", Font.BOLD, 11));
+		chckbxNoMedicamentosCC.setForeground(Color.WHITE);
+		chckbxNoMedicamentosCC.setContentAreaFilled(false);
+		chckbxNoMedicamentosCC.setBounds(1128, 182, 97, 23);
+		panelAgregarCasaCuna.add(chckbxNoMedicamentosCC);
 		
 		JLabel lblnecesitarDonacionesDe = new JLabel("\u00BFNecesitar\u00E9 Donaciones de Medicamentos?");
 		lblnecesitarDonacionesDe.setForeground(Color.WHITE);
@@ -992,15 +1032,15 @@ public class VentanaPrincipal {
 		lblCantidadDeMascotas.setBounds(69, 372, 319, 23);
 		panelAgregarCasaCuna.add(lblCantidadDeMascotas);
 		
-		JComboBox comboBoxTamanoMascota = new JComboBox();
-		comboBoxTamanoMascota.setModel(new DefaultComboBoxModel(new String[] {"Peque\u00F1a(s)", "Mediana(s)", "Grande(s)"}));
-		comboBoxTamanoMascota.setBounds(404, 182, 203, 22);
-		panelAgregarCasaCuna.add(comboBoxTamanoMascota);
+		comboBoxTamanoMascotaCC = new JComboBox();
+		comboBoxTamanoMascotaCC.setModel(new DefaultComboBoxModel(new String[] {"Peque\u00F1a(s)", "Mediana(s)", "Grande(s)"}));
+		comboBoxTamanoMascotaCC.setBounds(404, 182, 203, 22);
+		panelAgregarCasaCuna.add(comboBoxTamanoMascotaCC);
 		
-		JSpinner spinnerCantidadDeMascota = new JSpinner();
-		spinnerCantidadDeMascota.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
-		spinnerCantidadDeMascota.setBounds(404, 372, 54, 20);
-		panelAgregarCasaCuna.add(spinnerCantidadDeMascota);
+		spinnerCantidadDeMascotaCC = new JSpinner();
+		spinnerCantidadDeMascotaCC.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
+		spinnerCantidadDeMascotaCC.setBounds(404, 372, 54, 20);
+		panelAgregarCasaCuna.add(spinnerCantidadDeMascotaCC);
 		
 		JLabel label = new JLabel("");
 		label.setIcon(new ImageIcon("./imgs/fondoRegistro.png"));
@@ -1147,4 +1187,24 @@ public class VentanaPrincipal {
 		}
 		
 	}
+	
+	public boolean verificarNecesitaDonacion(){
+		if (chckbxNoAlimentosCC.getText().equals("No")){
+			return false;
+		}else{
+			return true;
+		}
+		
+	}
+	
+	public boolean verificarNecesitaMedicamentos(){
+		if (chckbxNoMedicamentosCC.getText().equals("No")){
+			return false;
+		}else{
+			return true;
+		}
+		
+	}
+	
+	
 };;
