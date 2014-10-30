@@ -193,6 +193,21 @@ public class CasaCuna {
     	}
     }
 	
+	public static boolean esCasacuna(int idUsuario){
+		try {
+			CasaCuna.leerCasaCuna();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		for(CasaCuna obj: listaCasasCuna){
+			if(obj.getIdUsuarioCasaCuna() == idUsuario){
+				return true;
+			}
+			
+		}
+		return false;
+	}
 
 	
   

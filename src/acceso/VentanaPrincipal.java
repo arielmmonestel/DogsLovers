@@ -160,6 +160,8 @@ public class VentanaPrincipal {
 	private JCheckBox chckbxNoAlimentosCC;
 	private JComboBox comboBoxProvinciaCasaCuna;
 	private JComboBox comboBoxCantonCasaCuna;
+	private JMenuItem mntmCasaCuna;
+	private JMenu mnRegistro;
 	
 	
 	public static void main(String[] args) {
@@ -1100,8 +1102,28 @@ public class VentanaPrincipal {
 		JMenuBar menuBar = new JMenuBar();
 		VentanaPrincipal.setJMenuBar(menuBar);
 		
-		JMenu mnRegistro = new JMenu("Registro");
-        mnRegistro.setIcon(new ImageIcon("./imgs/Registro-40.png"));
+		mnRegistro = new JMenu("Registro");
+		mnRegistro.addMouseListener(new MouseAdapter() {
+			
+			public void mouseClicked(MouseEvent arg0) {
+				
+					if(CasaCuna.esCasacuna(IDUsuarioActivo)){
+						
+						mntmCasaCuna.setVisible(false);
+						mntmCasaCuna.setEnabled(false);
+					System.out.println(IDUsuarioActivo);
+					}
+					
+					else{
+					
+						mntmCasaCuna.setVisible(true);
+						mntmCasaCuna.setEnabled(true);
+						
+					}
+				}
+			
+		});
+		mnRegistro.setIcon(new ImageIcon("./imgs/Registro-40.png"));
         mnRegistro.setToolTipText("Registro");
         menuBar.add(mnRegistro);
 		
@@ -1118,7 +1140,7 @@ public class VentanaPrincipal {
 		});
 		mnRegistro.add(mntmMascota);
 		
-		JMenuItem mntmCasaCuna = new JMenuItem("Casa Cuna");
+		mntmCasaCuna = new JMenuItem("Casa Cuna");
 		mntmCasaCuna.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				panelPrincipal.setVisible(false);
