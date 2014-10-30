@@ -158,7 +158,8 @@ public class VentanaPrincipal {
 	private JCheckBox chckbxNoMedicamentosCC;
 	private JSpinner spinnerCantidadDeMascotaCC;
 	private JCheckBox chckbxNoAlimentosCC;
-	private JTextArea textAreaDireccionCC;
+	private JComboBox comboBoxProvinciaCasaCuna;
+	private JComboBox comboBoxCantonCasaCuna;
 	
 	
 	public static void main(String[] args) {
@@ -874,7 +875,7 @@ public class VentanaPrincipal {
 				Boolean necesitaMedicamentos = verificarNecesitaMedicamentos();
 				int cantMascotas =(int) spinnerCantidadDeMascotaCC.getValue();
 				int camposDisponibles =(int) spinnerCantidadDeMascotaCC.getValue();
-				String direccionCC = textAreaDireccionCC.getText();
+				String direccionCC = comboBoxCantonCasaCuna.getSelectedItem().toString() + ", " + comboBoxProvinciaCasaCuna.getSelectedItem().toString();
 				int idUsuarioCasaCuna = IDUsuarioActivo;
 				
 				CasaCuna nuevaCasaCuna = new CasaCuna(tamanoMascota, tipoMascota,necesitaDonacion, necesitaMedicamentos, cantMascotas, camposDisponibles, direccionCC, idUsuarioCasaCuna);
@@ -894,7 +895,6 @@ public class VentanaPrincipal {
     			chckbxNoAlimentosCC.setSelected(false);
     			chckbxNoMedicamentosCC.setSelected(false);
     			spinnerCantidadDeMascotaCC.setValue(1);
-    			textAreaDireccionCC.setText(null);
     			
 			
 			}
@@ -950,13 +950,6 @@ public class VentanaPrincipal {
 		buttonGuardarCC.setIcon(new ImageIcon("./imgs/save-48.png"));
 		buttonGuardarCC.setBounds(1036, 558, 109, 78);
 		panelAgregarCasaCuna.add(buttonGuardarCC);
-		
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(749, 340, 399, 130);
-		panelAgregarCasaCuna.add(scrollPane_1);
-		
-		textAreaDireccionCC = new JTextArea();
-		scrollPane_1.setViewportView(textAreaDireccionCC);
 		
 		chckbxNoAlimentosCC = new JCheckBox("No");
 		chckbxNoAlimentosCC.setForeground(Color.WHITE);
@@ -1042,9 +1035,61 @@ public class VentanaPrincipal {
 		spinnerCantidadDeMascotaCC.setBounds(404, 372, 54, 20);
 		panelAgregarCasaCuna.add(spinnerCantidadDeMascotaCC);
 		
+		comboBoxProvinciaCasaCuna = new JComboBox();
+		comboBoxProvinciaCasaCuna.setModel(new DefaultComboBoxModel(new String[] {"San Jose", "Alajuela", "Cartago", "Heredia", "Puntarenas", "Limon", "Guanacaste"}));
+		comboBoxProvinciaCasaCuna.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(comboBoxProvinciaCasaCuna.getSelectedIndex() == 0){
+					comboBoxProvinciaCasaCuna.setModel(new DefaultComboBoxModel(new String[]{"Central","Escazú","Desamparados","Puriscal","Tarrazú","Aserrí","Mora","Goicoechea","Santa Ana","Alajuelita",
+                            "Coronado","Acosta","Tibás","Moravia","Montes de Oca","Turrubares",
+                            "Dota","Curridabat","Perez Zeledón","León Cortés"}));
+				}
+				if(comboBoxProvinciaCasaCuna.getSelectedIndex() == 1){
+                    comboBoxCantonCasaCuna.setModel(new DefaultComboBoxModel(new String[] {"Central","San Ramón","Grecia","San Mateo","Atenas","Naranjo",
+                    		"Palmares","Poás","Orotina","San Carlos","Alfaro Ruíz","Valverde Vega", "Upala","Los Chiles","Guatuzo"}))   ;
+                }
+                if(comboBoxProvinciaCasaCuna.getSelectedIndex() == 2){
+                    comboBoxCantonCasaCuna.setModel(new DefaultComboBoxModel(new String[] {"Central","Paraiso","La Unión","Jimenez","Turrialba","Alvarado","Oreamuno","El Guarco"}));
+                }
+                if(comboBoxProvinciaCasaCuna.getSelectedIndex() == 3){
+                    comboBoxCantonCasaCuna.setModel(new DefaultComboBoxModel(new String[] {"Central","	Barva","Santo Domingo","Santa Barbara","San Rafael","San Isidro","Belén","Flores","San Pablo","Sarapiqui"}))  ;
+                }
+                if(comboBoxProvinciaCasaCuna.getSelectedIndex() == 4){
+                    comboBoxCantonCasaCuna.setModel(new DefaultComboBoxModel(new String[] {"Central","Esparza","Buenos Aires","Montes de Oro","Osa","Aguirre","Golfito","Coto Brus","Parrita","Corredores","Garabito"}))    ;
+                }
+                if(comboBoxProvinciaCasaCuna.getSelectedIndex() == 5){
+                    comboBoxCantonCasaCuna.setModel(new DefaultComboBoxModel(new String[] {"Central","Pococí","Siquirres","Talamanca","Matina","Guacimo"})) ;
+                }
+                if(comboBoxProvinciaCasaCuna.getSelectedIndex() == 6){
+                    comboBoxCantonCasaCuna.setModel(new DefaultComboBoxModel(new String[] {"Liberia","Nicoya","Santa Cruz","Bagaces","Carrillo","Cañas","Abangares","Tilaran","Nandayure","La Cruz","Hojancha"}))   ;
+                }
+			}
+		});
+		comboBoxProvinciaCasaCuna.setBounds(841, 376, 197, 20);
+		panelAgregarCasaCuna.add(comboBoxProvinciaCasaCuna);
+		
+		comboBoxCantonCasaCuna = new JComboBox();
+		comboBoxCantonCasaCuna.setModel(new DefaultComboBoxModel(new String[]{"Central","Escazú","Desamparados","Puriscal","Tarrazú","Aserrí","Mora","Goicoechea","Santa Ana","Alajuelita",
+                            "Coronado","Acosta","Tibás","Moravia","Montes de Oca","Turrubares",
+                            "Dota","Curridabat","Perez Zeledón","León Cortés"}));
+		comboBoxCantonCasaCuna.setBounds(841, 436, 197, 20);
+		panelAgregarCasaCuna.add(comboBoxCantonCasaCuna);
+		
+		JLabel lblProvincia = new JLabel("Provincia:");
+		lblProvincia.setForeground(Color.WHITE);
+		lblProvincia.setFont(new Font("Khmer UI", Font.BOLD, 13));
+		lblProvincia.setBounds(749, 379, 91, 14);
+		panelAgregarCasaCuna.add(lblProvincia);
+		
+		JLabel lblCantn = new JLabel("Cant\u00F3n:");
+		lblCantn.setForeground(Color.WHITE);
+		lblCantn.setFont(new Font("Khmer UI", Font.BOLD, 13));
+		lblCantn.setBounds(749, 438, 69, 14);
+		panelAgregarCasaCuna.add(lblCantn);
+		
 		JLabel label = new JLabel("");
 		label.setIcon(new ImageIcon("./imgs/fondoRegistro.png"));
-		label.setBounds(0, 0, 2508, 1246);
+		label.setBounds(0, -49, 2508, 1246);
 		panelAgregarCasaCuna.add(label);
 		
 		
@@ -1205,6 +1250,4 @@ public class VentanaPrincipal {
 		}
 		
 	}
-	
-	
 };;
