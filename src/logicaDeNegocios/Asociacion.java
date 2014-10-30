@@ -10,7 +10,8 @@ public class Asociacion {
 	private String telefono;
 	private String numeroDeCuenta;
 	private String paginaWeb;
-	private static ArrayList<ArrayList<Integer>> donaciones = new ArrayList<ArrayList<Integer>>();
+	private static ArrayList<Asociacion> listaDeAsociaciones = new ArrayList<Asociacion>();
+	
 	
 	public Asociacion(int pId,
 					  String pNombre,
@@ -26,22 +27,28 @@ public class Asociacion {
 		setPaginaWeb(pPaginaWeb);
 	}
 	
-	public ArrayList<ArrayList<Integer>> ArrayLisgetListaDeDonaciones(){
-		return donaciones;
+	public static ArrayList<Asociacion> getListaDeAsociaciones(){
+		return listaDeAsociaciones;
 	}
 	
-	public int getListaDeDonacionesSize(){
-		return donaciones.size();
+	public static int getListaDeAsociacionesSize(){
+		return listaDeAsociaciones.size();
 	}
 	
-	public void agregarDonacion(int idUsuario, int idAsociacion){
-		ArrayList<Integer> donacionNueva = new ArrayList<Integer>();
-		donacionNueva.add(idUsuario);
-		donacionNueva.add(idAsociacion);
-		donaciones.add(donacionNueva);
-		
+	public static void agregarAsociacion(Asociacion pAsociacion){
+		listaDeAsociaciones.add(pAsociacion);
 	}
-
+	
+	public ArrayList<Donacion> getDonacionesRecibidas(){
+		ArrayList<Donacion> donacionesRecibidas = new ArrayList<Donacion>();
+		for(Donacion obj : Donacion.getListaDeDonaciones()){
+			if(obj.getAsociacionBeneficiada().equals(this)){
+				donacionesRecibidas.add(obj);
+			}
+		}
+		return donacionesRecibidas;
+	}
+	
 	public int getId() {
 		return id;
 	}
