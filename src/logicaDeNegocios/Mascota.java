@@ -63,8 +63,49 @@ public class Mascota {
 	
 	public Mascota() {
 	}
-
+	
+	public static ArrayList<Mascota> getMascotasPerdidas(){
+		try {
+			leerMascota();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ArrayList<Mascota> mascotasPerdidas = new ArrayList<Mascota>();
+		
+		for(Mascota obj:listaDeMascotas){
+			if (obj.estado.equals("PERDIDA")){
+				mascotasPerdidas.add(obj);
+			}
+		}
+		return mascotasPerdidas;
+		
+	}
+	
+	public static ArrayList<Mascota> getMascotasEncontradas(){
+        try {
+                leerMascota();
+        } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+        }
+        ArrayList<Mascota> mascotasEncontradas = new ArrayList<Mascota>();
+        
+        for(Mascota obj:listaDeMascotas){
+                if (obj.estado.equals("ENCONTRADA")){
+                        mascotasEncontradas.add(obj);
+                }
+        }
+        return mascotasEncontradas;
+        
+}
 	public static ArrayList<Mascota> getListaDeMascotas(){
+		try {
+            leerMascota();
+    } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+    }
 		return listaDeMascotas;
 	}
 	
@@ -205,6 +246,8 @@ public class Mascota {
 	public void setEstaEnCasaCuna(boolean pEstaEnCasaCuna) {
 		estaEnCasaCuna = pEstaEnCasaCuna;
 	}
+	
+	
 	
 	
 

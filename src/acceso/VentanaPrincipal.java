@@ -61,6 +61,7 @@ import javax.swing.JFrame;
 
 import java.awt.CardLayout;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import javax.swing.JPanel;
@@ -77,12 +78,14 @@ import java.io.File;
 
 
 
+
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.JToolBar;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
+
 import java.awt.event.MouseMotionAdapter;
 
 public class VentanaPrincipal {
@@ -95,6 +98,7 @@ public class VentanaPrincipal {
     private JTextField textFieldNumChip;
     private ButtonGroup estadoMascota = new ButtonGroup() ;
     private  ButtonGroup monedaDePago = new ButtonGroup() ;
+    private  ButtonGroup VerMascotasPor = new ButtonGroup() ;
     private JRadioButton rdbtnColones;
     private JRadioButton rdbtnDolares;
     private JLabel lblMonto;
@@ -141,7 +145,6 @@ public class VentanaPrincipal {
 	private JLabel lblNotas_3;
 	private JLabel lblFotoMascota_2;
 	private JLabel lblTituloMascota_2;
-	private JLabel lblNotas_2;
 	private JPanel panelSegundaMascota;
 	private JLabel lblLugar_2;
 	private JLabel lblFecha_2;
@@ -163,7 +166,18 @@ public class VentanaPrincipal {
 	private JComboBox comboBoxCantonCasaCuna;
 	private JMenuItem mntmCasaCuna;
 	private JMenu mnRegistro;
-	
+	private JLabel label_1;
+	private JLabel label_2;
+	private JRadioButton rdbtnTodas;
+	private JRadioButton rdbtnPerdidas;
+	private JRadioButton rdbtnEncontradas;
+	private static ArrayList<Mascota>listaMascotasParaMostrar = new ArrayList<Mascota>();
+	private int posicionMascotaPanel1 = listaMascotasParaMostrar.size()-1 ;
+	private int posicionMascotaPanel2 = listaMascotasParaMostrar.size()-2 ;
+	private int posicionMascotaPanel3 = listaMascotasParaMostrar.size()-3 ;
+	private Mascota mascotaPanel1 = listaMascotasParaMostrar.get(posicionMascotaPanel1);
+	private Mascota mascotaPanel2 = listaMascotasParaMostrar.get(posicionMascotaPanel2);
+	private Mascota mascotaPanel3 = listaMascotasParaMostrar.get(posicionMascotaPanel3);
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -196,12 +210,12 @@ public class VentanaPrincipal {
 		JButton btnCerrarSesion = new JButton("Cerrar Sesi\u00F3n");
 		btnCerrarSesion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println(IDUsuarioActivo);
+				
 				IDUsuarioActivo = -1;
 				VentanaPrincipal.dispose();
 				Loggin log  = new Loggin();
 				log.setVisible(true);
-				System.out.println(IDUsuarioActivo);
+				
 				
 			}
 		});
@@ -215,6 +229,56 @@ public class VentanaPrincipal {
 				btnCerrarSesion.setForeground(Color.BLUE);
 			}
 		});
+		
+		rdbtnEncontradas = new JRadioButton("Encontradas");
+		rdbtnEncontradas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				listaMascotasParaMostrar.clear();
+				listaMascotasParaMostrar = Mascota.getMascotasEncontradas();
+			}
+		});
+		rdbtnEncontradas.setContentAreaFilled(false);
+		rdbtnEncontradas.setBounds(54, 241, 109, 23);
+		VerMascotasPor.add(rdbtnEncontradas);
+		panelPrincipal.add(rdbtnEncontradas);
+		
+		rdbtnPerdidas = new JRadioButton("Perdidas");
+		rdbtnPerdidas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				listaMascotasParaMostrar.clear();
+				listaMascotasParaMostrar= Mascota.getMascotasPerdidas();
+			}
+		});
+		rdbtnPerdidas.setContentAreaFilled(false);
+		rdbtnPerdidas.setBounds(54, 205, 109, 23);
+		VerMascotasPor.add(rdbtnPerdidas);
+		panelPrincipal.add(rdbtnPerdidas);
+		
+		rdbtnTodas = new JRadioButton("Todas");
+		rdbtnTodas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				listaMascotasParaMostrar.clear();
+				listaMascotasParaMostrar = Mascota.getListaDeMascotas();
+				
+			}
+		});
+		rdbtnTodas.setSelected(true);
+		rdbtnTodas.setContentAreaFilled(false);
+		
+		rdbtnTodas.setBounds(54, 172, 109, 23);
+		panelPrincipal.add(rdbtnTodas);
+		VerMascotasPor.add(rdbtnTodas);
+		label_1 = new JLabel("Mostrar Por:");
+		label_1.setForeground(Color.GRAY);
+		label_1.setFont(new Font("Batang", Font.BOLD, 18));
+		label_1.setBounds(44, 135, 147, 30);
+		panelPrincipal.add(label_1);
+		
+		label_2 = new JLabel("");
+		label_2 .setBorder(new MatteBorder(5, 5, 5, 5, (Color) new Color(110, 170, 111)));
+		label_2.setIcon(new ImageIcon("C:\\Users\\Ariel\\Documents\\GitHub\\DogsLovers\\imgs\\fondoPanelesPantallaPrincipal.png"));
+		label_2.setBounds(34, 135, 234, 290);
+		panelPrincipal.add(label_2);
 		btnCerrarSesion.setRolloverIcon(null);
 		btnCerrarSesion.setFocusable(false);
 		btnCerrarSesion.setFocusTraversalKeysEnabled(false);
@@ -232,17 +296,19 @@ public class VentanaPrincipal {
 		
 		panelPrimeraMascota = new JPanel();
 		panelPrimeraMascota.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.BLACK, null, null, null));
-		panelPrimeraMascota.setBounds(252, 131, 868, 141);
+		panelPrimeraMascota.setBounds(347, 132, 868, 141);
 		panelPrincipal.add(panelPrimeraMascota);
 		panelPrimeraMascota.setLayout(null);
 		
-		lblFotoMascota1 = new JLabel("FotoMascota");
+		lblFotoMascota1 = new JLabel();
+		lblFotoMascota1.setIcon(new ImageIcon(mascotaPanel1.getFoto()));
 		lblFotoMascota1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblFotoMascota1.setBounds(10, 11, 106, 119);
 		panelPrimeraMascota.add(lblFotoMascota1);
 		
-		lbltitulomascota1 = new JLabel("TituloMascota");
+		lbltitulomascota1 = new JLabel();
 		lbltitulomascota1.setBounds(126, 11, 158, 14);
+		lbltitulomascota1.setText(mascotaPanel1.getTipo()+" " +mascotaPanel1.getEstado()+" en "+mascotaPanel1.getLugarVisto() );
 		panelPrimeraMascota.add(lbltitulomascota1);
 		
 		lblLugarSuceso1 = new JLabel("Lugar Suceso");
@@ -267,8 +333,12 @@ public class VentanaPrincipal {
 		panelSegundaMascota = new JPanel();
 		panelSegundaMascota.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.BLACK, null, null, null));
 		panelSegundaMascota.setLayout(null);
-		panelSegundaMascota.setBounds(252, 283, 868, 141);
+		panelSegundaMascota.setBounds(347, 284, 868, 141);
 		panelPrincipal.add(panelSegundaMascota);
+		
+		JLabel lblNotas2 = new JLabel("Notas");
+		lblNotas2.setBounds(126, 40, 461, 74);
+		panelSegundaMascota.add(lblNotas2);
 		
 		lblFotoMascota_2 = new JLabel("FotoMascota");
 		lblFotoMascota_2.setHorizontalAlignment(SwingConstants.CENTER);
@@ -287,11 +357,6 @@ public class VentanaPrincipal {
 		lblFecha_2.setBounds(728, 11, 130, 14);
 		panelSegundaMascota.add(lblFecha_2);
 		
-		lblNotas_2 = new JLabel("Notas");
-		lblNotas_2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNotas_2.setBounds(126, 40, 528, 78);
-		panelSegundaMascota.add(lblNotas_2);
-		
 		JLabel labelFondoPanel2 = new JLabel("");
 		labelFondoPanel2.setBorder(new MatteBorder(5, 5, 5, 5, (Color) new Color(110, 170, 111)));
 		labelFondoPanel2.setIcon(new ImageIcon("C:\\Users\\Ariel\\Documents\\GitHub\\DogsLovers\\imgs\\fondoPanelesPantallaPrincipal.png"));
@@ -301,7 +366,7 @@ public class VentanaPrincipal {
 		panelTerceraMascota = new JPanel();
 		panelTerceraMascota.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.BLACK, null, null, null));
 		panelTerceraMascota.setLayout(null);
-		panelTerceraMascota.setBounds(252, 438, 868, 141);
+		panelTerceraMascota.setBounds(347, 439, 868, 141);
 		panelPrincipal.add(panelTerceraMascota);
 		
 		lblFotoMascota_3 = new JLabel("FotoMascota");
@@ -1183,6 +1248,30 @@ public class VentanaPrincipal {
 		});
 		mntmCasaCuna.setIcon(new ImageIcon("./imgs/casaCuna.png"));
 		mnRegistro.add(mntmCasaCuna);
+		
+		JMenu mnConsulta = new JMenu("Consulta");
+		menuBar.add(mnConsulta);
+		
+		JMenuItem mntmConsultaMascota = new JMenuItem("Mascotas");
+		mnConsulta.add(mntmConsultaMascota);
+		
+		JMenuItem mntmConsutarCasaCuna = new JMenuItem("Casa Cuna");
+		mnConsulta.add(mntmConsutarCasaCuna);
+		
+		JMenuItem mntmConsultarAsociacinBeneficiaria = new JMenuItem("Asociaci\u00F3n Beneficiaria");
+		mnConsulta.add(mntmConsultarAsociacinBeneficiaria);
+		
+		JMenuItem mntmConsutaMiPerfil = new JMenuItem("Mi Perfil");
+		mnConsulta.add(mntmConsutaMiPerfil);
+		
+		JMenu mnAdopciones = new JMenu("Adopciones");
+		menuBar.add(mnAdopciones);
+		
+		JMenuItem mntmAdoptarUnaMascota = new JMenuItem("Adoptar una Mascota");
+		mnAdopciones.add(mntmAdoptarUnaMascota);
+		
+		JMenuItem mntmCalificarUnaAdopcin = new JMenuItem("Calificar una Adopci\u00F3n");
+		mnAdopciones.add(mntmCalificarUnaAdopcin);
 		panelAgregarCasaCuna.setVisible(false);
 	}
 	
