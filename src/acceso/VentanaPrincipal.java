@@ -1414,6 +1414,13 @@ public class VentanaPrincipal {
         menuBar.add(mnAdopciones);
         
         JMenuItem mntmAdoptarUnaMascota = new JMenuItem("Adoptar una Mascota");
+        mntmAdoptarUnaMascota.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		VentanaRegistroAdopcion ventanaRegistroAdopcion = new VentanaRegistroAdopcion();
+        		ventanaRegistroAdopcion.setVisible(true);
+        		ventanaRegistroAdopcion.setLocation(posicionMascotaPanel1, posicionMascotaPanel1);
+        	}
+        });
         mnAdopciones.add(mntmAdoptarUnaMascota);
         
         JMenuItem mntmCalificarUnaAdopcin = new JMenuItem("Calificar una Adopci\u00F3n");
