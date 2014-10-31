@@ -16,6 +16,8 @@ import javax.swing.JLabel;
 
 
 
+
+
 import java.awt.Font;
 
 import javax.swing.JOptionPane;
@@ -39,8 +41,10 @@ import com.jgoodies.forms.factories.DefaultComponentFactory;
 
 import java.awt.Toolkit;
 import java.awt.Cursor;
+import java.io.IOException;
 
 import logicaDeNegocios.EnviarMail;
+import logicaDeNegocios.Mascota;
 import logicaDeNegocios.Usuario;
 
 public class Loggin extends JFrame {
@@ -104,6 +108,7 @@ public class Loggin extends JFrame {
 					VentanaPrincipal VP = new VentanaPrincipal();
 					VP.main(null);
 					VP.setIDUsuarioActivo(Usuario.buscarIDDelUsuario(entradaUsuario));
+					
 					
 				}
 				else{

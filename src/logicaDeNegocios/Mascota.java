@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 public class Mascota {
 	
 	
-	private static ArrayList<Mascota> listaDeMascotas = new ArrayList<Mascota>();
+	public static ArrayList<Mascota> listaDeMascotas = new ArrayList<Mascota>();
 	
 	private  String estado;
 	private int id;
@@ -65,8 +65,13 @@ public class Mascota {
 	}
 
 	public static ArrayList<Mascota> getListaDeMascotas(){
+		
 		return listaDeMascotas;
 	}
+	
+	
+	
+	
 	
 	public static Mascota getMascota(int pIndice){
 		return listaDeMascotas.get(pIndice);
@@ -345,12 +350,7 @@ public class Mascota {
     }
 	
 	public static boolean verificarChip(String numeroDeChip, String estado){
-		try {
-			leerMascota();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		for(Mascota obj : listaDeMascotas){
 			if(obj.getEstado().equals(estado)){
 				if(obj.getChip().equals(numeroDeChip)&&obj.getChip() != null){
@@ -364,6 +364,47 @@ public class Mascota {
 		return false;
 
 	}
+	
+
+	
+	public static ArrayList<Mascota> getMascotasPerdidas(){
+		
+		try {
+			Mascota.leerMascota();
+		} catch (IOException e) {
+	
+			e.printStackTrace();
+		}
+		ArrayList<Mascota> mascotasPerdidas = new ArrayList<Mascota>();
+		
+		for(Mascota obj:listaDeMascotas){
+			if (obj.estado.equals("PERDIDA")){
+				mascotasPerdidas.add(obj);
+			}
+		}
+		return mascotasPerdidas;
+		
+	}
+	
+	public static ArrayList<Mascota> getMascotasEncontradas(){
+	
+		try {
+			Mascota.leerMascota();
+		} catch (IOException e) {
+	
+			e.printStackTrace();
+		}
+		
+        ArrayList<Mascota> mascotasEncontradas = new ArrayList<Mascota>();
+        
+        for(Mascota obj:listaDeMascotas){
+                if (obj.estado.equals("ENCONTRADA")){
+                        mascotasEncontradas.add(obj);
+                }
+        }
+        return mascotasEncontradas;
+        
+}
   
 	
 }
