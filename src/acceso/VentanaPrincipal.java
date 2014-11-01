@@ -115,15 +115,15 @@ public class VentanaPrincipal {
     private JEditorPane editorPaneNotas;
     private  String estado;
     private static String tipo;
-    private static String nombre = null;
+    private static String nombre = "";
     private static String raza;
-    private static String chip = null;
+    private static String chip = "";
     private static String colorDePelo;
     private static String colorDeOjos;
-    private static String foto = null;
+    private static String foto = "";
     private static String lugarVisto;
     private static String nota;
-    private static String recompensa = null;
+    private static String recompensa = "";
     private static int idEncargado;
     private static String fechaSuceso;
     private JTextField textFieldMontoRecompensa;
@@ -1396,18 +1396,23 @@ public class VentanaPrincipal {
         mnRegistro.add(mntmCasaCuna);
         
         JMenu mnConsulta = new JMenu("Consulta");
+        mnConsulta.setIcon(new ImageIcon("./imgs/Consulta.png"));
         menuBar.add(mnConsulta);
         
         JMenuItem mntmConsultaMascota = new JMenuItem("Mascotas");
+        mntmConsultaMascota.setIcon(new ImageIcon("./imgs/Pets-30.png"));         
         mnConsulta.add(mntmConsultaMascota);
         
         JMenuItem mntmConsutarCasaCuna = new JMenuItem("Casa Cuna");
+        mntmConsutarCasaCuna.setIcon(new ImageIcon("./imgs/casaCuna.png"));
         mnConsulta.add(mntmConsutarCasaCuna);
         
         JMenuItem mntmConsultarAsociacinBeneficiaria = new JMenuItem("Asociaci\u00F3n Beneficiaria");
+        mntmConsultarAsociacinBeneficiaria.setIcon(new ImageIcon("./imgs/AsociBene32.png"));
         mnConsulta.add(mntmConsultarAsociacinBeneficiaria);
         
         JMenuItem mntmConsutaMiPerfil = new JMenuItem("Mi Perfil");
+        mntmConsutaMiPerfil.setIcon(new ImageIcon("./imgs/Perfil.png"));
         mnConsulta.add(mntmConsutaMiPerfil);
         
         JMenu mnAdopciones = new JMenu("Adopciones");
@@ -1424,7 +1429,18 @@ public class VentanaPrincipal {
         mnAdopciones.add(mntmAdoptarUnaMascota);
         
         JMenuItem mntmCalificarUnaAdopcin = new JMenuItem("Calificar una Adopci\u00F3n");
+        mntmCalificarUnaAdopcin.setIcon(new ImageIcon("./imgs/Calificacion-32.png"));
         mnAdopciones.add(mntmCalificarUnaAdopcin);
+        
+        JMenu mnListaNegra = new JMenu("Lista Negra");
+        mnListaNegra.setIcon(new ImageIcon("./imgs/DeleteSelected.png"));
+        menuBar.add(mnListaNegra);
+        
+        JMenuItem mntmVerListaNegra = new JMenuItem("Ver Lista Negra");
+        mnListaNegra.add(mntmVerListaNegra);
+        
+        JMenuItem mntmAgregarALista = new JMenuItem("Agregar a Lista Negra");
+        mnListaNegra.add(mntmAgregarALista);
         panelAgregarCasaCuna.setVisible(false);
     }
     
@@ -1445,7 +1461,7 @@ public class VentanaPrincipal {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        foto = "./mascotas/" + String.valueOf(Mascota.getListaDeMascotasSize())+".jpg";
+        foto = "./mascotas/" + String.valueOf(Mascota.getListaDeMascotasSize()+1)+".jpg";
     }
     
     public void verificarEstado(){

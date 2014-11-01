@@ -2,7 +2,7 @@
 ENCONTRADA
 6
 Canino
-null
+BullDog Ingles
 Zoe
 555-666-854
 Blanco
@@ -11,16 +11,16 @@ Cafes
 TibÃ¡s, San Jose
 La encontrÃ© buscando alimento en la entrada de mi casa. Es una cachorra, presenta desnutriciÃ³n pero se esta recuperando.
 20/Setiembre/2014.0
-null
+""
 0
 false
 ===>nuevo Mascota<===
 PERDIDA
 6
 Felino
-null
+Angora Turco
 Filiberto
-null
+""
 Blanco
 Cafes
 ./mascotas/1.jpg
@@ -34,9 +34,9 @@ false
 PERDIDA
 6
 Canino
-null
+Labrador
 Lucy
-null
+""
 Amarillo
 Cafes
 ./mascotas/2.jpg
@@ -50,7 +50,7 @@ false
 PERDIDA
 6
 Canino
-null
+French Poodle
 Moza Sofia
 566-998-885
 Blanco
@@ -66,23 +66,23 @@ false
 ENCONTRADA
 6
 Ave
-null
-
-null
+Canario
+""
+""
 Otro
 Negros
 ./mascotas/4.jpg
 San Isidro, Heredia
 Me lo encontré caminando hacia casa con una ala lastimada. Lo hé curado pero no he dado con su dueño.
 13/Abril/2014.0
-null
--1
+""
+1
 false
 ===>nuevo Mascota<===
 PERDIDA
 5
 Canino
-null
+Labrador
 Marley
 888-999-7897
 Amarillo
@@ -92,7 +92,7 @@ Aserrí, San Jose
 Hay recompensa de 80 000 por la mascota
 1/Mayo/2014.0
 ? 80 000
--1
+0
 false
 ===>nuevo Mascota<===
 ENCONTRADA
@@ -108,7 +108,7 @@ Central, San Jose
 Quiza se envie a casaCuna
 1/Enero/2014.0
 ? 80 000
--1
+2
 false
 ===>nuevo Mascota<===
 PERDIDA
@@ -124,7 +124,7 @@ Central, San Jose
 
 1/Enero/2014.0
 ? 
--1
+3
 false
 ===>nuevo Mascota<===
 PERDIDA
@@ -140,7 +140,7 @@ Mora, San Jose
 
 10/Julio/2014.0
 ? 
--1
+1
 false
 ===>nuevo Mascota<===
 PERDIDA
@@ -156,5 +156,85 @@ Buenos Aires, Puntarenas
 
 1/Junio/2014.0
 ? 
--1
+3
+false
+===>nuevo Mascota<===
+ENCONTRADA
+0
+Canino
+American Stafford
+Gonther
+88-5841
+Cafe
+Negros
+./mascotas/11.jpg
+Belén, Heredia
+El Perrito Presentaba algo de agresividad pero con el tiempo se ha ido calmando
+13/Julio/2014.0
+""
+4
+false
+===>nuevo Mascota<===
+ENCONTRADA
+0
+Felino
+Gato habana
+Sabana
+4654-888
+Negro
+Amarillos
+./mascotas/12.jpg
+Tarrazú, San Jose
+Me asuste dema porque pense que el gatito queria darme mala suerte, lo lleve a la veterinaria y le hicieron lectura de chip
+31/Octubre/2014.0
+null
+2
+false
+===>nuevo Mascota<===
+PERDIDA
+0
+Roedor
+Erizo
+JuanPablo
+null
+Dos Tonalidades
+Negros
+./mascotas/13.jpg
+San Rafael, Heredia
+:( Extrano mi Erizo, se escapo de su bolita la semana pasada
+16/Agosto/2014.0
+? 50 000
+1
+false
+===>nuevo Mascota<===
+ENCONTRADA
+0
+Canino
+Golden retriever
+Nona
+888-445-66
+Cafe
+Dos Tonos 
+./mascotas/14.jpg
+Grecia, Alajuela
+Lo encontre con una patita danada, ya esta curado. Es muy carinoso y jugueton. Ocupa un espacio mas grande, por esa razon lo dare en adopcion
+21/Setiembre/2014.0
+null
+4
+false
+===>nuevo Mascota<===
+PERDIDA
+1
+Ave
+Loro
+Francisco
+null
+Otro
+Negros
+./mascotas/15.jpg
+Grecia, Alajuela
+ Aún  tengo la esperanza de encontrarlo, por eso recurro a Dogs Lovers.Lo asustaron las bombetas de año nuevo y huyó de mi casa.
+31/Diciembre/2013.0
+? 
+4
 false

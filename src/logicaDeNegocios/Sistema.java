@@ -132,7 +132,7 @@ public class Sistema {
 
 	public static void copiarImagen(File imagenOriginal) {
 		File archivoOriginal = new File(imagenOriginal.getAbsolutePath());
-		File archivoNuevo	 = new File(System.getProperty("user.dir") + "./mascotas/" + String.valueOf(Mascota.getListaDeMascotasSize()) + ".jpg");
+		File archivoNuevo	 = new File(System.getProperty("user.dir") + "./mascotas/" + String.valueOf(Mascota.getListaDeMascotasSize()+1) + ".jpg");
 		try {
 			FileInputStream inStream = new FileInputStream(archivoOriginal);
 			FileOutputStream outStream = new FileOutputStream(archivoNuevo);

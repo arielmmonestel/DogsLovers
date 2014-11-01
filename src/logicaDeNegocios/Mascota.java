@@ -20,13 +20,13 @@ public class Mascota {
 	private int id;
 	private String tipo;
 	private String raza;
-	private String nombre = null;
-	private String chip =null;
+	private String nombre = "";
+	private String chip ="";
 	private String colorDePelo;
 	private String colorDeOjos;
-	private String foto = null;
+	private String foto = "";
 	private String lugarVisto;
-	private String nota = null;
+	private String nota = "";
 	private String diaSuceso;//En la que se perdió o se encontró
 	private String recompensa;	
 	private int idEncargado;
