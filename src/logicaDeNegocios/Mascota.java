@@ -214,7 +214,7 @@ public class Mascota {
 	
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////// Búsqueda
-	
+	/*
 	public static final int opcionESTADO = 1;
 	public static final int opcionTIPO = 2;
 	public static final int opcionRAZA = 3;
@@ -247,7 +247,7 @@ public class Mascota {
 			return getLugarVisto().toLowerCase().contains(filtro.toLowerCase());
 		}		
 		return false;
-	}
+	}*/
 	
 	
 	/*Metodo que carga a los Mascotas en un arreglo*/
