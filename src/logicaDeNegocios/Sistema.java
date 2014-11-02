@@ -477,8 +477,9 @@ public class Sistema {
 	}
 
 		
-	public static void agregarEstado(String nuevoEstado){
-		estados += ","+ nuevoEstado;
+	public static void agregarEstado(String nuevoEstado) throws IOException{
+		leerEstados();
+		listaEstados.add(nuevoEstado);
 		guardarEstados();
 	}
 	
