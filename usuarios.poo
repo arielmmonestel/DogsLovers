@@ -68,6 +68,7 @@ false
 0
 ===>nuevo Usuario<===
 4
+<<<<<<< HEAD
 Byron
 Araya
 Chavarria
@@ -79,6 +80,19 @@ Junio
 1990
 byronaraya
 lucy123
+=======
+Fabián
+Monge
+G
+Masculino
+123456789
+fabian1mg@gmail.com
+1
+Julio
+1990
+fabianmg
+123
+>>>>>>> testFabian
 false
 false
 false
