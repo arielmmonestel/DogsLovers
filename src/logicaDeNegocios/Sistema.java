@@ -1,10 +1,15 @@
 package logicaDeNegocios;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.*;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import java.util.Properties;
@@ -26,7 +31,13 @@ public class Sistema {
 	private static int dia = fecha.get(Calendar.DATE);
 	
 	
+	private static final String rutaDetallesMascotas = "./infoMascota.poo";	
+	//public static  ArrayList<String> listaDetallesMascota = new ArrayList<String>();
 	
+	File archivo = null;
+	static FileReader lectura = null;
+	static BufferedReader bufferLectura = null;
+	static JFrame frame = new JFrame();
 	
 
 	public Sistema() {
@@ -38,7 +49,7 @@ public class Sistema {
 		return fecha;
 	}
 	
-	
+	/*
 	public static String[][] tomarDatosDeBusqueda(ArrayList<Integer> indicesDeResultados){
 		String[][] matrizConDatos = new String[Mascota.getListaDeMascotasSize()][7];
 		for(int k = 0; k < indicesDeResultados.size(); k++){
@@ -54,85 +65,13 @@ public class Sistema {
 			matrizConDatos[k][7] = Mascota.getMascota(i).getLugarVisto();
 		}
 		return matrizConDatos;
-	}
+	}*/
 
-	public static ArrayList<Integer> buscarMascotaPorEstado(String filtro){
-		ArrayList<Integer> resultados = new ArrayList<Integer>();
-		for(int i = 0; i < Mascota.getListaDeMascotasSize(); i++){
-			if( Mascota.getMascota(i).contieneFiltro(filtro, Mascota.opcionESTADO)){
-				resultados.add(i);
-			}
-		}
-		return resultados;
-	}
 	
-	public static ArrayList<Integer> buscarMascotaPorTipo(String filtro){
-		ArrayList<Integer> resultados = new ArrayList<Integer>();
-		for(int i = 0; i < Mascota.getListaDeMascotasSize(); i++){
-			if( Mascota.getMascota(i).contieneFiltro(filtro, Mascota.opcionTIPO)){
-				resultados.add(i);
-			}
-		}
-		return resultados;
-	}
-	
-	public static ArrayList<Integer> buscarMascotaPorRaza(String filtro){
-		ArrayList<Integer> resultados = new ArrayList<Integer>();
-		for(int i = 0; i < Mascota.getListaDeMascotasSize(); i++){
-			if( Mascota.getMascota(i).contieneFiltro(filtro, Mascota.opcionRAZA)){
-				resultados.add(i);
-			}
-		}
-		return resultados;
-	}
-
-	public static ArrayList<Integer> buscarMascotaPorChip(String filtro){
-		ArrayList<Integer> resultados = new ArrayList<Integer>();
-		for(int i = 0; i < Mascota.getListaDeMascotasSize(); i++){
-			if( Mascota.getMascota(i).contieneFiltro(filtro, Mascota.opcionCHIP)){
-				resultados.add(i);
-			}
-		}
-		return resultados;
-	}
-
-	public static ArrayList<Integer> buscarMascotaPorColorDePelo(String filtro){
-		ArrayList<Integer> resultados = new ArrayList<Integer>();
-		for(int i = 0; i < Mascota.getListaDeMascotasSize(); i++){
-			if( Mascota.getMascota(i).contieneFiltro(filtro, Mascota.opcionCOLORPELO)){
-				resultados.add(i);
-			}
-		}
-		return resultados;
-	}
-
-	//public static ArrayList<Integer> buscarMascotaPorFecha(String filtro){
-		/* TODO */
-	//}
-
-	public static ArrayList<Integer> buscarMascotaPorColorDeOjos(String filtro){
-		ArrayList<Integer> resultados = new ArrayList<Integer>();
-		for(int i = 0; i < Mascota.getListaDeMascotasSize(); i++){
-			if( Mascota.getMascota(i).contieneFiltro(filtro, Mascota.opcionCOLOROJOS)){
-				resultados.add(i);
-			}
-		}
-		return resultados;
-	}
-
-	public static ArrayList<Integer> buscarMascotaPorLugarVisto(String filtro){
-		ArrayList<Integer> resultados = new ArrayList<Integer>();
-		for(int i = 0; i < Mascota.getListaDeMascotasSize(); i++){
-			if( Mascota.getMascota(i).contieneFiltro(filtro, Mascota.opcionLUGARVISTO)){
-				resultados.add(i);
-			}
-		}
-		return resultados;
-	}
 
 	public static void copiarImagen(File imagenOriginal) {
 		File archivoOriginal = new File(imagenOriginal.getAbsolutePath());
-		File archivoNuevo	 = new File(System.getProperty("user.dir") + "./mascotas/" + String.valueOf(Mascota.getListaDeMascotasSize()) + ".jpg");
+		File archivoNuevo	 = new File(System.getProperty("user.dir") + "./mascotas/" + String.valueOf(SistemasMascotas.getSize()) + ".jpg");
 		try {
 			FileInputStream inStream = new FileInputStream(archivoOriginal);
 			FileOutputStream outStream = new FileOutputStream(archivoNuevo);
@@ -189,4 +128,168 @@ public class Sistema {
 	
 }
 
+	
+	
+	
+	private static boolean estaEnLista(ArrayList<String> lista, String dato){
+		/*verifica si dato está en lista*/
+		for(String str: lista)
+			if( str.equals(dato))
+				return true;
+		return false;
+			
+	}
+	/*public static ArrayList<String> getRazas(){
+	
+	  ArrayList<String> razas = new ArrayList<String>();
+	  
+	  for(Mascota obj:SistemasMascotas.getMascotas())
+	      if(!estaEnLista(razas, obj.getRaza()))
+	             	razas.add(obj.getRaza());
+	               
+	  return razas;    
+	}*/
+
+	
+	private static String estados = null; 
+	private static String razas = null;
+	private static String tipo = null;
+	private static String colorDePelo = null;
+	private static String colorDeOjos = null;
+	private static String lugarVisto = null;
+	
+
+	public static String[] getListaRazas() throws IOException{
+		leerDetallesParaMascotas();
+		String listaRazas[] = razas.split(",");
+		return listaRazas;
+	}
+	
+	public static String[] getListaTipo() throws IOException{
+		leerDetallesParaMascotas();
+		String  listaTipos[] = tipo.split(",");
+		return listaTipos;
+	}
+	
+	public static String[] getListaColorDeOjos() throws IOException{
+		leerDetallesParaMascotas();
+		String listaColorDeOjos[] = colorDeOjos.split(",");
+		return listaColorDeOjos;
+	}
+	
+	public static String[] getListaColorDePelo() throws IOException{
+		leerDetallesParaMascotas();
+		String listaColorDePelo[] = colorDePelo.split(",");
+		return listaColorDePelo;
+	}
+	
+	public static String[] getListaEsados() throws IOException{
+		leerDetallesParaMascotas();
+		String listaEstado[] = estados.split(",");
+		return listaEstado;
+	}
+	
+	public static void  leerDetallesParaMascotas() throws IOException{
+			File archivo = new File (rutaDetallesMascotas);
+	    	try
+	    	{
+   
+	    		estados = null; 
+	    		razas = null;
+	    		tipo = null;
+	    		colorDePelo = null;
+	    		colorDeOjos = null;
+	    		lugarVisto = null;
+
+	    		if (archivo.exists())
+	    		{			
+		    		lectura = new FileReader (archivo);
+	    			bufferLectura = new BufferedReader(lectura);
+	    			
+	    			estados =bufferLectura.readLine();
+		   			tipo =bufferLectura.readLine();
+		   			colorDePelo =bufferLectura.readLine();
+		   			colorDeOjos =bufferLectura.readLine();
+		   			razas = bufferLectura.readLine();
+		   			//lugarVisto =bufferLectura.readLine();
+		   			
+	    		}else
+	        		JOptionPane.showMessageDialog(frame, "No existen datos. O cambio la ruta del archivo Detalles de mascotas");                		
+	    	}catch(Exception e){
+	    		e.printStackTrace();  
+	    	}finally
+	    	{
+	    		try
+	    		{
+	        		if (archivo.exists())
+	    				lectura.close();
+	 
+	    		}catch (Exception e2)
+	    			{e2.printStackTrace();}
+	    	}
+	    }
+		
+	private void GuardarDetallesMascota(ArrayList<Usuario> arrayUsuarios) 
+    {
+    	FileWriter escribir = null;
+    	PrintWriter pw = null;
+    	try
+    	{		
+    		escribir = new FileWriter(rutaDetallesMascotas,false);
+    		pw = new PrintWriter(escribir);    		
+    		
+    		pw.println(estados);
+    		pw.println(tipo);
+    		pw.println(colorDePelo);
+    		pw.println(colorDeOjos);
+    		pw.println(razas);
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	} finally 
+    	{
+    		try 
+    		{
+    				escribir.close();
+    		} catch (Exception e2) 
+    		{e2.printStackTrace();}
+    	}
+    }
+	
+	public static void agregarEstado(String nuevoEstado){estados += ","+ nuevoEstado;}
+	public static void agregarTipo(String nuevoTipo){tipo += ","+ nuevoTipo;}
+	
+	// cambiar  
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
 }
