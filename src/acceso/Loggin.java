@@ -18,6 +18,7 @@ import javax.swing.JLabel;
 
 
 
+
 import java.awt.Font;
 
 import javax.swing.JOptionPane;
@@ -45,6 +46,7 @@ import java.io.IOException;
 
 import logicaDeNegocios.EnviarMail;
 import logicaDeNegocios.Mascota;
+import logicaDeNegocios.SistemasUsuarios;
 import logicaDeNegocios.Usuario;
 
 public class Loggin extends JFrame {
@@ -100,22 +102,24 @@ public class Loggin extends JFrame {
 		btnIngresar.setBorder(null);
 		btnIngresar.setIcon(new ImageIcon("./imgs/BotonIngresarTamanioMedio.png"));
 		btnIngresar.addActionListener(new ActionListener() {
+			
 			public void actionPerformed(ActionEvent e) {
 				String entradaUsuario = textFieldNombreUsuario.getText();
 				String entradaContrasenia = passwordFieldContrasenaUsuario.getText();
-				if(Usuario.verificarUsuarioYContrasena(entradaUsuario, entradaContrasenia)){
+
+				if(SistemasUsuarios.verificarUsuarioYContrasena(entradaUsuario, entradaContrasenia)){
 					dispose();
-					VentanaPrincipal VP = new VentanaPrincipal();
-					VP.main(null);
-					VP.setIDUsuarioActivo(Usuario.buscarIDDelUsuario(entradaUsuario));
-					
-					
+					VentanaPrincipal ventaPrincipal = new VentanaPrincipal();
+					ventaPrincipal.main(null);
+					ventaPrincipal.setIDUsuarioActivo(SistemasUsuarios.getIdPorNickName(entradaUsuario));
+
 				}
 				else{
 					JOptionPane.showMessageDialog(null, "Usuario y/o contraseña inválidos");
 				}
 			}
 		});
+		
 		btnIngresar.setBounds(154, 302, 245, 62);
 		contentPane.add(btnIngresar);
 		

@@ -81,9 +81,9 @@ public class SistemasUsuarios {
     			{e2.printStackTrace();}
     	}
     }
+
 	
-	
-	public void GuardarUsuario(ArrayList<Usuario> arrayUsuarios) 
+	public static void GuardarUsuario() 
     {
     	FileWriter escribir = null;
     	PrintWriter pw = null;
@@ -93,7 +93,7 @@ public class SistemasUsuarios {
     		pw = new PrintWriter(escribir);
     		idUsuario = 0;
     		
-    		for(Usuario obj: arrayUsuarios)
+    		for(Usuario obj: listaUsuarios)
     		{	
     			pw.println("===>nuevo Usuario<===");
     			pw.println(idUsuario);
@@ -127,12 +127,13 @@ public class SistemasUsuarios {
     	}
     }
   
-	public void AgregarUsuario(Usuario usuario) throws IOException{
+	public static void AgregarUsuario(Usuario usuario) throws IOException{
 		leerUsuarios();
 		listaUsuarios.add(usuario);
+		GuardarUsuario();
 	}
 	
-	public  static boolean nicknameYaEstaRegustrado(String nickname)
+	public  static boolean nicknameYaEstaRegistrado(String nickname)
     {		     
 		try {
 			
@@ -212,7 +213,7 @@ public class SistemasUsuarios {
 		return null;
 	}
 	
-	public static ArrayList<Usuario> getUsuarioCasaCuna(String nick){
+	public static ArrayList<Usuario> getUsuariosCasaCuna(String nick){
 		try {
 			leerUsuarios();
 			ArrayList<Usuario> usuriosCasaCuna = new ArrayList<Usuario>(1); 
@@ -228,7 +229,18 @@ public class SistemasUsuarios {
 	}
 	
 	
-	
+	public static int getIdPorNickName(String nick){
+		try {
+			leerUsuarios();
+			for(Usuario obj: listaUsuarios)
+				if(obj.getNombreUsuario().equals(nick))
+					return  obj.getID();		
+		} 
+		 catch (IOException e) {
+				e.printStackTrace();
+		}
+		return -1;
+	}
 	
 	
 	

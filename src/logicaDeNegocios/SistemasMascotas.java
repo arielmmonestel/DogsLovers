@@ -39,6 +39,9 @@ public class SistemasMascotas {
 	static JFrame frame = new JFrame();
 	
 
+	public static ArrayList<Mascota> getListaMascota(){
+		return listaMascotas;
+	}
 	
 	public static void  leerMascota() throws IOException
     {
@@ -91,8 +94,7 @@ public class SistemasMascotas {
     	}
     }
 	
-	public void GuardarMascota(ArrayList<Mascota> arrayMascotas) 
-    {
+	public static void GuardarMascota(){
     	FileWriter escribir = null;
     	PrintWriter pw = null;
     	size  = 0;
@@ -101,7 +103,7 @@ public class SistemasMascotas {
     		escribir = new FileWriter(rutaMascotas,false);
     		pw = new PrintWriter(escribir);
     		
-    		for(Mascota obj: arrayMascotas)
+    		for(Mascota obj: listaMascotas)
     		{	
     			pw.println("===>nuevo Mascota<===");
     			pw.println(obj.getEstado());
@@ -134,9 +136,10 @@ public class SistemasMascotas {
     	}
     }
 	
-	public void AgregarMascota(Mascota mascota) throws IOException{
+	public static void AgregarMascota(Mascota mascota) throws IOException{
 		leerMascota();
 		listaMascotas.add(mascota);
+		GuardarMascota();
 	}
 	
 	public static int getSize(){return size;}
@@ -162,6 +165,25 @@ public class SistemasMascotas {
 		
 		return null;
 	}
+
+	public static boolean ChipYaEstaRegistrado(String numChip){
+		
+		try {
+		
+			leerMascota();
+			Mascota mascotaEncontradaPorChip = new Mascota();
+			
+			for(Mascota obj:listaMascotas)
+				if (obj.getChip().equals(numChip))
+					return true;
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+	
 	
 	public static void todasLasMascotas() throws IOException{leerMascota(); listaMascotasFiltradas = listaMascotas;} // llamar antes de cada busqueda
 	

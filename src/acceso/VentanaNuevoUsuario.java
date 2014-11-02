@@ -234,16 +234,14 @@ public class VentanaNuevoUsuario extends JFrame {
 							return;
 						}
 						
-						if(Usuario.verificarNickname(nickName)){
+						if(SistemasUsuarios.nicknameYaEstaRegistrado(nickName)){
 							JOptionPane.showMessageDialog(contentPane, "Error! el nombre de usuario ya existe");
 							textFieldUsuario.setText("");
 							return;
 						}
 
-						if(Usuario.verificarNombreUsuario(nombre, apellidoUno, apellidoDos,telefono)){
+						if(SistemasUsuarios.emailYaEstaRegistrado(correo)){
 						
-
-
 							JOptionPane.showMessageDialog(contentPane, "Error! Este usuario ya fue registrado");
 							return;
 						}
@@ -252,13 +250,14 @@ public class VentanaNuevoUsuario extends JFrame {
 							Usuario NuevoUsuario = new Usuario(nombre,apellidoUno,apellidoDos,sexo,
 									telefono,correo,diaNacimiento,mesNacimiento,anioNacimiento,nickName,contrasenia);
 									try {
-										NuevoUsuario.leerUsuario();
+										//SistemasUsuarios.leerUsuarios();
+										SistemasUsuarios.AgregarUsuario(NuevoUsuario);
 									} catch (IOException e1) {
 										// TODO Auto-generated catch block
 										e1.printStackTrace();
 									}
-									Usuario.getListaDeUsuarios().add(NuevoUsuario);
-									NuevoUsuario.GuardarUsuario(Usuario.getListaDeUsuarios());
+									//Usuario.getListaDeUsuarios().add(NuevoUsuario);
+									//NuevoUsuario.GuardarUsuario(Usuario.getListaDeUsuarios());
 									String subject = "¡Bienvenido a Dogs Lovers " +nombre+ "!";
 									String mensaje = "¡Bienvenido a Dogs Lovers " +nombre+ "!." + "\n"+ 
 													 "Su nombre de Usuario es: "+nickName+ "."+ "\n" + 

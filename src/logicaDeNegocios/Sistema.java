@@ -29,9 +29,13 @@ public class Sistema {
 	private static int anio = fecha.get(Calendar.YEAR);
 	private static int mes = fecha.get(Calendar.MONTH)+1; 
 	private static int dia = fecha.get(Calendar.DATE);
+	private static ArrayList<CasaCuna> listaCasasCuna = new ArrayList<CasaCuna>();
 	
-	
-	private static final String rutaDetallesMascotas = "./infoMascota.poo";	
+	private static String rutaCasaCuna = "./casaCuna.poo";			
+	private static final String rutaTipoYRazaDeMascotas = "./Mascotas_TipoYRaza.poo";	
+	private static final String rutaDetallesDeMascotas = "./Mascotas_info.poo";	
+
+
 	//public static  ArrayList<String> listaDetallesMascota = new ArrayList<String>();
 	
 	File archivo = null;
@@ -48,6 +52,101 @@ public class Sistema {
 		String fecha = dia +"/"+ mes +"/"+ anio;
 		return fecha;
 	}
+	
+
+	public  void GuardarCasaCuna(ArrayList<CasaCuna> arrayCasaCuna) 
+    {
+    	FileWriter escribir = null;
+    	PrintWriter pw = null;
+    	try
+    	{		
+    		escribir = new FileWriter(rutaCasaCuna,false);
+    		pw = new PrintWriter(escribir);
+    		
+    		for(CasaCuna obj: arrayCasaCuna)
+    		{
+    			pw.println("===>Nueva Casa Cuna<===");
+    			pw.println(obj.getTamanoMascota());
+    			pw.println(obj.getTipoMascota());
+				pw.println(obj.isNecesitaDonacion());
+				pw.println(obj.isNecesitaMedicamentos());
+				pw.println(obj.getCantMascota());
+				pw.println(obj.getCamposDiponibles());
+				pw.println(obj.getDireccion());
+				pw.println(obj.getIdUsuarioCasaCuna());
+				
+			}
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	} finally 
+    	{
+    		try 
+    		{
+    				escribir.close();
+    		} catch (Exception e2) 
+    		{e2.printStackTrace();}
+    	}
+    }
+	
+	public static void  leerCasaCuna() throws IOException
+    {
+		File archivo = new File (rutaCasaCuna);
+    	try
+    	{
+    		listaCasasCuna.clear();    
+    		if (archivo.exists())
+    		{			
+	    		lectura = new FileReader (archivo);
+	    		bufferLectura = new BufferedReader(lectura);
+	    		while((bufferLectura.readLine())!=null)    			
+	    		{ 
+				CasaCuna obj = new CasaCuna();   
+	    			obj.setTamanoMascota(bufferLectura.readLine());
+	    			
+	    			obj.setTipoMascota(bufferLectura.readLine());
+	    			obj.setNecesitaDonacion(Boolean.getBoolean(bufferLectura.readLine()));
+	    			obj.setNecesitaMedicamentos(Boolean.getBoolean(bufferLectura.readLine()));
+	    			obj.setCantMascota(Integer.parseInt(bufferLectura.readLine()));
+	    			obj.setCamposDiponibles(Integer.parseInt(bufferLectura.readLine()));
+	    			obj.setDireccion(bufferLectura.readLine());
+	    			obj.setIdUsuarioCasaCuna(Integer.parseInt(bufferLectura.readLine()));
+	    			listaCasasCuna.add(obj);				
+	    		}
+
+
+    		}else
+        		JOptionPane.showMessageDialog(frame, "No existen datos. O cambio el archivo de ruta. (Usuarios)");                		
+    	}catch(Exception e){
+    		e.printStackTrace();  
+    	}finally
+    	{
+    		try
+    		{
+    			//if( null!= lectura )
+        		if (archivo.exists())
+    				lectura.close();
+ 
+    		}catch (Exception e2)
+    			{e2.printStackTrace();}
+    	}
+    }
+	
+	public static boolean esCasacuna(int idUsuario){
+		try {
+			leerCasaCuna();
+		
+		for(CasaCuna obj: listaCasasCuna)
+			if(obj.getIdUsuarioCasaCuna() == idUsuario)
+				return true;
+		
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	
+	
 	
 	/*
 	public static String[][] tomarDatosDeBusqueda(ArrayList<Integer> indicesDeResultados){
@@ -139,6 +238,7 @@ public class Sistema {
 		return false;
 			
 	}
+	
 	/*public static ArrayList<String> getRazas(){
 	
 	  ArrayList<String> razas = new ArrayList<String>();
@@ -153,68 +253,69 @@ public class Sistema {
 	
 	private static String estados = null; 
 	private static String razas = null;
-	private static String tipo = null;
+	private static String tipos = null;
 	private static String colorDePelo = null;
 	private static String colorDeOjos = null;
 	private static String lugarVisto = null;
 	
-
-	public static String[] getListaRazas() throws IOException{
-		leerDetallesParaMascotas();
+	public static String[] getListaRazas(String tipo) throws IOException{
+		leerTiposYRazas();
+		
+		boolean encontrado = false;
+		for(String str: listaDetalles){
+			if(str.equals(tipo))
+				encontrado = true;
+			if(encontrado){
+				return splitListaRazas();
+			}	
+		}
+		return null;
+	}
+	
+	private static String[] splitListaRazas() throws IOException{
+		leerTiposYRazas();
 		String listaRazas[] = razas.split(",");
 		return listaRazas;
 	}
 	
 	public static String[] getListaTipo() throws IOException{
-		leerDetallesParaMascotas();
-		String  listaTipos[] = tipo.split(",");
+		leerTiposYRazas();
+		String  listaTipos[] = tipos.split(",");
 		return listaTipos;
 	}
 	
 	public static String[] getListaColorDeOjos() throws IOException{
-		leerDetallesParaMascotas();
+		leerTiposYRazas();
 		String listaColorDeOjos[] = colorDeOjos.split(",");
 		return listaColorDeOjos;
 	}
 	
 	public static String[] getListaColorDePelo() throws IOException{
-		leerDetallesParaMascotas();
+		leerTiposYRazas();
 		String listaColorDePelo[] = colorDePelo.split(",");
 		return listaColorDePelo;
 	}
 	
 	public static String[] getListaEsados() throws IOException{
-		leerDetallesParaMascotas();
+		leerTiposYRazas();
 		String listaEstado[] = estados.split(",");
 		return listaEstado;
 	}
 	
-	public static void  leerDetallesParaMascotas() throws IOException{
-			File archivo = new File (rutaDetallesMascotas);
+	private static ArrayList<String> listaDetalles = new ArrayList<String>();
+	
+	public static void  leerTiposYRazas() throws IOException{
+			File archivo = new File (rutaTipoYRazaDeMascotas);
 	    	try
 	    	{
-   
-	    		estados = null; 
-	    		razas = null;
-	    		tipo = null;
-	    		colorDePelo = null;
-	    		colorDeOjos = null;
-	    		lugarVisto = null;
-
 	    		if (archivo.exists())
-	    		{			
+	    		{		
 		    		lectura = new FileReader (archivo);
 	    			bufferLectura = new BufferedReader(lectura);
-	    			
-	    			estados =bufferLectura.readLine();
-		   			tipo =bufferLectura.readLine();
-		   			colorDePelo =bufferLectura.readLine();
-		   			colorDeOjos =bufferLectura.readLine();
-		   			razas = bufferLectura.readLine();
-		   			//lugarVisto =bufferLectura.readLine();
-		   			
+	    			while((bufferLectura.readLine())!=null)    			
+	    				listaDetalles.add(bufferLectura.readLine());	    				
 	    		}else
-	        		JOptionPane.showMessageDialog(frame, "No existen datos. O cambio la ruta del archivo Detalles de mascotas");                		
+	        		JOptionPane.showMessageDialog(frame, "No existen datos. O cambio la ruta del archivo \"Detalles de mascotas\"");                		
 	    	}catch(Exception e){
 	    		e.printStackTrace();  
 	    	}finally
@@ -229,20 +330,17 @@ public class Sistema {
 	    	}
 	    }
 		
-	private void GuardarDetallesMascota(ArrayList<Usuario> arrayUsuarios) 
-    {
+	private static void GuardarDetallesMascota(){
     	FileWriter escribir = null;
     	PrintWriter pw = null;
     	try
     	{		
-    		escribir = new FileWriter(rutaDetallesMascotas,false);
+    		escribir = new FileWriter(rutaTipoYRazaDeMascotas,false);
     		pw = new PrintWriter(escribir);    		
+    		for(String str: listaDetalles)
+    			pw.println(str);
+    	
     		
-    		pw.println(estados);
-    		pw.println(tipo);
-    		pw.println(colorDePelo);
-    		pw.println(colorDeOjos);
-    		pw.println(razas);
     	} catch (Exception e) {
     		e.printStackTrace();
     	} finally 
@@ -255,12 +353,64 @@ public class Sistema {
     	}
     }
 	
-	public static void agregarEstado(String nuevoEstado){estados += ","+ nuevoEstado;}
-	public static void agregarTipo(String nuevoTipo){tipo += ","+ nuevoTipo;}
+	private static void agregarTipo(String tipo) throws IOException{
+			leerTiposYRazas();
+			listaDetalles.add(tipo);
+			listaDetalles.add(" ");
+	}
+
+	private static void agregarRaza(String tipo, String NuevaRaza) throws IOException{
+		leerTiposYRazas();
+		
+		boolean encontrado = false;
+		for(String str: listaDetalles){
+			if(str.equals(tipo))
+				encontrado = true;
+			if(encontrado){
+				str+=","+NuevaRaza;
+				encontrado = false;
+				break;
+			}
+				
+		}
+		listaDetalles.add(" ");
+		GuardarDetallesMascota();
+}
+	
+	
+	private static void guardarDetallesMascota(){
+    	FileWriter escribir = null;
+    	PrintWriter pw = null;
+    	try
+    	{		
+    		escribir = new FileWriter(rutaDetallesDeMascotas,false);
+    		pw = new PrintWriter(escribir);    		
+    		for(String str: listaDetalles)
+    			pw.println(str);
+    	
+    		
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	} finally 
+    	{
+    		try 
+    		{
+    				escribir.close();
+    		} catch (Exception e2) 
+    		{e2.printStackTrace();}
+    	}
+    }
+	
+	
+	//public static void agregarEstado(String nuevoEstado){estados += ","+ nuevoEstado; guardarEstados();}
+	
+	
+	
+	
 	
 	// cambiar  
 	
-	
+
 	
 	
 	

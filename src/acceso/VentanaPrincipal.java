@@ -201,13 +201,13 @@ public class VentanaPrincipal {
 
     public VentanaPrincipal() {
         try {
-            Mascota.leerMascota();
+            SistemasMascotas.leerMascota();
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
-        listaMascotasParaMostrar = Mascota.getListaDeMascotas();
+        listaMascotasParaMostrar = SistemasMascotas.getListaMascota();
          posicionMascotaPanel1 = listaMascotasParaMostrar.size()-1;
          posicionMascotaPanel2 = listaMascotasParaMostrar.size()-2; 
          posicionMascotaPanel3 = listaMascotasParaMostrar.size()-3;
@@ -257,12 +257,13 @@ public class VentanaPrincipal {
             public void actionPerformed(ActionEvent e) {
               if(rdbtnEncontradas.isSelected()){
                 listaMascotasParaMostrar.clear();
-                
-                listaMascotasParaMostrar = Mascota.getMascotasEncontradas();
+                /////////////////////////////////////////////
+                listaMascotasParaMostrar = SistemasMascotas.getMascotasPorEstado("ECONTRADA");
                 
                 posicionMascotaPanel1 = listaMascotasParaMostrar.size()-1  ;
                 posicionMascotaPanel2 = listaMascotasParaMostrar.size()-2  ;
                 posicionMascotaPanel3 = listaMascotasParaMostrar.size()-3   ;
+                
                 
                 
                 mascotaPanel1 = listaMascotasParaMostrar.get(posicionMascotaPanel1);
@@ -273,9 +274,9 @@ public class VentanaPrincipal {
                 lblFotoMascota_2.setIcon((new ImageIcon(mascotaPanel2.getFoto())));
                 lblFotoMascota_3.setIcon((new ImageIcon(mascotaPanel3.getFoto())));
                 
-                lbltitulomascota1.setText(mascotaPanel1.getTipo()+" " +mascotaPanel1.getEstado()+" en "+mascotaPanel1.getLugarVisto() );
-                lblTituloMascota_2.setText(mascotaPanel2.getTipo()+" " +mascotaPanel2.getEstado()+" en "+mascotaPanel2.getLugarVisto() );
-                lblTituloMascota_3.setText(mascotaPanel3.getTipo()+" " +mascotaPanel3.getEstado()+" en "+mascotaPanel3.getLugarVisto() );
+                lbltitulomascota1.setText(mascotaPanel1.getTipo()+" " +mascotaPanel1.getEstado()+" en "+mascotaPanel1.getLugarDelSuceso() );
+                lblTituloMascota_2.setText(mascotaPanel2.getTipo()+" " +mascotaPanel2.getEstado()+" en "+mascotaPanel2.getLugarDelSuceso() );
+                lblTituloMascota_3.setText(mascotaPanel3.getTipo()+" " +mascotaPanel3.getEstado()+" en "+mascotaPanel3.getLugarDelSuceso() );
                 
                 lblfechaSuceso.setText(mascotaPanel1.getDiaSuceso());
                 lblFecha_2.setText(mascotaPanel2.getDiaSuceso());
@@ -285,9 +286,9 @@ public class VentanaPrincipal {
                 lblNotas2.setText(mascotaPanel2.getNota());
                 lblNotas_3.setText(mascotaPanel3.getNota());
                 
-                lblLugarSuceso1.setText(mascotaPanel1.getLugarVisto());
-                lblLugar_2.setText(mascotaPanel2.getLugarVisto());
-                lblLugarSuceso_3.setText(mascotaPanel3.getLugarVisto());
+                lblLugarSuceso1.setText(mascotaPanel1.getLugarDelSuceso());
+                lblLugar_2.setText(mascotaPanel2.getLugarDelSuceso());
+                lblLugarSuceso_3.setText(mascotaPanel3.getLugarDelSuceso());
             }}
         });
         rdbtnEncontradas.setContentAreaFilled(false);
@@ -302,7 +303,7 @@ public class VentanaPrincipal {
              
                 listaMascotasParaMostrar.clear();
                 
-                listaMascotasParaMostrar = Mascota.getMascotasPerdidas();
+                listaMascotasParaMostrar = SistemasMascotas.getMascotasPorEstado("PERDIDAS");
 
                 posicionMascotaPanel1 = listaMascotasParaMostrar.size()-1  ;
                 posicionMascotaPanel2 = listaMascotasParaMostrar.size()-2  ;
@@ -319,9 +320,9 @@ public class VentanaPrincipal {
                 lblFotoMascota_2.setIcon((new ImageIcon(mascotaPanel2.getFoto())));
                 lblFotoMascota_3.setIcon((new ImageIcon(mascotaPanel3.getFoto())));
                 
-                lbltitulomascota1.setText(mascotaPanel1.getTipo()+" " +mascotaPanel1.getEstado()+" en "+mascotaPanel1.getLugarVisto() );
-                lblTituloMascota_2.setText(mascotaPanel2.getTipo()+" " +mascotaPanel2.getEstado()+" en "+mascotaPanel2.getLugarVisto() );
-                lblTituloMascota_3.setText(mascotaPanel3.getTipo()+" " +mascotaPanel3.getEstado()+" en "+mascotaPanel3.getLugarVisto() );
+                lbltitulomascota1.setText(mascotaPanel1.getTipo()+" " +mascotaPanel1.getEstado()+" en "+mascotaPanel1.getLugarDelSuceso() );
+                lblTituloMascota_2.setText(mascotaPanel2.getTipo()+" " +mascotaPanel2.getEstado()+" en "+mascotaPanel2.getLugarDelSuceso() );
+                lblTituloMascota_3.setText(mascotaPanel3.getTipo()+" " +mascotaPanel3.getEstado()+" en "+mascotaPanel3.getLugarDelSuceso() );
                 
                 lblfechaSuceso.setText(mascotaPanel1.getDiaSuceso());
                 lblFecha_2.setText(mascotaPanel2.getDiaSuceso());
@@ -331,9 +332,9 @@ public class VentanaPrincipal {
                 lblNotas2.setText(mascotaPanel2.getNota());
                 lblNotas_3.setText(mascotaPanel3.getNota());
                 
-                lblLugarSuceso1.setText(mascotaPanel1.getLugarVisto());
-                lblLugar_2.setText(mascotaPanel2.getLugarVisto());
-                lblLugarSuceso_3.setText(mascotaPanel3.getLugarVisto());
+                lblLugarSuceso1.setText(mascotaPanel1.getLugarDelSuceso());
+                lblLugar_2.setText(mascotaPanel2.getLugarDelSuceso());
+                lblLugarSuceso_3.setText(mascotaPanel3.getLugarDelSuceso());
             }
             }
         });
@@ -348,7 +349,7 @@ public class VentanaPrincipal {
                 if(rdbtnTodas.isSelected()){
                 listaMascotasParaMostrar.clear();
 
-                listaMascotasParaMostrar = Mascota.getListaDeMascotas();
+                listaMascotasParaMostrar = SistemasMascotas.getListaMascota();
                 
                 posicionMascotaPanel1 = listaMascotasParaMostrar.size()-1  ;
                 posicionMascotaPanel2 = listaMascotasParaMostrar.size()-2  ;
@@ -364,9 +365,9 @@ public class VentanaPrincipal {
                     lblFotoMascota_2.setIcon((new ImageIcon(mascotaPanel2.getFoto())));
                     lblFotoMascota_3.setIcon((new ImageIcon(mascotaPanel3.getFoto())));
                     
-                    lbltitulomascota1.setText(mascotaPanel1.getTipo()+" " +mascotaPanel1.getEstado()+" en "+mascotaPanel1.getLugarVisto() );
-                    lblTituloMascota_2.setText(mascotaPanel2.getTipo()+" " +mascotaPanel2.getEstado()+" en "+mascotaPanel2.getLugarVisto() );
-                    lblTituloMascota_3.setText(mascotaPanel3.getTipo()+" " +mascotaPanel3.getEstado()+" en "+mascotaPanel3.getLugarVisto() );
+                    lbltitulomascota1.setText(mascotaPanel1.getTipo()+" " +mascotaPanel1.getEstado()+" en "+mascotaPanel1.getLugarDelSuceso() );
+                    lblTituloMascota_2.setText(mascotaPanel2.getTipo()+" " +mascotaPanel2.getEstado()+" en "+mascotaPanel2.getLugarDelSuceso() );
+                    lblTituloMascota_3.setText(mascotaPanel3.getTipo()+" " +mascotaPanel3.getEstado()+" en "+mascotaPanel3.getLugarDelSuceso() );
                     
                     lblfechaSuceso.setText(mascotaPanel1.getDiaSuceso());
                     lblFecha_2.setText(mascotaPanel2.getDiaSuceso());
@@ -376,9 +377,9 @@ public class VentanaPrincipal {
                     lblNotas2.setText(mascotaPanel2.getNota());
                     lblNotas_3.setText(mascotaPanel3.getNota());
                     
-                    lblLugarSuceso1.setText(mascotaPanel1.getLugarVisto());
-                    lblLugar_2.setText(mascotaPanel2.getLugarVisto());
-                    lblLugarSuceso_3.setText(mascotaPanel3.getLugarVisto());
+                    lblLugarSuceso1.setText(mascotaPanel1.getLugarDelSuceso());
+                    lblLugar_2.setText(mascotaPanel2.getLugarDelSuceso());
+                    lblLugarSuceso_3.setText(mascotaPanel3.getLugarDelSuceso());
                     
                     
                 }
@@ -433,10 +434,10 @@ public class VentanaPrincipal {
         
         lbltitulomascota1 = new JLabel();
         lbltitulomascota1.setBounds(126, 11, 309, 14);
-        lbltitulomascota1.setText(mascotaPanel1.getTipo()+" " +mascotaPanel1.getEstado()+" en "+mascotaPanel1.getLugarVisto() );
+        lbltitulomascota1.setText(mascotaPanel1.getTipo()+" " +mascotaPanel1.getEstado()+" en "+mascotaPanel1.getLugarDelSuceso() );
         panelPrimeraMascota.add(lbltitulomascota1);
         
-        lblLugarSuceso1 = new JLabel(mascotaPanel1.getLugarVisto());
+        lblLugarSuceso1 = new JLabel(mascotaPanel1.getLugarDelSuceso());
         lblLugarSuceso1.setBounds(710, 40, 158, 14);
         panelPrimeraMascota.add(lblLugarSuceso1);
         
@@ -472,11 +473,11 @@ public class VentanaPrincipal {
         lblFotoMascota_2.setIcon(new ImageIcon(mascotaPanel2.getFoto()));
         panelSegundaMascota.add(lblFotoMascota_2);
         
-        lblTituloMascota_2 = new JLabel(mascotaPanel2.getTipo()+" " +mascotaPanel2.getEstado()+" en "+mascotaPanel2.getLugarVisto() );
+        lblTituloMascota_2 = new JLabel(mascotaPanel2.getTipo()+" " +mascotaPanel2.getEstado()+" en "+mascotaPanel2.getLugarDelSuceso() );
         lblTituloMascota_2.setBounds(126, 11, 308, 14);
         panelSegundaMascota.add(lblTituloMascota_2);
         
-        lblLugar_2 = new JLabel(mascotaPanel2.getLugarVisto() );
+        lblLugar_2 = new JLabel(mascotaPanel2.getLugarDelSuceso() );
         lblLugar_2.setBounds(710, 40, 158, 14);
         panelSegundaMascota.add(lblLugar_2);
         
@@ -503,11 +504,11 @@ public class VentanaPrincipal {
         lblFotoMascota_3.setBounds(10, 11, 106, 119);
         panelTerceraMascota.add(lblFotoMascota_3);
         
-        lblTituloMascota_3 = new JLabel(mascotaPanel3.getTipo()+" " +mascotaPanel3.getEstado()+" en "+mascotaPanel3.getLugarVisto() );
+        lblTituloMascota_3 = new JLabel(mascotaPanel3.getTipo()+" " +mascotaPanel3.getEstado()+" en "+mascotaPanel3.getLugarDelSuceso() );
         lblTituloMascota_3.setBounds(126, 11, 376, 14);
         panelTerceraMascota.add(lblTituloMascota_3);
         
-        lblLugarSuceso_3 = new JLabel(mascotaPanel3.getLugarVisto() );
+        lblLugarSuceso_3 = new JLabel(mascotaPanel3.getLugarDelSuceso() );
         lblLugarSuceso_3.setBounds(710, 40, 158, 14);
         panelTerceraMascota.add(lblLugarSuceso_3);
         
@@ -663,64 +664,70 @@ public class VentanaPrincipal {
         buttonGuardar.setFocusPainted(false);
         buttonGuardar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+            	 try {
             
-                nombre = textFieldNombreMascota.getText();
-                chip = textFieldNumChip.getText();
-                lugarVisto = comboBoxCanton.getSelectedItem().toString() + ", " + comboBoxProvincia.getSelectedItem().toString();
-                nota = editorPaneNotas.getText();
-                colorDePelo =(String)comboBoxColorPelaje.getSelectedItem();
-                idEncargado = IDUsuarioActivo;
-                fechaSuceso =  spinnerDiaPerdida.getValue().toString() + "/" + comboBoxMesPerdida.getSelectedItem().toString()+"/"+spinnerAnioPerdida.getValue().toString();
-                tipo = (String) comboBoxTipoMascota.getSelectedItem();
-                lugarVisto = (String)comboBoxCanton.getSelectedItem() + ", " + (String)comboBoxProvincia.getSelectedItem();
-                colorDeOjos = (comboBoxColorOjos.getSelectedItem()).toString();
-                verificarRaza();
-                verificarEstado();
-                verificarMoneda();
-                verificartxtFieldChip();
-                verificarNombre();
-                
-                if(chckbxRecompensa.isSelected() &&textFieldMontoRecompensa.getText().isEmpty()){
-                    JOptionPane.showMessageDialog(panelAgregarMascota, "Ingrese un monto de recompensa");
-                    return;
-                }
-                if(Mascota.verificarChip(chip, estado)){
-                
-                    JOptionPane.showMessageDialog(panelAgregarMascota, "Mascota ya ha sido registrada");
-                    return ;
-                }
-                
-                if(foto == null){
-                    
-                    JOptionPane.showMessageDialog(panelAgregarMascota, "Debe agregar fotografia");
-                    return;
-                }
-                if( nombre == null){
-                    JOptionPane.showMessageDialog(panelAgregarMascota, "Ingrese el nombre de la mascota");
-                    return;
-                }
-                
-                else{
-                    
-                    Mascota NuevaMascota = new Mascota(estado, tipo, raza, nombre, chip, colorDePelo, colorDeOjos, foto, lugarVisto, nota, fechaSuceso, recompensa, idEncargado);
-                   
-                    Mascota.getListaDeMascotas().add(NuevaMascota);
-                    
-                    NuevaMascota.GuardarMascota(Mascota.getListaDeMascotas());
-                    
-                    textFieldNombreMascota.setText(null);
-                    textFieldNumChip.setText(null);
-                    lblFotoMascota.setIcon(null);
-                    textFieldMontoRecompensa.setText(null);
-                    editorPaneNotas.setText(null);
-                    nombre = null;
-                    chip = null;
-                    recompensa = null;
-                    foto = null;
-                    JOptionPane.showMessageDialog(panelAgregarMascota, "Mascota registrada correctamente"); 
-                    panelAgregarMascota.setVisible(false);
-                    panelPrincipal.setVisible(true);
-                }
+	                nombre = textFieldNombreMascota.getText();
+	                chip = textFieldNumChip.getText();
+	                lugarVisto = comboBoxCanton.getSelectedItem().toString() + ", " + comboBoxProvincia.getSelectedItem().toString();
+	                nota = editorPaneNotas.getText();
+	                colorDePelo =(String)comboBoxColorPelaje.getSelectedItem();
+	                idEncargado = IDUsuarioActivo;
+	                fechaSuceso =  spinnerDiaPerdida.getValue().toString() + "/" + comboBoxMesPerdida.getSelectedItem().toString()+"/"+spinnerAnioPerdida.getValue().toString();
+	                tipo = (String) comboBoxTipoMascota.getSelectedItem();
+	                lugarVisto = (String)comboBoxCanton.getSelectedItem() + ", " + (String)comboBoxProvincia.getSelectedItem();
+	                colorDeOjos = (comboBoxColorOjos.getSelectedItem()).toString();
+	                verificarRaza();
+	                verificarEstado();
+	                verificarMoneda();
+	                verificartxtFieldChip();
+	                verificarNombre();
+	                
+	                if(chckbxRecompensa.isSelected() &&textFieldMontoRecompensa.getText().isEmpty()){
+	                    JOptionPane.showMessageDialog(panelAgregarMascota, "Ingrese un monto de recompensa");
+	                    return;
+	                }
+	               // if(Mascota.verificarChip(chip, estado)){
+	                if(SistemasMascotas.ChipYaEstaRegistrado(chip)){
+	                    JOptionPane.showMessageDialog(panelAgregarMascota, "Mascota ya ha sido registrada");
+	                    return ;
+	                }
+	                
+	                if(foto == null){
+	                    
+	                    JOptionPane.showMessageDialog(panelAgregarMascota, "Debe agregar fotografia");
+	                    return;
+	                }
+	                if( nombre == null){
+	                    JOptionPane.showMessageDialog(panelAgregarMascota, "Ingrese el nombre de la mascota");
+	                    return;
+	                }
+	                
+	                else{
+	                    
+	                    Mascota NuevaMascota = new Mascota(estado, tipo, raza, nombre, chip, colorDePelo, colorDeOjos, foto, lugarVisto, nota, fechaSuceso, recompensa, idEncargado);
+	                   
+	                   // Mascota.getListaDeMascotas().add(NuevaMascota);
+	                    //NuevaMascota.GuardarMascota(Mascota.getListaDeMascotas());
+	                   
+							SistemasMascotas.AgregarMascota(NuevaMascota);
+						
+	                    
+	                    textFieldNombreMascota.setText(null);
+	                    textFieldNumChip.setText(null);
+	                    lblFotoMascota.setIcon(null);
+	                    textFieldMontoRecompensa.setText(null);
+	                    editorPaneNotas.setText(null);
+	                    nombre = null;
+	                    chip = null;
+	                    recompensa = null;
+	                    foto = null;
+	                    JOptionPane.showMessageDialog(panelAgregarMascota, "Mascota registrada correctamente"); 
+	                    panelAgregarMascota.setVisible(false);
+	                    panelPrincipal.setVisible(true);
+	                 }
+            	 } catch (IOException e1) {
+						e1.printStackTrace();
+					}
             }
 
             
@@ -1115,33 +1122,29 @@ public class VentanaPrincipal {
         buttonGuardarCC = new JButton("");
         buttonGuardarCC.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                String tamanoMascota = (String) comboBoxTamanoMascotaCC.getSelectedItem();
-                String tipoMascota =(String) comboBoxTipoMascotaCC.getSelectedItem();
-                Boolean necesitaDonacion = verificarNecesitaDonacion();
-                Boolean necesitaMedicamentos = verificarNecesitaMedicamentos();
-                int cantMascotas =(int) spinnerCantidadDeMascotaCC.getValue();
-                int camposDisponibles =(int) spinnerCantidadDeMascotaCC.getValue();
-                String direccionCC = comboBoxCantonCasaCuna.getSelectedItem().toString() + ", " + comboBoxProvinciaCasaCuna.getSelectedItem().toString();
-                int idUsuarioCasaCuna = IDUsuarioActivo;
-                
-                CasaCuna nuevaCasaCuna = new CasaCuna(tamanoMascota, tipoMascota,necesitaDonacion, necesitaMedicamentos, cantMascotas, camposDisponibles, direccionCC, idUsuarioCasaCuna);
-                
-            
-                try {
-                    nuevaCasaCuna.leerCasaCuna();
-                } catch (IOException e1) {
-                    
-                    e1.printStackTrace();
-                }
-                CasaCuna.getListaCasasCuna().add(nuevaCasaCuna);
-                
-                nuevaCasaCuna.GuardarCasaCuna(CasaCuna.getListaCasasCuna());
-                
-                JOptionPane.showMessageDialog(null, "Casa Cuna Registrada Correctamente");
-                chckbxNoAlimentosCC.setSelected(false);
-                chckbxNoMedicamentosCC.setSelected(false);
-                spinnerCantidadDeMascotaCC.setValue(1);
-                
+            	//try {
+	              
+            	String tamanoMascota = (String) comboBoxTamanoMascotaCC.getSelectedItem();
+	            String tipoMascota =(String) comboBoxTipoMascotaCC.getSelectedItem();
+	            Boolean necesitaDonacion = verificarNecesitaDonacion();
+	            Boolean necesitaMedicamentos = verificarNecesitaMedicamentos();
+	            int cantMascotas =(int) spinnerCantidadDeMascotaCC.getValue();
+	            int camposDisponibles =(int) spinnerCantidadDeMascotaCC.getValue();
+	            String direccionCC = comboBoxCantonCasaCuna.getSelectedItem().toString() + ", " + comboBoxProvinciaCasaCuna.getSelectedItem().toString();
+	            int idUsuarioCasaCuna = IDUsuarioActivo;
+	              
+	            CasaCuna nuevaCasaCuna = new CasaCuna(tamanoMascota, tipoMascota,necesitaDonacion, necesitaMedicamentos, cantMascotas, camposDisponibles, direccionCC, idUsuarioCasaCuna);
+	               
+	            // nuevaCasaCuna.leerCasaCuna();	                
+	            //nuevaCasaCuna.GuardarCasaCuna(CasaCuna.getListaCasasCuna());
+	            CasaCuna.getListaCasasCuna().add(nuevaCasaCuna);
+	                
+	                
+	             JOptionPane.showMessageDialog(null, "Casa Cuna Registrada Correctamente");
+	             chckbxNoAlimentosCC.setSelected(false);
+	             chckbxNoMedicamentosCC.setSelected(false);
+	             spinnerCantidadDeMascotaCC.setValue(1);
+            	 
             
             }
         });
@@ -1350,19 +1353,14 @@ public class VentanaPrincipal {
         mnRegistro.addMouseListener(new MouseAdapter() {
             
             public void mouseClicked(MouseEvent arg0) {
-                
-                    if(CasaCuna.esCasacuna(IDUsuarioActivo)){
-                        
+                    //if(CasaCuna.esCasacuna(IDUsuarioActivo)){
+            		if(Sistema.esCasacuna(IDUsuarioActivo)){
                         mntmCasaCuna.setVisible(false);
                         mntmCasaCuna.setEnabled(false);
-                    
                     }
-                    
                     else{
-                    
                         mntmCasaCuna.setVisible(true);
                         mntmCasaCuna.setEnabled(true);
-                        
                     }
                 }
             
@@ -1440,12 +1438,12 @@ public class VentanaPrincipal {
     
     private void asignarIDFoto() {
         try {
-            Mascota.leerMascota();
+           SistemasMascotas.leerMascota();
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        foto = "./mascotas/" + String.valueOf(Mascota.getListaDeMascotasSize())+".jpg";
+        foto = "./mascotas/" + String.valueOf(SistemasMascotas.getSize())+".jpg";
     }
     
     public void verificarEstado(){
