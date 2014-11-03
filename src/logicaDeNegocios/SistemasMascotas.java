@@ -184,14 +184,14 @@ public class SistemasMascotas {
 		return false;
 	}
 	
+	public static ArrayList<Mascota> getMascotasFiltradas(){return listaMascotasFiltradas;} 
 	
-	public static  void buscarEnTodasLasMascotas() throws IOException{leerMascota(); listaMascotasFiltradas = listaMascotas;} // llamar antes de cada busqueda
+	public static void buscarEnTodasLasMascotas() throws IOException{leerMascota(); listaMascotasFiltradas = listaMascotas;} // llamar antes de cada busqueda
 	
-	public static ArrayList<Mascota> getMascotasPorEstado(String estado ){
+	public static ArrayList<Mascota> getMascotasPorEstado(String estado){
 			
 		ArrayList<Mascota> mascotasFiltradas = new ArrayList<Mascota>(); 
-	    
-		if(estado==null)
+		if(estado==" ")
 	    	return listaMascotasFiltradas;
 	    
 	    for(Mascota obj:listaMascotasFiltradas)
@@ -206,7 +206,7 @@ public class SistemasMascotas {
 
 	    ArrayList<Mascota> mascotasFiltradas = new ArrayList<Mascota>();
 	    
-	    if(tipo==null)
+	    if(tipo==" ")
 	    	return listaMascotasFiltradas;
 	    
 	    for(Mascota obj:listaMascotasFiltradas)
@@ -216,25 +216,26 @@ public class SistemasMascotas {
 	       return listaMascotasFiltradas = mascotasFiltradas;
 	}
 	
-	
-	public static ArrayList<Mascota> getMascotasPorRaza(String raza){
-
+	public static void getMascotasPorRaza(String raza){
 		ArrayList<Mascota> mascotasFiltradas = new ArrayList<Mascota>();
-		if(raza==null)
-	    	return listaMascotasFiltradas;
-		else{
+		if(raza!=" ")
+		{
 			for(Mascota obj:listaMascotasFiltradas)
 				if (obj.getRaza().equals(raza))
+						{System.out.println("filtré un -"+raza);
 		               	mascotasFiltradas.add(obj);
+						}
+			listaMascotasFiltradas = mascotasFiltradas;
+			
+		}
 		               
-			return listaMascotasFiltradas = mascotasFiltradas;
-		}	
-	}
+	}	
+	
 	
 	public static ArrayList<Mascota> getMascotasPorColorDePelo(String color){
 			
 		ArrayList<Mascota> mascotasFiltradas = new ArrayList<Mascota>();
-		if(color==null)
+		if(color==" ")
 	    	return listaMascotasFiltradas;    
 		for(Mascota obj:listaMascotasFiltradas)
 			if (obj.getColorDePelo().equals(color))
@@ -246,7 +247,7 @@ public class SistemasMascotas {
 	public static ArrayList<Mascota> getMascotasPorColorDeOjos(String color){
 		
 		  ArrayList<Mascota> mascotasFiltradas = new ArrayList<Mascota>();
-		  if(color==null)
+		  if(color==" ")
 		    	return listaMascotasFiltradas;
 		  for(Mascota obj:listaMascotasFiltradas)
 		      if (obj.getColorDeOjos().equals(color))
@@ -255,11 +256,10 @@ public class SistemasMascotas {
 		  return listaMascotasFiltradas = mascotasFiltradas;    
 	}
 	
-	
 	public static ArrayList<Mascota> getMascotasPorLugarDelSuceso(String lugar){
 		
 		  ArrayList<Mascota> mascotasFiltradas = new ArrayList<Mascota>();
-		  if(lugar==null)
+		  if(lugar==" ")
 		    	return listaMascotasFiltradas;  
 		  for(Mascota obj:listaMascotasFiltradas)
 		      if (obj.getLugarDelSuceso().equals(lugar))
