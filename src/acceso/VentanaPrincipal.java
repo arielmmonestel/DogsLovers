@@ -268,7 +268,7 @@ public class VentanaPrincipal {
               if(rdbtnEncontradas.isSelected()){
                 listaMascotasParaMostrar.clear();
                 /////////////////////////////////////////////
-                listaMascotasParaMostrar = SistemasMascotas.getMascotasPorEstado("ECONTRADA");
+                listaMascotasParaMostrar = SistemasMascotas.getMascotasPorEstado("ENCONTRADA");
                 
                 posicionMascotaPanel1 = listaMascotasParaMostrar.size()-1  ;
                 posicionMascotaPanel2 = listaMascotasParaMostrar.size()-2  ;

@@ -47,6 +47,9 @@ public class Sistema {
 	private static final String rutaEstadosDeMascotas = "./Mascotas_Estados.poo";
 	private static ArrayList<String> listaEstados =  new ArrayList<>() ;
 
+	//private static final String rutaReportes = "./Usuarios_Reportes.poo";
+	private static ArrayList<Reporte> listaDeReportes = new ArrayList<Reporte>();
+	
 
 	//public static  ArrayList<String> listaDetallesMascota = new ArrayList<String>();
 	
@@ -249,7 +252,7 @@ public class Sistema {
 			
 	}
 
-	
+	////////////////////////////////////////// mascotas /////////////////////////////////////////////
 	
 	private static String estados = null; 
 	private static String razas = null;
@@ -494,9 +497,28 @@ public class Sistema {
 
 	
 	
+	/////////////////////////////////////////// Reportes /////////////////////////////////////////////////////
 	
+	public static void agregarReporte(Reporte pReporte){
+		listaDeReportes.add(pReporte);
+	}
 	
+	public static void quitarReporte(Reporte pReporte){
+		listaDeReportes.remove(pReporte);
+	}
 	
+	public static boolean estaReportado(Usuario pUsuario){
+		for(Reporte obj : listaDeReportes){
+			if(pUsuario.equals(obj.getIdUsuarioReportado())){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	///////////////////////////////////////// Adopciones //////////////////////////////////////////////////////
+	
+
 	
 	
 	

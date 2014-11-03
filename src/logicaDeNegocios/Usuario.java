@@ -128,4 +128,21 @@ public class Usuario extends Persona{
 	public static int getListaDeUsuariosSize(){
 		return listaDeUsuarios.size();
 	}*/	
+	
+	
+	//////////////////////////////////// Acciones de Usuario /////////////////////////////////////////////////////////
+	
+//	public void adoptar(Mascota pMascota){
+//		Sistema.agregarAdopcion(new Adopcion(this, Mascota pMascota));
+//	}
+	
+	public void reportar(int idUsuario, String pMotivo){
+		Usuario usuarioReportado = SistemasUsuarios.getUsuario(idUsuario);
+		Sistema.agregarReporte(new Reporte(this, idUsuario, pMotivo));
+		usuarioReportado.setEstaEnListaNegra(true);
+		ListaNegra.agregarAListaNegra(usuarioReportado);
+	}
+	
+	
+	
 }

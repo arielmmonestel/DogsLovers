@@ -126,6 +126,10 @@ public class SistemasUsuarios {
     		{e2.printStackTrace();}
     	}
     }
+	
+	public static Usuario getUsuario(int indice){
+		return listaUsuarios.get(indice);
+	}
   
 	public static void AgregarUsuario(Usuario usuario) throws IOException{
 		leerUsuarios();
