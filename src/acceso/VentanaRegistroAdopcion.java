@@ -15,6 +15,7 @@ import java.awt.Toolkit;
 import java.awt.CardLayout;
 
 import javax.swing.ButtonGroup;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
@@ -27,11 +28,37 @@ import java.awt.Font;
 
 import javax.swing.JRadioButton;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.util.ArrayList;
+
+import logicaDeNegocios.Mascota;
+import logicaDeNegocios.Sistema;
+import logicaDeNegocios.SistemasMascotas;
+import logicaDeNegocios.SistemasUsuarios;
+import logicaDeNegocios.Usuario;
+
+import javax.swing.JComboBox;
+
+import java.awt.Choice;
+import java.awt.Panel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
 
 public class VentanaRegistroAdopcion extends JFrame {
 
     private JPanel contentPane;
     private ButtonGroup grupoMostrarPor = new ButtonGroup();
+    private static ArrayList<Mascota>listaMascotasParaMostrar ;
+    private static ArrayList<Usuario> listaUsuarios ;
+    private int posicionMascotaPanel1 ;
+    private int posicionMascotaPanel2 ;
+    private int posicionMascotaPanel3 ;
+    private Mascota mascotaPanel1 ;
+    private Mascota mascotaPanel2 ;
+    private Mascota mascotaPanel3 ;
     /**
      * Launch the application.
      */
@@ -39,6 +66,8 @@ public class VentanaRegistroAdopcion extends JFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
+                	SistemasMascotas.leerMascota();
+                    SistemasUsuarios.leerUsuarios();
                     VentanaRegistroAdopcion frame = new VentanaRegistroAdopcion();
                     frame.setVisible(true);
                 } catch (Exception e) {
@@ -50,8 +79,9 @@ public class VentanaRegistroAdopcion extends JFrame {
 
     /**
      * Create the frame.
+     * @throws IOException 
      */
-    public VentanaRegistroAdopcion() {
+    public VentanaRegistroAdopcion() throws IOException {
         setTitle("Adopciones");
         setAlwaysOnTop(true);
         setResizable(false);
@@ -64,10 +94,82 @@ public class VentanaRegistroAdopcion extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(new CardLayout(0, 0));
         
-        JPanel panelRegistrarAdopcion = new JPanel();
-        panelRegistrarAdopcion.setBounds(100, 100, 923, 641);
-        contentPane.add(panelRegistrarAdopcion, "name_42351462238686");
-        panelRegistrarAdopcion.setLayout(null);
+        JPanel panelMascotaAdopcion = new JPanel();
+        panelMascotaAdopcion.setBounds(100, 100, 923, 641);
+        contentPane.add(panelMascotaAdopcion, "name_42351462238686");
+        panelMascotaAdopcion.setLayout(null);
+        
+        JComboBox comboBoxMostrarPorRaza = new JComboBox();
+        comboBoxMostrarPorRaza.setVisible(false);
+        comboBoxMostrarPorRaza.setBounds(20, 241, 137, 20);
+        panelMascotaAdopcion.add(comboBoxMostrarPorRaza);
+        
+        JComboBox comboBoxMostrarTipo = new JComboBox();
+        comboBoxMostrarTipo.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		
+        		if(comboBoxMostrarTipo.getSelectedIndex() == 0){
+        			comboBoxMostrarPorRaza.setEnabled(false);
+        			comboBoxMostrarPorRaza.setVisible(false);
+        			
+        			listaMascotasParaMostrar = SistemasMascotas.getListaMascota();
+        			
+        			
+        			
+        		}
+        		
+        		
+        		if(comboBoxMostrarTipo.getSelectedIndex() == 1){    
+        			comboBoxMostrarPorRaza.setModel(new DefaultComboBoxModel(new String[] {"Airedale Terrier" ,"Akita inu" ,"Alaskan malamute", "American Stafford","Shire Terrier","Basenji",
+                            "Basset Hound","Beagle","Bichón Maltés","Boxer","Braco de Weimar","Bull Terrier","Bulldog francés","Bulldog inglés","Caniche","Carlino","Chihuahua","Chow-chow","Cocker Spaniel Americano","Cocker Spaniel inglés",
+                            "Crestado chino","Dálmata","Dobermann","Dogo Aleman","Dogo Argentino","Golden retriever","French Poodle",
+                            "Labrador Retrevier","Mastín Español","Mastín Napolitano","Pastor Alemán","Pequinés",
+                            "Pinscher Pomerania","Rottweiler","Samoyedo","San Bernardo","Schnauzer","Setter inglés",
+                            "Setter irlandés","Shar Pei","Shih Tzu","Siberian Husky"})) ;   
+        			comboBoxMostrarPorRaza.setVisible(true);
+        			comboBoxMostrarPorRaza.setEnabled(true);  
+
+                }
+                if (comboBoxMostrarTipo.getSelectedIndex() == 2){
+                    
+                	comboBoxMostrarPorRaza.setModel(new DefaultComboBoxModel(new String[] {"Abisinio","Aleman de pelo largo","Angora turco","American curl","American shorthair","American wirehair","Aphrodites giant","Australian mist",
+                      "Azul ruso","Balinés","Bengalí","Bogtail Japonés","Bosque de noruega","British shorthair","Burmilla","Burmés","Cornish rex","Cymric",
+                      "Chartreux","Devon rex","Don sphynx","Gato bombay","Gato brasileño","Ceylon","Europeo","Exótico","Gato habana","Korat","Manx","Munchkin","Ocicat","Ojos azules","Oriental","Oriental de pelo largo","Persa","Siamés","Siberiano","Singapura","Somalí","Tonkinés","LaPerm","Maine coon","Mau egipcio","Peterbald",
+                      "Pixiebob","Ragdoll","Sagrado de birmania","Scottish fold","Selkirk Rex","Sphynx","Van turco","Otro"}));
+                	comboBoxMostrarPorRaza.setVisible(true);
+                	comboBoxMostrarPorRaza.setEnabled(true);
+                    
+                }
+                if (comboBoxMostrarTipo.getSelectedIndex() == 3){
+                    
+                	comboBoxMostrarPorRaza.setModel(new DefaultComboBoxModel(new String[] {"Canario","Cotorra","Angaporis(Pájaros de Amor)","Rosella","Loro de Bolsillo"
+                            ,"Loro","Turaco","Cacatua","Guacamayo","Ninfa","Pato","Gallina","Otro"})); 
+                	comboBoxMostrarPorRaza.setVisible(true);
+                	comboBoxMostrarPorRaza.setEnabled(true);
+                    
+                }
+                if (comboBoxMostrarTipo.getSelectedIndex() == 4){
+                    
+                	comboBoxMostrarPorRaza.setModel(new DefaultComboBoxModel(new String[] {"Ardilla Coreana",
+                            "Cobaya","Conejos","Erizo","Hamster","Jerbo","Rata","Ratón","Otro"}));
+                	comboBoxMostrarPorRaza.setVisible(true);
+                	comboBoxMostrarPorRaza.setEnabled(true);
+                    
+                }
+                if (comboBoxMostrarTipo.getSelectedIndex() == 5){
+                    
+                	comboBoxMostrarPorRaza.setEnabled(false);
+                	comboBoxMostrarPorRaza.setVisible(false);
+                    
+                    
+                }
+
+
+        	}
+        });
+        comboBoxMostrarTipo.setModel(new DefaultComboBoxModel(new String[] {"Todos", "Canino", "Felino", "Ave", "Roedor", "Otro"}));
+        comboBoxMostrarTipo.setBounds(20, 186, 137, 20);
+        panelMascotaAdopcion.add(comboBoxMostrarTipo);
         
         JButton btnFlechaDerecha = new JButton("");
         btnFlechaDerecha.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -83,7 +185,7 @@ public class VentanaRegistroAdopcion extends JFrame {
         btnFlechaDerecha.setContentAreaFilled(false);
         btnFlechaDerecha.setIcon(new ImageIcon("./imgs/flechaDerecha-48.png"));
         btnFlechaDerecha.setBounds(773, 553, 151, 44);
-        panelRegistrarAdopcion.add(btnFlechaDerecha);
+        panelMascotaAdopcion.add(btnFlechaDerecha);
         
         JButton btnFlechaIzquierda = new JButton("");
         btnFlechaIzquierda.setFocusable(false);
@@ -95,61 +197,14 @@ public class VentanaRegistroAdopcion extends JFrame {
         btnFlechaIzquierda.setRolloverIcon(new ImageIcon("./imgs/flechaIzquierda-64.png"));
         btnFlechaIzquierda.setIcon(new ImageIcon("./imgs/flechaIzquierda-48.png"));
         btnFlechaIzquierda.setBounds(215, 553, 151, 44);
-        panelRegistrarAdopcion.add(btnFlechaIzquierda);
+        panelMascotaAdopcion.add(btnFlechaIzquierda);
         
-        
-        JRadioButton rdbtnTodos = new JRadioButton("Todos");
-        rdbtnTodos.setSelected(true);
-        rdbtnTodos.setHorizontalAlignment(SwingConstants.LEFT);
-        rdbtnTodos.setBounds(20, 193, 137, 20);
-        grupoMostrarPor.add(rdbtnTodos);
-        panelRegistrarAdopcion.add(rdbtnTodos);
-        
-        JRadioButton radioButtonOtros = new JRadioButton("Otros");
-        radioButtonOtros.setHorizontalAlignment(SwingConstants.LEFT);
-        grupoMostrarPor.add(radioButtonOtros);
-        radioButtonOtros.setBounds(20, 339, 137, 20);
-        panelRegistrarAdopcion.add(radioButtonOtros);
-        
-        JRadioButton rdbtnRoedores = new JRadioButton("Roedores");
-        rdbtnRoedores.setHorizontalAlignment(SwingConstants.LEFT);
-        grupoMostrarPor.add(rdbtnRoedores);
-        rdbtnRoedores.setBounds(20, 310, 137, 20);
-        panelRegistrarAdopcion.add(rdbtnRoedores);
-        
-        JRadioButton radioButtonAves = new JRadioButton("Aves");
-        radioButtonAves.setHorizontalAlignment(SwingConstants.LEFT);
-        grupoMostrarPor.add(radioButtonAves);
-        radioButtonAves.setBounds(20, 279, 137, 20);
-        panelRegistrarAdopcion.add(radioButtonAves);
-        
-        JRadioButton rdbtnFelinos = new JRadioButton("Felinos");
-        rdbtnFelinos.setHorizontalAlignment(SwingConstants.LEFT);
-        grupoMostrarPor.add(rdbtnFelinos);
-        rdbtnFelinos.setBounds(20, 249, 137, 20);
-        panelRegistrarAdopcion.add(rdbtnFelinos);
-        
-        JRadioButton radioButtonCaninos = new JRadioButton("Caninos");
-        radioButtonCaninos.setHorizontalAlignment(SwingConstants.LEFT);
-        grupoMostrarPor.add(radioButtonCaninos);
-        radioButtonCaninos.setBounds(20, 219, 137, 20);
-        panelRegistrarAdopcion.add(radioButtonCaninos);
-        
-        JLabel lblMostrarPor = new JLabel("Mostrar  Por:");
-        lblMostrarPor.setFont(new Font("Batang", Font.BOLD, 12));
-        lblMostrarPor.setBounds(20, 155, 137, 20);
-        panelRegistrarAdopcion.add(lblMostrarPor);
-        
-        JLabel labelMostrarPor = new JLabel("");
-        labelMostrarPor.setIcon(new ImageIcon("./imgs/fondoPanelesPantallaPrincipal.png"));
-        labelMostrarPor.setBorder(new MatteBorder(5, 5, 5, 5, (Color) new Color(110, 170, 111)));
-        labelMostrarPor.setBounds(10, 145, 198, 234);
-        panelRegistrarAdopcion.add(labelMostrarPor);
+        listaUsuarios = SistemasUsuarios.getUsuarios();
         
         JPanel panelAdopcionTres = new JPanel();
         panelAdopcionTres.setBounds(238, 414, 659, 128);
         panelAdopcionTres.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.BLACK, null, null, null));
-        panelRegistrarAdopcion.add(panelAdopcionTres);
+        panelMascotaAdopcion.add(panelAdopcionTres);
         panelAdopcionTres.setLayout(null);
         
         JButton btnAdoptarPanel3 = new JButton("Adoptar");
@@ -173,7 +228,7 @@ public class VentanaRegistroAdopcion extends JFrame {
         JPanel panelAdopcionDos = new JPanel();
         panelAdopcionDos.setBounds(238, 279, 659, 128);
         panelAdopcionDos.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.BLACK, null, null, null));
-        panelRegistrarAdopcion.add(panelAdopcionDos);
+        panelMascotaAdopcion.add(panelAdopcionDos);
         panelAdopcionDos.setLayout(null);
         
         JButton btnAdoptarPanel2 = new JButton("Adoptar");
@@ -197,7 +252,7 @@ public class VentanaRegistroAdopcion extends JFrame {
         JPanel panelAdopcionUno = new JPanel();
         panelAdopcionUno.setBounds(238, 145, 659, 128);
         panelAdopcionUno.setBorder(new BevelBorder(BevelBorder.LOWERED, new Color(100, 149, 237), null, null, null));
-        panelRegistrarAdopcion.add(panelAdopcionUno);
+        panelMascotaAdopcion.add(panelAdopcionUno);
         panelAdopcionUno.setLayout(null);
         
         JButton btnAdoptarPanel1 = new JButton("Adoptar");
@@ -218,15 +273,29 @@ public class VentanaRegistroAdopcion extends JFrame {
         labelFondoPanel1.setBorder(new MatteBorder(5, 5, 5, 5, (Color) new Color(110, 170, 111)));
         panelAdopcionUno.add(labelFondoPanel1);
         
+        JLabel lblMostrarPor = new JLabel("Mostrar  Por:");
+        lblMostrarPor.setFont(new Font("Batang", Font.BOLD, 12));
+        lblMostrarPor.setBounds(20, 155, 137, 20);
+        panelMascotaAdopcion.add(lblMostrarPor);
+        
+        JLabel labelMostrarPor = new JLabel("");
+        labelMostrarPor.setIcon(new ImageIcon("./imgs/fondoPanelesPantallaPrincipal.png"));
+        labelMostrarPor.setBorder(new MatteBorder(5, 5, 5, 5, (Color) new Color(110, 170, 111)));
+        labelMostrarPor.setBounds(10, 125, 198, 234);
+        panelMascotaAdopcion.add(labelMostrarPor);
+        
         JLabel lblTitulo = new JLabel("");
         lblTitulo.setIcon(new ImageIcon("./imgs/Logo.png"));
         lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
         lblTitulo.setBounds(270, 0, 457, 108);
-        panelRegistrarAdopcion.add(lblTitulo);
+        panelMascotaAdopcion.add(lblTitulo);
         
         JLabel labelFondo = new JLabel("");
         labelFondo.setIcon(new ImageIcon("./imgs/fondoRegistro.png"));
         labelFondo.setBounds(0, 0, 2508, 1246);
-        panelRegistrarAdopcion.add(labelFondo);
+        panelMascotaAdopcion.add(labelFondo);
+        
+        Panel panel = new Panel();
+        contentPane.add(panel, "name_19734065748226");
     }
 }

@@ -481,7 +481,32 @@ public class Sistema {
 	
 	private static void guardarEstados(){
 		
-	}
+			
+	        FileWriter escribir = null;
+	        PrintWriter pw = null;
+	        try
+	        {       
+	            escribir = new FileWriter(rutaEstadosDeMascotas,false);
+	            pw = new PrintWriter(escribir);         
+	            for(String str: listaEstados)
+	                pw.println(str);
+	        
+	            
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        } finally 
+	        {
+	            try 
+	            {
+	                    escribir.close();
+	            } catch (Exception e2) 
+	            {e2.printStackTrace();}
+	        }
+	    }
+
+		
+		
+	
 
 		
 	public static void agregarEstado(String nuevoEstado) throws IOException{
