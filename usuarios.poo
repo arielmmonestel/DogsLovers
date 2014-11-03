@@ -68,7 +68,6 @@ false
 0
 ===>nuevo Usuario<===
 4
-<<<<<<< HEAD
 Byron
 Araya
 Chavarria
@@ -80,10 +79,15 @@ Junio
 1990
 byronaraya
 lucy123
-=======
+false
+false
+false
+0
+===>nuevo Usuario<===
+5
 Fabián
 Monge
-G
+Garcia
 Masculino
 123456789
 fabian1mg@gmail.com
@@ -92,7 +96,6 @@ Julio
 1990
 fabianmg
 123
->>>>>>> testFabian
 false
 false
 false
