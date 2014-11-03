@@ -135,7 +135,7 @@ public class VentanaPrincipal {
     private JComboBox comboBoxMesPerdida;
     private JSpinner spinnerAnioPerdida;
     private JButton btnAgregarFoto;
-    private String rutaImagenesMascotas = "./mascotas";
+    private static String rutaImagenesMascotas = "./mascotas";
     /**
      * @wbp.nonvisual location=314,-31
      */
@@ -268,7 +268,7 @@ public class VentanaPrincipal {
               if(rdbtnEncontradas.isSelected()){
                 listaMascotasParaMostrar.clear();
                 /////////////////////////////////////////////
-                listaMascotasParaMostrar = SistemasMascotas.getMascotasPorEstado("ENCONTRADA");
+                listaMascotasParaMostrar = SistemasMascotas.getMascotasEncontradas();
                 
                 posicionMascotaPanel1 = listaMascotasParaMostrar.size()-1  ;
                 posicionMascotaPanel2 = listaMascotasParaMostrar.size()-2  ;
@@ -313,12 +313,12 @@ public class VentanaPrincipal {
              
                 listaMascotasParaMostrar.clear();
                 
-                listaMascotasParaMostrar = SistemasMascotas.getMascotasPorEstado("PERDIDAS");
+                listaMascotasParaMostrar = SistemasMascotas.getMascotasPerdidas();
 
                 posicionMascotaPanel1 = listaMascotasParaMostrar.size()-1  ;
                 posicionMascotaPanel2 = listaMascotasParaMostrar.size()-2  ;
                 posicionMascotaPanel3 = listaMascotasParaMostrar.size()-3   ;
-                
+                System.out.println("HOLA :" + listaMascotasParaMostrar.size() );
                 
                 mascotaPanel1 = listaMascotasParaMostrar.get(posicionMascotaPanel1);
                 mascotaPanel2 = listaMascotasParaMostrar.get(posicionMascotaPanel2);
@@ -765,8 +765,8 @@ public class VentanaPrincipal {
                     }
                     
                 }
-                crearCarpetaImagenesMascotas();
-                asignarIDFoto();
+                Sistema.crearCarpetaImagenesMascotas();
+                Sistema.asignarIDFoto();
                 Sistema.copiarImagen(archivoSeleccionado);
             }
             
@@ -853,7 +853,7 @@ public class VentanaPrincipal {
 	                    return ;
 	                }
 	                
-	                if(foto == null){
+	                if(getFoto() == null){
 	                    
 	                    JOptionPane.showMessageDialog(panelAgregarMascota, "Debe agregar fotografia");
 	                    return;
@@ -865,7 +865,7 @@ public class VentanaPrincipal {
 	                
 	                else{
 	                    
-	                    Mascota NuevaMascota = new Mascota(estado, tipo, raza, nombre, chip, colorDePelo, colorDeOjos, foto, lugarVisto, nota, fechaSuceso, recompensa, idEncargado);
+	                    Mascota NuevaMascota = new Mascota(estado, tipo, raza, nombre, chip, colorDePelo, colorDeOjos, getFoto(), lugarVisto, nota, fechaSuceso, recompensa, idEncargado);
 	                   
 	                   // Mascota.getListaDeMascotas().add(NuevaMascota);
 	                    //NuevaMascota.GuardarMascota(Mascota.getListaDeMascotas());
@@ -881,7 +881,7 @@ public class VentanaPrincipal {
 	                    nombre = null;
 	                    chip = null;
 	                    recompensa = null;
-	                    foto = null;
+	                    setFoto(null);
 	                    JOptionPane.showMessageDialog(panelAgregarMascota, "Mascota registrada correctamente"); 
 	                    panelAgregarMascota.setVisible(false);
 	                    panelPrincipal.setVisible(true);
@@ -1603,29 +1603,7 @@ public class VentanaPrincipal {
         panelAgregarCasaCuna.setVisible(false);
     }
     
-    private void crearCarpetaImagenesMascotas()
-    {
-        File archivo = new File (rutaImagenesMascotas);
-
-        if(!archivo.exists())
-        {
-            archivo.mkdir();
-        }
-    }
-    
-    private void asignarIDFoto() {
-        try {
-           SistemasMascotas.leerMascota();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        foto = "./mascotas/" + String.valueOf(SistemasMascotas.getSize())+".jpg";
-
-    }
-    
-    public void verificarEstado(){
+        public void verificarEstado(){
         
         if(estadoMascota.isSelected( rdbtnEncontrada.getModel())){
             
@@ -1727,5 +1705,21 @@ public class VentanaPrincipal {
         }
         
     }
+
+	public static String getFoto() {
+		return foto;
+	}
+
+	public static void setFoto(String pFoto) {
+		foto = pFoto;
+	}
+
+	public static String getRutaImagenesMascotas() {
+		return rutaImagenesMascotas;
+	}
+
+	public void setRutaImagenesMascotas(String pRutaImagenesMascotas) {
+		rutaImagenesMascotas = pRutaImagenesMascotas;
+	}
 };;
 

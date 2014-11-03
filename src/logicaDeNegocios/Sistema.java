@@ -20,6 +20,8 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import acceso.VentanaPrincipal;
+
 
 
 
@@ -186,7 +188,7 @@ public class Sistema {
 	public static void copiarImagen(File imagenOriginal) {
 		File archivoOriginal = new File(imagenOriginal.getAbsolutePath());
 
-		File archivoNuevo	 = new File(System.getProperty("user.dir") + "./mascotas/" + String.valueOf(SistemasMascotas.getSize()) + ".jpg");
+		File archivoNuevo	 = new File(System.getProperty("user.dir") + "./mascotas/" + String.valueOf(SistemasMascotas.getSize()+1) + ".jpg");
 
 		try {
 			FileInputStream inStream = new FileInputStream(archivoOriginal);
@@ -487,6 +489,32 @@ public class Sistema {
 		listaEstados.add(nuevoEstado);
 		guardarEstados();
 	}
+	
+
+    
+    public static void asignarIDFoto() {
+        try {
+           SistemasMascotas.leerMascota();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        VentanaPrincipal.setFoto("./mascotas/" + String.valueOf(SistemasMascotas.getSize()+1)+".jpg");
+
+    }
+    
+    public static void crearCarpetaImagenesMascotas()
+    {
+        File archivo = new File (VentanaPrincipal.getRutaImagenesMascotas());
+
+        if(!archivo.exists())
+        {
+            archivo.mkdir();
+        }
+    }    
+
+
 	
 	
 	
