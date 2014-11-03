@@ -31,7 +31,7 @@ public class SistemasMascotas {
 	
 	private static final String rutaMascotas = "./mascotas.poo";	
 	private static  ArrayList<Mascota> listaMascotas = new ArrayList<Mascota>();
-	private static  ArrayList<Mascota> listaMascotasFiltradas = new ArrayList<Mascota>();
+	public static  ArrayList<Mascota> listaMascotasFiltradas = new ArrayList<Mascota>();
 	public static int size;
 	File archivo = null;
 	static FileReader lectura = null;
@@ -209,12 +209,14 @@ public class SistemasMascotas {
 	    if(tipo==null)
 	    	return listaMascotasFiltradas;
 	    
-	    for(Mascota obj:listaMascotasFiltradas)
+	    for(Mascota obj:listaMascotas){
 	        if (obj.getTipo().equals(tipo))
 	              	mascotasFiltradas.add(obj);
-	               
-	        return listaMascotasFiltradas = mascotasFiltradas;
+	    }
+	    listaMascotasFiltradas = mascotasFiltradas;
+	        return listaMascotasFiltradas ;
 	}
+	
 	
 	public static ArrayList<Mascota> getMascotasPorRaza(String raza){
 
@@ -251,6 +253,51 @@ public class SistemasMascotas {
 		               
 		  return listaMascotasFiltradas = mascotasFiltradas;    
 	}
+	
+	
+	public static ArrayList<Mascota> getMascotasPerdidas(){
+		
+		listaMascotas.clear();
+		try {
+			leerMascota();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		ArrayList<Mascota> listaMascotasPerdida  = new ArrayList<Mascota>();
+		for(Mascota obj:listaMascotas){
+			
+			if (obj.getEstado().equals("PERDIDA")){
+				listaMascotasPerdida.add(obj);	
+			}
+		
+		}
+		return listaMascotasPerdida;
+	}
+	
+
+public static ArrayList<Mascota> getMascotasEncontradas(){
+        
+        listaMascotas.clear();
+        try {
+            leerMascota();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        ArrayList<Mascota> listaMascotasEncontrada  = new ArrayList<Mascota>();
+        for(Mascota obj:listaMascotas){
+            
+            if (obj.getEstado().equals("ENCONTRADA")){
+                listaMascotasEncontrada.add(obj);  
+            }
+        
+        }
+        return listaMascotasEncontrada;
+    }
+
 	
 	public static ArrayList<Mascota> getMascotasPorLugarDelSuceso(String lugar){
 		
