@@ -136,6 +136,10 @@ public class VentanaPrincipal {
     private JSpinner spinnerAnioPerdida;
     private JButton btnAgregarFoto;
     private static String rutaImagenesMascotas = "./mascotas";
+    
+    private static String opcEstado = "";
+    private static String opcTipo = "";
+    private static String opcRaza = "";
     /**
      * @wbp.nonvisual location=314,-31
      */
@@ -184,6 +188,7 @@ public class VentanaPrincipal {
     private Mascota mascotaPanel3 ;
     private static boolean llegoAlLimiteDerecho = false;
     private static boolean llegoAlLimiteIzquierdo = true;
+    private JButton btnFlechaDerecha;
     
   public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() { 
@@ -266,9 +271,16 @@ public class VentanaPrincipal {
         rdbtnEncontradas.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
               if(rdbtnEncontradas.isSelected()){
-                listaMascotasParaMostrar.clear();
-                /////////////////////////////////////////////
-                listaMascotasParaMostrar = SistemasMascotas.getMascotasEncontradas();
+            	  opcEstado = "ENCONTRADA";
+                //listaMascotasParaMostrar.clear();
+                refrescarPaneles();
+            /*    try {
+					SistemasMascotas.buscarEnTodasLasMascotas();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+                listaMascotasParaMostrar = SistemasMascotas.getMascotasPorEstado("ENCONTRADA");
                 
                 posicionMascotaPanel1 = listaMascotasParaMostrar.size()-1  ;
                 posicionMascotaPanel2 = listaMascotasParaMostrar.size()-2  ;
@@ -298,7 +310,7 @@ public class VentanaPrincipal {
                 
                 lblLugarSuceso1.setText(mascotaPanel1.getLugarDelSuceso());
                 lblLugar_2.setText(mascotaPanel2.getLugarDelSuceso());
-                lblLugarSuceso_3.setText(mascotaPanel3.getLugarDelSuceso());
+                lblLugarSuceso_3.setText(mascotaPanel3.getLugarDelSuceso());*/
             }}
         });
         rdbtnEncontradas.setContentAreaFilled(false);
@@ -310,15 +322,22 @@ public class VentanaPrincipal {
         rdbtnPerdidas.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if(rdbtnPerdidas.isSelected()){
-             
-                listaMascotasParaMostrar.clear();
+                	
+                	opcEstado = "PERDIDA";
+                	refrescarPaneles();
+               /* listaMascotasParaMostrar.clear();
+                /*try {
+					SistemasMascotas.buscarEnTodasLasMascotas();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
                 
-                listaMascotasParaMostrar = SistemasMascotas.getMascotasPerdidas();
-
+                listaMascotasParaMostrar = SistemasMascotas.getMascotasPorEstado(estado);
                 posicionMascotaPanel1 = listaMascotasParaMostrar.size()-1  ;
                 posicionMascotaPanel2 = listaMascotasParaMostrar.size()-2  ;
                 posicionMascotaPanel3 = listaMascotasParaMostrar.size()-3   ;
-                System.out.println("HOLA :" + listaMascotasParaMostrar.size() );
+                
                 
                 mascotaPanel1 = listaMascotasParaMostrar.get(posicionMascotaPanel1);
                 mascotaPanel2 = listaMascotasParaMostrar.get(posicionMascotaPanel2);
@@ -344,10 +363,12 @@ public class VentanaPrincipal {
                 
                 lblLugarSuceso1.setText(mascotaPanel1.getLugarDelSuceso());
                 lblLugar_2.setText(mascotaPanel2.getLugarDelSuceso());
-                lblLugarSuceso_3.setText(mascotaPanel3.getLugarDelSuceso());
+                lblLugarSuceso_3.setText(mascotaPanel3.getLugarDelSuceso());*/
             }
             }
         });
+       
+
         rdbtnPerdidas.setContentAreaFilled(false);
         rdbtnPerdidas.setBounds(54, 205, 109, 23);
         VerMascotasPor.add(rdbtnPerdidas);
@@ -357,42 +378,13 @@ public class VentanaPrincipal {
         rdbtnTodas.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 if(rdbtnTodas.isSelected()){
-                listaMascotasParaMostrar.clear();
-
-                listaMascotasParaMostrar = SistemasMascotas.getListaMascota();
+                opcEstado=null;
+                opcTipo=null;
+                opcRaza=null;
                 
-                posicionMascotaPanel1 = listaMascotasParaMostrar.size()-1  ;
-                posicionMascotaPanel2 = listaMascotasParaMostrar.size()-2  ;
-                posicionMascotaPanel3 = listaMascotasParaMostrar.size()-3   ;
+                refrescarPaneles();
                 
-                
-                mascotaPanel1 = listaMascotasParaMostrar.get(posicionMascotaPanel1);
-                mascotaPanel2 = listaMascotasParaMostrar.get(posicionMascotaPanel2);
-                mascotaPanel3 = listaMascotasParaMostrar.get(posicionMascotaPanel3);
-                
-                
-                    lblFotoMascota1.setIcon(new ImageIcon(mascotaPanel1.getFoto()));
-                    lblFotoMascota_2.setIcon((new ImageIcon(mascotaPanel2.getFoto())));
-                    lblFotoMascota_3.setIcon((new ImageIcon(mascotaPanel3.getFoto())));
-                    
-                    lbltitulomascota1.setText(mascotaPanel1.getTipo()+" " +mascotaPanel1.getEstado()+" en "+mascotaPanel1.getLugarDelSuceso() );
-                    lblTituloMascota_2.setText(mascotaPanel2.getTipo()+" " +mascotaPanel2.getEstado()+" en "+mascotaPanel2.getLugarDelSuceso() );
-                    lblTituloMascota_3.setText(mascotaPanel3.getTipo()+" " +mascotaPanel3.getEstado()+" en "+mascotaPanel3.getLugarDelSuceso() );
-                    
-                    lblfechaSuceso.setText(mascotaPanel1.getDiaSuceso());
-                    lblFecha_2.setText(mascotaPanel2.getDiaSuceso());
-                    lblFecha_3.setText(mascotaPanel3.getDiaSuceso());
-                    
-                    lblNotas_1.setText(mascotaPanel1.getNota());
-                    lblNotas2.setText(mascotaPanel2.getNota());
-                    lblNotas_3.setText(mascotaPanel3.getNota());
-                    
-                    lblLugarSuceso1.setText(mascotaPanel1.getLugarDelSuceso());
-                    lblLugar_2.setText(mascotaPanel2.getLugarDelSuceso());
-                    lblLugarSuceso_3.setText(mascotaPanel3.getLugarDelSuceso());
-                    
-                    
-                }
+                                }
             
             }
             }
@@ -537,7 +529,7 @@ public class VentanaPrincipal {
         labelFondoPanel3.setBounds(0, 0, 868, 141);
         panelTerceraMascota.add(labelFondoPanel3);
         
-        JButton btnFlechaDerecha = new JButton("");
+        btnFlechaDerecha = new JButton("");
         btnFlechaDerecha.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) { 
         		if(!llegoAlLimiteDerecho){
@@ -574,6 +566,7 @@ public class VentanaPrincipal {
 			                lblfechaSuceso.setVisible(false);
 			                lblNotas_1.setVisible(false);
 			                lblLugarSuceso1.setVisible(false);
+			                panelPrimeraMascota.setVisible(false);
 			        	}
 	        		
 		        		if(posicionMascotaPanel2 >= 0){
@@ -595,6 +588,7 @@ public class VentanaPrincipal {
 			                lblFecha_2.setVisible(false);
 			                lblNotas2.setVisible(false);
 			                lblLugar_2.setVisible(false);
+			                panelSegundaMascota.setVisible(false);
 			        	}
 			        	
 			        	if(posicionMascotaPanel3 >= 0){
@@ -615,6 +609,7 @@ public class VentanaPrincipal {
 			                lblFecha_3.setVisible(false);
 			                lblNotas_3.setVisible(false);
 			                lblLugarSuceso_3.setVisible(false);
+			                panelTerceraMascota.setVisible(false);
 			        	}
 		        	}
 		        	else{
@@ -648,7 +643,9 @@ public class VentanaPrincipal {
         btnFlechaIzquierda.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		if(!llegoAlLimiteIzquierdo){
-            		
+        			panelPrimeraMascota.setVisible(true);
+        			panelSegundaMascota.setVisible(true);
+        			panelTerceraMascota.setVisible(true);
         			llegoAlLimiteDerecho = false;
 	        		posicionMascotaPanel1 += 3;
 	        		System.out.println("pos1 = " + posicionMascotaPanel1);
@@ -1720,6 +1717,52 @@ public class VentanaPrincipal {
 
 	public void setRutaImagenesMascotas(String pRutaImagenesMascotas) {
 		rutaImagenesMascotas = pRutaImagenesMascotas;
+	}
+	
+	public void refrescarPaneles(){
+		try {
+			SistemasMascotas.buscarEnTodasLasMascotas();
+			
+			SistemasMascotas.getMascotasPorTipo("Canino");
+			SistemasMascotas.getMascotasPorRaza("Labrador");
+	        listaMascotasParaMostrar = SistemasMascotas.getMascotasPorEstado(opcEstado);
+	        
+	        
+	        posicionMascotaPanel1 = listaMascotasParaMostrar.size()-1  ;
+	        posicionMascotaPanel2 = listaMascotasParaMostrar.size()-2  ;
+	        posicionMascotaPanel3 = listaMascotasParaMostrar.size()-3   ;
+	        
+	        
+	        mascotaPanel1 = listaMascotasParaMostrar.get(posicionMascotaPanel1);
+	        mascotaPanel2 = listaMascotasParaMostrar.get(posicionMascotaPanel2);
+	        mascotaPanel3 = listaMascotasParaMostrar.get(posicionMascotaPanel3);
+	        
+	        
+	            lblFotoMascota1.setIcon(new ImageIcon(mascotaPanel1.getFoto()));
+	            lblFotoMascota_2.setIcon((new ImageIcon(mascotaPanel2.getFoto())));
+	            lblFotoMascota_3.setIcon((new ImageIcon(mascotaPanel3.getFoto())));
+	            
+	            lbltitulomascota1.setText(mascotaPanel1.getTipo()+" " +mascotaPanel1.getEstado()+" en "+mascotaPanel1.getLugarDelSuceso() );
+	            lblTituloMascota_2.setText(mascotaPanel2.getTipo()+" " +mascotaPanel2.getEstado()+" en "+mascotaPanel2.getLugarDelSuceso() );
+	            lblTituloMascota_3.setText(mascotaPanel3.getTipo()+" " +mascotaPanel3.getEstado()+" en "+mascotaPanel3.getLugarDelSuceso() );
+	            
+	            lblfechaSuceso.setText(mascotaPanel1.getDiaSuceso());
+	            lblFecha_2.setText(mascotaPanel2.getDiaSuceso());
+	            lblFecha_3.setText(mascotaPanel3.getDiaSuceso());
+	            
+	            lblNotas_1.setText(mascotaPanel1.getNota());
+	            lblNotas2.setText(mascotaPanel2.getNota());
+	            lblNotas_3.setText(mascotaPanel3.getNota());
+	            
+	            lblLugarSuceso1.setText(mascotaPanel1.getLugarDelSuceso());
+	            lblLugar_2.setText(mascotaPanel2.getLugarDelSuceso());
+	            lblLugarSuceso_3.setText(mascotaPanel3.getLugarDelSuceso());
+	         
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+            
+
 	}
 };;
 

@@ -185,7 +185,7 @@ public class SistemasMascotas {
 	}
 	
 	
-	public static void todasLasMascotas() throws IOException{leerMascota(); listaMascotasFiltradas = listaMascotas;} // llamar antes de cada busqueda
+	public static  void buscarEnTodasLasMascotas() throws IOException{leerMascota(); listaMascotasFiltradas = listaMascotas;} // llamar antes de cada busqueda
 	
 	public static ArrayList<Mascota> getMascotasPorEstado(String estado ){
 			
@@ -209,12 +209,11 @@ public class SistemasMascotas {
 	    if(tipo==null)
 	    	return listaMascotasFiltradas;
 	    
-	    for(Mascota obj:listaMascotas){
+	    for(Mascota obj:listaMascotasFiltradas)
 	        if (obj.getTipo().equals(tipo))
 	              	mascotasFiltradas.add(obj);
-	    }
-	    listaMascotasFiltradas = mascotasFiltradas;
-	        return listaMascotasFiltradas ;
+	   
+	       return listaMascotasFiltradas = mascotasFiltradas;
 	}
 	
 	
@@ -223,11 +222,13 @@ public class SistemasMascotas {
 		ArrayList<Mascota> mascotasFiltradas = new ArrayList<Mascota>();
 		if(raza==null)
 	    	return listaMascotasFiltradas;
-		for(Mascota obj:listaMascotasFiltradas)
-			if (obj.getRaza().equals(raza))
-	               	mascotasFiltradas.add(obj);
-	               
-		return listaMascotasFiltradas = mascotasFiltradas;  
+		else{
+			for(Mascota obj:listaMascotasFiltradas)
+				if (obj.getRaza().equals(raza))
+		               	mascotasFiltradas.add(obj);
+		               
+			return listaMascotasFiltradas = mascotasFiltradas;
+		}	
 	}
 	
 	public static ArrayList<Mascota> getMascotasPorColorDePelo(String color){
@@ -254,50 +255,6 @@ public class SistemasMascotas {
 		  return listaMascotasFiltradas = mascotasFiltradas;    
 	}
 	
-	
-	public static ArrayList<Mascota> getMascotasPerdidas(){
-		
-		listaMascotas.clear();
-		try {
-			leerMascota();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		ArrayList<Mascota> listaMascotasPerdida  = new ArrayList<Mascota>();
-		for(Mascota obj:listaMascotas){
-			
-			if (obj.getEstado().equals("PERDIDA")){
-				listaMascotasPerdida.add(obj);	
-			}
-		
-		}
-		return listaMascotasPerdida;
-	}
-	
-
-public static ArrayList<Mascota> getMascotasEncontradas(){
-        
-        listaMascotas.clear();
-        try {
-            leerMascota();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        ArrayList<Mascota> listaMascotasEncontrada  = new ArrayList<Mascota>();
-        for(Mascota obj:listaMascotas){
-            
-            if (obj.getEstado().equals("ENCONTRADA")){
-                listaMascotasEncontrada.add(obj);  
-            }
-        
-        }
-        return listaMascotasEncontrada;
-    }
-
 	
 	public static ArrayList<Mascota> getMascotasPorLugarDelSuceso(String lugar){
 		
