@@ -41,7 +41,7 @@ public class Asociacion {
 	
 	public ArrayList<Donacion> getDonacionesRecibidas(){
 		ArrayList<Donacion> donacionesRecibidas = new ArrayList<Donacion>();
-		for(Donacion obj : Donacion.getListaDeDonaciones()){
+		for(Donacion obj : Sistema.getListaDeDonaciones()){
 			if(obj.getAsociacionBeneficiada().equals(this)){
 				donacionesRecibidas.add(obj);
 			}

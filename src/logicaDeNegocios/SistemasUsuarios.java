@@ -64,7 +64,8 @@ public class SistemasUsuarios {
 	    			obj.setEsAdministrador(Boolean.parseBoolean(bufferLectura.readLine()));
 	    			obj.setEstaEnListaNegra(Boolean.parseBoolean(bufferLectura.readLine()));
 					obj.setCalificacion(Integer.parseInt(bufferLectura.readLine()));
-	    			listaUsuarios.add(obj);				
+	    			listaUsuarios.add(obj);		
+	    			
 	    		}
     		}else
         		JOptionPane.showMessageDialog(frame, "No existen datos. O cambio la ruta del archivo \"Usuarios\"");                		
@@ -80,6 +81,7 @@ public class SistemasUsuarios {
     		}catch (Exception e2)
     			{e2.printStackTrace();}
     	}
+    	agregarUsuariosEnListaNegra();
     }
 
 	
@@ -267,7 +269,14 @@ public class SistemasUsuarios {
 		return -1;
 	}
 	
-	
+	public static void agregarUsuariosEnListaNegra(){
+		for(Usuario obj : listaUsuarios){
+			if(obj.estaEnListaNegra() == true){
+				ListaNegra.agregarAListaNegra(obj);
+			}
+		}
+		System.out.println();
+	}
 	
 	
 	

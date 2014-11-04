@@ -40,6 +40,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import javax.swing.JComboBox;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
@@ -83,12 +84,15 @@ import java.io.File;
 
 
 
+
+
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.JToolBar;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
+import javax.swing.table.AbstractTableModel;
 
 import java.awt.event.MouseMotionAdapter;
 import java.awt.Choice;
@@ -193,6 +197,16 @@ public class VentanaPrincipal {
     private JButton btnFlechaDerecha;
     private Choice choice;
     private Choice choice_1;
+    private JTable tablaListaNegra;
+    private JScrollPane scrollPane_1;
+    private JLabel FondoConsultaListaNegra;
+    private JPanel panelConsultaListaNegra;
+    private JLabel lblMotivoLN;
+    private JLabel lblFotoLN;
+    private JLabel lblNombreLN;
+    private JLabel lblFechaLN;
+    private JLabel lblMensajeListaVacia;
+
     static JMenu mnConfiguracin;
    private static boolean esVisible = true;
     
@@ -1527,6 +1541,37 @@ public static void main(String[] args) {
         menuBar.add(mnListaNegra);
         
         JMenuItem mntmVerListaNegra = new JMenuItem("Ver Lista Negra");
+        mntmVerListaNegra.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		panelPrincipal.setVisible(false);
+        		panelConsultaListaNegra.setVisible(true);
+        		if(ListaNegra.getListaSize() == 0){
+        			tablaListaNegra.setVisible(false);
+        			lblFotoLN.setVisible(false);
+        			lblNombreLN.setVisible(false);
+        			lblFechaLN.setVisible(false);
+        			lblMotivoLN.setVisible(false);
+        			lblMensajeListaVacia.setVisible(true);
+        		}else{
+        			Usuario primerUsuarioEnLista = SistemasUsuarios.getUsuario(ListaNegra.getListaNegra().get(0));
+        			tablaListaNegra.setVisible(true);
+        			lblFotoLN.setVisible(true);
+        			//El atributo Foto para Usuario no existe, la sgte línea mostraría la misma si esto se añadiera.
+        			//lblFotoLN.setIcon(new ImageIcon(primerUsuarioEnLista.getFoto()));
+        			lblNombreLN.setVisible(true);
+        			lblNombreLN.setText(primerUsuarioEnLista.getNombreUsuario());
+        			lblFechaLN.setVisible(true); // Falta agregar una manera de conseguir fechas en las que Sistema pasó 
+        										// un usuario a listaNegra por malas calficaciones
+        			lblMotivoLN.setVisible(true);
+        			if(Sistema.estaReportado(primerUsuarioEnLista)){
+        				lblMotivoLN.setText(Sistema.getReporteDeUsuarioReportado(primerUsuarioEnLista).getMotivoReporte());
+        			}else{
+        				lblMotivoLN.setText("Este usuario fue puesto en la lista negra por malas calificaciones por parte de los demás.");
+        			}
+        			lblMensajeListaVacia.setVisible(false);
+        		}
+        	}
+        });
         mnListaNegra.add(mntmVerListaNegra);
         
         mnConfiguracin = new JMenu("Configuraci\u00F3n");
@@ -1546,7 +1591,125 @@ public static void main(String[] args) {
         mntmAdministrador.setIcon(new ImageIcon("./imgs/admin.png"));
         mnConfiguracin.add(mntmAdministrador);
         panelAgregarCasaCuna.setVisible(false);
-    }
+        
+//////////////////////////////////////Inicio Código Consulta Lista Negra////////////////////////////////////////////////////
+
+		        
+		panelConsultaListaNegra = new JPanel();
+		VentanaPrincipal.getContentPane().add(panelConsultaListaNegra, "name_154826621946393");
+		panelConsultaListaNegra.setLayout(null);
+		
+		JLabel lblTituloListaNegra = new JLabel("Lista Negra");
+		lblTituloListaNegra.setForeground(new Color(189, 183, 107));
+		lblTituloListaNegra.setFont(new Font("Khmer UI", Font.BOLD, 47));
+		lblTituloListaNegra.setBounds(47, 29, 364, 80);
+		panelConsultaListaNegra.add(lblTituloListaNegra);
+		
+		scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(175, 161, 554, 399);
+		panelConsultaListaNegra.add(scrollPane_1);
+		
+		tablaListaNegra = new JTable();
+		tablaListaNegra.addMouseListener(new MouseAdapter() {
+		public void mouseClicked(MouseEvent e) {
+			if (e.getClickCount() == 2) {
+				JTable target = (JTable)e.getSource();
+				int row = target.getSelectedRow();
+				int column = target.getSelectedColumn();
+				Usuario usuarioSeleccionado = SistemasUsuarios.getUsuario(ListaNegra.getListaNegra().get(row));
+				//lblFotoLN.setIcon(new ImageIcon(primerUsuarioEnLista.getFoto()));
+				lblNombreLN.setText(usuarioSeleccionado.getNombreUsuario());
+				if(Sistema.estaReportado(usuarioSeleccionado)){
+					lblMotivoLN.setText(Sistema.getReporteDeUsuarioReportado(usuarioSeleccionado).getMotivoReporte());
+				}else{
+					lblMotivoLN.setText("Este usuario fue puesto en la lista negra por malas calificaciones por parte de los demás.");
+				}
+			}
+		}
+		});
+		scrollPane_1.setViewportView(tablaListaNegra);
+		tablaListaNegra.setFont(new Font("Khmer UI", Font.PLAIN, 14));
+		tablaListaNegra.setModel(new modeloTablaListaNegra(Sistema.hacerMatrizParaTablaDeListaNegra()));
+		
+		lblFotoLN = new JLabel("");
+		lblFotoLN.setBounds(1024, 161, 154, 189);
+		panelConsultaListaNegra.add(lblFotoLN);
+		
+		lblNombreLN = new JLabel("");
+		lblNombreLN.setBounds(1024, 361, 160, 26);
+		panelConsultaListaNegra.add(lblNombreLN);
+		
+		lblFechaLN = new JLabel("");
+		lblFechaLN.setBounds(1000, 404, 110, 26);
+		panelConsultaListaNegra.add(lblFechaLN);
+		
+		lblMotivoLN = new JLabel("");
+		lblMotivoLN.setBounds(1005, 466, 234, 93);
+		panelConsultaListaNegra.add(lblMotivoLN);
+		
+		lblMensajeListaVacia = new JLabel("En este momento no hay usuarios en la lista negra.");
+		lblMensajeListaVacia.setForeground(new Color(189, 183, 107));
+		lblMensajeListaVacia.setFont(new Font("Khmer UI", Font.PLAIN, 18));
+		lblMensajeListaVacia.setBounds(47, 120, 430, 30);
+		lblMensajeListaVacia.setVisible(false);
+		panelConsultaListaNegra.add(lblMensajeListaVacia);
+		
+		FondoConsultaListaNegra = new JLabel("");
+		FondoConsultaListaNegra.setIcon(new ImageIcon("./imgs/fondoRegistro.png"));
+		FondoConsultaListaNegra.setBounds(0, 1, 1362, 675);
+		panelConsultaListaNegra.add(FondoConsultaListaNegra);
+
+
+
+        
+    }//Fin initilize()
+    
+	public static class modeloTablaListaNegra extends AbstractTableModel {
+		private String [] columnas = {"ID", "Usuario", "Calificación", "Motivo"}; 
+		private String[][] matrizDeListaNegra;
+		
+//		public modeloTablaListaNegra(){
+//			
+//			matrizDeListaNegra = new String[ListaNegra.getListaSize()][4]; // filas x columnas
+//			int contador = 0; // contador usado para ubicar cada posición en la matriz
+//			for(Integer id: ListaNegra.getListaNegra()){
+//				matrizDeListaNegra[contador][0] = String.valueOf(ListaNegra.getUsuario(id).getID());
+//				matrizDeListaNegra[contador][1] = ListaNegra.getUsuario(id).getNombreUsuario();
+//				matrizDeListaNegra[contador][2] = String.valueOf(ListaNegra.getUsuario(id).getCalificacion());
+//				if(Sistema.estaReportado(ListaNegra.getUsuario(id))){
+//					matrizDeListaNegra[contador][3] = "Reportado por otro usuario";
+//				}else{
+//					matrizDeListaNegra[contador][3] = "Calificaciones bajas";
+//				}
+//	 			contador++;
+//			}
+//		}
+		public modeloTablaListaNegra(String[][] pMatriz){
+			matrizDeListaNegra = pMatriz;
+		}
+		public int getColumnCount() {
+		return columnas.length;
+		}
+		public int getRowCount() {
+		return matrizDeListaNegra.length;
+		}
+		public String getColumnName(int column) {
+		return columnas[column];
+		}
+		public Object getValueAt(int rowIndex, int columnIndex) {
+			switch (columnIndex)
+			{
+				case 0: return matrizDeListaNegra[rowIndex][0]; 
+				case 1: return matrizDeListaNegra[rowIndex][1];
+				case 2: return matrizDeListaNegra[rowIndex][2];
+				case 3: return matrizDeListaNegra[rowIndex][3];
+				default: return null;
+			}
+		}
+	}
+
+//////////////////////////////////////Fin Código Consulta Lista Negra////////////////////////////////////////////////////
+    
     
         public void verificarEstado(){
         

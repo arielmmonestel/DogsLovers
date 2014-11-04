@@ -49,8 +49,11 @@ public class Sistema {
 	private static final String rutaEstadosDeMascotas = "./Mascotas_Estados.poo";
 	private static ArrayList<String> listaEstados =  new ArrayList<>() ;
 
-	//private static final String rutaReportes = "./Usuarios_Reportes.poo";
+	private static final String rutaReportes = "./Usuarios_Reportes.poo";
 	private static ArrayList<Reporte> listaDeReportes = new ArrayList<Reporte>();
+	
+	private static final String rutaDonaciones = "./Donaciones.poo";
+	private static ArrayList<Donacion> listaDeDonaciones = new ArrayList<Donacion>();
 	
 
 	//public static  ArrayList<String> listaDetallesMascota = new ArrayList<String>();
@@ -560,54 +563,77 @@ public class Sistema {
 	
 	// cambiar  
 	
+    /////////////////////////////////////////// Donaciones ///////////////////////////////////////////////////
+    
+   	public static ArrayList<Donacion> getListaDeDonaciones(){
+   		return listaDeDonaciones;
+   	}
+   	
+   	public static int getListaDeDonacionesSize(){
+   		return listaDeDonaciones.size();
+   	}
 
-	
-	
-	/////////////////////////////////////////// Reportes /////////////////////////////////////////////////////
-	
-	public static void agregarReporte(Reporte pReporte){
-		listaDeReportes.add(pReporte);
-	}
-	
-	public static void quitarReporte(Reporte pReporte){
-		listaDeReportes.remove(pReporte);
-	}
-	
-	public static boolean estaReportado(Usuario pUsuario){
-		for(Reporte obj : listaDeReportes){
-			if(pUsuario.equals(obj.getIdUsuarioReportado())){
-				return true;
-			}
-		}
-		return false;
-	}
+   	public static void agregarDonacion(Donacion pDonacion){
+   		listaDeDonaciones.add(pDonacion);
+   		
+   	}
+   	
+   	
+   	/////////////////////////////////////////// Reportes /////////////////////////////////////////////////////
+   	
+   	public static void agregarReporte(Reporte pReporte){
+   		listaDeReportes.add(pReporte);
+   	}
+   	
+   	public static void quitarReporte(Reporte pReporte){
+   		listaDeReportes.remove(pReporte);
+   	}
+   	
+   	public static boolean estaReportado(Usuario pUsuario){
+   		for(Reporte obj : listaDeReportes){
+   			if(pUsuario.equals(obj.getIdUsuarioReportado())){
+   				return true;
+   			}
+   		}
+   		return false;
+   	}
+   	
+   	public static Reporte getReporteDeUsuarioReportado(Usuario pUsuario){
+   		Reporte reporteBuscado = null;
+   		for(Reporte obj : listaDeReportes){
+   			if(obj.getIdUsuarioReportado() == pUsuario.getID()){
+   				reporteBuscado = obj;
+   			}
+   		}
+   		return reporteBuscado;
+   	}
+   	
+   	public static String[][] hacerMatrizParaTablaDeListaNegra(){
+   		String[][] matrizDeSalida = new String[ListaNegra.getListaSize()][4]; // filas x columnas
+   		System.out.println(ListaNegra.getListaSize());
+   		System.out.println(ListaNegra.getListaSize());
+   		System.out.println(ListaNegra.getListaSize());
+   		System.out.println(ListaNegra.getListaSize());
+   		System.out.println(ListaNegra.getListaSize());
+   		
+   		for(int i = 0; i < 1; i++){
+   			Usuario usuarioTemp = ListaNegra.getListaNegraPorUsuarios().get(i);
+   			matrizDeSalida[i][0] = String.valueOf(usuarioTemp.getID());
+   			matrizDeSalida[i][1] = usuarioTemp.getNombreUsuario();
+   			matrizDeSalida[i][2] = String.valueOf(usuarioTemp.getCalificacion());
+   			if(estaReportado(usuarioTemp)){
+   				matrizDeSalida[i][3] = "Reportado por otro usuario";
+   			}else{
+   				matrizDeSalida[i][3] = "Calificaciones bajas";
+   			}
+   		}
+   		System.out.println(ListaNegra.listatoString());
+   		return matrizDeSalida;
+   	}
 	
 	///////////////////////////////////////// Adopciones //////////////////////////////////////////////////////
 	
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 
 	
