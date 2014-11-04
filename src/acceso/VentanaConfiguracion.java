@@ -108,7 +108,37 @@ public class VentanaConfiguracion extends JFrame {
 					}
 				}
 				if(rdbtnNuevoTipo.isSelected())
-				{}
+				{
+					if(!textFieldNuevoEstado.getText().startsWith("Ingrese")){
+						try {
+							Sistema.agregarTipo(textFieldNuevoEstado.getText());
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+					
+				}
+				if(rdbtnNuevoColorOjos.isSelected()){
+					if(!textFieldNuevoEstado.getText().startsWith("Ingrese")){
+						try {
+							Sistema.agregarColorDeOjos(textFieldNuevoEstado.getText());
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}
+				if(rdbtnNuevoColorDe.isSelected()){
+					if(!textFieldNuevoEstado.getText().startsWith("Ingrese")){
+						try {
+							Sistema.agregarColorDePelo(textFieldNuevoEstado.getText());
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}
 			}
 		});
 		btnGuardar.setOpaque(false);
@@ -118,9 +148,9 @@ public class VentanaConfiguracion extends JFrame {
 		btnGuardar.setDefaultCapable(false);
 		btnGuardar.setContentAreaFilled(false);
 		btnGuardar.setBorderPainted(false);
-		btnGuardar.setRolloverIcon(new ImageIcon("C:\\Users\\Ariel\\Documents\\GitHub\\DogsLovers\\imgs\\save-64.png"));
-		btnGuardar.setPressedIcon(new ImageIcon("C:\\Users\\Ariel\\Documents\\GitHub\\DogsLovers\\imgs\\save-32.png"));
-		btnGuardar.setIcon(new ImageIcon("C:\\Users\\Ariel\\Documents\\GitHub\\DogsLovers\\imgs\\save-48.png"));
+		btnGuardar.setRolloverIcon(new ImageIcon("./imgs/save-64.png"));
+		btnGuardar.setPressedIcon(new ImageIcon("./imgs/save-32.png"));
+		btnGuardar.setIcon(new ImageIcon("./imgs/save-48.png"));
 		btnGuardar.setBounds(622, 135, 95, 84);
 		panelPrincipal.add(btnGuardar);
 		

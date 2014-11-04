@@ -1543,7 +1543,7 @@ public static void main(String[] args) {
         		
         	}
         });
-        mntmAdministrador.setIcon(new ImageIcon("C:\\Users\\Ariel\\Documents\\GitHub\\DogsLovers\\imgs\\admin.png"));
+        mntmAdministrador.setIcon(new ImageIcon("./imgs/admin.png"));
         mnConfiguracin.add(mntmAdministrador);
         panelAgregarCasaCuna.setVisible(false);
     }
