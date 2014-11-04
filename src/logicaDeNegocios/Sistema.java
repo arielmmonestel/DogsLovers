@@ -282,13 +282,16 @@ public class Sistema {
 		
 		leerTiposYRazas();
 		boolean esTipo = true;
-		String tipos = null;
+		
+		String tipos="Elija un tipo";
 		for(String str: listaDetalles){
 			if(esTipo){
 				tipos+= ","+str;
 			}
 			esTipo = !esTipo;
 		}
+		
+		System.out.println(tipos.split(",")[1]);
 		return tipos.split(",");
 	}
 	
@@ -317,6 +320,7 @@ public class Sistema {
     		{		
 	    		lectura = new FileReader (archivo);
     			bufferLectura = new BufferedReader(lectura);
+    			listaEstados.clear();
     			while((bufferLectura.readLine())!=null)    			
     				listaEstados.add(bufferLectura.readLine());	    				
     		}else
@@ -378,7 +382,9 @@ public class Sistema {
 	    		lectura = new FileReader (archivo);
     			bufferLectura = new BufferedReader(lectura);
     			while((bufferLectura.readLine())!=null)    			
-    				listaDetalles.add(bufferLectura.readLine());	    				
+    				{listaDetalles.add(bufferLectura.readLine());	    				
+    				listaDetalles.add(bufferLectura.readLine());
+    				}
     		}else
         		JOptionPane.showMessageDialog(frame, "No existen datos. O cambio la ruta del archivo \"Detalles de mascotas\"");                		
     	}catch(Exception e){
@@ -392,18 +398,24 @@ public class Sistema {
 	
 	public static void  agregarColorDeOjos(String nuevoColorDeOjos) throws IOException{
 		leerColorDeOjos();
+		listaColorDeOjos.add( " " );
 		listaColorDeOjos.add(nuevoColorDeOjos);
+		guardarColorDeOjos();
 	}
 	
 	public static void  agregarColorDePelo(String nuevoColorDePelo) throws IOException{
 		leerColorDePelo();
+		listaColorDePelo.add( " " );
 		listaColorDePelo.add(nuevoColorDePelo);
+		guardarColorDePelo();
 	}
 	
 	public static void agregarTipo(String tipo) throws IOException{
 		leerTiposYRazas();
+		listaTipoYRazaDeMascotas.add("n"); //" "
 		listaTipoYRazaDeMascotas.add(tipo);
 		listaTipoYRazaDeMascotas.add(""); //" " 
+		guardarTipoYRazaDeMascotas();
 	}
 	
 	public static void agregarRaza(String tipo, String NuevaRaza) throws IOException{
@@ -488,10 +500,10 @@ public class Sistema {
 	        {       
 	            escribir = new FileWriter(rutaEstadosDeMascotas,false);
 	            pw = new PrintWriter(escribir);         
-	            for(String str: listaEstados)
-	                pw.println(str);
-	        
 	            
+	            for(String str: listaEstados)
+	            	pw.println(str);
+	            	    
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	        } finally 
@@ -511,11 +523,12 @@ public class Sistema {
 		
 	public static void agregarEstado(String nuevoEstado) throws IOException{
 		leerEstados();
+		//listaEstados.add(" ");
 		listaEstados.add(nuevoEstado);
+		listaEstados.add(" ");
 		guardarEstados();
 	}
 	
-
     
     public static void asignarIDFoto() {
         try {

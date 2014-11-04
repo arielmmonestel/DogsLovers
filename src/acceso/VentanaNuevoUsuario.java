@@ -1,82 +1,42 @@
 package acceso;
-import logicaDeNegocios.*;
-
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.EventQueue;
-import java.awt.Rectangle;
-import java.awt.Toolkit;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-
-import com.jgoodies.forms.factories.DefaultComponentFactory;
-
-import javax.swing.JOptionPane;
-import javax.swing.SwingConstants;
-import javax.swing.ImageIcon;
-import javax.swing.JScrollPane;
-import javax.swing.JComboBox;
-import javax.swing.JRadioButton;
-import javax.swing.ButtonGroup;
-import javax.swing.border.LineBorder;
-
 import java.awt.Color;
-
-import javax.swing.JSpinner;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.SpinnerNumberModel;
-import javax.swing.JCheckBox;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
-import javax.swing.JTextField;
-
-import java.awt.Font;
 import java.awt.Component;
-
-import javax.swing.JPasswordField;
-
-//import org.eclipse.wb.swing.FocusTraversalOnArray;
-
-
-
-
-
-
-
-
-
-
-
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-
-import javax.swing.JToolBar;
-import javax.swing.Box;
-import javax.swing.JButton;
-import javax.swing.JTextArea;
-
+import java.awt.ComponentOrientation;
+import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.Point;
+import java.awt.SystemColor;
+import java.awt.Toolkit;
+import java.io.IOException;
 
-import javax.swing.JScrollBar;
+import javax.swing.ButtonGroup;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JSpinner;
+import javax.swing.JTextField;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 
-import sun.security.util.Length;
-
-import java.awt.SystemColor;
-import java.awt.ComponentOrientation;
-import java.awt.Frame;
-import java.io.IOException;
-import java.util.ArrayList;
+import com.jgoodies.forms.factories.DefaultComponentFactory;
+//import org.eclipse.wb.swing.FocusTraversalOnArray;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import logicaDeNegocios.EnviarMail;
-import logicaDeNegocios.Persona;
 import logicaDeNegocios.Sistema;
+import logicaDeNegocios.SistemasUsuarios;
 import logicaDeNegocios.Usuario;
 
 public class VentanaNuevoUsuario extends JFrame {

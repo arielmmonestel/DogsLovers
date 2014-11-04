@@ -19,6 +19,7 @@ import javax.swing.JLabel;
 
 
 
+
 import java.awt.Font;
 
 import javax.swing.JOptionPane;
@@ -108,13 +109,27 @@ public class Loggin extends JFrame {
 				String entradaContrasenia = passwordFieldContrasenaUsuario.getText();
 
 				if(SistemasUsuarios.verificarUsuarioYContrasena(entradaUsuario, entradaContrasenia)){
+					
 					dispose();
 					VentanaPrincipal ventaPrincipal = new VentanaPrincipal();
 					ventaPrincipal.main(null);
 					ventaPrincipal.setIDUsuarioActivo(SistemasUsuarios.getIdPorNickName(entradaUsuario));
-
+					
+					if(SistemasUsuarios.verificarEsAdministrador(entradaUsuario)){
+					
+						ventaPrincipal.setEsVisible(true);
+						
+					}
+					
+					else{
+					
+						ventaPrincipal.setEsVisible(false);
+						
+					}
 				}
+				
 				else{
+				
 					JOptionPane.showMessageDialog(null, "Usuario y/o contraseña inválidos");
 				}
 			}

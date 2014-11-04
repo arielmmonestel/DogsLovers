@@ -15,9 +15,9 @@ public class Usuario extends Persona{
 	private int id;
 	private String nombreUsuario;
 	private String contrasenia;
-	private boolean esCasaCuna= false;
-	private boolean esAdministrador = false;
-	private boolean estaEnListaNegra=false;
+	private boolean esCasaCuna;
+	private boolean esAdministrador ;
+	private boolean estaEnListaNegra;
 	private ArrayList<Usuario> personasCalificables;
 	private ArrayList<Mascota> mascotasAdoptadas;
 	int calificacion;

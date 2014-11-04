@@ -60,9 +60,9 @@ public class SistemasUsuarios {
 	    			obj.setAnioNacimiento(Integer.parseInt(bufferLectura.readLine()));
 	    			obj.setNombreUsuario(bufferLectura.readLine());
 	    			obj.setContrasenia(bufferLectura.readLine());
-	    			obj.setEsCasaCuna(Boolean.getBoolean(bufferLectura.readLine()));
-	    			obj.setEsAdministrador(Boolean.getBoolean(bufferLectura.readLine()));
-	    			obj.setEstaEnListaNegra(Boolean.getBoolean(bufferLectura.readLine()));
+	    			obj.setEsCasaCuna(Boolean.parseBoolean(bufferLectura.readLine()));
+	    			obj.setEsAdministrador(Boolean.parseBoolean(bufferLectura.readLine()));
+	    			obj.setEstaEnListaNegra(Boolean.parseBoolean(bufferLectura.readLine()));
 					obj.setCalificacion(Integer.parseInt(bufferLectura.readLine()));
 	    			listaUsuarios.add(obj);				
 	    		}
@@ -188,7 +188,28 @@ public class SistemasUsuarios {
 		
 		return false;
 	}
+
+	public  static boolean verificarEsAdministrador(String nombreUsuario){
 	
+		try {
+			leerUsuarios();
+		
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		for(Usuario obj: listaUsuarios){
+			if(obj.getNombreUsuario().equals(nombreUsuario)){
+			
+				if(obj.esAdministrador()){
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
+
 	//public static void todasLasPersonas() throws IOException{leerUsuarios(); listaUsuariosFiltradas = listaUsuarios;} // llamar antes de cada busqueda
 	
 	public static Usuario buscarUsuarioPorEmail(String email){
