@@ -34,6 +34,7 @@ import javax.swing.DefaultComboBoxModel;
 import logicaDeNegocios.ListaNegra;
 import logicaDeNegocios.Sistema;
 import logicaDeNegocios.SistemasUsuarios;
+import logicaDeNegocios.Usuario;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -319,17 +320,17 @@ public class VentanaConfiguracion extends JFrame {
 		scrollPaneQuitarListaNegra.setBounds(6, 218, 523, 229);
 		panelQuitarDeListaNegra.add(scrollPaneQuitarListaNegra);
 		
-		String[] columna = {"ID","Usuario","Calificación"};
-		String[] datos = new String[3];
-		
+		String[] columna = {"ID","Usuario","Calificación","Motivo"};
+		String[] datos = new String[4];
 		DefaultTableModel tableModel = new DefaultTableModel(columna,0);
-		for(int i = 0 ; i < ListaNegra.getListaSize() ; i++){
-			datos[0] =Integer.toString(ListaNegra.getListaNegra().get(i)); 
-			datos[1] =SistemasUsuarios.getNombreUsuario(ListaNegra.getListaNegra().get(i));
-			datos[2] =Integer.toString( SistemasUsuarios.getCalificacion(ListaNegra.getListaNegra().get(i)));
-			tableModel.addRow(datos);
-		}
 		tableQuitarListaNegra = new JTable(tableModel);
+		Sistema.cargarTableUsuariosEnListaNegra(columna,datos,tableModel);
+		tableQuitarListaNegra.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				btnQuitarDeLista_1.setEnabled(true);
+			}
+			});
+			
 		scrollPaneQuitarListaNegra.setViewportView(tableQuitarListaNegra);
 		
 		lblQuitarDeLista = new JLabel("Quitar de Lista Negra.");
@@ -345,6 +346,7 @@ public class VentanaConfiguracion extends JFrame {
 		panelQuitarDeListaNegra.add(labelIcono2);
 		
 		btnQuitarDeLista_1 = new JButton("Quitar de Lista Negra");
+		btnQuitarDeLista_1 .setEnabled(false);
 		btnQuitarDeLista_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int fila= tableQuitarListaNegra.getSelectedRow();
@@ -353,11 +355,12 @@ public class VentanaConfiguracion extends JFrame {
 				
 				//Sistema.leerColorDePelo();
 				try{
+					
 					int idUsuario = Integer.parseInt((String) tableQuitarListaNegra.getValueAt(fila,0));
 					ListaNegra.quitarDeListaNegra(SistemasUsuarios.getNombreUsuario(idUsuario));
 					ListaNegra.borrardeListaNegra(idUsuario);
 					tableModel.removeRow(fila);
-					
+					btnQuitarDeLista_1.setEnabled(false);
 				}catch(ArrayIndexOutOfBoundsException e){
 						JOptionPane.showMessageDialog(null,"No hay Usuarios en Lista Negra");}	
 				

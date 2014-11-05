@@ -11,6 +11,7 @@ import java.util.*;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 import java.util.Properties;
 
@@ -608,13 +609,7 @@ public class Sistema {
    		return reporteBuscado;
    	}
    	
-   	public static String[][] hacerMatrizParaTablaDeListaNegra(){
-   		String[][] matrizDeSalida = new String[ListaNegra.getListaSize()][4]; // filas x columnas
-   		System.out.println(ListaNegra.getListaSize());
-   		System.out.println(ListaNegra.getListaSize());
-   		System.out.println(ListaNegra.getListaSize());
-   		System.out.println(ListaNegra.getListaSize());
-   		System.out.println(ListaNegra.getListaSize());
+   /*	public static void cargarTableDeListaNegra(){
    		
    		for(int i = 0; i < 1; i++){
    			Usuario usuarioTemp = ListaNegra.getListaNegraPorUsuarios().get(i);
@@ -630,7 +625,24 @@ public class Sistema {
    		System.out.println(ListaNegra.listatoString());
    		return matrizDeSalida;
    	}
-	
+	*/
+   	
+   	public static void cargarTableUsuariosEnListaNegra(String[]columna,String[]datos,DefaultTableModel tableModel){
+   		
+   		for(int i = 0 ; i < ListaNegra.getListaSize() ; i++){
+   			Usuario usuarioTemp = ListaNegra.getListaNegraPorUsuarios().get(i);
+			datos[0] =Integer.toString(ListaNegra.getListaNegra().get(i)); 
+			datos[1] =SistemasUsuarios.getNombreUsuario(ListaNegra.getListaNegra().get(i));
+			datos[2] =Integer.toString( SistemasUsuarios.getCalificacion(ListaNegra.getListaNegra().get(i)));
+			if(estaReportado(usuarioTemp)){
+   				datos[3]= "Reportado por otro usuario";
+   			}else{
+   				datos[3]= "Calificaciones bajas";
+   			}
+			tableModel.addRow(datos);
+		}
+   	}
+
 	///////////////////////////////////////// Adopciones //////////////////////////////////////////////////////
 	
 

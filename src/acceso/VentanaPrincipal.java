@@ -86,6 +86,9 @@ import java.io.File;
 
 
 
+
+
+
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.JToolBar;
@@ -93,6 +96,7 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableModel;
 
 import java.awt.event.MouseMotionAdapter;
 import java.awt.Choice;
@@ -223,6 +227,7 @@ public static void main(String[] args) {
                     
                    
                 } catch (Exception e) {
+                	
                     e.printStackTrace();
                 }
             }
@@ -1616,7 +1621,13 @@ public static void main(String[] args) {
 		scrollPane_1.setBounds(175, 161, 554, 399);
 		panelConsultaListaNegra.add(scrollPane_1);
 		
-		tablaListaNegra = new JTable();
+		
+		String[] columna = {"ID","Usuario","Calificacion","Motivo"};
+		String[] fila = new String[4];
+		DefaultTableModel modeloListanegra = new DefaultTableModel(columna,0);
+		tablaListaNegra = new JTable(modeloListanegra);
+		Sistema.cargarTableUsuariosEnListaNegra(columna, fila, modeloListanegra);
+		
 		tablaListaNegra.addMouseListener(new MouseAdapter() {
 		public void mouseClicked(MouseEvent e) {
 			if (e.getClickCount() == 2) {
@@ -1636,7 +1647,7 @@ public static void main(String[] args) {
 		});
 		scrollPane_1.setViewportView(tablaListaNegra);
 		tablaListaNegra.setFont(new Font("Khmer UI", Font.PLAIN, 14));
-		tablaListaNegra.setModel(new modeloTablaListaNegra(Sistema.hacerMatrizParaTablaDeListaNegra()));
+		
 		
 		lblFotoLN = new JLabel("");
 		lblFotoLN.setBounds(1024, 161, 154, 189);
