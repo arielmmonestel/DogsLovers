@@ -378,7 +378,7 @@ public class Sistema {
     	try
     	{
     		if (archivo.exists())
-    		{		
+    		{	listaTipoYRazaDeMascotas.clear();
 	    		lectura = new FileReader (archivo);
     			bufferLectura = new BufferedReader(lectura);
     			while((bufferLectura.readLine())!=null)    			

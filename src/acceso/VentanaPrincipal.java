@@ -286,6 +286,10 @@ public static void main(String[] args) {
         });
         rdbtnEncontradas.setContentAreaFilled(false);
         rdbtnEncontradas.setBounds(54, 241, 109, 23);
+        rdbtnEncontradas.setForeground(new Color(210, 180, 140));
+        rdbtnEncontradas.setFont(new Font("Khmer UI", Font.BOLD, 14));
+        
+        
         VerMascotasPor.add(rdbtnEncontradas);
         panelPrincipal.add(rdbtnEncontradas);
         
@@ -304,6 +308,10 @@ public static void main(String[] args) {
 
         rdbtnPerdidas.setContentAreaFilled(false);
         rdbtnPerdidas.setBounds(54, 205, 109, 23);
+        rdbtnPerdidas.setForeground(new Color(210, 180, 140));
+        rdbtnPerdidas.setFont(new Font("Khmer UI", Font.BOLD, 14));
+        
+        
         VerMascotasPor.add(rdbtnPerdidas);
         panelPrincipal.add(rdbtnPerdidas);
         
@@ -325,18 +333,21 @@ public static void main(String[] args) {
         );
         rdbtnTodas.setSelected(true);
         rdbtnTodas.setContentAreaFilled(false);
-        
+        rdbtnTodas.setForeground(new Color(210, 180, 140));
+        rdbtnTodas.setFont(new Font("Khmer UI", Font.BOLD, 14));
         rdbtnTodas.setBounds(54, 172, 109, 23);
         panelPrincipal.add(rdbtnTodas);
         VerMascotasPor.add(rdbtnTodas);
         label_1 = new JLabel("Mostrar Por:");
-        label_1.setForeground(Color.GRAY);
-        label_1.setFont(new Font("Batang", Font.BOLD, 18));
+        label_1 .setForeground(new Color(210, 180, 140));
+        label_1 .setFont(new Font("Khmer UI", Font.BOLD, 19));
         label_1.setBounds(44, 135, 147, 30);
         panelPrincipal.add(label_1);
         
         label_2 = new JLabel("");
         label_2 .setBorder(new MatteBorder(5, 5, 5, 5, (Color) new Color(110, 170, 111)));
+        label_2 .setForeground(new Color(210, 180, 140));
+        label_2 .setFont(new Font("Khmer UI", Font.BOLD, 19));
         label_2.setIcon(new ImageIcon("./imgs/fondoPanelesPantallaPrincipal.png"));
         label_2.setBounds(34, 135, 234, 146);
         panelPrincipal.add(label_2);
@@ -674,7 +685,7 @@ public static void main(String[] args) {
         
         JLabel lblImagenDeLa = new JLabel("Imagen de la Mascota");
         lblImagenDeLa.setForeground(Color.WHITE);
-        lblImagenDeLa.setFont(new Font("Batang", Font.BOLD, 19));
+        lblImagenDeLa.setFont(new Font("Khmer UI", Font.BOLD, 19));
         lblImagenDeLa.setBounds(707, 178, 208, 23);
         panelAgregarMascota.add(lblImagenDeLa);
         
@@ -727,7 +738,7 @@ public static void main(String[] args) {
         
         final JCheckBox chckbxRecompensa = new JCheckBox("Recompensa");
         chckbxRecompensa.setForeground(Color.WHITE);
-        chckbxRecompensa.setFont(new Font("Batang", Font.BOLD, 19));
+        chckbxRecompensa.setFont(new Font("Khmer UI", Font.BOLD, 19));
         chckbxRecompensa.setContentAreaFilled(false);
         chckbxRecompensa.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
@@ -938,7 +949,7 @@ public static void main(String[] args) {
         
         lblMonto = new JLabel("Monto");
         lblMonto.setForeground(Color.WHITE);
-        lblMonto.setFont(new Font("Batang", Font.BOLD, 19));
+        lblMonto.setFont(new Font("Khmer UI", Font.BOLD, 19));
         lblMonto.setBounds(944, 351, 75, 14);
         panelAgregarMascota.add(lblMonto);
         chckbxRecompensa.setBounds(707, 347, 155, 23);
@@ -956,66 +967,66 @@ public static void main(String[] args) {
         
         JLabel lblEstado = new JLabel("Estado de la Mascota");
         lblEstado.setForeground(Color.WHITE);
-        lblEstado.setFont(new Font("Batang", Font.BOLD, 19));
+        lblEstado.setFont(new Font("Khmer UI", Font.BOLD, 19));
         lblEstado.setBounds(32, 134, 214, 23);
         panelAgregarMascota.add(lblEstado);
         
         JLabel lblTipoDeMascota = new JLabel("Tipo de Mascota");
         lblTipoDeMascota.setForeground(Color.WHITE);
-        lblTipoDeMascota.setFont(new Font("Batang", Font.BOLD, 19));
+        lblTipoDeMascota.setFont(new Font("Khmer UI", Font.BOLD, 19));
         lblTipoDeMascota.setBounds(32, 207, 186, 23);
         panelAgregarMascota.add(lblTipoDeMascota);
         
         JLabel lblRaza = new JLabel("Raza");
         lblRaza.setForeground(Color.WHITE);
-        lblRaza.setFont(new Font("Batang", Font.BOLD, 19));
+        lblRaza.setFont(new Font("Khmer UI", Font.BOLD, 19));
         lblRaza.setBounds(32, 271, 186, 23);
         panelAgregarMascota.add(lblRaza);
         
         final JLabel lblNombreDeLa = new JLabel("Nombre de la Mascota");
         lblNombreDeLa.setForeground(Color.WHITE);
-        lblNombreDeLa.setFont(new Font("Batang", Font.BOLD, 19));
+        lblNombreDeLa.setFont(new Font("Khmer UI", Font.BOLD, 19));
         lblNombreDeLa.setBounds(33, 333, 214, 23);
         panelAgregarMascota.add(lblNombreDeLa);
         
         final JLabel lblNumeroDeChip = new JLabel("N\u00FAmero de Chip");
         lblNumeroDeChip.setForeground(Color.WHITE);
-        lblNumeroDeChip.setFont(new Font("Batang", Font.BOLD, 19));
+        lblNumeroDeChip.setFont(new Font("Khmer UI", Font.BOLD, 19));
         lblNumeroDeChip.setBounds(33, 397, 225, 23);
         panelAgregarMascota.add(lblNumeroDeChip);
         
         JLabel lblColorDelPelaje = new JLabel("Color del Pelaje");
         lblColorDelPelaje.setForeground(Color.WHITE);
-        lblColorDelPelaje.setFont(new Font("Batang", Font.BOLD, 19));
+        lblColorDelPelaje.setFont(new Font("Khmer UI", Font.BOLD, 19));
         lblColorDelPelaje.setBounds(32, 464, 186, 23);
         panelAgregarMascota.add(lblColorDelPelaje);
         
         JLabel lblColorDeOjos = new JLabel("Color de Ojos");
         lblColorDeOjos.setForeground(Color.WHITE);
-        lblColorDeOjos.setFont(new Font("Batang", Font.BOLD, 19));
+        lblColorDeOjos.setFont(new Font("Khmer UI", Font.BOLD, 19));
         lblColorDeOjos.setBounds(32, 527, 186, 23);
         panelAgregarMascota.add(lblColorDeOjos);
         
         final JLabel lblSitioDeHallazgoperdida = new JLabel("Sitio de P\u00E9rdida");
         lblSitioDeHallazgoperdida.setForeground(Color.WHITE);
-        lblSitioDeHallazgoperdida.setFont(new Font("Batang", Font.BOLD, 19));
+        lblSitioDeHallazgoperdida.setFont(new Font("Khmer UI", Font.BOLD, 19));
         lblSitioDeHallazgoperdida.setBounds(707, 290, 177, 23);
         panelAgregarMascota.add(lblSitioDeHallazgoperdida);
         
         final JLabel lblFechaDeHallazgoperdida = new JLabel("Fecha de P\u00E9rdida");
         lblFechaDeHallazgoperdida.setForeground(Color.WHITE);
-        lblFechaDeHallazgoperdida.setFont(new Font("Batang", Font.BOLD, 19));
+        lblFechaDeHallazgoperdida.setFont(new Font("Khmer UI", Font.BOLD, 19));
         lblFechaDeHallazgoperdida.setBounds(707, 237, 163, 23);
         panelAgregarMascota.add(lblFechaDeHallazgoperdida);
         
         JLabel lblNotas = new JLabel("Notas");
         lblNotas.setForeground(Color.WHITE);
-        lblNotas.setFont(new Font("Batang", Font.BOLD, 19));
+        lblNotas.setFont(new Font("Khmer UI", Font.BOLD, 19));
         lblNotas.setBounds(707, 389, 384, 28);
         panelAgregarMascota.add(lblNotas);
         
         rdbtnPerdida = new JRadioButton("Perdida");
-        rdbtnPerdida.setFont(new Font("Batang", Font.BOLD, 13));
+        rdbtnPerdida.setFont(new Font("Khmer UI", Font.BOLD, 13));
         rdbtnPerdida.setForeground(Color.WHITE);
         rdbtnPerdida.setContentAreaFilled(false);
         rdbtnPerdida.addActionListener(new ActionListener() {
@@ -1052,7 +1063,7 @@ public static void main(String[] args) {
         panelAgregarMascota.add(rdbtnPerdida);
         
         rdbtnEncontrada = new JRadioButton("Encontrada");
-        rdbtnEncontrada.setFont(new Font("Batang", Font.BOLD, 13));
+        rdbtnEncontrada.setFont(new Font("Khmer UI", Font.BOLD, 13));
         rdbtnEncontrada.setForeground(Color.WHITE);
         rdbtnEncontrada.setContentAreaFilled(false);
         rdbtnEncontrada.addActionListener(new ActionListener() {
@@ -1196,6 +1207,7 @@ public static void main(String[] args) {
     
         
         panelAgregarCasaCuna = new JPanel();
+        panelAgregarCasaCuna.setBackground(new Color(99,84,65));
         VentanaPrincipal.getContentPane().add(panelAgregarCasaCuna, "name_28003406149630");
         panelAgregarCasaCuna.setLayout(null);
         
@@ -1304,7 +1316,7 @@ public static void main(String[] args) {
         
         JLabel lblnecesitarDonacionesDe_1 = new JLabel("\u00BFNecesitar\u00E9 Donaciones de Alimentos?");
         lblnecesitarDonacionesDe_1.setForeground(Color.WHITE);
-        lblnecesitarDonacionesDe_1.setFont(new Font("Batang", Font.BOLD, 19));
+        lblnecesitarDonacionesDe_1.setFont(new Font("Khmer UI", Font.BOLD, 19));
         lblnecesitarDonacionesDe_1.setBounds(749, 235, 373, 30);
         panelAgregarCasaCuna.add(lblnecesitarDonacionesDe_1);
         
@@ -1330,31 +1342,31 @@ public static void main(String[] args) {
         
         JLabel lblnecesitarDonacionesDe = new JLabel("\u00BFNecesitar\u00E9 Donaciones de Medicamentos?");
         lblnecesitarDonacionesDe.setForeground(Color.WHITE);
-        lblnecesitarDonacionesDe.setFont(new Font("Batang", Font.BOLD, 17));
+        lblnecesitarDonacionesDe.setFont(new Font("Khmer UI", Font.BOLD, 19));
         lblnecesitarDonacionesDe.setBounds(749, 176, 373, 30);
         panelAgregarCasaCuna.add(lblnecesitarDonacionesDe);
 
         JLabel lblDireccionCasaCuna = new JLabel("Direccion Casa Cuna");
         lblDireccionCasaCuna.setForeground(Color.WHITE);
-        lblDireccionCasaCuna.setFont(new Font("Batang", Font.BOLD, 19));
+        lblDireccionCasaCuna.setFont(new Font("Khmer UI", Font.BOLD, 19));
         lblDireccionCasaCuna.setBounds(749, 312, 203, 23);
         panelAgregarCasaCuna.add(lblDireccionCasaCuna);
         
         JLabel lblTamaoDeMascota = new JLabel("Tama\u00F1o de Mascota a Recibir");
         lblTamaoDeMascota.setForeground(Color.WHITE);
-        lblTamaoDeMascota.setFont(new Font("Batang", Font.BOLD, 19));
+        lblTamaoDeMascota.setFont(new Font("Khmer UI", Font.BOLD, 19));
         lblTamaoDeMascota.setBounds(69, 182, 270, 23);
         panelAgregarCasaCuna.add(lblTamaoDeMascota);
         
         lblTipoDeMascota = new JLabel("Tipo de Mascota");
         lblTipoDeMascota.setForeground(Color.WHITE);
-        lblTipoDeMascota.setFont(new Font("Batang", Font.BOLD, 19));
+        lblTipoDeMascota.setFont(new Font("Khmer UI", Font.BOLD, 19));
         lblTipoDeMascota.setBounds(69, 276, 146, 23);
         panelAgregarCasaCuna.add(lblTipoDeMascota);
         
         JLabel lblCantidadDeMascotas = new JLabel("\u00BFCu\u00E1ntas Mascotas Podr\u00E9 Recibir? ");
         lblCantidadDeMascotas.setForeground(Color.WHITE);
-        lblCantidadDeMascotas.setFont(new Font("Batang", Font.BOLD, 19));
+        lblCantidadDeMascotas.setFont(new Font("Khmer UI", Font.BOLD, 19));
         lblCantidadDeMascotas.setBounds(69, 372, 319, 23);
         panelAgregarCasaCuna.add(lblCantidadDeMascotas);
         
@@ -1419,11 +1431,6 @@ public static void main(String[] args) {
         lblCantn.setFont(new Font("Khmer UI", Font.BOLD, 13));
         lblCantn.setBounds(749, 438, 69, 14);
         panelAgregarCasaCuna.add(lblCantn);
-        
-        JLabel label = new JLabel("");
-        label.setIcon(new ImageIcon("./imgs/fondoRegistro.png"));
-        label.setBounds(0, -49, 2508, 1246);
-        panelAgregarCasaCuna.add(label);
         
         
         

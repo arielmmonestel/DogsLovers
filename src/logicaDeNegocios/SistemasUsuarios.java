@@ -21,6 +21,7 @@ public class SistemasUsuarios {
 	private static final String rutaUsuarios = "./Usuarios.poo";	
 	private static  ArrayList<Usuario> listaUsuarios = new ArrayList<Usuario>();
 	private static  ArrayList<Usuario> listaUsuariosFiltradas = new ArrayList<Usuario>();
+	private static  ArrayList<Usuario> listaNegra = new ArrayList<Usuario>();
 	public static int size;
 	public static int idUsuario;
 	
@@ -266,9 +267,37 @@ public class SistemasUsuarios {
 		}
 		return -1;
 	}
+	public static String getNombreUsuario(int id){
+		try {
+			leerUsuarios();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String nombreUsuario = "";
+		for(Usuario usuario:listaUsuarios){
+			if (usuario.getID() ==id){
+				nombreUsuario = usuario.getNombreUsuario();
+			}
+		}
+		return nombreUsuario;
+	}
 	
-	
-	
+	public static int getCalificacion(int id){
+		try {
+			leerUsuarios();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		int calificacionUsuario = 0;
+		for(Usuario usuario:listaUsuarios){
+			if (usuario.getID() ==id){
+				calificacionUsuario= usuario.getCalificacion();
+			}
+		}
+		return calificacionUsuario;
+	}
 	
 	
 }

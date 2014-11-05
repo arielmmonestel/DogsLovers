@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
+import javax.swing.table.DefaultTableModel;
 
 import java.awt.Color;
 
@@ -28,11 +29,17 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.DefaultComboBoxModel;
 
+import logicaDeNegocios.ListaNegra;
 import logicaDeNegocios.Sistema;
+import logicaDeNegocios.SistemasUsuarios;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
+import javax.swing.JTable;
+import javax.swing.JScrollPane;
 
 public class VentanaConfiguracion extends JFrame {
 	private JPanel contentPane;
@@ -45,6 +52,14 @@ public class VentanaConfiguracion extends JFrame {
 	private JRadioButton rdbtnNuevoColorDe;
 	private JRadioButton rdbtnRaza;
 	private JComboBox comboBoxTipos;
+	private JButton btnAgregarNuevasCaracteristicas;
+	private JButton btnQuitarDeLista;
+	private JPanel panelNuevasCaracteristicas;
+	private JPanel panelQuitarDeListaNegra;
+	private JTable tableQuitarListaNegra;
+	private JLabel lblQuitarDeLista;
+	private JLabel labelIcono2;
+	private JButton btnQuitarDeLista_1;
 
 	/**
 	 * Launch the application.
@@ -76,10 +91,10 @@ public class VentanaConfiguracion extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new CardLayout(0, 0));
 		
-		JPanel panelPrincipal = new JPanel();
-		panelPrincipal.setBackground(new Color(99,84, 65));
-		contentPane.add(panelPrincipal, "name_62609517236581");
-		panelPrincipal.setLayout(null);
+		panelNuevasCaracteristicas = new JPanel();
+		panelNuevasCaracteristicas.setBackground(new Color(99,84, 65));
+		contentPane.add(panelNuevasCaracteristicas, "name_62609517236581");
+		panelNuevasCaracteristicas.setLayout(null);
 		
 		btnGuardar = new JButton("");
 		btnGuardar.addActionListener(new ActionListener() {
@@ -151,8 +166,8 @@ public class VentanaConfiguracion extends JFrame {
 		btnGuardar.setRolloverIcon(new ImageIcon("./imgs/save-64.png"));
 		btnGuardar.setPressedIcon(new ImageIcon("./imgs/save-32.png"));
 		btnGuardar.setIcon(new ImageIcon("./imgs/save-48.png"));
-		btnGuardar.setBounds(622, 135, 95, 84);
-		panelPrincipal.add(btnGuardar);
+		btnGuardar.setBounds(608, 356, 95, 84);
+		panelNuevasCaracteristicas.add(btnGuardar);
 		
 		comboBoxTipos = new JComboBox();
 		try {
@@ -161,8 +176,8 @@ public class VentanaConfiguracion extends JFrame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		comboBoxTipos.setBounds(115, 177, 127, 19);
-		panelPrincipal.add(comboBoxTipos);
+		comboBoxTipos.setBounds(102, 406, 127, 19);
+		panelNuevasCaracteristicas.add(comboBoxTipos);
 		
 		rdbtnRaza = new JRadioButton(" Raza");
 		rdbtnRaza.addMouseListener(new MouseAdapter() {
@@ -172,12 +187,12 @@ public class VentanaConfiguracion extends JFrame {
 				textFieldNuevoEstado.setText("Ingrese la Nueva Raza");
 			}
 		});
-		rdbtnRaza.setFont(new Font("Batang", Font.BOLD, 19));
-		rdbtnRaza.setForeground(new Color(0, 0, 0));
+		rdbtnRaza.setFont(new Font("Khmer UI", Font.BOLD, 19));
+		rdbtnRaza.setForeground(new Color(210, 180, 140));
 		rdbtnRaza.setContentAreaFilled(false);
-		rdbtnRaza.setBounds(19, 177, 87, 23);
+		rdbtnRaza.setBounds(6, 406, 87, 23);
 		grupoAgregarNuevo.add(rdbtnRaza);
-		panelPrincipal.add(rdbtnRaza);
+		panelNuevasCaracteristicas.add(rdbtnRaza);
 		
 		textFieldNuevoEstado = new JTextField();
 		textFieldNuevoEstado.setText("Ingrese el Nuevo Estado");
@@ -187,11 +202,11 @@ public class VentanaConfiguracion extends JFrame {
 				textFieldNuevoEstado.setText(null);
 			}
 		});
-		textFieldNuevoEstado.setBounds(370, 173, 241, 23);
-		panelPrincipal.add(textFieldNuevoEstado);
+		textFieldNuevoEstado.setBounds(357, 402, 241, 23);
+		panelNuevasCaracteristicas.add(textFieldNuevoEstado);
 		textFieldNuevoEstado.setColumns(10);
 		
-		rdbtnNuevoColorDe = new JRadioButton("Nuevo Color de Pelo");
+		rdbtnNuevoColorDe = new JRadioButton("Color de Pelo");
 		rdbtnNuevoColorDe.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -199,14 +214,14 @@ public class VentanaConfiguracion extends JFrame {
 				textFieldNuevoEstado.setText("Ingrese el Nuevo Color de Pelo");
 			}
 		});
-		rdbtnNuevoColorDe.setForeground(new Color(0, 0, 0));
-		rdbtnNuevoColorDe.setFont(new Font("Batang", Font.BOLD, 19));
+		rdbtnNuevoColorDe.setForeground(new Color(210, 180, 140));
+		rdbtnNuevoColorDe.setFont(new Font("Khmer UI", Font.BOLD, 19));
 		rdbtnNuevoColorDe.setContentAreaFilled(false);
-		rdbtnNuevoColorDe.setBounds(19, 143, 247, 23);
+		rdbtnNuevoColorDe.setBounds(6, 358, 247, 23);
 		grupoAgregarNuevo.add(rdbtnNuevoColorDe);
-		panelPrincipal.add(rdbtnNuevoColorDe);
+		panelNuevasCaracteristicas.add(rdbtnNuevoColorDe);
 		
-		rdbtnNuevoTipo = new JRadioButton("Nuevo Tipo de Mascota");
+		rdbtnNuevoTipo = new JRadioButton("Tipo de Mascota");
 		rdbtnNuevoTipo.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -214,14 +229,14 @@ public class VentanaConfiguracion extends JFrame {
 				textFieldNuevoEstado.setText("Ingrese el Nuevo Tipo de Mascota");
 			}
 		});
-		rdbtnNuevoTipo.setForeground(new Color(0, 0, 0));
-		rdbtnNuevoTipo.setFont(new Font("Batang", Font.BOLD, 19));
+		rdbtnNuevoTipo.setForeground(new Color(210, 180, 140));
+		rdbtnNuevoTipo.setFont(new Font("Khmer UI", Font.BOLD, 19));
 		rdbtnNuevoTipo.setContentAreaFilled(false);
-		rdbtnNuevoTipo.setBounds(19, 83, 247, 19);
+		rdbtnNuevoTipo.setBounds(6, 271, 247, 19);
 		grupoAgregarNuevo.add(rdbtnNuevoTipo);
-		panelPrincipal.add(rdbtnNuevoTipo);
+		panelNuevasCaracteristicas.add(rdbtnNuevoTipo);
 		
-		rdbtnNuevoColorOjos = new JRadioButton("Nuevo Color de Ojos");
+		rdbtnNuevoColorOjos = new JRadioButton("Color de Ojos");
 		rdbtnNuevoColorOjos.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -230,14 +245,14 @@ public class VentanaConfiguracion extends JFrame {
 				
 			}
 		});
-		rdbtnNuevoColorOjos.setForeground(new Color(0, 0, 0));
-		rdbtnNuevoColorOjos.setFont(new Font("Batang", Font.BOLD, 19));
+		rdbtnNuevoColorOjos.setForeground(new Color(210, 180, 140));
+		rdbtnNuevoColorOjos.setFont(new Font("Khmer UI", Font.BOLD, 19));
 		rdbtnNuevoColorOjos.setContentAreaFilled(false);
-		rdbtnNuevoColorOjos.setBounds(19, 113, 247, 23);
+		rdbtnNuevoColorOjos.setBounds(6, 314, 247, 23);
 		grupoAgregarNuevo.add(rdbtnNuevoColorOjos);
-		panelPrincipal.add(rdbtnNuevoColorOjos);
+		panelNuevasCaracteristicas.add(rdbtnNuevoColorOjos);
 		
-		rdbtnNuevoEstado = new JRadioButton("Nuevo Estado");
+		rdbtnNuevoEstado = new JRadioButton(" Estado");
 		rdbtnNuevoEstado.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -246,26 +261,99 @@ public class VentanaConfiguracion extends JFrame {
 			}
 		});
 		rdbtnNuevoEstado.setSelected(true);
-		rdbtnNuevoEstado.setForeground(new Color(0, 0, 0));
-		rdbtnNuevoEstado.setFont(new Font("Batang", Font.BOLD, 19));
+		rdbtnNuevoEstado.setForeground(new Color(210, 180, 140));
+		rdbtnNuevoEstado.setFont(new Font("Khmer UI", Font.BOLD, 19));
 		rdbtnNuevoEstado.setContentAreaFilled(false);
-		rdbtnNuevoEstado.setBounds(19, 51, 247, 23);
+		rdbtnNuevoEstado.setBounds(6, 229, 247, 23);
 		grupoAgregarNuevo.add(rdbtnNuevoEstado);
-		panelPrincipal.add(rdbtnNuevoEstado);
+		panelNuevasCaracteristicas.add(rdbtnNuevoEstado);
 		
-		JLabel label = new JLabel("");
-		label.setForeground(new Color(0, 0, 0));
-		label.setBounds(0, 0, 740, 234);
-		label.setBorder(new MatteBorder(5, 5, 5, 5, (Color) new Color(110, 170, 111)));
-        //label.setIcon(new ImageIcon("./imgs/fondoPanelesPantallaPrincipal.png"));
+		JLabel lblNuevasCaractersticas = new JLabel("Nuevas Caracter\u00EDsticas");
+		lblNuevasCaractersticas.setForeground(new Color(210, 180, 140));
+		lblNuevasCaractersticas.setFont(new Font("Khmer UI", Font.BOLD, 35));
+		lblNuevasCaractersticas.setBounds(10, 129, 379, 93);
+		panelNuevasCaracteristicas.add(lblNuevasCaractersticas);
+		
+		btnQuitarDeLista = new JButton("Quitar de Lista Negra");
+		btnQuitarDeLista.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panelNuevasCaracteristicas.setVisible(false);
+				panelQuitarDeListaNegra.setVisible(true);
+				for(int i:ListaNegra.getListaNegra()){
+					
+					
+				}
+				System.out.println(ListaNegra.getListaNegra().size());
+			}
+		});
+		btnQuitarDeLista.setBounds(6, 11, 89, 67);
+		panelNuevasCaracteristicas.add(btnQuitarDeLista);
+		
+		JLabel labelIcono = new JLabel("");
+		labelIcono.setBounds(130, 0, 552, 135);
+
+        labelIcono.setIcon(new ImageIcon("./imgs/Logo.png"));
         
-		panelPrincipal.add(label);
+		panelNuevasCaracteristicas.add(labelIcono);
 		
-		JLabel label_1 = new JLabel("");
-		label_1.setForeground(Color.BLACK);
-		//label_1.setIcon(new ImageIcon("./imgs/fondoPanelesPantallaPrincipal.png"));
-		label_1.setBorder(new MatteBorder(5, 5, 5, 5, (Color) new Color(110, 170, 111)));
-		label_1.setBounds(0, 253, 740, 234);
-		panelPrincipal.add(label_1);
+		panelQuitarDeListaNegra = new JPanel();
+		panelQuitarDeListaNegra.setBackground(new Color(99,84, 65));
+		contentPane.add(panelQuitarDeListaNegra, "name_15768002466605");
+		panelQuitarDeListaNegra.setLayout(null);
+		
+		btnAgregarNuevasCaracteristicas = new JButton("Agregar Nuevas Caracteristicas");
+		btnAgregarNuevasCaracteristicas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				panelNuevasCaracteristicas.setVisible(true);
+				panelQuitarDeListaNegra.setVisible(false);
+			}
+		});
+		btnAgregarNuevasCaracteristicas.setBounds(6, 11, 89, 67);
+		panelQuitarDeListaNegra.add(btnAgregarNuevasCaracteristicas);
+		
+		JScrollPane scrollPaneQuitarListaNegra = new JScrollPane();
+		scrollPaneQuitarListaNegra.setAutoscrolls(true);
+		scrollPaneQuitarListaNegra.setBackground(new Color(210, 180, 140));
+		scrollPaneQuitarListaNegra.setBounds(6, 218, 523, 229);
+		panelQuitarDeListaNegra.add(scrollPaneQuitarListaNegra);
+		
+		String[] columna = {"ID","Usuario","Calificación"};
+		String[] datos = new String[3];
+		
+		DefaultTableModel tableModel = new DefaultTableModel(columna,0);
+		for(int i = 0 ; i < ListaNegra.getListaSize() ; i++){
+			datos[0] =Integer.toString(ListaNegra.getListaNegra().get(i)); 
+			datos[1] =SistemasUsuarios.getNombreUsuario(ListaNegra.getListaNegra().get(i));
+			datos[2] =Integer.toString( SistemasUsuarios.getCalificacion(ListaNegra.getListaNegra().get(i)));
+			tableModel.addRow(datos);
+		}
+		tableQuitarListaNegra = new JTable(tableModel);
+		scrollPaneQuitarListaNegra.setViewportView(tableQuitarListaNegra);
+		
+		lblQuitarDeLista = new JLabel("Quitar de Lista Negra.");
+		lblQuitarDeLista.setForeground(new Color(210, 180, 140));
+		lblQuitarDeLista.setFont(new Font("Khmer UI", Font.BOLD, 35));
+		lblQuitarDeLista.setBounds(10, 129, 379, 93);
+		
+		panelQuitarDeListaNegra.add(lblQuitarDeLista);
+		
+		labelIcono2 = new JLabel("");
+		labelIcono2.setBounds(130, 0, 552, 135);
+        labelIcono2.setIcon(new ImageIcon("./imgs/Logo.png"));
+		panelQuitarDeListaNegra.add(labelIcono2);
+		
+		btnQuitarDeLista_1 = new JButton("Quitar de Lista Negra");
+		btnQuitarDeLista_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int fila= tableQuitarListaNegra.getSelectedRow();
+				int columna= tableQuitarListaNegra.getSelectedColumn();
+				int idUsuario = Integer.parseInt((String) tableQuitarListaNegra.getValueAt(fila,0));
+				ListaNegra.quitarDeListaNegra(SistemasUsuarios.getNombreUsuario(idUsuario));
+				ListaNegra.borrardeListaNegra(idUsuario);
+				tableModel.removeRow(fila);
+			}
+		});
+		btnQuitarDeLista_1.setBounds(580, 369, 102, 82);
+		panelQuitarDeListaNegra.add(btnQuitarDeLista_1);
 	}
 }
