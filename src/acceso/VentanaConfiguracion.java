@@ -7,7 +7,9 @@ import java.awt.Toolkit;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.table.DefaultTableModel;
@@ -347,11 +349,21 @@ public class VentanaConfiguracion extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				int fila= tableQuitarListaNegra.getSelectedRow();
 				int columna= tableQuitarListaNegra.getSelectedColumn();
-				int idUsuario = Integer.parseInt((String) tableQuitarListaNegra.getValueAt(fila,0));
-				ListaNegra.quitarDeListaNegra(SistemasUsuarios.getNombreUsuario(idUsuario));
-				ListaNegra.borrardeListaNegra(idUsuario);
-				tableModel.removeRow(fila);
-			}
+				
+				
+				//Sistema.leerColorDePelo();
+				try{
+					int idUsuario = Integer.parseInt((String) tableQuitarListaNegra.getValueAt(fila,0));
+					ListaNegra.quitarDeListaNegra(SistemasUsuarios.getNombreUsuario(idUsuario));
+					ListaNegra.borrardeListaNegra(idUsuario);
+					tableModel.removeRow(fila);
+					
+				}catch(ArrayIndexOutOfBoundsException e){
+						JOptionPane.showMessageDialog(null,"No hay Usuarios en Lista Negra");}	
+				
+
+		}
+				
 		});
 		btnQuitarDeLista_1.setBounds(580, 369, 102, 82);
 		panelQuitarDeListaNegra.add(btnQuitarDeLista_1);
