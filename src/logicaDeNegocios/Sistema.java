@@ -642,6 +642,18 @@ public class Sistema {
 			tableModel.addRow(datos);
 		}
    	}
+   	
+	public static void cargarTableNuevosAdmin(String[]columna,String[]filas,DefaultTableModel tableModel){
+   		
+   		for(int i = 0 ; i < SistemasUsuarios.getNoAdministradores().size(); i++){
+   			Usuario usuarioTemp = SistemasUsuarios.getNoAdministradores().get(i);
+   			filas[0] =Integer.toString(usuarioTemp.getID()); 
+   			filas[1] =usuarioTemp.getNombre() + " " + usuarioTemp.getPrimerApellido();
+   			filas[2] = usuarioTemp.getNombreUsuario();
+   			tableModel.addRow(filas);
+		}
+   	}
+
 
 	///////////////////////////////////////// Adopciones //////////////////////////////////////////////////////
 	

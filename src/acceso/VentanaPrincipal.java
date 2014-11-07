@@ -1592,16 +1592,16 @@ public static void main(String[] args) {
         mnConfiguracin.setIcon(new ImageIcon("./imgs/params-32.png"));
         menuBar.add(mnConfiguracin);
         
-        JMenuItem mntmAdministrador = new JMenuItem("Administrador");
-        mntmAdministrador.addActionListener(new ActionListener() {
+        JMenuItem mntmAdministracion = new JMenuItem("Administrador");
+        mntmAdministracion.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
         		VentanaConfiguracion ventanaConfiguracion  = new VentanaConfiguracion();
         		ventanaConfiguracion.setVisible(true);
         		
         	}
         });
-        mntmAdministrador.setIcon(new ImageIcon("./imgs/admin.png"));
-        mnConfiguracin.add(mntmAdministrador);
+        mntmAdministracion.setIcon(new ImageIcon("./imgs/admin.png"));
+        mnConfiguracin.add(mntmAdministracion);
         panelAgregarCasaCuna.setVisible(false);
         
 //////////////////////////////////////Inicio Código Consulta Lista Negra////////////////////////////////////////////////////

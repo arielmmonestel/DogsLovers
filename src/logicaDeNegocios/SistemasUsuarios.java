@@ -212,6 +212,24 @@ public class SistemasUsuarios {
 
 		return false;
 	}
+	public static ArrayList<Usuario> getNoAdministradores(){
+		
+		ArrayList<Usuario> listaDeNoAdministradores = new ArrayList<Usuario>();
+		
+		try {
+			leerUsuarios();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		for(Usuario usuario:listaUsuarios){
+			if (!usuario.esAdministrador()){
+				listaDeNoAdministradores.add(usuario);
+			}
+		}
+		return listaDeNoAdministradores;
+		
+	}
 
 	//public static void todasLasPersonas() throws IOException{leerUsuarios(); listaUsuariosFiltradas = listaUsuarios;} // llamar antes de cada busqueda
 	
@@ -299,6 +317,23 @@ public class SistemasUsuarios {
 			}
 		}
 		return calificacionUsuario;
+	}
+	
+	public static void convertirEnAdministrador(int idUsuario){
+		try {
+			leerUsuarios();
+			for(Usuario usuario: listaUsuarios){
+				if (usuario.getID() == idUsuario){
+					usuario.setEsAdministrador(true);
+				}
+			}
+			GuardarUsuario();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 	}
 	
 }

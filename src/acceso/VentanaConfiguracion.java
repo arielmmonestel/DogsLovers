@@ -55,7 +55,6 @@ public class VentanaConfiguracion extends JFrame {
 	private JRadioButton rdbtnNuevoColorDe;
 	private JRadioButton rdbtnRaza;
 	private JComboBox comboBoxTipos;
-	private JButton btnAgregarNuevasCaracteristicas;
 	private JButton btnQuitarDeLista;
 	private JPanel panelNuevasCaracteristicas;
 	private JPanel panelQuitarDeListaNegra;
@@ -63,6 +62,13 @@ public class VentanaConfiguracion extends JFrame {
 	private JLabel lblQuitarDeLista;
 	private JLabel labelIcono2;
 	private JButton btnQuitarDeLista_1;
+	private JPanel panelAsignarNuevoAdmin;
+	private JButton button;
+	private JButton buttonAgregarNuevosAtr;
+	private JButton btnAgregarNuevasCaracteristicas;
+	private JButton btnQuitarDeListaNegra;
+	private JTable tableAgregarAdmin;
+	private JButton btnAsignarComoAdministrador;
 
 	/**
 	 * Launch the application.
@@ -281,6 +287,7 @@ public class VentanaConfiguracion extends JFrame {
 		btnQuitarDeLista.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				panelNuevasCaracteristicas.setVisible(false);
+				panelAsignarNuevoAdmin.setVisible(false);
 				panelQuitarDeListaNegra.setVisible(true);
 				for(int i:ListaNegra.getListaNegra()){
 					
@@ -289,7 +296,7 @@ public class VentanaConfiguracion extends JFrame {
 				System.out.println(ListaNegra.getListaNegra().size());
 			}
 		});
-		btnQuitarDeLista.setBounds(6, 11, 89, 67);
+		btnQuitarDeLista.setBounds(6, 15, 70, 52);
 		panelNuevasCaracteristicas.add(btnQuitarDeLista);
 		
 		JLabel labelIcono = new JLabel("");
@@ -299,20 +306,22 @@ public class VentanaConfiguracion extends JFrame {
         
 		panelNuevasCaracteristicas.add(labelIcono);
 		
+		JButton buttonAsignarNuevoAdmin = new JButton("Asignar Nuevo Admnistrador");
+		buttonAsignarNuevoAdmin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panelNuevasCaracteristicas.setVisible(false);
+				panelAsignarNuevoAdmin.setVisible(true);
+				panelQuitarDeListaNegra.setVisible(true);
+				
+			}
+		});
+		buttonAsignarNuevoAdmin.setBounds(4, 78, 70, 52);
+		panelNuevasCaracteristicas.add(buttonAsignarNuevoAdmin);
+		
 		panelQuitarDeListaNegra = new JPanel();
 		panelQuitarDeListaNegra.setBackground(new Color(99,84, 65));
 		contentPane.add(panelQuitarDeListaNegra, "name_15768002466605");
 		panelQuitarDeListaNegra.setLayout(null);
-		
-		btnAgregarNuevasCaracteristicas = new JButton("Agregar Nuevas Caracteristicas");
-		btnAgregarNuevasCaracteristicas.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				panelNuevasCaracteristicas.setVisible(true);
-				panelQuitarDeListaNegra.setVisible(false);
-			}
-		});
-		btnAgregarNuevasCaracteristicas.setBounds(6, 11, 89, 67);
-		panelQuitarDeListaNegra.add(btnAgregarNuevasCaracteristicas);
 		
 		JScrollPane scrollPaneQuitarListaNegra = new JScrollPane();
 		scrollPaneQuitarListaNegra.setAutoscrolls(true);
@@ -350,7 +359,7 @@ public class VentanaConfiguracion extends JFrame {
 		btnQuitarDeLista_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int fila= tableQuitarListaNegra.getSelectedRow();
-				int columna= tableQuitarListaNegra.getSelectedColumn();
+				
 				
 				
 				//Sistema.leerColorDePelo();
@@ -370,5 +379,113 @@ public class VentanaConfiguracion extends JFrame {
 		});
 		btnQuitarDeLista_1.setBounds(580, 369, 102, 82);
 		panelQuitarDeListaNegra.add(btnQuitarDeLista_1);
+		
+		button = new JButton("Asignar Nuevo Admnistrador");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panelNuevasCaracteristicas.setVisible(false);
+				panelAsignarNuevoAdmin.setVisible(true);
+				panelQuitarDeListaNegra.setVisible(false);
+				
+			}
+		});
+		button.setBounds(6, 74, 70, 52);
+		panelQuitarDeListaNegra.add(button);
+		
+		buttonAgregarNuevosAtr = new JButton("Agregar Nuevas Caracteristicas");
+		buttonAgregarNuevosAtr.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panelNuevasCaracteristicas.setVisible(true);
+				panelAsignarNuevoAdmin.setVisible(false);
+				panelQuitarDeListaNegra.setVisible(false);
+				
+			}
+		});
+		buttonAgregarNuevosAtr.setBounds(8, 11, 70, 52);
+		panelQuitarDeListaNegra.add(buttonAgregarNuevosAtr);
+		
+		panelAsignarNuevoAdmin = new JPanel();
+		panelAsignarNuevoAdmin.setBackground(new Color(99,84, 65));
+		contentPane.add(panelAsignarNuevoAdmin, "name_89064241281199");
+		panelAsignarNuevoAdmin.setLayout(null);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(6, 218, 523, 229);
+		panelAsignarNuevoAdmin.add(scrollPane);
+		
+		String [] columnas = {"ID","Nombre","Usuario"};
+		String[] filas = new String[3];
+		DefaultTableModel tableModelAgregarAdmin =  new DefaultTableModel(columnas,0);
+		Sistema.cargarTableNuevosAdmin(columnas, filas, tableModelAgregarAdmin);
+		tableAgregarAdmin = new JTable(tableModelAgregarAdmin);
+		tableAgregarAdmin.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				btnAsignarComoAdministrador.setEnabled(true);
+			}
+		});
+		scrollPane.setViewportView(tableAgregarAdmin);
+		
+		JLabel label1 = new JLabel("");
+		label1.setBounds(130, 0, 552, 135);
+
+        label1.setIcon(new ImageIcon("./imgs/Logo.png"));
+
+		panelAsignarNuevoAdmin.add(label1);
+		
+		JLabel lblAsignarNuevoAdmin = new JLabel("Asignar Nuevo Administrador");
+		lblAsignarNuevoAdmin.setForeground(new Color(210, 180, 140));
+		lblAsignarNuevoAdmin.setFont(new Font("Khmer UI", Font.BOLD, 35));
+		lblAsignarNuevoAdmin.setBounds(10, 129, 504, 93);
+		panelAsignarNuevoAdmin.add(	lblAsignarNuevoAdmin);
+		
+		btnAgregarNuevasCaracteristicas = new JButton("Agregar Nuevas Caracteristicas");
+		btnAgregarNuevasCaracteristicas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panelNuevasCaracteristicas.setVisible(true);
+				panelAsignarNuevoAdmin.setVisible(false);
+				panelQuitarDeListaNegra.setVisible(false);
+				
+				
+			}
+		});
+		btnAgregarNuevasCaracteristicas.setBounds(10, 84, 70, 52);
+		panelAsignarNuevoAdmin.add(btnAgregarNuevasCaracteristicas);
+		
+		btnQuitarDeListaNegra = new JButton("Quitar de Lista Negra");
+		btnQuitarDeListaNegra.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			panelNuevasCaracteristicas.setVisible(false);
+			panelAsignarNuevoAdmin.setVisible(false);
+			panelQuitarDeListaNegra.setVisible(true);
+			
+			}
+		});
+		btnQuitarDeListaNegra.setBounds(12, 21, 70, 52);
+		
+		panelAsignarNuevoAdmin.add(btnQuitarDeListaNegra);
+		
+		btnAsignarComoAdministrador = new JButton("Asignar como Administrador");
+		btnAsignarComoAdministrador.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int fila= tableAgregarAdmin.getSelectedRow();
+				
+				
+				
+				//Sistema.leerColorDePelo();
+			
+					
+					int idUsuario = Integer.parseInt((String) tableAgregarAdmin.getValueAt(fila,0));
+					SistemasUsuarios.convertirEnAdministrador(idUsuario);
+					
+					tableModelAgregarAdmin.removeRow(fila);
+					btnAsignarComoAdministrador.setEnabled(false);
+			
+			
+			}});
+		btnAsignarComoAdministrador.setEnabled(false);
+		btnAsignarComoAdministrador.setBounds(580, 369, 102, 82);
+		panelAsignarNuevoAdmin.add(btnAsignarComoAdministrador);
+	
 	}
 }

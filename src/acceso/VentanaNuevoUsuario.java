@@ -8,6 +8,7 @@ import java.awt.Point;
 import java.awt.SystemColor;
 import java.awt.Toolkit;
 import java.io.IOException;
+import java.net.UnknownHostException;
 
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
@@ -28,6 +29,7 @@ import javax.swing.border.EmptyBorder;
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 
 import com.jgoodies.forms.factories.DefaultComponentFactory;
+
 //import org.eclipse.wb.swing.FocusTraversalOnArray;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -227,8 +229,10 @@ public class VentanaNuevoUsuario extends JFrame {
 									EnviarMail.subject = subject;
 									EnviarMail.mensaje = mensaje;
 									
-									JOptionPane.showMessageDialog(contentPane, "Usuario registrado correctamente");
-									EnviarMail.enviarMail();
+									JOptionPane.showMessageDialog(contentPane, "Usuario registrado correctamente.Se enviará un correo electrónico con sus datos de usuario");
+									
+										EnviarMail.enviarMail();
+										JOptionPane.showMessageDialog(contentPane, "Correo electrónico enviado correctamente");
 									dispose();
 									loguearse= new Loggin();
 									loguearse.setVisible(true);
@@ -339,7 +343,7 @@ public class VentanaNuevoUsuario extends JFrame {
 		comboBoxMes.setBackground(SystemColor.text);
 		comboBoxMes.setBounds(332, 436, 176, 23);
 		comboBoxMes.setToolTipText("Mes de nacimiento");
-		comboBoxMes.setModel(new DefaultComboBoxModel(new String[] {"Mes", "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre", "Octubre", "Noviembre", "Diciembre"}));
+		comboBoxMes.setModel(new DefaultComboBoxModel(new String[] { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre", "Octubre", "Noviembre", "Diciembre"}));
 		panelAgregarPersona.add(comboBoxMes);
 		
 		spinnerAnio = new JSpinner();
