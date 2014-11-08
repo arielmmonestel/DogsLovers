@@ -22,7 +22,6 @@ public class SistemasUsuarios {
 	private static  ArrayList<Usuario> listaUsuarios = new ArrayList<Usuario>();
 	private static  ArrayList<Usuario> listaUsuariosFiltradas = new ArrayList<Usuario>();
 	private static  ArrayList<Usuario> listaNegra = new ArrayList<Usuario>();
-	public static int size;
 	public static int idUsuario;
 	
 	File archivo = null;
@@ -30,7 +29,9 @@ public class SistemasUsuarios {
 	static BufferedReader bufferLectura = null;
 	static JFrame frame = new JFrame();
 	
-	public static int getSize(){return size = idUsuario;}
+	public static int getListaDeUsuariosSize(){
+		return listaUsuarios.size();
+	}
 	
 	public static ArrayList<Usuario> getUsuarios() throws IOException{leerUsuarios(); return listaUsuarios;}
 	

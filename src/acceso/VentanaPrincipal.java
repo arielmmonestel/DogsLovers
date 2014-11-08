@@ -201,14 +201,10 @@ public class VentanaPrincipal {
     private JButton btnFlechaDerecha;
     private Choice choice;
     private Choice choice_1;
-    private JTable tablaListaNegra;
+    private JTable tablaDeUsuarios;
     private JScrollPane scrollPane_1;
-    private JLabel FondoConsultaListaNegra;
-    private JPanel panelConsultaListaNegra;
-    private JLabel lblMotivoLN;
-    private JLabel lblFotoLN;
-    private JLabel lblNombreLN;
-    private JLabel lblFechaLN;
+    private JLabel fondoConsultaUsuarios;
+    private JPanel panelConsultaDeUsuarios;
     private JLabel lblMensajeListaVacia;
 
     static JMenu mnConfiguracin;
@@ -299,7 +295,7 @@ public static void main(String[] args) {
             public void actionPerformed(ActionEvent e) {
               if(rdbtnEncontradas.isSelected()){
             	  opcEstado = "ENCONTRADA";
-                refrescarPaneles();
+                  refrescarPaneles();
     
             }}
         });
@@ -338,18 +334,17 @@ public static void main(String[] args) {
         rdbtnTodas.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 if(rdbtnTodas.isSelected()){
-                opcEstado=" ";
-                opcTipo=" ";
-                opcRaza=" ";
+                opcEstado = " ";
+                opcTipo = " ";
+                opcRaza = " ";
                 
                 refrescarPaneles();
                 
                                 }
             
             }
-            }
-            
-        );
+        });
+        
         rdbtnTodas.setSelected(true);
         rdbtnTodas.setContentAreaFilled(false);
         rdbtnTodas.setForeground(new Color(210, 180, 140));
@@ -1556,30 +1551,12 @@ public static void main(String[] args) {
         mntmVerListaNegra.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		panelPrincipal.setVisible(false);
-        		panelConsultaListaNegra.setVisible(true);
-        		if(ListaNegra.getListaSize() == 0){
-        			tablaListaNegra.setVisible(false);
-        			lblFotoLN.setVisible(false);
-        			lblNombreLN.setVisible(false);
-        			lblFechaLN.setVisible(false);
-        			lblMotivoLN.setVisible(false);
+        		panelConsultaDeUsuarios.setVisible(true);
+        		if(SistemasUsuarios.getListaDeUsuariosSize() == 0){
+        			tablaDeUsuarios.setVisible(false);
         			lblMensajeListaVacia.setVisible(true);
         		}else{
-        			Usuario primerUsuarioEnLista = SistemasUsuarios.getUsuario(ListaNegra.getListaNegra().get(0));
-        			tablaListaNegra.setVisible(true);
-        			lblFotoLN.setVisible(true);
-        			//El atributo Foto para Usuario no existe, la sgte línea mostraría la misma si esto se añadiera.
-        			//lblFotoLN.setIcon(new ImageIcon(primerUsuarioEnLista.getFoto()));
-        			lblNombreLN.setVisible(true);
-        			lblNombreLN.setText(primerUsuarioEnLista.getNombreUsuario());
-        			lblFechaLN.setVisible(true); // Falta agregar una manera de conseguir fechas en las que Sistema pasó 
-        										// un usuario a listaNegra por malas calficaciones
-        			lblMotivoLN.setVisible(true);
-        			if(Sistema.estaReportado(primerUsuarioEnLista)){
-        				lblMotivoLN.setText(Sistema.getReporteDeUsuarioReportado(primerUsuarioEnLista).getMotivoReporte());
-        			}else{
-        				lblMotivoLN.setText("Este usuario fue puesto en la lista negra por malas calificaciones por parte de los demás.");
-        			}
+        			tablaDeUsuarios.setVisible(true);
         			lblMensajeListaVacia.setVisible(false);
         		}
         	}
@@ -1607,124 +1584,56 @@ public static void main(String[] args) {
 //////////////////////////////////////Inicio Código Consulta Lista Negra////////////////////////////////////////////////////
 
 		        
-		panelConsultaListaNegra = new JPanel();
-		VentanaPrincipal.getContentPane().add(panelConsultaListaNegra, "name_154826621946393");
-		panelConsultaListaNegra.setLayout(null);
+		panelConsultaDeUsuarios = new JPanel();
+		VentanaPrincipal.getContentPane().add(panelConsultaDeUsuarios, "name_154826621946393");
+		panelConsultaDeUsuarios.setLayout(null);
 		
-		JLabel lblTituloListaNegra = new JLabel("Lista Negra");
-		lblTituloListaNegra.setForeground(new Color(189, 183, 107));
-		lblTituloListaNegra.setFont(new Font("Khmer UI", Font.BOLD, 47));
-		lblTituloListaNegra.setBounds(47, 29, 364, 80);
-		panelConsultaListaNegra.add(lblTituloListaNegra);
+		JLabel lblTituloConsultaUsuarios = new JLabel("Usuarios");
+		lblTituloConsultaUsuarios.setForeground(new Color(189, 183, 107));
+		lblTituloConsultaUsuarios.setFont(new Font("Khmer UI", Font.BOLD, 47));
+		lblTituloConsultaUsuarios.setBounds(47, 29, 364, 80);
+		panelConsultaDeUsuarios.add(lblTituloConsultaUsuarios);
 		
 		scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(175, 161, 554, 399);
-		panelConsultaListaNegra.add(scrollPane_1);
+		panelConsultaDeUsuarios.add(scrollPane_1);
 		
 		
-		String[] columna = {"ID","Usuario","Calificacion","Motivo"};
+		String[] columna = {"ID","Usuario", "Nombre", "Calificacion"};
 		String[] fila = new String[4];
-		DefaultTableModel modeloListanegra = new DefaultTableModel(columna,0);
-		tablaListaNegra = new JTable(modeloListanegra);
-		Sistema.cargarTableUsuariosEnListaNegra(columna, fila, modeloListanegra);
+		DefaultTableModel modeloListaDeUsuarios = new DefaultTableModel(columna,0);
+		tablaDeUsuarios = new JTable(modeloListaDeUsuarios);
+		Sistema.cargarTablaDeUsuarios(fila, modeloListaDeUsuarios);
 		
-		tablaListaNegra.addMouseListener(new MouseAdapter() {
+		tablaDeUsuarios.addMouseListener(new MouseAdapter() {
 		public void mouseClicked(MouseEvent e) {
 			if (e.getClickCount() == 2) {
 				JTable target = (JTable)e.getSource();
 				int row = target.getSelectedRow();
 				int column = target.getSelectedColumn();
-				Usuario usuarioSeleccionado = SistemasUsuarios.getUsuario(ListaNegra.getListaNegra().get(row));
-				//lblFotoLN.setIcon(new ImageIcon(primerUsuarioEnLista.getFoto()));
-				lblNombreLN.setText(usuarioSeleccionado.getNombreUsuario());
-				if(Sistema.estaReportado(usuarioSeleccionado)){
-					lblMotivoLN.setText(Sistema.getReporteDeUsuarioReportado(usuarioSeleccionado).getMotivoReporte());
-				}else{
-					lblMotivoLN.setText("Este usuario fue puesto en la lista negra por malas calificaciones por parte de los demás.");
-				}
+				//Aquí se abre el perfil del usuario seleccionado en la tabla
 			}
 		}
 		});
-		scrollPane_1.setViewportView(tablaListaNegra);
-		tablaListaNegra.setFont(new Font("Khmer UI", Font.PLAIN, 14));
+		scrollPane_1.setViewportView(tablaDeUsuarios);
+		tablaDeUsuarios.setFont(new Font("Khmer UI", Font.PLAIN, 14));
 		
-		
-		lblFotoLN = new JLabel("");
-		lblFotoLN.setBounds(1024, 161, 154, 189);
-		panelConsultaListaNegra.add(lblFotoLN);
-		
-		lblNombreLN = new JLabel("");
-		lblNombreLN.setBounds(1024, 361, 160, 26);
-		panelConsultaListaNegra.add(lblNombreLN);
-		
-		lblFechaLN = new JLabel("");
-		lblFechaLN.setBounds(1000, 404, 110, 26);
-		panelConsultaListaNegra.add(lblFechaLN);
-		
-		lblMotivoLN = new JLabel("");
-		lblMotivoLN.setBounds(1005, 466, 234, 93);
-		panelConsultaListaNegra.add(lblMotivoLN);
-		
-		lblMensajeListaVacia = new JLabel("En este momento no hay usuarios en la lista negra.");
+		lblMensajeListaVacia = new JLabel("En este momento no hay usuarios registrados.");
 		lblMensajeListaVacia.setForeground(new Color(189, 183, 107));
 		lblMensajeListaVacia.setFont(new Font("Khmer UI", Font.PLAIN, 18));
 		lblMensajeListaVacia.setBounds(47, 120, 430, 30);
 		lblMensajeListaVacia.setVisible(false);
-		panelConsultaListaNegra.add(lblMensajeListaVacia);
+		panelConsultaDeUsuarios.add(lblMensajeListaVacia);
 		
-		FondoConsultaListaNegra = new JLabel("");
-		FondoConsultaListaNegra.setIcon(new ImageIcon("./imgs/fondoRegistro.png"));
-		FondoConsultaListaNegra.setBounds(0, 1, 1362, 675);
-		panelConsultaListaNegra.add(FondoConsultaListaNegra);
+		fondoConsultaUsuarios = new JLabel("");
+		fondoConsultaUsuarios.setIcon(new ImageIcon("./imgs/fondoRegistro.png"));
+		fondoConsultaUsuarios.setBounds(0, 1, 1362, 675);
+		panelConsultaDeUsuarios.add(fondoConsultaUsuarios);
 
 
 
         
     }//Fin initilize()
-    
-	public static class modeloTablaListaNegra extends AbstractTableModel {
-		private String [] columnas = {"ID", "Usuario", "Calificación", "Motivo"}; 
-		private String[][] matrizDeListaNegra;
-		
-//		public modeloTablaListaNegra(){
-//			
-//			matrizDeListaNegra = new String[ListaNegra.getListaSize()][4]; // filas x columnas
-//			int contador = 0; // contador usado para ubicar cada posición en la matriz
-//			for(Integer id: ListaNegra.getListaNegra()){
-//				matrizDeListaNegra[contador][0] = String.valueOf(ListaNegra.getUsuario(id).getID());
-//				matrizDeListaNegra[contador][1] = ListaNegra.getUsuario(id).getNombreUsuario();
-//				matrizDeListaNegra[contador][2] = String.valueOf(ListaNegra.getUsuario(id).getCalificacion());
-//				if(Sistema.estaReportado(ListaNegra.getUsuario(id))){
-//					matrizDeListaNegra[contador][3] = "Reportado por otro usuario";
-//				}else{
-//					matrizDeListaNegra[contador][3] = "Calificaciones bajas";
-//				}
-//	 			contador++;
-//			}
-//		}
-		public modeloTablaListaNegra(String[][] pMatriz){
-			matrizDeListaNegra = pMatriz;
-		}
-		public int getColumnCount() {
-		return columnas.length;
-		}
-		public int getRowCount() {
-		return matrizDeListaNegra.length;
-		}
-		public String getColumnName(int column) {
-		return columnas[column];
-		}
-		public Object getValueAt(int rowIndex, int columnIndex) {
-			switch (columnIndex)
-			{
-				case 0: return matrizDeListaNegra[rowIndex][0]; 
-				case 1: return matrizDeListaNegra[rowIndex][1];
-				case 2: return matrizDeListaNegra[rowIndex][2];
-				case 3: return matrizDeListaNegra[rowIndex][3];
-				default: return null;
-			}
-		}
-	}
 
 //////////////////////////////////////Fin Código Consulta Lista Negra////////////////////////////////////////////////////
     
@@ -1850,56 +1759,64 @@ public static void main(String[] args) {
 	
 	public void refrescarPaneles(){
 		try {
-			
 			SistemasMascotas.buscarEnTodasLasMascotas();
-			SistemasMascotas.getMascotasPorEstado(opcEstado);
-			SistemasMascotas.getMascotasPorTipo("Canino");
-			SistemasMascotas.getMascotasPorRaza(opcRaza);
-			
-	        listaMascotasParaMostrar = SistemasMascotas.getMascotasFiltradas();
-	        	        
-	        habilitarPanel1();
-	        habilitarPanel2();
-	        habilitarPanel3();
-	        int size = listaMascotasParaMostrar.size();
-
-	        if(size>=3){
-	            posicionMascotaPanel3 = size-3;
-		        mascotaPanel3 = listaMascotasParaMostrar.get(posicionMascotaPanel3);
-		        lblFotoMascota_3.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage(mascotaPanel3.getFoto())));
-		        lblTituloMascota_3.setText(mascotaPanel3.getTipo()+" " +mascotaPanel3.getEstado()+" en "+mascotaPanel3.getLugarDelSuceso() );
-		        lblFecha_3.setText(mascotaPanel3.getDiaSuceso());
-		        lblNotas_3.setText(mascotaPanel3.getNota());
-	    		lblLugarSuceso_3.setText(mascotaPanel3.getLugarDelSuceso());
-	    	}else
-	    		ocultarPanel3();
-
-			if(size>=2){		        
-		        posicionMascotaPanel2 = size-2;
-		        mascotaPanel2 = listaMascotasParaMostrar.get(posicionMascotaPanel2);
-		        lblFotoMascota_2.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage(mascotaPanel2.getFoto())));
-		        lblTituloMascota_2.setText(mascotaPanel2.getTipo()+" " +mascotaPanel2.getEstado()+" en "+mascotaPanel2.getLugarDelSuceso() );
-		        lblNotas2.setText(mascotaPanel2.getNota());
-		        lblFecha_2.setText(mascotaPanel2.getDiaSuceso());
-		        lblLugar_2.setText(mascotaPanel2.getLugarDelSuceso());
-	        }else
-	        	ocultarPanel2();
-
-	        if (size>=1){
-	   			posicionMascotaPanel1 = size-1; 
-		        mascotaPanel1 = listaMascotasParaMostrar.get(posicionMascotaPanel1);
-		        lblFotoMascota1.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage(mascotaPanel1.getFoto())));
-				lbltitulomascota1.setText(mascotaPanel1.getTipo()+" " +mascotaPanel1.getEstado()+" en "+mascotaPanel1.getLugarDelSuceso() );   
-		        lblfechaSuceso.setText(mascotaPanel1.getDiaSuceso());
-				lblNotas_1.setText(mascotaPanel1.getNota());
-				lblLugarSuceso1.setText(mascotaPanel1.getLugarDelSuceso());
-	        }else
-	        	ocultarPanel1();
-				
-	        
-         
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		SistemasMascotas.getMascotasPorEstado(opcEstado);
+		//SistemasMascotas.getMascotasPorTipo("Canino");
+		//SistemasMascotas.getMascotasPorRaza(opcRaza);
+		
+		listaMascotasParaMostrar = SistemasMascotas.getMascotasFiltradas();
+		
+
+		int size = listaMascotasParaMostrar.size();
+		
+		posicionMascotaPanel1 = size - 1;
+		posicionMascotaPanel2 = size - 2;
+		posicionMascotaPanel3 = size - 3;
+		
+		habilitarPanel1();
+		habilitarPanel2();
+		habilitarPanel3();
+		
+		if(size>=3){
+		    posicionMascotaPanel3 = size-3;
+		    mascotaPanel3 = listaMascotasParaMostrar.get(posicionMascotaPanel3);
+		    lblFotoMascota_3.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage(mascotaPanel3.getFoto())));
+		    lblTituloMascota_3.setText(mascotaPanel3.getTipo()+" " +mascotaPanel3.getEstado()+" en "+mascotaPanel3.getLugarDelSuceso() );
+		    lblFecha_3.setText(mascotaPanel3.getDiaSuceso());
+		    lblNotas_3.setText(mascotaPanel3.getNota());
+			lblLugarSuceso_3.setText(mascotaPanel3.getLugarDelSuceso());
+		}else{
+			ocultarPanel3();
+			llegoAlLimiteDerecho = true;
+			}
+
+		if(size>=2){		        
+		    posicionMascotaPanel2 = size-2;
+		    mascotaPanel2 = listaMascotasParaMostrar.get(posicionMascotaPanel2);
+		    lblFotoMascota_2.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage(mascotaPanel2.getFoto())));
+		    lblTituloMascota_2.setText(mascotaPanel2.getTipo()+" " +mascotaPanel2.getEstado()+" en "+mascotaPanel2.getLugarDelSuceso() );
+		    lblNotas2.setText(mascotaPanel2.getNota());
+		    lblFecha_2.setText(mascotaPanel2.getDiaSuceso());
+		    lblLugar_2.setText(mascotaPanel2.getLugarDelSuceso());
+		}else{
+			ocultarPanel2();
+		    llegoAlLimiteDerecho = true;
+		}
+		if (size>=1){
+			posicionMascotaPanel1 = size-1; 
+		    mascotaPanel1 = listaMascotasParaMostrar.get(posicionMascotaPanel1);
+		    lblFotoMascota1.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage(mascotaPanel1.getFoto())));
+			lbltitulomascota1.setText(mascotaPanel1.getTipo()+" " +mascotaPanel1.getEstado()+" en "+mascotaPanel1.getLugarDelSuceso() );   
+		    lblfechaSuceso.setText(mascotaPanel1.getDiaSuceso());
+			lblNotas_1.setText(mascotaPanel1.getNota());
+			lblLugarSuceso1.setText(mascotaPanel1.getLugarDelSuceso());
+		}else{
+			ocultarPanel1();
+		    llegoAlLimiteDerecho = true;
 		}
      
 	}

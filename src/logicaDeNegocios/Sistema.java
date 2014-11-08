@@ -627,18 +627,14 @@ public class Sistema {
    	}
 	*/
    	
-   	public static void cargarTableUsuariosEnListaNegra(String[]columna,String[]datos,DefaultTableModel tableModel){
+   	public static void cargarTablaDeUsuarios(String[]datos, DefaultTableModel tableModel){
    		
-   		for(int i = 0 ; i < ListaNegra.getListaSize() ; i++){
-   			Usuario usuarioTemp = ListaNegra.getListaNegraPorUsuarios().get(i);
-			datos[0] =Integer.toString(ListaNegra.getListaNegra().get(i)); 
-			datos[1] =SistemasUsuarios.getNombreUsuario(ListaNegra.getListaNegra().get(i));
-			datos[2] =Integer.toString( SistemasUsuarios.getCalificacion(ListaNegra.getListaNegra().get(i)));
-			if(estaReportado(usuarioTemp)){
-   				datos[3]= "Reportado por otro usuario";
-   			}else{
-   				datos[3]= "Calificaciones bajas";
-   			}
+   		for(int i = 0 ; i < SistemasUsuarios.getListaDeUsuariosSize() ; i++){
+   			Usuario usuarioTemp = SistemasUsuarios.getUsuario(i);
+			datos[0] = Integer.toString(usuarioTemp.getID()); 
+			datos[1] = usuarioTemp.getNombreUsuario();
+			datos[2] = usuarioTemp.getNombre() + usuarioTemp.getPrimerApellido() + usuarioTemp.getSegundoApellido();
+			datos[3] = Integer.toString(usuarioTemp.getCalificacion());
 			tableModel.addRow(datos);
 		}
    	}
