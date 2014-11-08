@@ -144,7 +144,6 @@ public class VentanaNuevoUsuario extends JFrame {
 		btnRegistrarme.addActionListener(new ActionListener() {
 	
 			public void actionPerformed(ActionEvent e) {
-				validarEmail();
 				String nombre = textFieldNombre.getText();
 				String apellidoUno= textFieldApellidoUno.getText();
 				String apellidoDos =  textFieldApellidoDos.getText();
@@ -156,8 +155,14 @@ public class VentanaNuevoUsuario extends JFrame {
 				int anioNacimiento= ((Integer)spinnerAnio.getValue());
 				String nickName = textFieldUsuario.getText();
 				String contrasenia= convertirClave(passwordFieldNewPass.getPassword()); // No probado aún
+				System.out.println("regisssssssss");
 				
-						
+				String correoRegex = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+				if(!(correo.matches(correoRegex))){
+					JOptionPane.showMessageDialog(contentPane, "Ingrese un correo valido.");
+					return;
+				}
+				
 						if(textFieldNombre.getText().isEmpty()){
 							JOptionPane.showMessageDialog(contentPane, "Error! el campo de nombre esta vacio");
 							return;
@@ -218,12 +223,9 @@ public class VentanaNuevoUsuario extends JFrame {
 										// TODO Auto-generated catch block
 										e1.printStackTrace();
 									}
-									//Usuario.getListaDeUsuarios().add(NuevoUsuario);
-									//NuevoUsuario.GuardarUsuario(Usuario.getListaDeUsuarios());
 									String subject = "¡Bienvenido a Dogs Lovers " +nombre+ "!";
 									String mensaje = "¡Bienvenido a Dogs Lovers " +nombre+ "!." + "\n"+ 
-													 "Su nombre de Usuario es: "+nickName+ "."+ "\n" + 
-													 "Su contrasenia es: " +contrasenia + "." + "\n" + 
+													 "Su nombre de Usuario es: "+nickName+ "."+ "\n" +  
 													 "Fecha de Registro: " + Sistema.getFecha();
 									EnviarMail.correoDestinatario = correo;
 									EnviarMail.subject = subject;
@@ -353,6 +355,16 @@ public class VentanaNuevoUsuario extends JFrame {
 		panelAgregarPersona.add(spinnerAnio);
 		
 		textFieldNombre = new JTextField();
+		textFieldNombre.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				String validar = String.valueOf(e.getKeyChar());
+				if(!(validar.matches("[a-zA-Z]"))){
+					e.consume();
+					getToolkit().beep();
+				}
+			}
+		});
 		textFieldNombre.setFont(new Font("Batang", Font.PLAIN, 13));
 		textFieldNombre.setBorder(null);
 		textFieldNombre.setActionCommand("\r\n");
@@ -364,6 +376,16 @@ public class VentanaNuevoUsuario extends JFrame {
 		textFieldNombre.setColumns(10);
 		
 		textFieldApellidoUno = new JTextField();
+		textFieldApellidoUno.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				String validar = String.valueOf(e.getKeyChar());
+				if(!(validar.matches("[a-zA-Z]"))){
+					e.consume();
+					getToolkit().beep();
+				}
+			}
+		});
 		textFieldApellidoUno.setFont(new Font("Batang", Font.PLAIN, 13));
 		textFieldApellidoUno.setBorder(null);
 		textFieldApellidoUno.setHorizontalAlignment(SwingConstants.CENTER);
@@ -374,6 +396,16 @@ public class VentanaNuevoUsuario extends JFrame {
 		panelAgregarPersona.add(textFieldApellidoUno);
 		
 		textFieldApellidoDos = new JTextField();
+		textFieldApellidoDos.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				String validar = String.valueOf(e.getKeyChar());
+				if(!(validar.matches("[a-zA-Z]"))){
+					e.consume();
+					getToolkit().beep();
+				}
+			}
+		});
 		textFieldApellidoDos.setFont(new Font("Batang", Font.PLAIN, 13));
 		textFieldApellidoDos.setBorder(null);
 		textFieldApellidoDos.setHorizontalAlignment(SwingConstants.CENTER);
@@ -384,6 +416,16 @@ public class VentanaNuevoUsuario extends JFrame {
 		panelAgregarPersona.add(textFieldApellidoDos);
 		
 		textFieldCorreo = new JTextField();
+		textFieldCorreo.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				String validar = String.valueOf(e.getKeyChar());
+				if((validar.matches("[ !$%&/()=?¿|#~€¬^*¨Ç¨/ºª]"))){
+					e.consume();
+					getToolkit().beep();
+				}
+			}
+		});
 		textFieldCorreo.setFont(new Font("Batang", Font.PLAIN, 13));
 		textFieldCorreo.setBorder(null);
 		textFieldCorreo.setHorizontalAlignment(SwingConstants.CENTER);
@@ -394,6 +436,16 @@ public class VentanaNuevoUsuario extends JFrame {
 		panelAgregarPersona.add(textFieldCorreo);
 		
 		textFieldTelefono = new JTextField();
+		textFieldTelefono.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				String validar = String.valueOf(e.getKeyChar());
+				if(!(validar.matches("[0-9]"))){
+					e.consume();
+					getToolkit().beep();
+				}
+			}
+		});
 		textFieldTelefono.setFont(new Font("Batang", Font.PLAIN, 13));
 		textFieldTelefono.setBorder(null);
 		textFieldTelefono.setHorizontalAlignment(SwingConstants.CENTER);
@@ -404,6 +456,16 @@ public class VentanaNuevoUsuario extends JFrame {
 		panelAgregarPersona.add(textFieldTelefono);
 		
 		textFieldUsuario = new JTextField();
+		textFieldUsuario.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				String validar = String.valueOf(e.getKeyChar());
+				if((validar.matches("[ ]"))){
+					e.consume();
+					getToolkit().beep();
+				}
+			}
+		});
 		textFieldUsuario.setFont(new Font("Batang", Font.PLAIN, 13));
 		textFieldUsuario.setBorder(null);
 		textFieldUsuario.setHorizontalAlignment(SwingConstants.CENTER);
@@ -441,10 +503,7 @@ public class VentanaNuevoUsuario extends JFrame {
 		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{textFieldNombre, textFieldApellidoUno, textFieldApellidoDos, spinnerDia, comboBoxMes, spinnerAnio, textFieldCorreo, textFieldTelefono, textFieldUsuario, passwordFieldNewPass, passwordFieldRepeatPass, lblFechaDeNacimiento, btnRegistrarme}));
 		
 	
-	}
-	public void validarEmail(){
-		if (textFieldCorreo.getText().isEmpty()){
-			textFieldCorreo.setText(null);
-		}
+
+
 	}
 }

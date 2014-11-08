@@ -500,6 +500,7 @@ public static void main(String[] args) {
         btnFlechaDerecha = new JButton("");
         btnFlechaDerecha.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) { 
+        		
         		if(!llegoAlLimiteDerecho){
         		
         			llegoAlLimiteIzquierdo = false;
@@ -1853,15 +1854,20 @@ public static void main(String[] args) {
 			
 			SistemasMascotas.buscarEnTodasLasMascotas();
 			SistemasMascotas.getMascotasPorEstado(opcEstado);
-			SistemasMascotas.getMascotasPorTipo("Canino");
-			SistemasMascotas.getMascotasPorRaza(opcRaza);
+			//SistemasMascotas.getMascotasPorTipo("Canino");
+			//SistemasMascotas.getMascotasPorRaza(opcRaza);
 			
 	        listaMascotasParaMostrar = SistemasMascotas.getMascotasFiltradas();
+	        llegoAlLimiteDerecho = false;
+	        llegoAlLimiteIzquierdo = false;
 	        	        
 	        habilitarPanel1();
 	        habilitarPanel2();
 	        habilitarPanel3();
 	        int size = listaMascotasParaMostrar.size();
+	      
+	        if (size <=3)
+	        	llegoAlLimiteIzquierdo = true;
 
 	        if(size>=3){
 	            posicionMascotaPanel3 = size-3;
@@ -1871,8 +1877,10 @@ public static void main(String[] args) {
 		        lblFecha_3.setText(mascotaPanel3.getDiaSuceso());
 		        lblNotas_3.setText(mascotaPanel3.getNota());
 	    		lblLugarSuceso_3.setText(mascotaPanel3.getLugarDelSuceso());
-	    	}else
+	    	}else{
 	    		ocultarPanel3();
+	    		llegoAlLimiteDerecho = true;
+	    	}
 
 			if(size>=2){		        
 		        posicionMascotaPanel2 = size-2;
@@ -1882,8 +1890,10 @@ public static void main(String[] args) {
 		        lblNotas2.setText(mascotaPanel2.getNota());
 		        lblFecha_2.setText(mascotaPanel2.getDiaSuceso());
 		        lblLugar_2.setText(mascotaPanel2.getLugarDelSuceso());
-	        }else
+	        }else{
 	        	ocultarPanel2();
+	        	llegoAlLimiteDerecho = true;
+	        }
 
 	        if (size>=1){
 	   			posicionMascotaPanel1 = size-1; 
@@ -1893,8 +1903,10 @@ public static void main(String[] args) {
 		        lblfechaSuceso.setText(mascotaPanel1.getDiaSuceso());
 				lblNotas_1.setText(mascotaPanel1.getNota());
 				lblLugarSuceso1.setText(mascotaPanel1.getLugarDelSuceso());
-	        }else
+	        }else{
 	        	ocultarPanel1();
+	        	llegoAlLimiteDerecho = true;
+	        }
 				
 	        
          
