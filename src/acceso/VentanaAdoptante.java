@@ -103,7 +103,7 @@ public class VentanaAdoptante extends JFrame {
 			e.printStackTrace();
 		}
 		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setIconImage(Toolkit.getDefaultToolkit().getImage("./imgs/Icono.png"));
 		setName("frameRegistroUsuario");
 		setLocationByPlatform(true);

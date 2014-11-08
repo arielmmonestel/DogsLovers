@@ -3,37 +3,45 @@ import java.util.ArrayList;
 
 public class Adopcion {
 	
-	private int idPersona;
+	private int idAdoptante;
 	private int idMascota;
-	private ArrayList<String> fotos = new ArrayList<String>();
+	private String fotoAdoptante;
+	private String fotoConvivencia;
 	
-	public Adopcion(int pIdPersona, int pIdMascota) {
-		setIdPersona(pIdPersona);
+	public Adopcion(int pIdAdoptante, int pIdMascota, String fotoAdoptante, String fotoConvivencia){
+		setIdAdoptante(pIdAdoptante);
 		setIdMascota(pIdMascota);
+		setFotoAdoptante(fotoAdoptante);
+		setFotoConvivencia(fotoConvivencia);
 	}
-
-	public int getIdPersona() {
-		return idPersona;
+	
+	public Adopcion(){
+		
 	}
-
-	public void setIdPersona(int pIdPersona) {
-		idPersona = pIdPersona;
+	
+	public int getIdAdoptante() {
+		return idAdoptante;
 	}
-
+	public void setIdAdoptante(int idAdoptante) {
+		this.idAdoptante = idAdoptante;
+	}
 	public int getIdMascota() {
 		return idMascota;
 	}
-
-	public void setIdMascota(int pIdMascota) {
-		idMascota = pIdMascota;
+	public void setIdMascota(int idMascota) {
+		this.idMascota = idMascota;
+	}
+	public String  getFotoAdoptante() {
+		return fotoAdoptante;
+	}
+	public void setFotoAdoptante(String fotoAdoptante) {
+		this.fotoAdoptante = fotoAdoptante;
+	}
+	public String getFotoConvivencia() {
+		return fotoConvivencia;
+	}
+	public void setFotoConvivencia(String fotoConvivencia) {
+		this.fotoConvivencia = fotoConvivencia;
 	}
 	
-	public ArrayList<String> getArrayDeFotos(){
-		return fotos;
 	}
-	
-	public void agregarFoto(String direccion){
-		
-	}
-
-}

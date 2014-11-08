@@ -145,7 +145,9 @@ public class VentanaPrincipal {
     private JComboBox comboBoxMesPerdida;
     private JSpinner spinnerAnioPerdida;
     private JButton btnAgregarFoto;
-    private static String rutaImagenesMascotas = "./mascotas";
+    private final static String rutaImagenesMascotas = "./mascotas";
+ 
+	
     
     private static String opcEstado = " ";
     private static String opcTipo = " ";
@@ -1754,9 +1756,6 @@ public static void main(String[] args) {
 		return rutaImagenesMascotas;
 	}
 
-	public void setRutaImagenesMascotas(String pRutaImagenesMascotas) {
-		rutaImagenesMascotas = pRutaImagenesMascotas;
-	}
 	
 	public void refrescarPaneles(){
 		try {

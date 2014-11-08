@@ -304,6 +304,90 @@ public class SistemasUsuarios {
 		return nombreUsuario;
 	}
 	
+	public static int getCantMascotasAdoptadas(int idUsuario){
+		
+		int cantidadDeMascotasAdoptadas = 0;
+		try {
+			SistemasMascotas.leerMascota();
+			for(Mascota mascota: SistemasMascotas.getListaMascota()){
+				if (mascota.getEstado().equalsIgnoreCase("ENADOPCION")){
+					if(mascota.getIdEncargado() == idUsuario){
+						cantidadDeMascotasAdoptadas++;
+					}
+				}
+			}
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return cantidadDeMascotasAdoptadas;
+	}
+	
+	public static String getNombreCompletoDelUsuario(int iDUsuario){
+		
+		String nombreCompleto = "";
+		try {
+			leerUsuarios();
+			for(Usuario usuario:listaUsuarios){
+				if(usuario.getID() == iDUsuario){
+					nombreCompleto = usuario.getNombre()+" "+ usuario.getPrimerApellido() + " " + usuario.getSegundoApellido();
+				}
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return nombreCompleto;
+		
+	}
+	
+
+	public static String getCorreoDelUsuario(int iDUsuario){
+		
+		String correo = "";
+		try {
+			leerUsuarios();
+			for(Usuario usuario:listaUsuarios){
+				if(usuario.getID() == iDUsuario){
+					correo = usuario.getEmail();
+				}
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return correo;
+		
+	}
+
+
+	public static String getTelefonoDelUsuario(int iDUsuario){
+		
+		String telefono= "";
+		try {
+			leerUsuarios();
+			for(Usuario usuario:listaUsuarios){
+				if(usuario.getID() == iDUsuario){
+					telefono = usuario.getTelefono();
+				}
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return telefono;
+		
+	}
+
+	
+	
+	
 	public static int getCalificacion(int id){
 		try {
 			leerUsuarios();

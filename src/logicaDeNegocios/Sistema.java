@@ -28,7 +28,9 @@ import javax.mail.internet.MimeMultipart;
 
 
 
+
 import acceso.VentanaPrincipal;
+import acceso.VentanaRegistroAdopcion;
 
 
 
@@ -223,6 +225,27 @@ public class Sistema {
 			JOptionPane.showMessageDialog(null, "No se pudo copiar la imagen seleccionada.\n" + noHayArchivo.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
 		}
 	}
+	
+	public static void copiarImagenAdoptante(File imagenOriginal) {
+		File archivoOriginal = new File(imagenOriginal.getAbsolutePath());
+
+		File archivoNuevo	 = new File(System.getProperty("user.dir") + VentanaRegistroAdopcion.getRutaImagenesAdoptantes()+ String.valueOf(listaAdopciones.getSize()+1)+".jpg");
+
+		try {
+			FileInputStream inStream = new FileInputStream(archivoOriginal);
+			FileOutputStream outStream = new FileOutputStream(archivoNuevo);
+    	    byte[] buffer = new byte[1024]; 
+    	    int length; 
+    	    while ((length = inStream.read(buffer)) > 0){
+    	    	outStream.write(buffer, 0, length);
+    	    }
+    	    inStream.close();
+    	    outStream.close();
+		} catch (IOException noHayArchivo) {
+			JOptionPane.showMessageDialog(null, "No se pudo copiar la imagen seleccionada.\n" + noHayArchivo.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+
 	
 	public static void enviarMail(String correoDestinatario, String mensaje, String subject,String CorreoRemitente,String passwordRemitente){
 	        try
@@ -626,7 +649,28 @@ public class Sistema {
         {
             archivo.mkdir();
         }
-    }    
+    }
+    
+    public static void asignarIDFotoAdoptante() {
+        try {
+           SistemasAdopciones.leerAdopcion();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        //VentanaRegistroAdopcion.setFoto("./Adoptantes" + String.valueOf(listaAdopciones.getSize()+1)+".jpg");
+
+    }
+	public static void crearCarpetaImagenesAdoptantes() {
+		   File archivo = new File (VentanaRegistroAdopcion.getRutaImagenesAdoptantes());
+
+	        if(!archivo.exists())
+	        {
+	            archivo.mkdir();
+	        }
+
+	}
 
 
 	
@@ -721,6 +765,9 @@ public class Sistema {
    			tableModel.addRow(filas);
 		}
    	}
+
+
+
 
 
 	///////////////////////////////////////// Adopciones //////////////////////////////////////////////////////
