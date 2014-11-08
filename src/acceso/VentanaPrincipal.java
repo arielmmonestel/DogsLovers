@@ -110,8 +110,9 @@ public class VentanaPrincipal {
     private JTextField textFieldNombreMascota;
     private JTextField textFieldNumChip;
     private ButtonGroup estadoMascota = new ButtonGroup() ;
-    private  ButtonGroup monedaDePago = new ButtonGroup() ;
-    private  ButtonGroup VerMascotasPor = new ButtonGroup() ;
+    private ButtonGroup monedaDePago = new ButtonGroup() ;
+    private ButtonGroup verMascotasPor = new ButtonGroup() ;
+    private ButtonGroup verUsuariosPor = new ButtonGroup();
     private JRadioButton rdbtnColones;
     private JRadioButton rdbtnDolares;
     private JLabel lblMonto;
@@ -208,6 +209,7 @@ public class VentanaPrincipal {
     private JLabel fondoConsultaUsuarios;
     private JPanel panelConsultaDeUsuarios;
     private JLabel lblMensajeListaVacia;
+    private DefaultTableModel modeloListaDeUsuarios;
 
     static JMenu mnConfiguracin;
    private static boolean esVisible = true;
@@ -307,7 +309,7 @@ public static void main(String[] args) {
         rdbtnEncontradas.setFont(new Font("Khmer UI", Font.BOLD, 14));
         
         
-        VerMascotasPor.add(rdbtnEncontradas);
+        verMascotasPor.add(rdbtnEncontradas);
         panelPrincipal.add(rdbtnEncontradas);
         
         rdbtnPerdidas = new JRadioButton("Perdidas");
@@ -329,7 +331,7 @@ public static void main(String[] args) {
         rdbtnPerdidas.setFont(new Font("Khmer UI", Font.BOLD, 14));
         
         
-        VerMascotasPor.add(rdbtnPerdidas);
+        verMascotasPor.add(rdbtnPerdidas);
         panelPrincipal.add(rdbtnPerdidas);
         
         rdbtnTodas = new JRadioButton("Todas");
@@ -353,7 +355,7 @@ public static void main(String[] args) {
         rdbtnTodas.setFont(new Font("Khmer UI", Font.BOLD, 14));
         rdbtnTodas.setBounds(54, 172, 109, 23);
         panelPrincipal.add(rdbtnTodas);
-        VerMascotasPor.add(rdbtnTodas);
+        verMascotasPor.add(rdbtnTodas);
         label_1 = new JLabel("Mostrar Por:");
         label_1 .setForeground(new Color(210, 180, 140));
         label_1 .setFont(new Font("Khmer UI", Font.BOLD, 19));
@@ -1505,9 +1507,29 @@ public static void main(String[] args) {
         mnConsulta.setIcon(new ImageIcon("./imgs/Consulta.png"));
         menuBar.add(mnConsulta);
         
+        JMenuItem mntmConsutaMiPerfil = new JMenuItem("Mi Perfil");
+        mntmConsutaMiPerfil.setIcon(new ImageIcon("./imgs/Perfil.png"));
+        mnConsulta.add(mntmConsutaMiPerfil);
+        
         JMenuItem mntmConsultaMascota = new JMenuItem("Mascotas");
         mntmConsultaMascota.setIcon(new ImageIcon("./imgs/Pets-30.png"));         
         mnConsulta.add(mntmConsultaMascota);
+        
+        JMenuItem mntmConsultaUsuarios = new JMenuItem("Usuarios");
+        mnConsulta.add(mntmConsultaUsuarios);
+        mntmConsultaUsuarios.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		panelPrincipal.setVisible(false);
+        		panelConsultaDeUsuarios.setVisible(true);
+        		if(SistemasUsuarios.getListaDeUsuariosSize() == 0){
+        			tablaDeUsuarios.setVisible(false);
+        			lblMensajeListaVacia.setVisible(true);
+        		}else{
+        			tablaDeUsuarios.setVisible(true);
+        			lblMensajeListaVacia.setVisible(false);
+        		}
+        	}
+        });
         
         JMenuItem mntmConsutarCasaCuna = new JMenuItem("Casa Cuna");
         mntmConsutarCasaCuna.setIcon(new ImageIcon("./imgs/casaCuna.png"));
@@ -1516,10 +1538,6 @@ public static void main(String[] args) {
         JMenuItem mntmConsultarAsociacinBeneficiaria = new JMenuItem("Asociaci\u00F3n Beneficiaria");
         mntmConsultarAsociacinBeneficiaria.setIcon(new ImageIcon("./imgs/AsociBene32.png"));
         mnConsulta.add(mntmConsultarAsociacinBeneficiaria);
-        
-        JMenuItem mntmConsutaMiPerfil = new JMenuItem("Mi Perfil");
-        mntmConsutaMiPerfil.setIcon(new ImageIcon("./imgs/Perfil.png"));
-        mnConsulta.add(mntmConsutaMiPerfil);
         
         JMenu mnAdopciones = new JMenu("Adopciones");
         menuBar.add(mnAdopciones);
@@ -1546,26 +1564,6 @@ public static void main(String[] args) {
         mntmCalificarUnaAdopcin.setIcon(new ImageIcon("./imgs/Calificacion-32.png"));
         mnAdopciones.add(mntmCalificarUnaAdopcin);
         
-        JMenu mnListaNegra = new JMenu("Lista Negra");
-        mnListaNegra.setIcon(new ImageIcon("./imgs/DeleteSelected.png"));
-        menuBar.add(mnListaNegra);
-        
-        JMenuItem mntmVerListaNegra = new JMenuItem("Ver Lista Negra");
-        mntmVerListaNegra.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		panelPrincipal.setVisible(false);
-        		panelConsultaDeUsuarios.setVisible(true);
-        		if(SistemasUsuarios.getListaDeUsuariosSize() == 0){
-        			tablaDeUsuarios.setVisible(false);
-        			lblMensajeListaVacia.setVisible(true);
-        		}else{
-        			tablaDeUsuarios.setVisible(true);
-        			lblMensajeListaVacia.setVisible(false);
-        		}
-        	}
-        });
-        mnListaNegra.add(mntmVerListaNegra);
-        
         mnConfiguracin = new JMenu("Configuraci\u00F3n");
         mnConfiguracin.setVisible(esVisible);
         mnConfiguracin.setEnabled(esVisible);
@@ -1587,6 +1585,7 @@ public static void main(String[] args) {
 //////////////////////////////////////Inicio Código Consulta Usuarios////////////////////////////////////////////////////
 
 		        
+        
 		panelConsultaDeUsuarios = new JPanel();
 		VentanaPrincipal.getContentPane().add(panelConsultaDeUsuarios, "name_154826621946393");
 		panelConsultaDeUsuarios.setLayout(null);
@@ -1598,15 +1597,25 @@ public static void main(String[] args) {
 		panelConsultaDeUsuarios.add(lblTituloConsultaUsuarios);
 		
 		scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(175, 161, 554, 399);
+		scrollPane_1.setBounds(176, 208, 554, 399);
 		panelConsultaDeUsuarios.add(scrollPane_1);
 		
 		
 		String[] columna = {"ID","Usuario", "Nombre", "Calificacion"};
 		String[] fila = new String[4];
-		DefaultTableModel modeloListaDeUsuarios = new DefaultTableModel(columna,0);
+		modeloListaDeUsuarios = new DefaultTableModel(columna,0);
 		tablaDeUsuarios = new JTable(modeloListaDeUsuarios);
-		Sistema.cargarTablaDeUsuarios(fila, modeloListaDeUsuarios);
+		tablaDeUsuarios.setBorder(new LineBorder(new Color(189, 183, 107)));
+		tablaDeUsuarios.setBackground(new Color(238, 232, 170));
+		tablaDeUsuarios.setForeground(new Color(139, 69, 19));
+		tablaDeUsuarios.setRowHeight(20);
+		tablaDeUsuarios.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		tablaDeUsuarios.getColumnModel().getColumn(0).setPreferredWidth(27);
+		tablaDeUsuarios.getColumnModel().getColumn(1).setPreferredWidth(143);
+		tablaDeUsuarios.getColumnModel().getColumn(2).setPreferredWidth(300);
+		tablaDeUsuarios.getColumnModel().getColumn(3).setPreferredWidth(80);
+		modeloListaDeUsuarios = Sistema.cargarTablaDeUsuarios(fila, modeloListaDeUsuarios);
+		
 		
 		tablaDeUsuarios.addMouseListener(new MouseAdapter() {
 		public void mouseClicked(MouseEvent e) {
@@ -1624,16 +1633,63 @@ public static void main(String[] args) {
 		lblMensajeListaVacia = new JLabel("En este momento no hay usuarios registrados.");
 		lblMensajeListaVacia.setForeground(new Color(189, 183, 107));
 		lblMensajeListaVacia.setFont(new Font("Khmer UI", Font.PLAIN, 18));
-		lblMensajeListaVacia.setBounds(47, 120, 430, 30);
+		lblMensajeListaVacia.setBounds(47, 167, 430, 30);
 		lblMensajeListaVacia.setVisible(false);
 		panelConsultaDeUsuarios.add(lblMensajeListaVacia);
+		
+		JRadioButton rdbtnTodosLosUsuarios = new JRadioButton("Todos los usuarios");
+		rdbtnTodosLosUsuarios.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(rdbtnTodosLosUsuarios.isSelected()){
+					modeloListaDeUsuarios.setRowCount(0);
+					modeloListaDeUsuarios = Sistema.cargarTablaDeUsuarios(fila, modeloListaDeUsuarios);
+					tablaDeUsuarios.setModel(modeloListaDeUsuarios);
+				}
+			}
+		});
+		rdbtnTodosLosUsuarios.setSelected(true);
+		rdbtnTodosLosUsuarios.setContentAreaFilled(false);
+		rdbtnTodosLosUsuarios.setForeground(new Color(189, 183, 107));
+		rdbtnTodosLosUsuarios.setFont(new Font("Khmer UI", Font.PLAIN, 20));
+		rdbtnTodosLosUsuarios.setBounds(792, 276, 251, 23);
+		verUsuariosPor.add(rdbtnTodosLosUsuarios);
+		panelConsultaDeUsuarios.add(rdbtnTodosLosUsuarios);
+		
+		JRadioButton rdbtnUsuariosEnLaListaNegra = new JRadioButton("Usuarios en la lista negra");
+		rdbtnUsuariosEnLaListaNegra.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(rdbtnUsuariosEnLaListaNegra.isSelected()){
+					modeloListaDeUsuarios.setRowCount(0);
+					modeloListaDeUsuarios = Sistema.cargarTablaDeUsuariosEnListaNegra(fila, modeloListaDeUsuarios);
+					tablaDeUsuarios.setModel(modeloListaDeUsuarios);
+				}
+			}
+		});
+		rdbtnUsuariosEnLaListaNegra.setContentAreaFilled(false);
+		rdbtnUsuariosEnLaListaNegra.setFont(new Font("Khmer UI", Font.PLAIN, 20));
+		rdbtnUsuariosEnLaListaNegra.setForeground(new Color(189, 183, 107));
+		rdbtnUsuariosEnLaListaNegra.setBounds(791, 316, 332, 23);
+		verUsuariosPor.add(rdbtnUsuariosEnLaListaNegra);
+		panelConsultaDeUsuarios.add(rdbtnUsuariosEnLaListaNegra);
+		
+		JLabel lblLineaDivisoria = new JLabel("__________________________________");
+		lblLineaDivisoria.setForeground(new Color(189, 183, 107));
+		lblLineaDivisoria.setFont(new Font("Tahoma", Font.BOLD, 60));
+		lblLineaDivisoria.setBounds(42, -12, 1318, 227);
+		panelConsultaDeUsuarios.add(lblLineaDivisoria);
+		
+		JLabel lblVerListaPor = new JLabel("Ver lista por:");
+		lblVerListaPor.setForeground(new Color(189, 183, 107));
+		lblVerListaPor.setFont(new Font("Khmer UI", Font.PLAIN, 18));
+		lblVerListaPor.setBounds(784, 226, 193, 25);
+		panelConsultaDeUsuarios.add(lblVerListaPor);
 		
 		fondoConsultaUsuarios = new JLabel("");
 		fondoConsultaUsuarios.setIcon(new ImageIcon("./imgs/fondoRegistro.png"));
 		fondoConsultaUsuarios.setBounds(0, 1, 1362, 675);
 		panelConsultaDeUsuarios.add(fondoConsultaUsuarios);
-
-
+		
+		
 
         
     }//Fin initilize()

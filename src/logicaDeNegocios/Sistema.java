@@ -484,8 +484,8 @@ public class Sistema {
     				{listaDetalles.add(bufferLectura.readLine());	    				
     				listaDetalles.add(bufferLectura.readLine());
     				}
-    		}else
-        		JOptionPane.showMessageDialog(frame, "No existen datos. O cambio la ruta del archivo \"Detalles de mascotas\"");                		
+    		}//else
+        		//JOptionPane.showMessageDialog(frame, "No existen datos. O cambio la ruta del archivo \"Detalles de mascotas\"");                		
     	}catch(Exception e){
     		e.printStackTrace();  
     	}finally
@@ -743,16 +743,32 @@ public class Sistema {
    	}
 	*/
    	
-   	public static void cargarTablaDeUsuarios(String[]datos, DefaultTableModel tableModel){
+   	public static DefaultTableModel cargarTablaDeUsuarios(String[]datos, DefaultTableModel tableModel){
    		
    		for(int i = 0 ; i < SistemasUsuarios.getListaDeUsuariosSize() ; i++){
    			Usuario usuarioTemp = SistemasUsuarios.getUsuario(i);
 			datos[0] = Integer.toString(usuarioTemp.getID()); 
 			datos[1] = usuarioTemp.getNombreUsuario();
-			datos[2] = usuarioTemp.getNombre() + usuarioTemp.getPrimerApellido() + usuarioTemp.getSegundoApellido();
+			datos[2] = usuarioTemp.getNombre() + " " + usuarioTemp.getPrimerApellido() + " " + usuarioTemp.getSegundoApellido();
 			datos[3] = Integer.toString(usuarioTemp.getCalificacion());
 			tableModel.addRow(datos);
 		}
+   		return tableModel;
+   	}
+   	
+   	public static DefaultTableModel cargarTablaDeUsuariosEnListaNegra(String[]datos, DefaultTableModel tableModel){
+   		
+   		for(int i = 0 ; i < SistemasUsuarios.getListaDeUsuariosSize() ; i++){
+   			Usuario usuarioTemp = SistemasUsuarios.getUsuario(i);
+   			if(usuarioTemp.estaEnListaNegra()){
+				datos[0] = Integer.toString(usuarioTemp.getID()); 
+				datos[1] = usuarioTemp.getNombreUsuario();
+				datos[2] = usuarioTemp.getNombre() + " " + usuarioTemp.getPrimerApellido() + " " + usuarioTemp.getSegundoApellido();
+				datos[3] = Integer.toString(usuarioTemp.getCalificacion());
+				tableModel.addRow(datos);
+   			}
+		}
+   		return tableModel;
    	}
    	
 	public static void cargarTableNuevosAdmin(String[]columna,String[]filas,DefaultTableModel tableModel){
