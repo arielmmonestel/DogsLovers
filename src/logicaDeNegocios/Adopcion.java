@@ -3,12 +3,14 @@ import java.util.ArrayList;
 
 public class Adopcion {
 	
+	private int idAdopcion;
 	private int idAdoptante;
 	private int idMascota;
 	private String fotoAdoptante;
 	private String fotoConvivencia;
 	
-	public Adopcion(int pIdAdoptante, int pIdMascota, String fotoAdoptante, String fotoConvivencia){
+	public Adopcion(int pIdAdoptante, int pIdMascota, String fotoAdoptante, String fotoConvivencia,int IdAdopcion){
+		setIdAdopcion(IdAdopcion);
 		setIdAdoptante(pIdAdoptante);
 		setIdMascota(pIdMascota);
 		setFotoAdoptante(fotoAdoptante);
@@ -42,6 +44,14 @@ public class Adopcion {
 	}
 	public void setFotoConvivencia(String fotoConvivencia) {
 		this.fotoConvivencia = fotoConvivencia;
+	}
+
+	public int getIdAdopcion() {
+		return idAdopcion;
+	}
+
+	public void setIdAdopcion(int idAdopcion) {
+		this.idAdopcion = idAdopcion;
 	}
 	
 	}

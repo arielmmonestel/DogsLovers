@@ -25,8 +25,92 @@ public class SistemasAdopciones {
 	static JFrame frame = new JFrame();
 	
 	
+	public static int getListaDeAdopcionesSize(){
+		return listaAdopciones.size();
+	}
 	
 	public static ArrayList<Adopcion> getAdopciones() throws IOException{leerAdopcion(); return listaAdopciones;}
 	
-	public static void leerAdopcion(){}
+	
+
+public static void  leerAdopcion() throws IOException
+{
+	File archivo = new File (rutaAdopciones);
+	try
+	{
+		listaAdopciones.clear();    
+		idAdopcion = 0;
+		if (archivo.exists())
+		{			
+    		lectura = new FileReader (archivo);
+    		bufferLectura = new BufferedReader(lectura);
+    		while((bufferLectura.readLine())!=null)    			
+    		{ 
+    			Adopcion obj = new Adopcion();
+    			obj.setIdAdopcion(Integer.parseInt(bufferLectura.readLine()));
+    			idAdopcion++;
+    			obj.setIdAdoptante(Integer.parseInt(bufferLectura.readLine()));
+    			obj.setIdMascota(Integer.parseInt(bufferLectura.readLine()));
+    			obj.setFotoAdoptante(bufferLectura.readLine());
+    			obj.setFotoConvivencia(bufferLectura.readLine());
+    			listaAdopciones.add(obj);		
+    			
+    		}
+		}else
+    		JOptionPane.showMessageDialog(frame, "No existen datos. O cambio la ruta del archivo \"Usuarios\"");                		
+	}catch(Exception e){
+		e.printStackTrace();  
+	}finally
+	{
+		try
+		{
+    		if (archivo.exists())
+				lectura.close();
+
+		}catch (Exception e2)
+			{e2.printStackTrace();}
+	}
+	
 }
+public static void GuardarAdopcion() 
+{
+	FileWriter escribir = null;
+	PrintWriter pw = null;
+	try
+	{		
+		escribir = new FileWriter(rutaAdopciones,false);
+		pw = new PrintWriter(escribir);
+		idAdopcion = 0;
+		
+		for(Adopcion obj: listaAdopciones)
+		{	
+			pw.println("===>Nueva Adopcion<===");
+			pw.println(obj.getIdAdopcion());
+			pw.println(obj.getIdAdoptante());
+			pw.println(obj.getIdMascota());
+			pw.println(obj.getFotoAdoptante());
+			pw.println(obj.getFotoConvivencia());
+			idAdopcion ++;
+			
+		}
+	} catch (Exception e) {
+		e.printStackTrace();
+	} finally 
+	{
+		try 
+		{
+				escribir.close();
+		} catch (Exception e2) 
+		{e2.printStackTrace();}
+	}
+}
+
+public static void AgregarAdopcion(Adopcion adopcion) throws IOException{
+	leerAdopcion();
+	listaAdopciones.add(adopcion);
+	GuardarAdopcion();
+}
+
+}
+
+

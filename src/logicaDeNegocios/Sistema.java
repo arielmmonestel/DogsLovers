@@ -229,7 +229,7 @@ public class Sistema {
 	public static void copiarImagenAdoptante(File imagenOriginal) {
 		File archivoOriginal = new File(imagenOriginal.getAbsolutePath());
 
-		File archivoNuevo	 = new File(System.getProperty("user.dir") + VentanaRegistroAdopcion.getRutaImagenesAdoptantes()+ String.valueOf(listaAdopciones.getSize()+1)+".jpg");
+		File archivoNuevo	 = new File(System.getProperty("user.dir") + VentanaRegistroAdopcion.getRutaImagenesAdoptantes()+ String.valueOf(SistemasAdopciones.getListaDeAdopcionesSize()+1)+".jpg");
 
 		try {
 			FileInputStream inStream = new FileInputStream(archivoOriginal);
