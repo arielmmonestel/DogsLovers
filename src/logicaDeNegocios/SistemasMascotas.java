@@ -37,7 +37,7 @@ public class SistemasMascotas {
 	static FileReader lectura = null;
 	static BufferedReader bufferLectura = null;
 	static JFrame frame = new JFrame();
-	
+	public static int idMascota = 0;
 
 	public static ArrayList<Mascota> getListaMascota(){
 		return listaMascotas;
@@ -61,6 +61,7 @@ public class SistemasMascotas {
 	    			Mascota obj = new Mascota();   
 	    			obj.setEstado(bufferLectura.readLine());
 	    			obj.setID(Integer.parseInt(bufferLectura.readLine()));
+	    			idMascota++;
 	    			obj.setTipo(bufferLectura.readLine());
 	    			obj.setRaza(bufferLectura.readLine());
 	    			obj.setNombre(bufferLectura.readLine());
@@ -74,11 +75,12 @@ public class SistemasMascotas {
                     obj.setRecompensa(bufferLectura.readLine());
                     obj.setIdEncargado(Integer.parseInt(bufferLectura.readLine()));
                     obj.setEstaEnCasaCuna(Boolean.parseBoolean(bufferLectura.readLine()));
-                    size++;
-                    listaMascotas.add(obj);				
+                    listaMascotas.add(obj);	
+
 	    		}
 
 
+	    		
     		}else
         		JOptionPane.showMessageDialog(frame, "No existen datos. O cambio el archivo de ruta del archivo \"Mascotas\"");                		
     	}catch(Exception e){
@@ -107,8 +109,7 @@ public class SistemasMascotas {
     		{	
     			pw.println("===>nuevo Mascota<===");
     			pw.println(obj.getEstado());
-    			//pw.println(obj.getID());
-    			pw.println(size);
+    			pw.println(idMascota);
 				pw.println(obj.getTipo());
 				pw.println(obj.getRaza());
 				pw.println(obj.getNombre());
@@ -122,7 +123,8 @@ public class SistemasMascotas {
                 pw.println(obj.getRecompensa());
                 pw.println(obj.getIdEncargado());
                 pw.println(obj.estaEnCasaCuna());
-                size ++;
+                idMascota ++;
+
 			}
     	} catch (Exception e) {
     		e.printStackTrace();
@@ -142,7 +144,7 @@ public class SistemasMascotas {
 		GuardarMascota();
 	}
 	
-	public static int getSize(){return size;}
+	public static int getListaMascotasSize() throws IOException{leerMascota();return listaMascotas.size(); }
 	
 	public static ArrayList<Mascota> getMascotas(){
 		return listaMascotas;

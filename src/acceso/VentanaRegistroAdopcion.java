@@ -39,8 +39,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import logicaDeNegocios.Adopcion;
+import logicaDeNegocios.EnviarMail;
 import logicaDeNegocios.Mascota;
 import logicaDeNegocios.Sistema;
+import logicaDeNegocios.SistemasAdopciones;
 import logicaDeNegocios.SistemasMascotas;
 import logicaDeNegocios.SistemasUsuarios;
 import logicaDeNegocios.Usuario;
@@ -52,6 +55,7 @@ import java.awt.Panel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
+import javax.swing.JTextField;
 
 
 public class VentanaRegistroAdopcion extends JFrame {
@@ -78,6 +82,13 @@ public class VentanaRegistroAdopcion extends JFrame {
     private JLabel labelDelAdoptante;
     private JButton btnAgregarFoto;
     private static int idUsuarioActivo = VentanaPrincipal.getIDUsuarioActivo();
+    private JButton btnGuardarAdopcion;
+	protected int idMascota = 0;
+	protected String fotoAdoptante = "";
+	protected String fotoConvivencia= "";
+	protected int idUsuarioQueCalifica= 0;
+	protected String nuevoNombreMascota= "";
+	private JTextField textFieldNuevoNombreMascota;
 	    
 	
 
@@ -935,5 +946,57 @@ public class VentanaRegistroAdopcion extends JFrame {
 			labelTelefonoDelAdoptante.setFont(new Font("Khmer UI", Font.BOLD, 15));
 			labelTelefonoDelAdoptante.setBounds(272, 590, 258, 26);
 			panelRegistrarAdopcion.add(labelTelefonoDelAdoptante);
+			
+			btnGuardarAdopcion = new JButton("");
+			btnGuardarAdopcion.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					
+					Adopcion adopcion = new Adopcion(idUsuarioActivo, idMascota, fotoAdoptante,fotoConvivencia,idUsuarioQueCalifica);
+							try {
+								//SistemasUsuarios.leerUsuarios();
+								SistemasAdopciones.AgregarAdopcion(adopcion);
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+							String subject = "¡Se ha registrado la adopción de" +nuevoNombreMascota+ "!";
+							String mensaje = "¡Es un honor ser parte de la adopción de " +nuevoNombreMascota+ "!." + "\n"+ 
+											 "Es importante cuidar mucho de "+nuevoNombreMascota+ "pues será calificado por el usuario que dio en adopción a" +nuevoNombreMascota+ "\n"   
+											 + "\n"+"Fecha de Registro: " + Sistema.getFecha()+ "\n"+ "¡Muchas Felicidades!";
+							EnviarMail.correoDestinatario = SistemasUsuarios.getCorreoDelUsuario(idUsuarioActivo);
+							EnviarMail.subject = subject;
+							EnviarMail.mensaje = mensaje;
+							
+							JOptionPane.showMessageDialog(contentPane, "Adopción registrada correctamente. Se enviará un correo electrónico con los datos de la adopcion");
+							
+								EnviarMail.enviarMail();
+								JOptionPane.showMessageDialog(contentPane, "Correo electrónico enviado correctamente");
+							
+			  }
+				
+			});
+			btnGuardarAdopcion.setToolTipText("GuardarAdopcion");
+			btnGuardarAdopcion.setFocusPainted(false);
+			btnGuardarAdopcion.setOpaque(false);
+			btnGuardarAdopcion.setContentAreaFilled(false);
+			btnGuardarAdopcion.setBorderPainted(false);
+			btnGuardarAdopcion.setBorder(null);
+			btnGuardarAdopcion.setHorizontalTextPosition(SwingConstants.CENTER);
+			btnGuardarAdopcion.setIconTextGap(-3);
+			btnGuardarAdopcion.setRolloverIcon(new ImageIcon("./imgs/save-64.png"));
+			btnGuardarAdopcion.setPressedIcon(new ImageIcon("./imgs/save-32.png"));
+			btnGuardarAdopcion.setIcon(new ImageIcon("./imgs/save-48.png"));
+			btnGuardarAdopcion.setBounds(598, 590, 105, 64);
+			panelRegistrarAdopcion.add(btnGuardarAdopcion);
+			
+			JLabel lblNuevoNombreDe = new JLabel("Nuevo Nombre de la Mascota: ");
+			lblNuevoNombreDe.setFont(new Font("Khmer UI", Font.BOLD, 15));
+			lblNuevoNombreDe.setBounds(270, 421, 249, 26);
+			panelRegistrarAdopcion.add(lblNuevoNombreDe);
+			
+			textFieldNuevoNombreMascota = new JTextField();
+			textFieldNuevoNombreMascota.setBounds(540, 421, 128, 20);
+			panelRegistrarAdopcion.add(textFieldNuevoNombreMascota);
+			textFieldNuevoNombreMascota.setColumns(10);
 	}
 }

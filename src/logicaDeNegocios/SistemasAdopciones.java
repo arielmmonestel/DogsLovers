@@ -53,6 +53,7 @@ public static void  leerAdopcion() throws IOException
     			obj.setIdMascota(Integer.parseInt(bufferLectura.readLine()));
     			obj.setFotoAdoptante(bufferLectura.readLine());
     			obj.setFotoConvivencia(bufferLectura.readLine());
+    			obj.setIdUsuarioQueCalifica(Integer.parseInt(bufferLectura.readLine()));
     			listaAdopciones.add(obj);		
     			
     		}
@@ -90,6 +91,7 @@ public static void GuardarAdopcion()
 			pw.println(obj.getIdMascota());
 			pw.println(obj.getFotoAdoptante());
 			pw.println(obj.getFotoConvivencia());
+			pw.println(obj.getIdUsuarioQueCalifica());
 			idAdopcion ++;
 			
 		}

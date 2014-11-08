@@ -209,7 +209,13 @@ public class Sistema {
 	public static void copiarImagen(File imagenOriginal) {
 		File archivoOriginal = new File(imagenOriginal.getAbsolutePath());
 
-		File archivoNuevo	 = new File(System.getProperty("user.dir") + "./mascotas/" + String.valueOf(SistemasMascotas.getSize()+1) + ".jpg");
+		File archivoNuevo = null;
+		try {
+			archivoNuevo = new File(System.getProperty("user.dir") + "./mascotas/" + String.valueOf(SistemasMascotas.getListaMascotasSize()+1) + ".jpg");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		try {
 			FileInputStream inStream = new FileInputStream(archivoOriginal);
@@ -630,14 +636,14 @@ public class Sistema {
 	
     
     public static void asignarIDFoto() {
-        try {
-           SistemasMascotas.leerMascota();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        
 
-        VentanaPrincipal.setFoto("./mascotas/" + String.valueOf(SistemasMascotas.getSize()+1)+".jpg");
+        try {
+			VentanaPrincipal.setFoto("./mascotas/" + String.valueOf(SistemasMascotas.getListaMascotasSize()+1)+".jpg");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
     }
     

@@ -7,15 +7,26 @@ public class Adopcion {
 	private int idAdoptante;
 	private int idMascota;
 	private String fotoAdoptante;
-	private String fotoConvivencia;
 	
-	public Adopcion(int pIdAdoptante, int pIdMascota, String fotoAdoptante, String fotoConvivencia,int IdAdopcion){
-		setIdAdopcion(IdAdopcion);
+	private String fotoConvivencia;
+	private int idUsuarioQueCalifica;
+	
+	public Adopcion(int pIdAdoptante, int pIdMascota, String fotoAdoptante, String fotoConvivencia,int IdUsuarioqueCalifica){
 		setIdAdoptante(pIdAdoptante);
 		setIdMascota(pIdMascota);
 		setFotoAdoptante(fotoAdoptante);
 		setFotoConvivencia(fotoConvivencia);
+		setIdUsuarioQueCalifica(IdUsuarioqueCalifica);
 	}
+	
+	public int getIdUsuarioQueCalifica() {
+		return idUsuarioQueCalifica;
+	}
+
+	public void setIdUsuarioQueCalifica(int idUsuarioQueCalifica) {
+		this.idUsuarioQueCalifica = idUsuarioQueCalifica;
+	}
+
 	
 	public Adopcion(){
 		
