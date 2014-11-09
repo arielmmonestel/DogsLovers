@@ -10,8 +10,7 @@ public class Adopcion {
 	private String fotoAdoptante;
 	private String fotoConvivencia;
 	
-	public Adopcion(int pIdPersonaQueDaEnAdopcion, int pIdAdoptante, int pIdMascota, String fotoAdoptante, String fotoConvivencia,int IdAdopcion){
-		setIdAdopcion(IdAdopcion);
+	public Adopcion(int pIdAdoptante, int pIdMascota, String fotoAdoptante, String fotoConvivencia,int pIdPersonaQueDaEnAdopcion){
 		setIdAdoptante(pIdAdoptante);
 		setIdPersonaQueDaEnAdopcion(pIdPersonaQueDaEnAdopcion);
 		setIdMascota(pIdMascota);

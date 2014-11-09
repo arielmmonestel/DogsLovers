@@ -1454,6 +1454,12 @@ public static void main(String[] args) {
         menuBar.add(mnConsulta);
         
         JMenuItem mntmConsutaMiPerfil = new JMenuItem("Mi Perfil");
+        mntmConsutaMiPerfil.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		VentanaPerfilUsuario ventanaMiPerfil = new VentanaPerfilUsuario(IDUsuarioActivo);
+        		ventanaMiPerfil.setVisible(true);
+        	}
+        });
         mntmConsutaMiPerfil.setIcon(new ImageIcon("./imgs/Perfil.png"));
         mnConsulta.add(mntmConsutaMiPerfil);
         
@@ -1554,6 +1560,7 @@ public static void main(String[] args) {
 			    return false;  
 			} 
 		};
+		tablaDeUsuarios.setRowSelectionAllowed(true);
 		tablaDeUsuarios.setCellSelectionEnabled(true);
 		tablaDeUsuarios.setBorder(new LineBorder(new Color(189, 183, 107)));
 		tablaDeUsuarios.setBackground(new Color(238, 232, 170));

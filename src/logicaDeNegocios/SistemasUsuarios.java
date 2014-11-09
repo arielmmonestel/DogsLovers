@@ -384,9 +384,6 @@ public class SistemasUsuarios {
 		return telefono;
 		
 	}
-
-	
-	
 	
 	public static int getCalificacion(int id){
 		try {
