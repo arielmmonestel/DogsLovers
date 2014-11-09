@@ -3,8 +3,11 @@ package acceso;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Image;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
@@ -16,7 +19,9 @@ import java.awt.CardLayout;
 
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
 
@@ -30,11 +35,15 @@ import javax.swing.JRadioButton;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import logicaDeNegocios.Adopcion;
+import logicaDeNegocios.EnviarMail;
 import logicaDeNegocios.Mascota;
 import logicaDeNegocios.Sistema;
+import logicaDeNegocios.SistemasAdopciones;
 import logicaDeNegocios.SistemasMascotas;
 import logicaDeNegocios.SistemasUsuarios;
 import logicaDeNegocios.Usuario;
@@ -45,6 +54,8 @@ import java.awt.Choice;
 import java.awt.Panel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.image.BufferedImage;
+import javax.swing.JTextField;
 
 
 public class VentanaRegistroAdopcion extends JFrame {
@@ -64,6 +75,23 @@ public class VentanaRegistroAdopcion extends JFrame {
 	private Mascota mascotaPanel1 ;
 	private Mascota mascotaPanel2 ;
 	private Mascota mascotaPanel3 ;
+	private JLabel lblRegistrarAdopcin;
+	private JPanel panelMascotaAdopcion;
+	private Panel panelRegistrarAdopcion;
+    private final static String rutaImagenesAdoptantes = "./Adoptantes";
+    private JLabel labelDelAdoptante;
+    private JButton btnAgregarFoto;
+    private static int idUsuarioActivo = VentanaPrincipal.getIDUsuarioActivo();
+    private JButton btnGuardarAdopcion;
+	protected int idMascota = 0;
+	protected String fotoAdoptante = "";
+	protected String fotoConvivencia= "";
+	protected int idUsuarioQueCalifica= 0;
+	protected String nuevoNombreMascota= "";
+	private JTextField textFieldNuevoNombreMascota;
+	    
+	
+
 	/**
 	 * Launch the application.
 	 */
@@ -84,6 +112,11 @@ public class VentanaRegistroAdopcion extends JFrame {
 
 	}
 
+    public static String getRutaImagenesAdoptantes() {
+			return rutaImagenesAdoptantes;
+		}
+
+	
 	public void filtro(String tipo){
 		listaTemporal.clear();
 		for(int x = 0;x<listaMascotasParaMostrar.size();x++){
@@ -98,11 +131,12 @@ public class VentanaRegistroAdopcion extends JFrame {
 	 * @throws IOException 
 	 */
 	public VentanaRegistroAdopcion() throws IOException {
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setTitle("Adopciones");
 		setAlwaysOnTop(true);
 		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage("./imgs/Icono.png"));
-		setBounds(100, 100, 979, 695);
+		setBounds(100, 100, 836, 693);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(99, 84, 75));
 		contentPane.setForeground(new Color(99, 84, 75));
@@ -110,13 +144,14 @@ public class VentanaRegistroAdopcion extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new CardLayout(0, 0));
 
-		JPanel panelMascotaAdopcion = new JPanel();
+		panelMascotaAdopcion = new JPanel();
+		panelMascotaAdopcion.setBackground(new Color(99,84, 65));
 		panelMascotaAdopcion.setBounds(100, 100, 923, 641);
 		contentPane.add(panelMascotaAdopcion, "name_42351462238686");
 		panelMascotaAdopcion.setLayout(null);
 
 		JPanel panelAdopcionTres = new JPanel();
-		panelAdopcionTres.setBounds(238, 414, 659, 128);
+		panelAdopcionTres.setBounds(238, 414, 489, 128);
 		panelAdopcionTres.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.BLACK, null, null, null));
 		panelMascotaAdopcion.add(panelAdopcionTres);
 		panelAdopcionTres.setLayout(null);
@@ -125,11 +160,13 @@ public class VentanaRegistroAdopcion extends JFrame {
 		btnAdoptarPanel3.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				VentanaAdoptante adopcion = new VentanaAdoptante(mascotaPanel3);
-				adopcion.setVisible(true);
+				dispose();
+
+				panelMascotaAdopcion.setVisible(false);
+				panelRegistrarAdopcion.setVisible(true);
 			}
 		});
-		btnAdoptarPanel3.setBounds(560, 94, 89, 23);
+		btnAdoptarPanel3.setBounds(390, 94, 89, 23);
 		panelAdopcionTres.add(btnAdoptarPanel3);
 
 		final JLabel labelFotoPanel3 = new JLabel("<Foto>");
@@ -143,11 +180,11 @@ public class VentanaRegistroAdopcion extends JFrame {
 		final JLabel lblFondoPanel3 = new JLabel("");
 		lblFondoPanel3.setIcon(new ImageIcon("./imgs/fondoPanelesPantallaPrincipal.png"));
 		lblFondoPanel3.setBorder(new MatteBorder(5, 5, 5, 5, (Color) new Color(110, 170, 111)));
-		lblFondoPanel3.setBounds(0, 0, 659, 128);
+		lblFondoPanel3.setBounds(0, 0, 490, 128);
 		panelAdopcionTres.add(lblFondoPanel3);
 
 		JPanel panelAdopcionDos = new JPanel();
-		panelAdopcionDos.setBounds(238, 279, 659, 128);
+		panelAdopcionDos.setBounds(238, 279, 489, 128);
 		panelAdopcionDos.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.BLACK, null, null, null));
 		panelMascotaAdopcion.add(panelAdopcionDos);
 		panelAdopcionDos.setLayout(null);
@@ -156,11 +193,12 @@ public class VentanaRegistroAdopcion extends JFrame {
 		btnAdoptarPanel2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				VentanaAdoptante adopcion = new VentanaAdoptante(mascotaPanel2);
-				adopcion.setVisible(true);
+
+				panelMascotaAdopcion.setVisible(false);
+				panelRegistrarAdopcion.setVisible(true);
 			}
 		});
-		btnAdoptarPanel2.setBounds(560, 94, 89, 23);
+		btnAdoptarPanel2.setBounds(390, 94, 89, 23);
 		panelAdopcionDos.add(btnAdoptarPanel2);
 
 		final JLabel labelFotoPanel2 = new JLabel("<Foto>");
@@ -173,12 +211,12 @@ public class VentanaRegistroAdopcion extends JFrame {
 
 		final JLabel labelFondoPanel2 = new JLabel("");
 		labelFondoPanel2.setIcon(new ImageIcon("./imgs/fondoPanelesPantallaPrincipal.png"));
-		labelFondoPanel2.setBounds(0, 0, 659, 128);
+		labelFondoPanel2.setBounds(0, 0, 490, 128);
 		labelFondoPanel2.setBorder(new MatteBorder(5, 5, 5, 5, (Color) new Color(110, 170, 111)));
 		panelAdopcionDos.add(labelFondoPanel2);
 
 		JPanel panelAdopcionUno = new JPanel();
-		panelAdopcionUno.setBounds(238, 145, 659, 128);
+		panelAdopcionUno.setBounds(238, 145, 489, 128);
 		panelAdopcionUno.setBorder(new BevelBorder(BevelBorder.LOWERED, new Color(100, 149, 237), null, null, null));
 		panelMascotaAdopcion.add(panelAdopcionUno);
 		panelAdopcionUno.setLayout(null);
@@ -187,11 +225,14 @@ public class VentanaRegistroAdopcion extends JFrame {
 		btnAdoptarPanel1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				VentanaAdoptante adopcion = new VentanaAdoptante(mascotaPanel1);
-				adopcion.setVisible(true);
+				
+				panelMascotaAdopcion.setVisible(false);
+				panelRegistrarAdopcion.setVisible(true);
+				
+				
 			}
 		});
-		btnAdoptarPanel1.setBounds(560, 94, 89, 23);
+		btnAdoptarPanel1.setBounds(390, 94, 89, 23);
 		panelAdopcionUno.add(btnAdoptarPanel1);
 
 		final JLabel labelFotoPanel1 = new JLabel("<Foto>");
@@ -204,7 +245,7 @@ public class VentanaRegistroAdopcion extends JFrame {
 
 		final JLabel labelFondoPanel1 = new JLabel("");
 		labelFondoPanel1.setIcon(new ImageIcon("./imgs/fondoPanelesPantallaPrincipal.png"));
-		labelFondoPanel1.setBounds(0, 0, 659, 128);
+		labelFondoPanel1.setBounds(0, 0, 490, 128);
 		labelFondoPanel1.setBorder(new MatteBorder(5, 5, 5, 5, (Color) new Color(110, 170, 111)));
 		panelAdopcionUno.add(labelFondoPanel1);
 
@@ -423,7 +464,7 @@ public class VentanaRegistroAdopcion extends JFrame {
 			}
 		});
 		comboBoxMostrarTipo.setModel(new DefaultComboBoxModel(new String[] {"Todos", "Canino", "Felino", "Ave", "Roedor", "Otro"}));
-		comboBoxMostrarTipo.setBounds(20, 186, 137, 20);
+		comboBoxMostrarTipo.setBounds(40, 207, 137, 20);
 		panelMascotaAdopcion.add(comboBoxMostrarTipo);
 
 		JButton btnFlechaDerecha = new JButton("");
@@ -599,7 +640,7 @@ public class VentanaRegistroAdopcion extends JFrame {
 		btnFlechaDerecha.setDefaultCapable(false);
 		btnFlechaDerecha.setContentAreaFilled(false);
 		btnFlechaDerecha.setIcon(new ImageIcon("./imgs/flechaDerecha-48.png"));
-		btnFlechaDerecha.setBounds(773, 553, 151, 44);
+		btnFlechaDerecha.setBounds(650, 553, 151, 44);
 		panelMascotaAdopcion.add(btnFlechaDerecha);
 
 		JButton btnFlechaIzquierda = new JButton("");
@@ -770,20 +811,20 @@ public class VentanaRegistroAdopcion extends JFrame {
 		btnFlechaIzquierda.setPressedIcon(new ImageIcon("./imgs/flechaIzquierda-32.png"));
 		btnFlechaIzquierda.setRolloverIcon(new ImageIcon("./imgs/flechaIzquierda-64.png"));
 		btnFlechaIzquierda.setIcon(new ImageIcon("./imgs/flechaIzquierda-48.png"));
-		btnFlechaIzquierda.setBounds(215, 553, 151, 44);
+		btnFlechaIzquierda.setBounds(161, 553, 151, 44);
 		panelMascotaAdopcion.add(btnFlechaIzquierda);
 
 		listaUsuarios = SistemasUsuarios.getUsuarios();
 
 		JLabel lblMostrarPor = new JLabel("Mostrar  Por:");
 		lblMostrarPor.setFont(new Font("Batang", Font.BOLD, 12));
-		lblMostrarPor.setBounds(20, 155, 137, 20);
+		lblMostrarPor.setBounds(40, 176, 137, 20);
 		panelMascotaAdopcion.add(lblMostrarPor);
 
 		JLabel labelMostrarPor = new JLabel("");
 		labelMostrarPor.setIcon(new ImageIcon("./imgs/fondoPanelesPantallaPrincipal.png"));
 		labelMostrarPor.setBorder(new MatteBorder(5, 5, 5, 5, (Color) new Color(110, 170, 111)));
-		labelMostrarPor.setBounds(10, 125, 198, 234);
+		labelMostrarPor.setBounds(30, 146, 198, 234);
 		panelMascotaAdopcion.add(labelMostrarPor);
 
 		JLabel lblTitulo = new JLabel("");
@@ -792,12 +833,170 @@ public class VentanaRegistroAdopcion extends JFrame {
 		lblTitulo.setBounds(270, 0, 457, 108);
 		panelMascotaAdopcion.add(lblTitulo);
 
-		JLabel labelFondo = new JLabel("");
-		labelFondo.setIcon(new ImageIcon("./imgs/fondoRegistro.png"));
-		labelFondo.setBounds(0, 0, 2508, 1246);
-		panelMascotaAdopcion.add(labelFondo);
-
-		Panel panel = new Panel();
-		contentPane.add(panel, "name_19734065748226");
+		panelRegistrarAdopcion = new Panel();
+		contentPane.add(panelRegistrarAdopcion, "name_19734065748226");
+		panelRegistrarAdopcion.setLayout(null);
+		
+		btnAgregarFoto= new JButton("");
+		btnAgregarFoto.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent arg0) {
+		        JFileChooser elegir = new JFileChooser();
+		        int resultadoAbrir = elegir.showOpenDialog(btnAgregarFoto);
+		        File archivoSeleccionado = elegir.getSelectedFile();
+		        if (resultadoAbrir == JFileChooser.APPROVE_OPTION) {
+		            String pathArchivo = archivoSeleccionado.getAbsolutePath();     
+		            String nombre =      archivoSeleccionado.getName();                    
+		            if (archivoSeleccionado != null) {
+		                try {
+		                    BufferedImage imagenMostrada = ImageIO.read(archivoSeleccionado);
+		                    Dimension recuadro =labelDelAdoptante.getSize();
+		                    labelDelAdoptante.setIcon(new ImageIcon(imagenMostrada.getScaledInstance(recuadro.width, recuadro.height, Image.SCALE_AREA_AVERAGING)));
+		                } catch (IOException ex) {
+		                    JOptionPane.showMessageDialog(btnAgregarFoto, ex.getMessage(), "Advertencia", JOptionPane.WARNING_MESSAGE);
+		                }
+		            }
+		            
+		        }
+		        Sistema.crearCarpetaImagenesAdoptantes();
+		        Sistema.asignarIDFotoAdoptante();
+		        Sistema.copiarImagen(archivoSeleccionado);
+		    }
+		    
+		});
+		btnAgregarFoto.setToolTipText("Agregar imagen de la mascota");
+		btnAgregarFoto.setPressedIcon(new ImageIcon("./imgs/addPicture-24.png"));
+		btnAgregarFoto.setRolloverIcon(new ImageIcon("./imgs/addPicture-48.png"));
+		btnAgregarFoto.setRequestFocusEnabled(false);
+		btnAgregarFoto.setOpaque(false);
+		btnAgregarFoto.setFocusable(false);
+		btnAgregarFoto.setFocusTraversalKeysEnabled(false);
+		btnAgregarFoto.setFocusPainted(false);
+		btnAgregarFoto.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnAgregarFoto.setBorderPainted(false);
+		btnAgregarFoto.setContentAreaFilled(false);
+		btnAgregarFoto.setIcon(new ImageIcon("./imgs/addPicture-32.png"));
+		btnAgregarFoto.setBounds(187, 503, 75, 65);
+		
+			panelRegistrarAdopcion.add(btnAgregarFoto);
+		
+		lblRegistrarAdopcin = new JLabel("Registrar Adopci\u00F3n");
+		lblRegistrarAdopcin.setForeground(new Color(210, 180, 140));
+		lblRegistrarAdopcin.setFont(new Font("Khmer UI", Font.BOLD, 35));
+		lblRegistrarAdopcin.setBounds(10, 129, 379, 93);
+		
+		panelRegistrarAdopcion.add(lblRegistrarAdopcin);
+		
+		JLabel lblTituloNuevaAdopcion = new JLabel("");
+		lblTituloNuevaAdopcion.setIcon(new ImageIcon("./imgs/Logo.png"));
+		lblTituloNuevaAdopcion.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTituloNuevaAdopcion.setBounds(206, 0, 457, 108);
+			panelRegistrarAdopcion.add(lblTituloNuevaAdopcion);
+			
+			JLabel labelFotoMascotaAdopcion = new JLabel("<FotoDeLaMascota>");
+			labelFotoMascotaAdopcion.setFont(new Font("Khmer UI", Font.BOLD, 15));
+			labelFotoMascotaAdopcion.setBounds(20, 233, 146, 137);
+			panelRegistrarAdopcion.add(labelFotoMascotaAdopcion);
+			
+			JLabel labelRazaMAscotaAdopccion = new JLabel("<RazaDeLaMascota>");
+			labelRazaMAscotaAdopccion.setFont(new Font("Khmer UI", Font.BOLD, 15));
+			labelRazaMAscotaAdopccion.setBounds(270, 322, 185, 26);
+			panelRegistrarAdopcion.add(labelRazaMAscotaAdopccion);
+			
+			JLabel labelTipoMascotaAdopcion = new JLabel("<TipoDeMascota>");
+			labelTipoMascotaAdopcion.setFont(new Font("Khmer UI", Font.BOLD, 15));
+			labelTipoMascotaAdopcion.setBounds(270, 272, 185, 26);
+			panelRegistrarAdopcion.add(labelTipoMascotaAdopcion);
+			
+			JLabel labelEncargadoActual = new JLabel("<EncargadoActual>");
+			labelEncargadoActual.setFont(new Font("Khmer UI", Font.BOLD, 15));
+			labelEncargadoActual.setBounds(270, 372, 185, 26);
+			panelRegistrarAdopcion.add(labelEncargadoActual);
+			
+			JLabel labelFechaDeAdopcion = new JLabel("<FechaDeAdopcion>");
+			labelFechaDeAdopcion.setText("Fecha de la Adopción: "+Sistema.getFecha());
+			labelFechaDeAdopcion.setFont(new Font("Khmer UI", Font.BOLD, 15));
+			labelFechaDeAdopcion.setBounds(270, 233, 290, 26);
+			panelRegistrarAdopcion.add(labelFechaDeAdopcion);
+			
+			labelDelAdoptante = new JLabel("<FotoDelAdoptante>");
+			labelDelAdoptante.setFont(new Font("Khmer UI", Font.BOLD, 15));
+			labelDelAdoptante.setBounds(20, 446, 146, 137);
+			panelRegistrarAdopcion.add(labelDelAdoptante);
+			
+			JLabel lblNombreDelAdoptante = new JLabel("<NombreDelAdoptante>");
+			lblNombreDelAdoptante.setText(SistemasUsuarios.getNombreCompletoDelUsuario(idUsuarioActivo));
+			lblNombreDelAdoptante.setFont(new Font("Khmer UI", Font.BOLD, 15));
+			lblNombreDelAdoptante.setBounds(272, 446, 258, 26);
+			panelRegistrarAdopcion.add(lblNombreDelAdoptante);
+			
+			JLabel labelCantMascotasAdoptadas = new JLabel("<CAntidadDeMAscotasAdoptadas>");
+			labelCantMascotasAdoptadas.setText(String.valueOf(SistemasUsuarios.getCantMascotasAdoptadas(idUsuarioActivo))); 
+			labelCantMascotasAdoptadas.setFont(new Font("Khmer UI", Font.BOLD, 15));
+			labelCantMascotasAdoptadas.setBounds(272, 495, 258, 26);
+			panelRegistrarAdopcion.add(labelCantMascotasAdoptadas);
+			
+			JLabel labelCorreoDelAdoptante = new JLabel("<CorreoDelAdoptante>");
+			labelCorreoDelAdoptante.setText(SistemasUsuarios.getCorreoDelUsuario(idUsuarioActivo));
+			labelCorreoDelAdoptante.setFont(new Font("Khmer UI", Font.BOLD, 15));
+			labelCorreoDelAdoptante.setBounds(272, 542, 258, 26);
+			panelRegistrarAdopcion.add(labelCorreoDelAdoptante);
+			
+			JLabel labelTelefonoDelAdoptante = new JLabel("<TelefonoDelAdoptante>");
+			labelTelefonoDelAdoptante.setText(SistemasUsuarios.getTelefonoDelUsuario(idUsuarioActivo));
+			labelTelefonoDelAdoptante.setFont(new Font("Khmer UI", Font.BOLD, 15));
+			labelTelefonoDelAdoptante.setBounds(272, 590, 258, 26);
+			panelRegistrarAdopcion.add(labelTelefonoDelAdoptante);
+			
+			btnGuardarAdopcion = new JButton("");
+			btnGuardarAdopcion.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					
+					Adopcion adopcion = new Adopcion(idUsuarioActivo, idMascota, fotoAdoptante,fotoConvivencia,idUsuarioQueCalifica);
+							try {
+								//SistemasUsuarios.leerUsuarios();
+								SistemasAdopciones.AgregarAdopcion(adopcion);
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+							String subject = "¡Se ha registrado la adopción de" +nuevoNombreMascota+ "!";
+							String mensaje = "¡Es un honor ser parte de la adopción de " +nuevoNombreMascota+ "!." + "\n"+ 
+											 "Es importante cuidar mucho de "+nuevoNombreMascota+ "pues será calificado por el usuario que dio en adopción a" +nuevoNombreMascota+ "\n"   
+											 + "\n"+"Fecha de Registro: " + Sistema.getFecha()+ "\n"+ "¡Muchas Felicidades!";
+							EnviarMail.correoDestinatario = SistemasUsuarios.getCorreoDelUsuario(idUsuarioActivo);
+							EnviarMail.subject = subject;
+							EnviarMail.mensaje = mensaje;
+							
+							JOptionPane.showMessageDialog(contentPane, "Adopción registrada correctamente. Se enviará un correo electrónico con los datos de la adopcion");
+							
+								EnviarMail.enviarMail();
+								JOptionPane.showMessageDialog(contentPane, "Correo electrónico enviado correctamente");
+							
+			  }
+				
+			});
+			btnGuardarAdopcion.setToolTipText("GuardarAdopcion");
+			btnGuardarAdopcion.setFocusPainted(false);
+			btnGuardarAdopcion.setOpaque(false);
+			btnGuardarAdopcion.setContentAreaFilled(false);
+			btnGuardarAdopcion.setBorderPainted(false);
+			btnGuardarAdopcion.setBorder(null);
+			btnGuardarAdopcion.setHorizontalTextPosition(SwingConstants.CENTER);
+			btnGuardarAdopcion.setIconTextGap(-3);
+			btnGuardarAdopcion.setRolloverIcon(new ImageIcon("./imgs/save-64.png"));
+			btnGuardarAdopcion.setPressedIcon(new ImageIcon("./imgs/save-32.png"));
+			btnGuardarAdopcion.setIcon(new ImageIcon("./imgs/save-48.png"));
+			btnGuardarAdopcion.setBounds(598, 590, 105, 64);
+			panelRegistrarAdopcion.add(btnGuardarAdopcion);
+			
+			JLabel lblNuevoNombreDe = new JLabel("Nuevo Nombre de la Mascota: ");
+			lblNuevoNombreDe.setFont(new Font("Khmer UI", Font.BOLD, 15));
+			lblNuevoNombreDe.setBounds(270, 421, 249, 26);
+			panelRegistrarAdopcion.add(lblNuevoNombreDe);
+			
+			textFieldNuevoNombreMascota = new JTextField();
+			textFieldNuevoNombreMascota.setBounds(540, 421, 128, 20);
+			panelRegistrarAdopcion.add(textFieldNuevoNombreMascota);
+			textFieldNuevoNombreMascota.setColumns(10);
 	}
 }

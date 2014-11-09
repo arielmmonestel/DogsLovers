@@ -44,8 +44,7 @@ public class Mascota {
 	public Mascota(String pEstado, String pTipo, String pRaza, String pNombre, String pChip, String pColorDePelo, String pColorDeOjos,
 				   String pFoto, String pLugarVisto, String pNota, String pDia, String pRecompensa, int pIdEncargado) {
 	
-		//setID(IDMascotas);
-		//IDMascotas ++;
+		setID(IDMascotas++);
 		setEstado(pEstado);
 		setTipo(pTipo);
 		setRaza(pRaza);

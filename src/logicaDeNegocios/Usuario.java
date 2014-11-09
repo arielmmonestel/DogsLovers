@@ -19,7 +19,6 @@ public class Usuario extends Persona{
 	private boolean esAdministrador ;
 	private boolean estaEnListaNegra;
 	private ArrayList<Usuario> personasCalificables;
-	private ArrayList<Mascota> mascotasAdoptadas;
 	int calificacion;
 	
 	
@@ -99,14 +98,6 @@ public class Usuario extends Persona{
 
 	public void setPersonasCalificables(ArrayList<Usuario> pPersonasCalificables) {
 		personasCalificables = pPersonasCalificables;
-	}
-
-	public ArrayList<Mascota> getMascotasAdoptadas() {
-		return mascotasAdoptadas;
-	}
-
-	public void setMascotasAdoptadas(ArrayList<Mascota> pMascotasAdoptadas) {
-		mascotasAdoptadas = pMascotasAdoptadas;
 	}
 
 	public int getCalificacion() {

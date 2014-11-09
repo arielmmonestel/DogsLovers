@@ -28,7 +28,9 @@ import javax.mail.internet.MimeMultipart;
 
 
 
+
 import acceso.VentanaPrincipal;
+import acceso.VentanaRegistroAdopcion;
 
 
 
@@ -71,13 +73,7 @@ public class Sistema {
 	static BufferedReader bufferLectura = null;
 	static JFrame frame = new JFrame();
 	
-	
 
-    public static void main(String[] args){
-   	 enviarMailConAdjunto("arielmmonestel@gmail.com", "Probando 2...", "i try so hard 2", "./mascotas/2.jpg");
-  	  
-    }
-	
 	
 
 	public Sistema() {
@@ -207,7 +203,13 @@ public class Sistema {
 	public static void copiarImagen(File imagenOriginal) {
 		File archivoOriginal = new File(imagenOriginal.getAbsolutePath());
 
-		File archivoNuevo	 = new File(System.getProperty("user.dir") + "./mascotas/" + String.valueOf(SistemasMascotas.getSize()+1) + ".jpg");
+		File archivoNuevo = null;
+		try {
+			archivoNuevo = new File(System.getProperty("user.dir") + "./mascotas/" + String.valueOf(SistemasMascotas.getListaMascotasSize()+1) + ".jpg");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		try {
 			FileInputStream inStream = new FileInputStream(archivoOriginal);
@@ -223,6 +225,27 @@ public class Sistema {
 			JOptionPane.showMessageDialog(null, "No se pudo copiar la imagen seleccionada.\n" + noHayArchivo.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
 		}
 	}
+	
+	public static void copiarImagenAdoptante(File imagenOriginal) {
+		File archivoOriginal = new File(imagenOriginal.getAbsolutePath());
+
+		File archivoNuevo	 = new File(System.getProperty("user.dir") + VentanaRegistroAdopcion.getRutaImagenesAdoptantes()+ String.valueOf(SistemasAdopciones.getListaDeAdopcionesSize()+1)+".jpg");
+
+		try {
+			FileInputStream inStream = new FileInputStream(archivoOriginal);
+			FileOutputStream outStream = new FileOutputStream(archivoNuevo);
+    	    byte[] buffer = new byte[1024]; 
+    	    int length; 
+    	    while ((length = inStream.read(buffer)) > 0){
+    	    	outStream.write(buffer, 0, length);
+    	    }
+    	    inStream.close();
+    	    outStream.close();
+		} catch (IOException noHayArchivo) {
+			JOptionPane.showMessageDialog(null, "No se pudo copiar la imagen seleccionada.\n" + noHayArchivo.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+
 	
 	public static void enviarMail(String correoDestinatario, String mensaje, String subject,String CorreoRemitente,String passwordRemitente){
 	        try
@@ -548,8 +571,8 @@ public class Sistema {
     				listaTipoYRazaDeMascotas.add(dato);	    				
     				listaTipoYRazaDeMascotas.add(bufferLectura.readLine());
     				}
-    		}else
-        		JOptionPane.showMessageDialog(frame, "No existen datos. O cambio la ruta del archivo \"Detalles de mascotas\"");                		
+    		}//else
+        		//JOptionPane.showMessageDialog(frame, "No existen datos. O cambio la ruta del archivo \"Detalles de mascotas\"");                		
     	}catch(Exception e){
     		e.printStackTrace();  
     	}finally
@@ -661,12 +684,24 @@ public class Sistema {
 		
 
     public static void asignarIDFoto() {
+<<<<<<< HEAD
         try {
            SistemasMascotas.leerMascota();
     	   VentanaPrincipal.setFoto("./mascotas/" + String.valueOf(SistemasMascotas.getSize()+1)+".jpg");
         } catch (IOException e) {
             e.printStackTrace();
         }
+=======
+        
+
+        try {
+			VentanaPrincipal.setFoto("./mascotas/" + String.valueOf(SistemasMascotas.getListaMascotasSize()+1)+".jpg");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+>>>>>>> d10e1ca5f3821a5cf90cb4660d4dcfa22f57f6a1
     }
     
     public static void crearCarpetaImagenesMascotas()
@@ -677,7 +712,28 @@ public class Sistema {
         {
             archivo.mkdir();
         }
-    }    
+    }
+    
+    public static void asignarIDFotoAdoptante() {
+        try {
+           SistemasAdopciones.leerAdopcion();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        //VentanaRegistroAdopcion.setFoto("./Adoptantes" + String.valueOf(listaAdopciones.getSize()+1)+".jpg");
+
+    }
+	public static void crearCarpetaImagenesAdoptantes() {
+		   File archivo = new File (VentanaRegistroAdopcion.getRutaImagenesAdoptantes());
+
+	        if(!archivo.exists())
+	        {
+	            archivo.mkdir();
+	        }
+
+	}
 
 
 	
@@ -750,16 +806,32 @@ public class Sistema {
    	}
 	*/
    	
-   	public static void cargarTablaDeUsuarios(String[]datos, DefaultTableModel tableModel){
+   	public static DefaultTableModel cargarTablaDeUsuarios(String[]datos, DefaultTableModel tableModel){
    		
    		for(int i = 0 ; i < SistemasUsuarios.getListaDeUsuariosSize() ; i++){
    			Usuario usuarioTemp = SistemasUsuarios.getUsuario(i);
 			datos[0] = Integer.toString(usuarioTemp.getID()); 
 			datos[1] = usuarioTemp.getNombreUsuario();
-			datos[2] = usuarioTemp.getNombre() + usuarioTemp.getPrimerApellido() + usuarioTemp.getSegundoApellido();
+			datos[2] = usuarioTemp.getNombre() + " " + usuarioTemp.getPrimerApellido() + " " + usuarioTemp.getSegundoApellido();
 			datos[3] = Integer.toString(usuarioTemp.getCalificacion());
 			tableModel.addRow(datos);
 		}
+   		return tableModel;
+   	}
+   	
+   	public static DefaultTableModel cargarTablaDeUsuariosEnListaNegra(String[]datos, DefaultTableModel tableModel){
+   		
+   		for(int i = 0 ; i < SistemasUsuarios.getListaDeUsuariosSize() ; i++){
+   			Usuario usuarioTemp = SistemasUsuarios.getUsuario(i);
+   			if(usuarioTemp.estaEnListaNegra()){
+				datos[0] = Integer.toString(usuarioTemp.getID()); 
+				datos[1] = usuarioTemp.getNombreUsuario();
+				datos[2] = usuarioTemp.getNombre() + " " + usuarioTemp.getPrimerApellido() + " " + usuarioTemp.getSegundoApellido();
+				datos[3] = Integer.toString(usuarioTemp.getCalificacion());
+				tableModel.addRow(datos);
+   			}
+		}
+   		return tableModel;
    	}
    	
 	public static void cargarTableNuevosAdmin(String[]columna,String[]filas,DefaultTableModel tableModel){
@@ -772,6 +844,9 @@ public class Sistema {
    			tableModel.addRow(filas);
 		}
    	}
+
+
+
 
 
 	///////////////////////////////////////// Adopciones //////////////////////////////////////////////////////
