@@ -85,23 +85,23 @@ public class VentanaRegistroAdopcion extends JFrame {
     private JButton btnAgregarFoto;
     private static int idUsuarioActivo = VentanaPrincipal.getIDUsuarioActivo();
     private JButton btnGuardarAdopcion;
-      protected int idMascota = 0;
-      protected String fotoAdoptante = "";
-      protected String fotoConvivencia= "";
-      protected int idUsuarioQueCalifica= 0;
-      protected String nuevoNombreMascota= "";
-      private JTextField textFieldNuevoNombreMascota;
-      ImageIcon imgfotomascota1;
-	    ImageIcon imgfotomascota2 ;
-	    ImageIcon imgfotomascota3; 
-	    ImageIcon imgfotomascotaAdoptar ;
-	    private JButton btnAdoptarPanel2;
-	    private JButton btnAdoptarPanel3;
-	    private JLabel labelRazaMAscotaAdopccion;
-	    private JLabel labelTipoMascotaAdopcion;
-	    private JLabel labelEncargadoActual;
-	    private JLabel labelFotoMascotaAdopcion; 
-	    
+    protected int idMascota = 0;
+    private static String fotoAdoptante = "";
+    protected static String fotoConvivencia= "";
+    protected int idUsuarioQueCalifica= 0;
+    protected String nuevoNombreMascota= "";
+    private JTextField textFieldNuevoNombreMascota;
+    ImageIcon imgfotomascota1;
+	ImageIcon imgfotomascota2 ;
+	ImageIcon imgfotomascota3; 
+	ImageIcon imgfotomascotaAdoptar ;
+	private JButton btnAdoptarPanel2;
+	private JButton btnAdoptarPanel3;
+	private JLabel labelRazaMAscotaAdopccion;
+	private JLabel labelTipoMascotaAdopcion;
+	private JLabel labelEncargadoActual;
+	private JLabel labelFotoMascotaAdopcion; 
+	
       
 
       /**
@@ -123,6 +123,16 @@ public class VentanaRegistroAdopcion extends JFrame {
             });
 
       }
+    
+      public static String getFotoAdoptante() {
+  		return fotoAdoptante;
+  	}
+
+  	public static void setFotoAdoptante(String fotoAdoptante) {
+  		VentanaRegistroAdopcion.fotoAdoptante = fotoAdoptante;
+  	}
+
+
 
     public static String getRutaImagenesAdoptantes() {
                   return rutaImagenesAdoptantes;
@@ -132,8 +142,10 @@ public class VentanaRegistroAdopcion extends JFrame {
             listaTemporal.clear();
             for(Mascota mascota:listaMascotasParaMostrar){
                   if(mascota.getTipo().equals(tipo)){
-                        if(mascota.getEstado().equals("ENADOPCION")){
-                              listaTemporal.add(mascota);
+                        if(mascota.getEstado().equals("ENADOPCION")||mascota.getEstado().equals("EN CASA CUNA")){
+                            if(mascota.getIdEncargado()!= idUsuarioActivo){
+                        	listaTemporal.add(mascota);
+                        	}
                         }  
                         
                   }      
@@ -294,9 +306,11 @@ public class VentanaRegistroAdopcion extends JFrame {
             listaMascotasParaMostrar = SistemasMascotas.getListaMascota();
             listaTemporal.clear();
             for(Mascota mascota:listaMascotasParaMostrar){
-                  if(mascota.getEstado().equals("ENADOPCION")){
+            	if(mascota.getIdEncargado()!= idUsuarioActivo){
+                  if(mascota.getEstado().equals("ENADOPCION")||mascota.getEstado().equals("EN CASA CUNA")){
                         listaTemporal.add(mascota);
                   }      
+            	}
             }
             listaMascotasParaMostrar = listaTemporal;
             listaUsuarios = SistemasUsuarios.getUsuarios();
@@ -931,14 +945,14 @@ public class VentanaRegistroAdopcion extends JFrame {
                                 Dimension recuadro =labelDelAdoptante.getSize();
                                 labelDelAdoptante.setIcon(new ImageIcon(imagenMostrada.getScaledInstance(recuadro.width, recuadro.height, Image.SCALE_AREA_AVERAGING)));
                             } catch (IOException ex) {
-                                JOptionPane.showMessageDialog(btnAgregarFoto, ex.getMessage(), "Advertencia", JOptionPane.WARNING_MESSAGE);
+                              //  JOptionPane.showMessageDialog(btnAgregarFoto, ex.getMessage(), "Advertencia", JOptionPane.WARNING_MESSAGE);
                             }
                         }
                         
                     }
                     Sistema.crearCarpetaImagenesAdoptantes();
                     Sistema.asignarIDFotoAdoptante();
-                    Sistema.copiarImagen(archivoSeleccionado);
+                    Sistema.copiarImagenAdoptante(archivoSeleccionado);
                 }
                 
             });
@@ -1035,16 +1049,32 @@ public class VentanaRegistroAdopcion extends JFrame {
 	          btnGuardarAdopcion = new JButton("");
 	          btnGuardarAdopcion.addActionListener(new ActionListener() {
 	                public void actionPerformed(ActionEvent arg0) {
+	                	nuevoNombreMascota = textFieldNuevoNombreMascota.getText();
 	                      
-	                      Adopcion adopcion = new Adopcion(idUsuarioActivo, idMascota, fotoAdoptante,fotoConvivencia,idUsuarioQueCalifica);
-	                                  try {
-	                                        //SistemasUsuarios.leerUsuarios();
+	                		if(nuevoNombreMascota.length()!= 0 ){
+	                		Adopcion adopcion = new Adopcion(idUsuarioActivo, idMascota, fotoAdoptante,fotoConvivencia,idUsuarioQueCalifica);
+	                                  
+	                      		try {
+	                                        SistemasMascotas.leerMascota();
+	                                        for(Mascota mascota:SistemasMascotas.getListaMascota()){
+	                                        	if(mascota.getID() == idMascota){
+	                                        		mascota.setIdEncargado(idUsuarioActivo);
+	                                        		mascota.setNombre(nuevoNombreMascota);
+	                                        		mascota.setEstado("ADOPTADA");
+	                                        		mascota.setEstaEnCasaCuna(false);
+	                                        		
+	                                        	}
+	                                        }
+	                                        
+	                                        SistemasMascotas.GuardarMascota();
 	                                        SistemasAdopciones.AgregarAdopcion(adopcion);
 	                                  } catch (IOException e1) {
 	                                        // TODO Auto-generated catch block
 	                                        e1.printStackTrace();
-	                                  }
-	                                  String subject = "¡Se ha registrado la adopción de" +nuevoNombreMascota+ "!";
+	                                  }labelFotoMascotaAdopcion.setIcon(null);
+	                                  labelDelAdoptante.setIcon(null);
+	                                  dispose();
+	                                  String subject = "¡Se ha registrado la adopción de " +nuevoNombreMascota+ "!";
 	                                  String mensaje = "¡Es un honor ser parte de la adopción de " +nuevoNombreMascota+ "!." + "\n"+ 
 	                                                           "Es importante cuidar mucho de "+nuevoNombreMascota+ "pues será calificado por el usuario que dio en adopción a" +nuevoNombreMascota+ "\n"   
 	                                                           + "\n"+"Fecha de Registro: " + Sistema.getFecha()+ "\n"+ "¡Muchas Felicidades!";
@@ -1057,8 +1087,11 @@ public class VentanaRegistroAdopcion extends JFrame {
 	                                        EnviarMail.enviarMail();
 	                                        JOptionPane.showMessageDialog(contentPane, "Correo electrónico enviado correctamente");
 	                                  
-	            }
-	                
+	                                  
+	            }else{
+                	JOptionPane.showMessageDialog(null,"Debe Asignarle un nombre a la mascota");
+                }
+	                }    
 	          });
 	          btnGuardarAdopcion.setToolTipText("GuardarAdopcion");
 	          btnGuardarAdopcion.setFocusPainted(false);

@@ -229,7 +229,7 @@ public class Sistema {
 	public static void copiarImagenAdoptante(File imagenOriginal) {
 		File archivoOriginal = new File(imagenOriginal.getAbsolutePath());
 
-		File archivoNuevo	 = new File(System.getProperty("user.dir") + VentanaRegistroAdopcion.getRutaImagenesAdoptantes()+ String.valueOf(SistemasAdopciones.getListaDeAdopcionesSize()+1)+".jpg");
+		File archivoNuevo	 = new File(System.getProperty("user.dir") + "/Adoptantes/"+ String.valueOf(SistemasAdopciones.getListaDeAdopcionesSize()+1)+".jpg");
 
 		try {
 			FileInputStream inStream = new FileInputStream(archivoOriginal);
@@ -708,12 +708,13 @@ public class Sistema {
     public static void asignarIDFotoAdoptante() {
         try {
            SistemasAdopciones.leerAdopcion();
+         VentanaRegistroAdopcion.setFotoAdoptante("./Adoptantes/" + String.valueOf(SistemasAdopciones.getListaDeAdopcionesSize()+1)+".jpg");
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
-        //VentanaRegistroAdopcion.setFoto("./Adoptantes" + String.valueOf(listaAdopciones.getSize()+1)+".jpg");
+        
 
     }
 	public static void crearCarpetaImagenesAdoptantes() {

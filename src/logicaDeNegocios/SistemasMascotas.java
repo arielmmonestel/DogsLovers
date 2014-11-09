@@ -82,8 +82,7 @@ public class SistemasMascotas {
 
 
 	    		
-    		}else
-        		JOptionPane.showMessageDialog(frame, "No existen datos. O cambio el archivo de ruta del archivo \"Mascotas\"");                		
+    		}                		
     	}catch(Exception e){
     		e.printStackTrace();  
     	}finally
