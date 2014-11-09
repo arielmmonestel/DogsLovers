@@ -5,28 +5,19 @@ public class Adopcion {
 	
 	private int idAdopcion;
 	private int idAdoptante;
+	private int idPersonaQueDaEnAdopcion;
 	private int idMascota;
 	private String fotoAdoptante;
-	
 	private String fotoConvivencia;
-	private int idUsuarioQueCalifica;
 	
-	public Adopcion(int pIdAdoptante, int pIdMascota, String fotoAdoptante, String fotoConvivencia,int IdUsuarioqueCalifica){
+	public Adopcion(int pIdPersonaQueDaEnAdopcion, int pIdAdoptante, int pIdMascota, String fotoAdoptante, String fotoConvivencia,int IdAdopcion){
+		setIdAdopcion(IdAdopcion);
 		setIdAdoptante(pIdAdoptante);
+		setIdPersonaQueDaEnAdopcion(pIdPersonaQueDaEnAdopcion);
 		setIdMascota(pIdMascota);
 		setFotoAdoptante(fotoAdoptante);
 		setFotoConvivencia(fotoConvivencia);
-		setIdUsuarioQueCalifica(IdUsuarioqueCalifica);
 	}
-	
-	public int getIdUsuarioQueCalifica() {
-		return idUsuarioQueCalifica;
-	}
-
-	public void setIdUsuarioQueCalifica(int idUsuarioQueCalifica) {
-		this.idUsuarioQueCalifica = idUsuarioQueCalifica;
-	}
-
 	
 	public Adopcion(){
 		
@@ -43,6 +34,12 @@ public class Adopcion {
 	}
 	public void setIdMascota(int idMascota) {
 		this.idMascota = idMascota;
+	}
+	public int getIdPersonaQueDaEnAdopcion() {
+		return idPersonaQueDaEnAdopcion;
+	}
+	public void setIdPersonaQueDaEnAdopcion(int pIdPersonaQueDaEnAdopcion) {
+		idPersonaQueDaEnAdopcion = pIdPersonaQueDaEnAdopcion;
 	}
 	public String  getFotoAdoptante() {
 		return fotoAdoptante;
@@ -65,4 +62,4 @@ public class Adopcion {
 		this.idAdopcion = idAdopcion;
 	}
 	
-	}
+}

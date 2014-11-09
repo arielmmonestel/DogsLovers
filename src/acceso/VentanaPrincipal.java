@@ -101,7 +101,7 @@ public class VentanaPrincipal {
     private JTextField textFieldNumChip;
     private ButtonGroup estadoMascota = new ButtonGroup() ;
     private ButtonGroup monedaDePago = new ButtonGroup() ;
-    private ButtonGroup verMascotasPor = new ButtonGroup() ;
+    private ButtonGroup VerMascotasPor = new ButtonGroup() ;
     private ButtonGroup verUsuariosPor = new ButtonGroup();
     private JRadioButton rdbtnColones;
     private JRadioButton rdbtnDolares;
@@ -136,9 +136,7 @@ public class VentanaPrincipal {
     private JComboBox comboBoxMesPerdida;
     private JSpinner spinnerAnioPerdida;
     private JButton btnAgregarFoto;
-    private final static String rutaImagenesMascotas = "./mascotas";
- 
-	
+    private static String rutaImagenesMascotas = "./mascotas";
     
     private static String opcEstado = " ";
     private static String opcTipo = " ";
@@ -203,6 +201,8 @@ public class VentanaPrincipal {
 
     static JMenu mnConfiguracin;
    private static boolean esVisible = true;
+   private JRadioButton rdbtnTodosLosUsuarios;
+   private JRadioButton rdbtnUsuariosEnLaListaNegra;
     
 
 
@@ -293,7 +293,7 @@ public static void main(String[] args) {
         rdbtnEncontradas.setFont(new Font("Khmer UI", Font.BOLD, 14));
         
         
-        verMascotasPor.add(rdbtnEncontradas);
+        VerMascotasPor.add(rdbtnEncontradas);
         panelPrincipal.add(rdbtnEncontradas);
         
         rdbtnPerdidas = new JRadioButton("Perdidas");
@@ -315,7 +315,7 @@ public static void main(String[] args) {
         rdbtnPerdidas.setFont(new Font("Khmer UI", Font.BOLD, 14));
         
         
-        verMascotasPor.add(rdbtnPerdidas);
+        VerMascotasPor.add(rdbtnPerdidas);
         panelPrincipal.add(rdbtnPerdidas);
         
         rdbtnTodas = new JRadioButton("Todas");
@@ -337,7 +337,7 @@ public static void main(String[] args) {
         rdbtnTodas.setFont(new Font("Khmer UI", Font.BOLD, 14));
         rdbtnTodas.setBounds(54, 172, 109, 23);
         panelPrincipal.add(rdbtnTodas);
-        verMascotasPor.add(rdbtnTodas);
+        VerMascotasPor.add(rdbtnTodas);
         label_1 = new JLabel("Mostrar Por:");
         label_1 .setForeground(new Color(210, 180, 140));
         label_1 .setFont(new Font("Khmer UI", Font.BOLD, 19));
@@ -1457,10 +1457,6 @@ public static void main(String[] args) {
         mntmConsutaMiPerfil.setIcon(new ImageIcon("./imgs/Perfil.png"));
         mnConsulta.add(mntmConsutaMiPerfil);
         
-        JMenuItem mntmConsultaMascota = new JMenuItem("Mascotas");
-        mntmConsultaMascota.setIcon(new ImageIcon("./imgs/Pets-30.png"));         
-        mnConsulta.add(mntmConsultaMascota);
-        
         JMenuItem mntmConsultaUsuarios = new JMenuItem("Usuarios");
         mnConsulta.add(mntmConsultaUsuarios);
         mntmConsultaUsuarios.addActionListener(new ActionListener() {
@@ -1476,6 +1472,10 @@ public static void main(String[] args) {
         		}
         	}
         });
+        
+        JMenuItem mntmConsultaMascota = new JMenuItem("Mascotas");
+        mntmConsultaMascota.setIcon(new ImageIcon("./imgs/Pets-30.png"));         
+        mnConsulta.add(mntmConsultaMascota);
         
         JMenuItem mntmConsutarCasaCuna = new JMenuItem("Casa Cuna");
         mntmConsutarCasaCuna.setIcon(new ImageIcon("./imgs/casaCuna.png"));
@@ -1531,8 +1531,7 @@ public static void main(String[] args) {
 //////////////////////////////////////Inicio Código Consulta Usuarios////////////////////////////////////////////////////
 
 		        
-        
-		panelConsultaDeUsuarios = new JPanel();
+        panelConsultaDeUsuarios = new JPanel();
 		VentanaPrincipal.getContentPane().add(panelConsultaDeUsuarios, "name_154826621946393");
 		panelConsultaDeUsuarios.setLayout(null);
 		
@@ -1550,7 +1549,12 @@ public static void main(String[] args) {
 		String[] columna = {"ID","Usuario", "Nombre", "Calificacion"};
 		String[] fila = new String[4];
 		modeloListaDeUsuarios = new DefaultTableModel(columna,0);
-		tablaDeUsuarios = new JTable(modeloListaDeUsuarios);
+		tablaDeUsuarios = new JTable(modeloListaDeUsuarios){
+			public boolean isCellEditable(int row, int column){  
+			    return false;  
+			} 
+		};
+		tablaDeUsuarios.setCellSelectionEnabled(true);
 		tablaDeUsuarios.setBorder(new LineBorder(new Color(189, 183, 107)));
 		tablaDeUsuarios.setBackground(new Color(238, 232, 170));
 		tablaDeUsuarios.setForeground(new Color(139, 69, 19));
@@ -1566,10 +1570,18 @@ public static void main(String[] args) {
 		tablaDeUsuarios.addMouseListener(new MouseAdapter() {
 		public void mouseClicked(MouseEvent e) {
 			if (e.getClickCount() == 2) {
+				System.out.println("Dio doble clic en una celda");
 				JTable target = (JTable)e.getSource();
 				int row = target.getSelectedRow();
 				int column = target.getSelectedColumn();
-				//Aquí se abre el perfil del usuario seleccionado en la tabla
+				int idUsuarioDelPerfil = -1;
+				if(rdbtnTodosLosUsuarios.isSelected()){
+					idUsuarioDelPerfil = tablaDeUsuarios.getSelectedRow();
+				}else{
+					idUsuarioDelPerfil = ListaNegra.getUsuario(tablaDeUsuarios.getSelectedRow()).getID();
+				}
+				VentanaPerfilUsuario ventanaDePerfil = new VentanaPerfilUsuario(idUsuarioDelPerfil);
+				ventanaDePerfil.setVisible(true);
 			}
 		}
 		});
@@ -1583,7 +1595,7 @@ public static void main(String[] args) {
 		lblMensajeListaVacia.setVisible(false);
 		panelConsultaDeUsuarios.add(lblMensajeListaVacia);
 		
-		JRadioButton rdbtnTodosLosUsuarios = new JRadioButton("Todos los usuarios");
+		rdbtnTodosLosUsuarios = new JRadioButton("Todos los usuarios");
 		rdbtnTodosLosUsuarios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(rdbtnTodosLosUsuarios.isSelected()){
@@ -1601,7 +1613,7 @@ public static void main(String[] args) {
 		verUsuariosPor.add(rdbtnTodosLosUsuarios);
 		panelConsultaDeUsuarios.add(rdbtnTodosLosUsuarios);
 		
-		JRadioButton rdbtnUsuariosEnLaListaNegra = new JRadioButton("Usuarios en la lista negra");
+		rdbtnUsuariosEnLaListaNegra = new JRadioButton("Usuarios en la lista negra");
 		rdbtnUsuariosEnLaListaNegra.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(rdbtnUsuariosEnLaListaNegra.isSelected()){
@@ -1634,8 +1646,8 @@ public static void main(String[] args) {
 		fondoConsultaUsuarios.setIcon(new ImageIcon("./imgs/fondoRegistro.png"));
 		fondoConsultaUsuarios.setBounds(0, 1, 1362, 675);
 		panelConsultaDeUsuarios.add(fondoConsultaUsuarios);
-		
-		
+
+
 
         
     }//Fin initilize()
@@ -1758,6 +1770,9 @@ public static void main(String[] args) {
 		return rutaImagenesMascotas;
 	}
 
+	public void setRutaImagenesMascotas(String pRutaImagenesMascotas) {
+		rutaImagenesMascotas = pRutaImagenesMascotas;
+	}
 	
 	public void refrescarPaneles(){
 		try {
@@ -1880,4 +1895,3 @@ public static void main(String[] args) {
 			esVisible = pVisible;
 		}
 };;
-
