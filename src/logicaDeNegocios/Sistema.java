@@ -29,6 +29,9 @@ import javax.mail.internet.MimeMultipart;
 
 
 
+
+
+
 import acceso.VentanaPrincipal;
 import acceso.VentanaRegistroAdopcion;
 
@@ -65,8 +68,9 @@ public class Sistema {
 	private static final String rutaDonaciones = "./Donaciones.poo";
 	private static ArrayList<Donacion> listaDeDonaciones = new ArrayList<Donacion>();
 	
-
-	//public static  ArrayList<String> listaDetallesMascota = new ArrayList<String>();
+	private static int idAsociacion;
+	private static String rutaAsociaciones = "./Asociaciones.poo";
+	public static ArrayList<Asociacion> listaAsociaciones=  new ArrayList<Asociacion>() ;
 	
 	File archivo = null;
 	static FileReader lectura = null;
@@ -85,6 +89,83 @@ public class Sistema {
 		return fecha;
 	}
 	
+	
+	public static void  leerAsociaciones() throws IOException
+	{
+		File archivo = new File (rutaAsociaciones);
+		try
+		{
+			listaAsociaciones.clear();    
+			idAsociacion= 0;
+			if (archivo.exists())
+			{			
+	    		FileReader lectura = new FileReader (archivo);
+	    		BufferedReader bufferLectura = new BufferedReader(lectura);
+	    		while((bufferLectura.readLine())!=null)    			
+	    		{ 
+	    			Asociacion obj = new Asociacion();
+	    			obj.setId(Integer.parseInt(bufferLectura.readLine()));
+	    			idAsociacion++;
+	    			obj.setNombre(bufferLectura.readLine());
+	    			obj.setDireccion(bufferLectura.readLine());
+	    			obj.setTelefono(bufferLectura.readLine());
+	    			obj.setNumeroDeCuenta(bufferLectura.readLine());
+	    			obj.setPaginaWeb(bufferLectura.readLine());
+	    			listaAsociaciones.add(obj);		
+	    			
+	    		}
+			}	                		
+		}catch(Exception e){
+			e.printStackTrace();  
+		}finally
+		{
+			try
+			{
+	    		if (archivo.exists())
+					lectura.close();
+
+			}catch (Exception e2)
+				{e2.printStackTrace();}
+		}
+		
+	}
+	
+
+public static void GuardarAsociacion() 
+{
+	FileWriter escribir = null;
+	PrintWriter pw = null;
+	try
+	{		
+		escribir = new FileWriter(rutaAsociaciones,false);
+		pw = new PrintWriter(escribir);
+		idAsociacion= 0;
+		
+		for(Asociacion obj: listaAsociaciones)
+		{	
+			pw.println("===>Nueva Asociacion<===");
+			pw.println(idAsociacion);
+			pw.println(obj.getNombre());
+			pw.println(obj.getDireccion());
+			pw.println(obj.getTelefono());
+			pw.println(obj.getNumeroDeCuenta());
+			pw.println(obj.getPaginaWeb());
+			idAsociacion ++;
+			
+		}
+	} catch (Exception e) {
+		e.printStackTrace();
+	} finally 
+	{
+		try 
+		{
+				escribir.close();
+		} catch (Exception e2) 
+		{e2.printStackTrace();}
+	}
+}
+
+
 
 	private static void GuardarCasaCuna() 
     {
@@ -120,6 +201,12 @@ public class Sistema {
     	}
     }
 	
+	public static void AgregarAsociacion(Asociacion asociacion) throws IOException{
+		leerAsociaciones();
+		listaAsociaciones.add(asociacion);
+		GuardarAsociacion();
+	}
+	
 	private static void  leerCasaCuna() throws IOException
     {
 		File archivo = new File (rutaCasaCuna);
@@ -145,8 +232,7 @@ public class Sistema {
 	    		}
 
 
-    		}else
-        		JOptionPane.showMessageDialog(frame, "No existen datos. O cambio el archivo de ruta. (Usuarios)");                		
+    		}                		
     	}catch(Exception e){
     		e.printStackTrace();  
     	}finally

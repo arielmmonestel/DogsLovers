@@ -57,8 +57,7 @@ public static void  leerAdopcion() throws IOException
     			listaAdopciones.add(obj);		
     			
     		}
-		}else
-    		JOptionPane.showMessageDialog(frame, "No existen datos. O cambio la ruta del archivo \"Usuarios\"");                		
+		}	                		
 	}catch(Exception e){
 		e.printStackTrace();  
 	}finally

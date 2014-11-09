@@ -27,6 +27,10 @@ public class Asociacion {
 		setPaginaWeb(pPaginaWeb);
 	}
 	
+	public Asociacion() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public static ArrayList<Asociacion> getListaDeAsociaciones(){
 		return listaDeAsociaciones;
 	}

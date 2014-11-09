@@ -163,7 +163,6 @@ public class VentanaPrincipal {
     private JTextArea lblNotas_1;
     private JLabel lblFotoMascota1;
     private JLabel lbltitulomascota1;
-    private JLabel lblFondoPanelPrincipal;
     private JComboBox comboBoxColorPelaje;
     private JComboBox comboBoxColorOjos;
     private JComboBox comboBoxTamanoMascotaCC;
@@ -190,8 +189,6 @@ public class VentanaPrincipal {
     private static boolean llegoAlLimiteDerecho = false;
     private static boolean llegoAlLimiteIzquierdo = true;
     private JButton btnFlechaDerecha;
-    private Choice choice;
-    private Choice choice_1;
     private JTable tablaDeUsuarios;
     private JScrollPane scrollPane_1;
     private JLabel fondoConsultaUsuarios;
@@ -205,6 +202,8 @@ public class VentanaPrincipal {
    private static boolean esVisible = true;
    private JRadioButton rdbtnTodosLosUsuarios;
    private JRadioButton rdbtnUsuariosEnLaListaNegra;
+   private JMenuItem mntmAsociacinBeneficiaria;
+   private JLabel labelTituloAso;
    
 
 
@@ -254,6 +253,7 @@ public static void main(String[] args) {
         VentanaPrincipal.setIconImage(Toolkit.getDefaultToolkit().getImage("./imgs/Icono.png"));
         
         JPanel panelPrincipal = new JPanel();
+        panelPrincipal.setBackground(new Color(99, 84, 65));
         VentanaPrincipal.getContentPane().add(panelPrincipal, "name_154826621946393");
         panelPrincipal.setLayout(null);
         
@@ -651,26 +651,9 @@ public static void main(String[] args) {
         btnFlechaIzquierda.setBounds(347, 591, 151, 44);
         panelPrincipal.add(btnFlechaIzquierda);
         
-        lblFondoPanelPrincipal = new JLabel("");
-        lblFondoPanelPrincipal.setIcon(new ImageIcon("./imgs/fondoRegistro.png"));
-        lblFondoPanelPrincipal.setBounds(10, 0, 1362, 675);
-        panelPrincipal.add(lblFondoPanelPrincipal);
-        
-        JLabel label_3 = new JLabel("");
-        label_3.setBorder(new MatteBorder(5, 5, 5, 5, (Color) new Color(110, 170, 111)));
-        label_3.setBounds(34, 298, 234, 146);
-        panelPrincipal.add(label_3);
-        
-        choice = new Choice();
-        choice.setBounds(54, 326, 129, 20);
-        panelPrincipal.add(choice);
-        
-        choice_1 = new Choice();
-        choice_1.setBounds(68, 377, 123, 23);
-        panelPrincipal.add(choice_1);
-        
         
         panelAgregarMascota = new JPanel();
+        panelAgregarMascota.setBackground(new Color(99,84, 65));
         VentanaPrincipal.getContentPane().add(panelAgregarMascota, "name_27990074221032");
         panelAgregarMascota.setLayout(null);
         panelAgregarMascota.setVisible(false);
@@ -1183,14 +1166,6 @@ public static void main(String[] args) {
         editorPaneNotas = new JEditorPane();
         scrollPane.setViewportView(editorPaneNotas);
         
-        JLabel labelFondo = new JLabel("");
-        labelFondo.setOpaque(true);
-        labelFondo.setFocusTraversalKeysEnabled(false);
-        labelFondo.setForeground(Color.WHITE);
-        labelFondo.setIcon(new ImageIcon("./imgs/fondoRegistro.png"));
-        labelFondo.setBounds(0, 0, 2508, 1246);
-        panelAgregarMascota.add(labelFondo);
-        
         
         
         //////////////////////////////////Codigo panel Mascota fin///////////////////////////////////////////////////////////////
@@ -1460,10 +1435,11 @@ public static void main(String[] args) {
         mntmMascota.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
     
-                panelPrincipal.setVisible(false);
-                panelAgregarMascota.setVisible(true);
-                panelAgregarCasaCuna.setVisible(false);
-            
+            	panelPrincipal.setVisible(false);
+        		panelAgregarCasaCuna.setVisible(false);
+        		panelAgregarMascota.setVisible(true);
+        		panelConsultaDeUsuarios.setVisible(false);
+        	
             }
         });
         mnRegistro.add(mntmMascota);
@@ -1471,13 +1447,26 @@ public static void main(String[] args) {
         mntmCasaCuna = new JMenuItem("Casa Cuna");
         mntmCasaCuna.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                panelPrincipal.setVisible(false);
-                panelAgregarMascota.setVisible(false);
-                panelAgregarCasaCuna.setVisible(true);
+            	panelPrincipal.setVisible(false);
+        		panelAgregarCasaCuna.setVisible(true);
+        		panelAgregarMascota.setVisible(false);
+        		panelConsultaDeUsuarios.setVisible(false);
+        	
             }
         });
         mntmCasaCuna.setIcon(new ImageIcon("./imgs/casaCuna.png"));
         mnRegistro.add(mntmCasaCuna);
+        
+        mntmAsociacinBeneficiaria = new JMenuItem("Asociaci\u00F3n Beneficiaria");
+        mntmAsociacinBeneficiaria.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		VentanaRegistroAsociaciónBeneficiaria asobene = new VentanaRegistroAsociaciónBeneficiaria();
+        		asobene.setVisible(true);
+        	}
+        });
+        mntmAsociacinBeneficiaria.setVisible(esVisible);
+        mntmAsociacinBeneficiaria.setIcon(new ImageIcon("./imgs/AsociBene32.png"));
+        mnRegistro.add(mntmAsociacinBeneficiaria);
         
         JMenu mnConsulta = new JMenu("Consulta");
         mnConsulta.setIcon(new ImageIcon("./imgs/Consulta.png"));
@@ -1498,7 +1487,10 @@ public static void main(String[] args) {
         mntmConsultaUsuarios.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		panelPrincipal.setVisible(false);
+        		panelAgregarCasaCuna.setVisible(false);
+        		panelAgregarMascota.setVisible(false);
         		panelConsultaDeUsuarios.setVisible(true);
+        		
         		if(SistemasUsuarios.getListaDeUsuariosSize() == 0){
         			tablaDeUsuarios.setVisible(false);
         			lblMensajeListaVacia.setVisible(true);
