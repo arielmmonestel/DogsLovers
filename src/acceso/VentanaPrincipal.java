@@ -198,12 +198,14 @@ public class VentanaPrincipal {
     private JPanel panelConsultaDeUsuarios;
     private JLabel lblMensajeListaVacia;
     private DefaultTableModel modeloListaDeUsuarios;
-
+    ImageIcon imgfotomascota1 ;
+    ImageIcon imgfotomascota2 ;
+    ImageIcon imgfotomascota3; 
     static JMenu mnConfiguracin;
    private static boolean esVisible = true;
    private JRadioButton rdbtnTodosLosUsuarios;
    private JRadioButton rdbtnUsuariosEnLaListaNegra;
-    
+   
 
 
 public static void main(String[] args) {
@@ -242,7 +244,9 @@ public static void main(String[] args) {
         posicionMascotaPanel1 = listaMascotasParaMostrar.size()-1; posicionMascotaPanel2 = listaMascotasParaMostrar.size()-2; posicionMascotaPanel3 = listaMascotasParaMostrar.size()-3; mascotaPanel1 = listaMascotasParaMostrar.get(posicionMascotaPanel1);
         mascotaPanel2 = listaMascotasParaMostrar.get(posicionMascotaPanel2);
         mascotaPanel3 = listaMascotasParaMostrar.get(posicionMascotaPanel3);
-        
+        imgfotomascota1 = new ImageIcon(mascotaPanel1.getFoto());
+        imgfotomascota2 = new ImageIcon(mascotaPanel2.getFoto());
+        imgfotomascota3 = new ImageIcon(mascotaPanel3.getFoto());
         VentanaPrincipal = new JFrame();
         VentanaPrincipal.setBounds(0, 0, 1435, 735);
         VentanaPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -372,8 +376,13 @@ public static void main(String[] args) {
         panelPrincipal.add(panelPrimeraMascota);
         panelPrimeraMascota.setLayout(null);
         
-     lblFotoMascota1 = new JLabel();
-        lblFotoMascota1.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage(mascotaPanel1.getFoto())));
+        
+        lblFotoMascota1 = new JLabel();
+        lblFotoMascota1.setBounds(10, 11, 106, 119);
+        
+         
+        lblFotoMascota1.setIcon(new ImageIcon(imgfotomascota1.getImage().getScaledInstance(106,119,Image.SCALE_SMOOTH)));
+        
         
         lblFotoMascota1.setVerticalAlignment(javax.swing.SwingConstants.CENTER);        
         lblFotoMascota1.setHorizontalAlignment(SwingConstants.CENTER);
@@ -419,7 +428,8 @@ public static void main(String[] args) {
         lblFotoMascota_2.setHorizontalAlignment(SwingConstants.CENTER);
         lblFotoMascota_2.setVerticalAlignment(javax.swing.SwingConstants.CENTER);        
         lblFotoMascota_2.setBounds(10, 11, 106, 119);
-        lblFotoMascota_2.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage(mascotaPanel2.getFoto())));
+       
+        lblFotoMascota_2.setIcon(new ImageIcon(imgfotomascota2.getImage().getScaledInstance(106,119,Image.SCALE_SMOOTH)));
         panelSegundaMascota.add(lblFotoMascota_2);
         
         lblTituloMascota_2 = new JLabel(mascotaPanel2.getTipo()+" " +mascotaPanel2.getEstado()+" en "+mascotaPanel2.getLugarDelSuceso() );
@@ -447,8 +457,12 @@ public static void main(String[] args) {
         panelPrincipal.add(panelTerceraMascota);
         
         lblFotoMascota_3 = new JLabel();
-        lblFotoMascota_3 .setVerticalAlignment(javax.swing.SwingConstants.CENTER);        
-        lblFotoMascota_3.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage(mascotaPanel3.getFoto())));
+        lblFotoMascota_3 .setVerticalAlignment(javax.swing.SwingConstants.CENTER);  
+         
+        lblFotoMascota_3.setIcon(new ImageIcon(imgfotomascota3.getImage().getScaledInstance(106,119,Image.SCALE_SMOOTH)));
+        
+        
+       // lblFotoMascota_3.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage(mascotaPanel3.getFoto())));
         
         
         lblFotoMascota_3.setHorizontalAlignment(SwingConstants.CENTER);
@@ -493,8 +507,10 @@ public static void main(String[] args) {
 		        	if(posicionMascotaPanel1 != -1){
 	        		
 		        		if(posicionMascotaPanel1 >= 0){	
+		        			
 			        		mascotaPanel1 = listaMascotasParaMostrar.get(posicionMascotaPanel1);
-			        		lblFotoMascota1.setIcon(new ImageIcon(mascotaPanel1.getFoto()));
+			        		imgfotomascota1 = new ImageIcon(mascotaPanel1.getFoto());
+		    	            lblFotoMascota1.setIcon(new ImageIcon(imgfotomascota1.getImage().getScaledInstance(106,119,Image.SCALE_SMOOTH)));
 			        		lbltitulomascota1.setText(mascotaPanel1.getTipo()+" " +mascotaPanel1.getEstado()+" en "+mascotaPanel1.getLugarDelSuceso() );
 			        		lblfechaSuceso.setText(mascotaPanel1.getDiaSuceso());
 			        		lblNotas_1.setText(mascotaPanel1.getNota());
@@ -505,8 +521,12 @@ public static void main(String[] args) {
 			        	}
 	        		
 		        		if(posicionMascotaPanel2 >= 0){
+		        			
+		    	        	
+		    	        	
 			        		mascotaPanel2 = listaMascotasParaMostrar.get(posicionMascotaPanel2);
-			                lblFotoMascota_2.setIcon((new ImageIcon(mascotaPanel2.getFoto())));
+			        		imgfotomascota2 = new ImageIcon(mascotaPanel2.getFoto());
+			        		lblFotoMascota_2.setIcon(new ImageIcon(imgfotomascota2.getImage().getScaledInstance(106,119,Image.SCALE_SMOOTH)));
 			                lblTituloMascota_2.setText(mascotaPanel2.getTipo()+" " +mascotaPanel2.getEstado()+" en "+mascotaPanel2.getLugarDelSuceso() );
 			                lblFecha_2.setText(mascotaPanel2.getDiaSuceso());
 			                lblNotas2.setText(mascotaPanel2.getNota());
@@ -519,8 +539,10 @@ public static void main(String[] args) {
 			        	}
 			        	
 			        	if(posicionMascotaPanel3 >= 0){
+			        		
 			        		mascotaPanel3 = listaMascotasParaMostrar.get(posicionMascotaPanel3);
-			                lblFotoMascota_3.setIcon((new ImageIcon(mascotaPanel3.getFoto())));
+			        		imgfotomascota3 = new ImageIcon(mascotaPanel3.getFoto());
+			        		lblFotoMascota_3.setIcon(new ImageIcon(imgfotomascota3.getImage().getScaledInstance(106,119,Image.SCALE_SMOOTH)));
 			                lblTituloMascota_3.setText(mascotaPanel3.getTipo()+" " +mascotaPanel3.getEstado()+" en "+mascotaPanel3.getLugarDelSuceso() );
 			                lblFecha_3.setText(mascotaPanel3.getDiaSuceso());
 			                lblNotas_3.setText(mascotaPanel3.getNota());
@@ -554,15 +576,18 @@ public static void main(String[] args) {
         JButton btnFlechaIzquierda = new JButton("");
         btnFlechaIzquierda.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
+        		
         		if(!llegoAlLimiteIzquierdo){
         			panelPrimeraMascota.setVisible(true);
         			panelSegundaMascota.setVisible(true);
         			panelTerceraMascota.setVisible(true);
         			llegoAlLimiteDerecho = false;
 	        		posicionMascotaPanel1 += 3;
-	        		if(posicionMascotaPanel1 < listaMascotasParaMostrar.size()){	
-		        		mascotaPanel1 = listaMascotasParaMostrar.get(posicionMascotaPanel1);
-		        		lblFotoMascota1.setIcon(new ImageIcon(mascotaPanel1.getFoto()));
+	        		if(posicionMascotaPanel1 < listaMascotasParaMostrar.size()){
+	        			
+	    	            mascotaPanel1 = listaMascotasParaMostrar.get(posicionMascotaPanel1);
+	    	            imgfotomascota1 = new ImageIcon(mascotaPanel1.getFoto());
+	    	            lblFotoMascota1.setIcon(new ImageIcon(imgfotomascota1.getImage().getScaledInstance(106,119,Image.SCALE_SMOOTH)));
 		        		lbltitulomascota1.setText(mascotaPanel1.getTipo()+" " +mascotaPanel1.getEstado()+" en "+mascotaPanel1.getLugarDelSuceso() );
 		        		lblfechaSuceso.setText(mascotaPanel1.getDiaSuceso());
 		        		lblNotas_1.setText(mascotaPanel1.getNota());
@@ -576,8 +601,11 @@ public static void main(String[] args) {
 
 	        		posicionMascotaPanel2 += 3;
 	        		if(posicionMascotaPanel2 < listaMascotasParaMostrar.size()){
+		        		
+			        	
 		        		mascotaPanel2 = listaMascotasParaMostrar.get(posicionMascotaPanel2);
-		                lblFotoMascota_2.setIcon((new ImageIcon(mascotaPanel2.getFoto())));
+		        		imgfotomascota2 = new ImageIcon(mascotaPanel2.getFoto());
+			        	lblFotoMascota_2.setIcon(new ImageIcon(imgfotomascota2.getImage().getScaledInstance(106,119,Image.SCALE_SMOOTH)));
 		                lblTituloMascota_2.setText(mascotaPanel2.getTipo()+" " +mascotaPanel2.getEstado()+" en "+mascotaPanel2.getLugarDelSuceso() );
 		                lblFecha_2.setText(mascotaPanel2.getDiaSuceso());
 		                lblNotas2.setText(mascotaPanel2.getNota());
@@ -591,8 +619,10 @@ public static void main(String[] args) {
 	        		
 	        		posicionMascotaPanel3 += 3;
 		        	if(posicionMascotaPanel3 < listaMascotasParaMostrar.size()){
-		        		mascotaPanel3 = listaMascotasParaMostrar.get(posicionMascotaPanel3);
-		                lblFotoMascota_3.setIcon((new ImageIcon(mascotaPanel3.getFoto())));
+		        		
+			        	mascotaPanel3 = listaMascotasParaMostrar.get(posicionMascotaPanel3);
+			        	imgfotomascota3 = new ImageIcon(mascotaPanel3.getFoto());
+			        	lblFotoMascota_3.setIcon(new ImageIcon(imgfotomascota3.getImage().getScaledInstance(106,119,Image.SCALE_SMOOTH)));
 		                lblTituloMascota_3.setText(mascotaPanel3.getTipo()+" " +mascotaPanel3.getEstado()+" en "+mascotaPanel3.getLugarDelSuceso() );
 		                lblFecha_3.setText(mascotaPanel3.getDiaSuceso());
 		                lblNotas_3.setText(mascotaPanel3.getNota());
@@ -1787,6 +1817,7 @@ public static void main(String[] args) {
 			SistemasMascotas.getMascotasPorEstado(opcEstado);
 
 			
+			
 	        listaMascotasParaMostrar = SistemasMascotas.getMascotasFiltradas();
 	        llegoAlLimiteDerecho = false;
 	        llegoAlLimiteIzquierdo = false;
@@ -1800,9 +1831,11 @@ public static void main(String[] args) {
 	        	llegoAlLimiteIzquierdo = true;
 
 	        if(size>=3){
-	            posicionMascotaPanel3 = size-3;
+	        	
+	        	posicionMascotaPanel3 = size-3;
 		        mascotaPanel3 = listaMascotasParaMostrar.get(posicionMascotaPanel3);
-		        lblFotoMascota_3.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage(mascotaPanel3.getFoto())));
+		        imgfotomascota3 = new ImageIcon(mascotaPanel3.getFoto());
+		        lblFotoMascota_3.setIcon(new ImageIcon(imgfotomascota3.getImage().getScaledInstance(106,119,Image.SCALE_SMOOTH)));
 		        lblTituloMascota_3.setText(mascotaPanel3.getTipo()+" " +mascotaPanel3.getEstado()+" en "+mascotaPanel3.getLugarDelSuceso() );
 		        lblFecha_3.setText(mascotaPanel3.getDiaSuceso());
 		        lblNotas_3.setText(mascotaPanel3.getNota());
@@ -1813,9 +1846,11 @@ public static void main(String[] args) {
 	    	}
 
 			if(size>=2){		        
-		        posicionMascotaPanel2 = size-2;
+				
+	        	posicionMascotaPanel2 = size-2;
 		        mascotaPanel2 = listaMascotasParaMostrar.get(posicionMascotaPanel2);
-		        lblFotoMascota_2.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage(mascotaPanel2.getFoto())));
+		        imgfotomascota2 = new ImageIcon(mascotaPanel2.getFoto());
+		        lblFotoMascota_2.setIcon(new ImageIcon(imgfotomascota2.getImage().getScaledInstance(106,119,Image.SCALE_SMOOTH)));
 		        lblTituloMascota_2.setText(mascotaPanel2.getTipo()+" " +mascotaPanel2.getEstado()+" en "+mascotaPanel2.getLugarDelSuceso() );
 		        lblNotas2.setText(mascotaPanel2.getNota());
 		        lblFecha_2.setText(mascotaPanel2.getDiaSuceso());
@@ -1826,10 +1861,13 @@ public static void main(String[] args) {
 	        }
 
 	        if (size>=1){
+	        	
+	        	
 	   			posicionMascotaPanel1 = size-1; 
 		        mascotaPanel1 = listaMascotasParaMostrar.get(posicionMascotaPanel1);
-		        lblFotoMascota1.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage(mascotaPanel1.getFoto())));
-				lbltitulomascota1.setText(mascotaPanel1.getTipo()+" " +mascotaPanel1.getEstado()+" en "+mascotaPanel1.getLugarDelSuceso() );   
+		        imgfotomascota1 = new ImageIcon(mascotaPanel1.getFoto());
+		        lblFotoMascota1.setIcon(new ImageIcon(imgfotomascota1.getImage().getScaledInstance(106,119,Image.SCALE_SMOOTH)));
+		        lbltitulomascota1.setText(mascotaPanel1.getTipo()+" " +mascotaPanel1.getEstado()+" en "+mascotaPanel1.getLugarDelSuceso() );   
 		        lblfechaSuceso.setText(mascotaPanel1.getDiaSuceso());
 				lblNotas_1.setText(mascotaPanel1.getNota());
 				lblLugarSuceso1.setText(mascotaPanel1.getLugarDelSuceso());
