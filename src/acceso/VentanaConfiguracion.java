@@ -333,7 +333,7 @@ public class VentanaConfiguracion extends JFrame {
 		String[] datos = new String[4];
 		DefaultTableModel tableModel = new DefaultTableModel(columna,0);
 		tableQuitarListaNegra = new JTable(tableModel);
-		Sistema.cargarTablaDeUsuarios(datos, tableModel);
+		Sistema.cargarTablaDeUsuariosEnListaNegra(datos, tableModel);
 		tableQuitarListaNegra.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				btnQuitarDeLista_1.setEnabled(true);

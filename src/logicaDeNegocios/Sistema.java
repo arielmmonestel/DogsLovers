@@ -73,13 +73,7 @@ public class Sistema {
 	static BufferedReader bufferLectura = null;
 	static JFrame frame = new JFrame();
 	
-	
 
-    public static void main(String[] args){
-   	 enviarMailConAdjunto("arielmmonestel@gmail.com", "Probando 2...", "i try so hard 2", "./mascotas/2.jpg");
-  	  
-    }
-	
 	
 
 	public Sistema() {
