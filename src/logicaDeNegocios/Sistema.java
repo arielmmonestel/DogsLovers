@@ -477,8 +477,8 @@ public static void GuardarAsociacion()
     			String dato = "" ;
     			while((dato = bufferLectura.readLine())!=null)    			
     				listaEstados.add(dato);	    				
+
     		}
-                    		
     	}catch(Exception e){
     		e.printStackTrace();  
     	}finally
@@ -543,7 +543,8 @@ public static void GuardarAsociacion()
     			String dato = "" ;
     			while((dato = bufferLectura.readLine())!=null)    			
     				listaColorDeOjos.add(dato);	    				
-    		}               		
+
+    		}
     	}catch(Exception e){
     		e.printStackTrace();  
     	}finally
@@ -598,7 +599,10 @@ public static void GuardarAsociacion()
     			String dato = "" ;
     			while((dato = bufferLectura.readLine())!=null)    			
     				listaColorDePelo.add(dato);	    				
+
     		}               		
+
+    		
     	}catch(Exception e){
     		e.printStackTrace();  
     	}finally

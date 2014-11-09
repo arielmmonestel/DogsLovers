@@ -141,6 +141,8 @@ public class VentanaPrincipal {
     private static String opcEstado = " ";
     private static String opcTipo = " ";
     private static String opcRaza = " ";
+    private static String opcColorDeOjos = " ";
+    private static String opcColorDePelo = " ";
     /**
      * @wbp.nonvisual location=314,-31
      */
@@ -176,9 +178,6 @@ public class VentanaPrincipal {
     private JMenu mnRegistro;
     private JLabel label_1;
     private JLabel label_2;
-    private JRadioButton rdbtnTodas;
-    private JRadioButton rdbtnPerdidas;
-    private JRadioButton rdbtnEncontradas;
     private static ArrayList<Mascota>listaMascotasParaMostrar ;
     private int posicionMascotaPanel1 ;
     private int posicionMascotaPanel2 ;
@@ -215,6 +214,9 @@ public class VentanaPrincipal {
    private JButton btnBuscarConsulta;
    private JTextField textFieldBuscarPorLugar;
    private JScrollPane scrollPane_2;
+   private JButton btnVer_panel1;
+   private JButton btnVer_panel2;
+   private JButton btnVer_panel3;
 
    
 
@@ -290,70 +292,6 @@ public static void main(String[] args) {
                 btnCerrarSesion.setForeground(Color.BLUE);
             }
         });
-        
-//////////////////////////////*Inicio Codigo del Panel Agregar Mascota*/////////////////////////////////////////////////////////////////////        
-        
-        
-        rdbtnEncontradas = new JRadioButton("Encontradas");
-        rdbtnEncontradas.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-              if(rdbtnEncontradas.isSelected()){
-            	  opcEstado = "ENCONTRADA";
-                  refrescarPaneles();
-    
-            }}
-        });
-        rdbtnEncontradas.setContentAreaFilled(false);
-        rdbtnEncontradas.setBounds(54, 241, 109, 23);
-        rdbtnEncontradas.setForeground(new Color(210, 180, 140));
-        rdbtnEncontradas.setFont(new Font("Khmer UI", Font.BOLD, 14));
-        
-        
-        VerMascotasPor.add(rdbtnEncontradas);
-        panelPrincipal.add(rdbtnEncontradas);
-        
-        rdbtnPerdidas = new JRadioButton("Perdidas");
-        rdbtnPerdidas.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if(rdbtnPerdidas.isSelected()){
-                	
-                	opcEstado = "PERDIDA";
-                	refrescarPaneles();
-               
-            }
-            }
-        });
-       
-
-        rdbtnPerdidas.setContentAreaFilled(false);
-        rdbtnPerdidas.setBounds(54, 205, 109, 23);
-        rdbtnPerdidas.setForeground(new Color(210, 180, 140));
-        rdbtnPerdidas.setFont(new Font("Khmer UI", Font.BOLD, 14));
-        
-        
-        VerMascotasPor.add(rdbtnPerdidas);
-        panelPrincipal.add(rdbtnPerdidas);
-        
-        rdbtnTodas = new JRadioButton("Todas");
-        rdbtnTodas.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-                if(rdbtnTodas.isSelected()){
-	                opcEstado = " ";
-	                opcTipo = " ";
-	                opcRaza = " ";
-	                
-	                refrescarPaneles();	              
-                }                
-            }
-        });
-        
-        rdbtnTodas.setSelected(true);
-        rdbtnTodas.setContentAreaFilled(false);
-        rdbtnTodas.setForeground(new Color(210, 180, 140));
-        rdbtnTodas.setFont(new Font("Khmer UI", Font.BOLD, 14));
-        rdbtnTodas.setBounds(54, 172, 109, 23);
-        panelPrincipal.add(rdbtnTodas);
-        VerMascotasPor.add(rdbtnTodas);
         label_1 = new JLabel("Mostrar Por:");
         label_1 .setForeground(new Color(210, 180, 140));
         label_1 .setFont(new Font("Khmer UI", Font.BOLD, 19));
@@ -365,7 +303,7 @@ public static void main(String[] args) {
         label_2 .setForeground(new Color(210, 180, 140));
         label_2 .setFont(new Font("Khmer UI", Font.BOLD, 19));
         label_2.setIcon(new ImageIcon("./imgs/fondoPanelesPantallaPrincipal.png"));
-        label_2.setBounds(34, 135, 234, 146);
+        label_2.setBounds(34, 38, 266, 68);
         panelPrincipal.add(label_2);
         btnCerrarSesion.setRolloverIcon(null);
         btnCerrarSesion.setFocusable(false);
@@ -388,6 +326,10 @@ public static void main(String[] args) {
         panelPrincipal.add(panelPrimeraMascota);
         panelPrimeraMascota.setLayout(null);
         
+        btnVer_panel1 = new JButton("Ver mascota");
+        btnVer_panel1.setBounds(728, 107, 130, 23);
+        panelPrimeraMascota.add(btnVer_panel1);
+        
         
         lblFotoMascota1 = new JLabel();
         lblFotoMascota1.setBounds(10, 11, 106, 119);
@@ -407,7 +349,7 @@ public static void main(String[] args) {
         panelPrimeraMascota.add(lbltitulomascota1);
         
         lblLugarSuceso1 = new JLabel(mascotaPanel1.getLugarDelSuceso());
-        lblLugarSuceso1.setBounds(710, 40, 158, 14);
+        lblLugarSuceso1.setBounds(685, 44, 158, 14);
         panelPrimeraMascota.add(lblLugarSuceso1);
         
         lblfechaSuceso = new JLabel(mascotaPanel1.getDiaSuceso());
@@ -430,6 +372,10 @@ public static void main(String[] args) {
         panelSegundaMascota.setLayout(null);
         panelSegundaMascota.setBounds(347, 284, 868, 141);
         panelPrincipal.add(panelSegundaMascota);
+        
+        btnVer_panel2 = new JButton("Ver mascota");
+        btnVer_panel2.setBounds(728, 107, 130, 23);
+        panelSegundaMascota.add(btnVer_panel2);
         
         lblNotas2 = new JTextArea(mascotaPanel2.getNota());
         lblNotas2.setEditable(false);
@@ -467,6 +413,10 @@ public static void main(String[] args) {
         panelTerceraMascota.setLayout(null);
         panelTerceraMascota.setBounds(347, 439, 868, 141);
         panelPrincipal.add(panelTerceraMascota);
+        
+        btnVer_panel3 = new JButton("Ver mascota");
+        btnVer_panel3.setBounds(728, 107, 130, 23);
+        panelTerceraMascota.add(btnVer_panel3);
         
         lblFotoMascota_3 = new JLabel();
         lblFotoMascota_3 .setVerticalAlignment(javax.swing.SwingConstants.CENTER);  
@@ -663,6 +613,150 @@ public static void main(String[] args) {
         btnFlechaIzquierda.setBounds(347, 591, 151, 44);
         panelPrincipal.add(btnFlechaIzquierda);
         
+        JComboBox comboBoxEstado = new JComboBox();
+        comboBoxEstado.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		opcEstado = (String)comboBoxEstado.getSelectedItem();
+        		System.out.println(opcEstado);
+        		if(opcEstado.equals("Todos"))
+        			opcEstado = " ";
+        		refrescarPaneles();
+        	}
+        });
+        comboBoxEstado.setEditable(true);
+        comboBoxEstado.setBounds(148, 192, 137, 23);
+        panelPrincipal.add(comboBoxEstado);
+        String datos = "Todos,";
+        for(String str : Sistema.getListaEstados())
+        	datos += str + ",";
+        String listaDatos[] = datos.split(",");
+        comboBoxEstado.setModel(new DefaultComboBoxModel(listaDatos));
+
+        JComboBox comboBoxRaza = new JComboBox();
+        comboBoxRaza.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		
+        		opcRaza = (String)comboBoxRaza.getSelectedItem();
+        		if(opcRaza.equals("Todos"))
+        			opcRaza = " ";
+        		refrescarPaneles();
+        	}
+        });
+        comboBoxRaza.setModel(new DefaultComboBoxModel(new String[] {"Todos"}));
+        comboBoxRaza.setEditable(true);
+        comboBoxRaza.setBounds(148, 314, 137, 23);
+        panelPrincipal.add(comboBoxRaza);
+        
+        
+        JComboBox comboBoxTipo = new JComboBox();
+        comboBoxTipo.setEditable(true);
+        comboBoxTipo.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		try {
+        		opcTipo = (String)comboBoxTipo.getSelectedItem();        		
+        		if(opcTipo.equals("Todos")){
+        			opcTipo = " ";
+        			comboBoxRaza.setModel(new DefaultComboBoxModel(new String[] {" "}));
+        		}
+        		else{        			
+	        		String datos = "Todos,";
+	                for(String str : Sistema.getListaRazas(opcTipo))
+	                	datos += str + ",";
+	                String listaDatos[] = datos.split(",");        		
+	        		comboBoxRaza.setModel(new DefaultComboBoxModel(listaDatos));
+        		}
+        		System.out.println(opcTipo);
+        		refrescarPaneles();
+        		
+        		
+        		
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+        		
+        	}
+        });
+        comboBoxTipo.setBounds(148, 249, 138, 23);
+        panelPrincipal.add(comboBoxTipo);
+        datos = "Todos,";
+        for(String str : Sistema.getListaTipo())
+        	datos += str + ",";
+        listaDatos = datos.split(",");
+        comboBoxTipo.setModel(new DefaultComboBoxModel(listaDatos));
+        
+        
+        JComboBox comboBoxOjos = new JComboBox();
+        comboBoxOjos.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		opcColorDeOjos = (String)comboBoxOjos.getSelectedItem();
+        		System.out.println(opcColorDeOjos);
+        		if(opcColorDeOjos.equals("Todos")){
+        			opcColorDeOjos = " ";
+        			System.out.println("entro!!");
+        		}
+        		refrescarPaneles();
+        	}
+        });
+        comboBoxOjos.setEditable(true);
+        comboBoxOjos.setBounds(148, 375, 137, 22);
+        panelPrincipal.add(comboBoxOjos);
+        
+        datos = "Todos,";
+        for(String str : Sistema.getListaColorDeOjos())
+        	datos += str + ",";
+        listaDatos = datos.split(",");
+        comboBoxOjos.setModel(new DefaultComboBoxModel(listaDatos));
+        
+        JComboBox comboBoxPelo = new JComboBox();
+        comboBoxPelo.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		opcColorDePelo = (String)comboBoxPelo.getSelectedItem();
+        		System.out.println(opcColorDePelo);
+        		if(opcColorDePelo.equals("Todos"))
+        			opcColorDePelo = " ";
+        		refrescarPaneles();
+        	}
+        });
+        comboBoxPelo.setEditable(true);
+        comboBoxPelo.setBounds(148, 431, 137, 23);
+        panelPrincipal.add(comboBoxPelo);
+        datos = "Todos,";
+        for(String str : Sistema.getListaColorDePelo())
+        	datos += str + ",";
+        listaDatos = datos.split(",");
+        comboBoxPelo.setModel(new DefaultComboBoxModel(listaDatos));
+        
+        JLabel lblTipo = new JLabel("Estado");
+        lblTipo.setForeground(new Color(210, 180, 140));
+        lblTipo.setFont(new Font("Khmer UI", Font.BOLD, 19));
+        lblTipo.setBounds(54, 185, 71, 30);
+        panelPrincipal.add(lblTipo);
+        
+        JLabel label_3 = new JLabel("Tipo");
+        label_3.setForeground(new Color(210, 180, 140));
+        label_3.setFont(new Font("Khmer UI", Font.BOLD, 19));
+        label_3.setBounds(54, 243, 51, 30);
+        panelPrincipal.add(label_3);
+        
+        JLabel lblRaza_1 = new JLabel("Raza");
+        lblRaza_1.setForeground(new Color(210, 180, 140));
+        lblRaza_1.setFont(new Font("Khmer UI", Font.BOLD, 19));
+        lblRaza_1.setBounds(54, 307, 51, 30);
+        panelPrincipal.add(lblRaza_1);
+        
+        JLabel lblOjos = new JLabel("Ojos");
+        lblOjos.setForeground(new Color(210, 180, 140));
+        lblOjos.setFont(new Font("Khmer UI", Font.BOLD, 19));
+        lblOjos.setBounds(54, 368, 51, 30);
+        panelPrincipal.add(lblOjos);
+        
+        JLabel lblPelo = new JLabel("Pelo");
+        lblPelo.setForeground(new Color(210, 180, 140));
+        lblPelo.setFont(new Font("Khmer UI", Font.BOLD, 19));
+        lblPelo.setBounds(54, 424, 51, 30);
+        panelPrincipal.add(lblPelo);
+        
         
         panelAgregarMascota = new JPanel();
         panelAgregarMascota.setBackground(new Color(99,84, 65));
@@ -674,7 +768,6 @@ public static void main(String[] args) {
         try {
 			for(String obj: Sistema.getListaColorDePelo()){
 				comboBoxColorPelaje.addItem(obj);
-
 			}
 			
 		} catch (IOException e2) {
@@ -2003,8 +2096,10 @@ public static void main(String[] args) {
 		try {
 			SistemasMascotas.buscarEnTodasLasMascotas();
 			SistemasMascotas.getMascotasPorEstado(opcEstado);
-
-			
+			SistemasMascotas.getMascotasPorTipo(opcTipo);
+			SistemasMascotas.getMascotasPorRaza(opcRaza);
+			SistemasMascotas.getMascotasPorColorDeOjos(opcColorDeOjos);
+			SistemasMascotas.getMascotasPorColorDePelo(opcColorDePelo);
 			
 	        listaMascotasParaMostrar = SistemasMascotas.getMascotasFiltradas();
 	        llegoAlLimiteDerecho = false;
@@ -2014,7 +2109,12 @@ public static void main(String[] args) {
 	        habilitarPanel2();
 	        habilitarPanel3();
 	        int size = listaMascotasParaMostrar.size();
-	      
+	        
+	        btnVer_panel1.setVisible(true);
+	        btnVer_panel2.setVisible(true);
+	        btnVer_panel3.setVisible(true);
+	        
+	        
 	        if (size <=3)
 	        	llegoAlLimiteIzquierdo = true;
 
@@ -2028,6 +2128,8 @@ public static void main(String[] args) {
 		        lblFecha_3.setText(mascotaPanel3.getDiaSuceso());
 		        lblNotas_3.setText(mascotaPanel3.getNota());
 	    		lblLugarSuceso_3.setText(mascotaPanel3.getLugarDelSuceso());
+	    		btnVer_panel3.setVisible(true);
+		
 	    	}else{
 	    		ocultarPanel3();
 	    		llegoAlLimiteDerecho = true;
@@ -2043,6 +2145,7 @@ public static void main(String[] args) {
 		        lblNotas2.setText(mascotaPanel2.getNota());
 		        lblFecha_2.setText(mascotaPanel2.getDiaSuceso());
 		        lblLugar_2.setText(mascotaPanel2.getLugarDelSuceso());
+	    		btnVer_panel2.setVisible(true);
 	        }else{
 	        	ocultarPanel2();
 	        	llegoAlLimiteDerecho = true;
@@ -2059,9 +2162,11 @@ public static void main(String[] args) {
 		        lblfechaSuceso.setText(mascotaPanel1.getDiaSuceso());
 				lblNotas_1.setText(mascotaPanel1.getNota());
 				lblLugarSuceso1.setText(mascotaPanel1.getLugarDelSuceso());
+    			btnVer_panel1.setVisible(true);
 	        }else{
 	        	ocultarPanel1();
 	        	llegoAlLimiteDerecho = true;
+	        	JOptionPane.showMessageDialog(null, "No se encontraron mascotas");
 	        }
 		}catch (IOException e) {
 				e.printStackTrace();
