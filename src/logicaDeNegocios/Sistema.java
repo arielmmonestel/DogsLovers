@@ -477,8 +477,7 @@ public static void GuardarAsociacion()
     			String dato = "" ;
     			while((dato = bufferLectura.readLine())!=null)    			
     				listaEstados.add(dato);	    				
-    		}else
-        		JOptionPane.showMessageDialog(frame, "No existen datos. O cambio la ruta del archivo \"Color de pelo de mascotas\"");                		
+    		}                		
     	}catch(Exception e){
     		e.printStackTrace();  
     	}finally
@@ -543,8 +542,7 @@ public static void GuardarAsociacion()
     			String dato = "" ;
     			while((dato = bufferLectura.readLine())!=null)    			
     				listaColorDeOjos.add(dato);	    				
-    		}else
-        		JOptionPane.showMessageDialog(frame, "No existen datos. O cambio la ruta del archivo \"Color de pelo de mascotas\"");                		
+    		}                		
     	}catch(Exception e){
     		e.printStackTrace();  
     	}finally
@@ -599,8 +597,7 @@ public static void GuardarAsociacion()
     			String dato = "" ;
     			while((dato = bufferLectura.readLine())!=null)    			
     				listaColorDePelo.add(dato);	    				
-    		}else
-        		JOptionPane.showMessageDialog(frame, "No existen datos. O cambio la ruta del archivo \"Color de pelo de mascotas\"");                		
+    		}                 		
     	}catch(Exception e){
     		e.printStackTrace();  
     	}finally

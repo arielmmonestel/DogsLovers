@@ -232,7 +232,7 @@ public class SistemasMascotas {
 
 	    ArrayList<Mascota> mascotasFiltradas = new ArrayList<Mascota>();
 	    
-	    if(tipo==" ")
+	    if(tipo.equals(" "))
 	    	return listaMascotasFiltradas;
 	    
 	    for(Mascota obj:listaMascotasFiltradas)
@@ -242,26 +242,27 @@ public class SistemasMascotas {
 	       return listaMascotasFiltradas = mascotasFiltradas;
 	}
 	
-	public static void getMascotasPorRaza(String raza){
+	public static ArrayList<Mascota> getMascotasPorRaza(String raza){
 		ArrayList<Mascota> mascotasFiltradas = new ArrayList<Mascota>();
-		if(raza!=" ")
+		if(!(raza.equals(" ")))
 		{
 			for(Mascota obj:listaMascotasFiltradas)
 				if (obj.getRaza().equals(raza))
 						{System.out.println("filtré un -"+raza);
 		               	mascotasFiltradas.add(obj);
 						}
-			listaMascotasFiltradas = mascotasFiltradas;
+			return listaMascotasFiltradas = mascotasFiltradas;
 			
-		}
-		               
+		}   
+		return listaMascotasFiltradas;
 	}	
+	
 	
 	
 	public static ArrayList<Mascota> getMascotasPorColorDePelo(String color){
 			
 		ArrayList<Mascota> mascotasFiltradas = new ArrayList<Mascota>();
-		if(color==" ")
+		if(color.equals((" ")))
 	    	return listaMascotasFiltradas;    
 		for(Mascota obj:listaMascotasFiltradas)
 			if (obj.getColorDePelo().equals(color))
@@ -273,7 +274,7 @@ public class SistemasMascotas {
 	public static ArrayList<Mascota> getMascotasPorColorDeOjos(String color){
 		
 		  ArrayList<Mascota> mascotasFiltradas = new ArrayList<Mascota>();
-		  if(color==" ")
+		  if(color.equals(" "))
 		    	return listaMascotasFiltradas;
 		  for(Mascota obj:listaMascotasFiltradas)
 		      if (obj.getColorDeOjos().equals(color))
@@ -285,7 +286,7 @@ public class SistemasMascotas {
 	public static ArrayList<Mascota> getMascotasPorLugarDelSuceso(String lugar){
 		
 		  ArrayList<Mascota> mascotasFiltradas = new ArrayList<Mascota>();
-		  if(lugar==" ")
+		  if(lugar.equals(" "))
 		    	return listaMascotasFiltradas;  
 		  for(Mascota obj:listaMascotasFiltradas)
 		      if (obj.getLugarDelSuceso().equals(lugar))
