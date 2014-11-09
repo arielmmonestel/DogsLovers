@@ -310,8 +310,8 @@ public class SistemasUsuarios {
 		try {
 			SistemasMascotas.leerMascota();
 			for(Mascota mascota: SistemasMascotas.getListaMascota()){
-				if (mascota.getEstado().equalsIgnoreCase("ENADOPCION")){
-					if(mascota.getIdEncargado() == idUsuario){
+				if(mascota.getIdEncargado() == idUsuario){
+					if (mascota.getEstado().equalsIgnoreCase("ADOPTADA")){
 						cantidadDeMascotasAdoptadas++;
 					}
 				}

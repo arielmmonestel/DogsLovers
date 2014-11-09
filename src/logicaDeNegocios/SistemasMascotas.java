@@ -150,6 +150,21 @@ public class SistemasMascotas {
 	public static ArrayList<Mascota> getMascotas(){
 		return listaMascotas;
 	}
+	public static String getFotoMascota(int idMascota){
+		String foto = "";
+		try {
+			leerMascota();
+			for(Mascota mascota:listaMascotas){
+				if(mascota.getID() == idMascota){
+					foto = mascota.getFoto();
+				}
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return foto;
+	}
 	
 	public static Mascota buscarPorChip(String numChip){
 		
@@ -293,6 +308,61 @@ public class SistemasMascotas {
 		}
 		return false;
 	}
+
+	public static String getRazaDeMascota(int idMascota) {
+		String raza = "";
+		try {
+			leerMascota();
+			for(Mascota mascota:listaMascotas){
+				if(mascota.getID() == idMascota){
+					raza= mascota.getRaza();
+				}
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return raza;
+	}
+
+	public static String getTipoDeMascota(int idMascota) {
+		String tipo= "";
+		try {
+			leerMascota();
+			for(Mascota mascota:listaMascotas){
+				if(mascota.getID() == idMascota){
+					tipo= mascota.getTipo();
+							
+				}
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return tipo;
+	}
+
+	public static String getEncargadoActual(int idMascota2) {
+		int idEncargado = 0;
+		String encargado= "";
+		try {
+			leerMascota();
+			SistemasUsuarios.leerUsuarios();
+			for(Mascota mascota:listaMascotas){
+				if(mascota.getID() == idMascota){
+					idEncargado= mascota.getIdEncargado();
+							
+				}
+			}
+			encargado = SistemasUsuarios.getNombreCompletoDelUsuario(idEncargado);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return encargado;
+		
+	}
+	
 	
 	
 	
