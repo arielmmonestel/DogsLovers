@@ -308,7 +308,7 @@ public static void GuardarAsociacion()
     	    inStream.close();
     	    outStream.close();
 		} catch (IOException noHayArchivo) {
-			JOptionPane.showMessageDialog(null, "No se pudo copiar la imagen seleccionada.\n" + noHayArchivo.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+	
 		}
 	}
 	
@@ -477,8 +477,8 @@ public static void GuardarAsociacion()
     			String dato = "" ;
     			while((dato = bufferLectura.readLine())!=null)    			
     				listaEstados.add(dato);	    				
-    		}else
-        		JOptionPane.showMessageDialog(frame, "No existen datos. O cambio la ruta del archivo \"Color de pelo de mascotas\"");                		
+    		}
+                    		
     	}catch(Exception e){
     		e.printStackTrace();  
     	}finally
@@ -543,8 +543,7 @@ public static void GuardarAsociacion()
     			String dato = "" ;
     			while((dato = bufferLectura.readLine())!=null)    			
     				listaColorDeOjos.add(dato);	    				
-    		}else
-        		JOptionPane.showMessageDialog(frame, "No existen datos. O cambio la ruta del archivo \"Color de pelo de mascotas\"");                		
+    		}               		
     	}catch(Exception e){
     		e.printStackTrace();  
     	}finally
@@ -599,8 +598,7 @@ public static void GuardarAsociacion()
     			String dato = "" ;
     			while((dato = bufferLectura.readLine())!=null)    			
     				listaColorDePelo.add(dato);	    				
-    		}else
-        		JOptionPane.showMessageDialog(frame, "No existen datos. O cambio la ruta del archivo \"Color de pelo de mascotas\"");                		
+    		}               		
     	}catch(Exception e){
     		e.printStackTrace();  
     	}finally
@@ -929,6 +927,19 @@ public static void GuardarAsociacion()
    			tableModel.addRow(filas);
 		}
    	}
+	
+public static void cargarTableAdopcionesACalificar(String[]columna,String[]filas,DefaultTableModel tableModel) throws IOException{
+ 
+   		for(Adopcion adopcion:SistemasAdopciones.getAdopciones()){
+   			if(adopcion.getIdPersonaQueDaEnAdopcion() == VentanaPrincipal.getIDUsuarioActivo()){
+   			filas[0] =SistemasUsuarios.getNombreUsuario(adopcion.getIdAdoptante()); 
+   			filas[1] =SistemasUsuarios.getNombreCompletoDelUsuario(adopcion.getIdAdoptante());
+   			filas[2] =Integer.toString(SistemasUsuarios.getCalificacion(adopcion.getIdAdoptante()));
+   			tableModel.addRow(filas);
+   			}
+		}
+   	}
+
 
 	public static DefaultTableModel cargarTablaDeMascotas(String[]datos, DefaultTableModel tableModel) throws IOException{
 	   		

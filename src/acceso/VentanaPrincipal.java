@@ -1451,6 +1451,8 @@ public static void main(String[] args) {
         		panelAgregarCasaCuna.setVisible(false);
         		panelAgregarMascota.setVisible(true);
         		panelConsultaDeUsuarios.setVisible(false);
+        		panelConsultaDeMascotas.setVisible(false);
+        		
         	
             }
         });
@@ -1502,6 +1504,7 @@ public static void main(String[] args) {
         		panelAgregarCasaCuna.setVisible(false);
         		panelAgregarMascota.setVisible(false);
         		panelConsultaDeUsuarios.setVisible(true);
+        		panelConsultaDeMascotas.setVisible(false);
         		
         		if(SistemasUsuarios.getListaDeUsuariosSize() == 0){
         			tablaDeUsuarios.setVisible(false);
@@ -1519,7 +1522,11 @@ public static void main(String[] args) {
         mntmConsultaMascota.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		panelPrincipal.setVisible(false);
+        		panelAgregarCasaCuna.setVisible(false);
+        		panelAgregarMascota.setVisible(false);
+        		panelConsultaDeUsuarios.setVisible(false);
         		panelConsultaDeMascotas.setVisible(true);
+        		
         	}
         });
         
@@ -1553,6 +1560,11 @@ public static void main(String[] args) {
         mnAdopciones.add(mntmAdoptarUnaMascota);
         
         JMenuItem mntmCalificarUnaAdopcin = new JMenuItem("Calificar una Adopci\u00F3n");
+        mntmCalificarUnaAdopcin.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		VentanaCalificarAdopcion.main(null);
+        	}
+        });
         mntmCalificarUnaAdopcin.setIcon(new ImageIcon("./imgs/Calificacion-32.png"));
         mnAdopciones.add(mntmCalificarUnaAdopcin);
         
