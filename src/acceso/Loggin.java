@@ -115,19 +115,20 @@ public class Loggin extends JFrame {
 				if(SistemasUsuarios.verificarUsuarioYContrasena(entradaUsuario, entradaContrasenia)){
 					
 					dispose();
-					VentanaPrincipal ventaPrincipal = new VentanaPrincipal();
-					ventaPrincipal.main(null);
-					ventaPrincipal.setIDUsuarioActivo(SistemasUsuarios.getIdPorNickName(entradaUsuario));
+					
+					
+					VentanaPrincipal.main(null);
+					VentanaPrincipal.setIDUsuarioActivo(SistemasUsuarios.getIdPorNickName(entradaUsuario));
 					
 					if(SistemasUsuarios.verificarEsAdministrador(entradaUsuario)){
 					
-						ventaPrincipal.setEsVisible(true);
+						VentanaPrincipal.setEsVisible(true);
 						
 					}
 					
 					else{
 					
-						ventaPrincipal.setEsVisible(false);
+						VentanaPrincipal.setEsVisible(false);
 						
 					}
 				}

@@ -149,6 +149,11 @@ public class SistemasMascotas {
 	public static ArrayList<Mascota> getMascotas(){
 		return listaMascotas;
 	}
+	
+	public static Mascota getMascota(int pIndice){
+		return listaMascotas.get(pIndice);
+	}
+	
 	public static String getFotoMascota(int idMascota){
 		String foto = "";
 		try {
@@ -361,10 +366,28 @@ public class SistemasMascotas {
 		return encargado;
 		
 	}
+
+
+	public static ArrayList<Mascota> buscarMascotasPorNumeroDeChip(String filtro){
+		ArrayList<Mascota> arregloDeRetorno = new ArrayList<Mascota>();
+		for(Mascota obj : listaMascotas){
+			if(obj.getChip().contains(filtro)){
+				arregloDeRetorno.add(obj);
+			}
+		}
+		return arregloDeRetorno;
+	}
 	
-	
-	
-	
+	public static ArrayList<Mascota> buscarMascotasPorLugar(String filtro){
+		ArrayList<Mascota> arregloDeRetorno = new ArrayList<Mascota>();
+		for(Mascota obj : listaMascotas){
+			if(obj.getLugarDelSuceso().contains(filtro)){
+				arregloDeRetorno.add(obj);
+			}
+		}
+		return arregloDeRetorno;
+	}
 	
 	
 }
+
