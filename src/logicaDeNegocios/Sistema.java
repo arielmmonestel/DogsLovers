@@ -403,7 +403,7 @@ public class Sistema {
 
 	public static void agregarEstado(String nuevoEstado) throws IOException{
 		leerEstados();
-		ArrayList<String> estado = getListaEsados();
+		ArrayList<String> estado = getListaEstados();
 		if(!(estaEnLista(estado, nuevoEstado))){
 		listaEstados.add(nuevoEstado);
 		guardarEstados();
@@ -439,7 +439,7 @@ public class Sistema {
         }
     }
 
-	public static ArrayList<String> getListaEsados() throws IOException{
+	public static ArrayList<String> getListaEstados() throws IOException{
 		leerEstados();
 		return listaEstados;
 	}
@@ -727,7 +727,14 @@ public class Sistema {
 
 	}
 
-
+	public static String[] arrayToString(ArrayList<String> pArreglo){
+		String[] datos = new String[pArreglo.size()];
+		int i = 0;
+		for(String obj : pArreglo){
+			datos[i] = obj;
+		}
+		return datos;
+	}
 	
 
 	
@@ -837,12 +844,27 @@ public class Sistema {
 		}
    	}
 
-
-
+	public static DefaultTableModel cargarTablaDeMascotas(String[]datos, DefaultTableModel tableModel) throws IOException{
+	   		
+	   		for(int i = 0 ; i < SistemasMascotas.getListaMascotasSize() ; i++){
+	   			Mascota mascotaTemp = SistemasMascotas.getMascota(i);
+				datos[0] = Integer.toString(mascotaTemp.getID()); 
+				datos[1] = mascotaTemp.getEstado();
+				datos[2] = mascotaTemp.getTipo();
+				datos[3] = mascotaTemp.getRaza();
+				datos[4] = mascotaTemp.getColorDePelo();
+				datos[5] = mascotaTemp.getColorDeOjos();
+				datos[6] = mascotaTemp.getChip();
+				datos[7] = mascotaTemp.getLugarDelSuceso();
+				tableModel.addRow(datos);
+				
+			}
+	   		return tableModel;
+	   	}
+		
 
 
 	///////////////////////////////////////// Adopciones //////////////////////////////////////////////////////
-	
 
 	
 }
