@@ -684,15 +684,6 @@ public class Sistema {
 		
 
     public static void asignarIDFoto() {
-<<<<<<< HEAD
-        try {
-           SistemasMascotas.leerMascota();
-    	   VentanaPrincipal.setFoto("./mascotas/" + String.valueOf(SistemasMascotas.getSize()+1)+".jpg");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-=======
-        
 
         try {
 			VentanaPrincipal.setFoto("./mascotas/" + String.valueOf(SistemasMascotas.getListaMascotasSize()+1)+".jpg");
@@ -701,7 +692,7 @@ public class Sistema {
 			e.printStackTrace();
 		}
 
->>>>>>> d10e1ca5f3821a5cf90cb4660d4dcfa22f57f6a1
+
     }
     
     public static void crearCarpetaImagenesMascotas()
