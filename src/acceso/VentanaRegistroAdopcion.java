@@ -1093,7 +1093,7 @@ public class VentanaRegistroAdopcion extends JFrame {
                 }
 	                }    
 	          });
-	          btnGuardarAdopcion.setToolTipText("GuardarAdopcion");
+	          btnGuardarAdopcion.setToolTipText("Guardar Adopcion");
 	          btnGuardarAdopcion.setFocusPainted(false);
 	          btnGuardarAdopcion.setOpaque(false);
 	          btnGuardarAdopcion.setContentAreaFilled(false);

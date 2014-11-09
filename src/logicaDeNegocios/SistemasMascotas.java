@@ -170,6 +170,23 @@ public class SistemasMascotas {
 		return foto;
 	}
 	
+	public static String getNombreMascota(int idMascota){
+		String nombre= "";
+		try {
+			leerMascota();
+			for(Mascota mascota:listaMascotas){
+				if(mascota.getID() == idMascota){
+					nombre = mascota.getNombre();
+				}
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return nombre;
+	}
+	
+	
 	public static Mascota buscarPorChip(String numChip){
 		
 		try {
