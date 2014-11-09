@@ -120,7 +120,7 @@ public class VentanaRegistroAdopcion extends JFrame {
 	public void filtro(String tipo){
 		listaTemporal.clear();
 		for(int x = 0;x<listaMascotasParaMostrar.size();x++){
-			if(listaMascotasParaMostrar.get(x).getTipo().equals(tipo)){
+			if(listaMascotasParaMostrar.get(x).getTipo().equals(tipo) && listaMascotasParaMostrar.get(x).getEstado().equals("ENADOPCION")){
 				listaTemporal.add(listaMascotasParaMostrar.get(x));
 			}	 
 		}
@@ -252,6 +252,13 @@ public class VentanaRegistroAdopcion extends JFrame {
 		final JComboBox comboBoxMostrarTipo = new JComboBox();
 		
 		listaMascotasParaMostrar = SistemasMascotas.getListaMascota();
+		listaTemporal.clear();
+		for(int x = 0;x<listaMascotasParaMostrar.size();x++){
+			if(listaMascotasParaMostrar.get(x).getEstado().equals("ENADOPCION")){
+				listaTemporal.add(listaMascotasParaMostrar.get(x));
+			}	 
+		}
+		listaMascotasParaMostrar = listaTemporal;
 		listaUsuarios = SistemasUsuarios.getUsuarios();
 		tamanio = listaMascotasParaMostrar.size();
 		posicionMascotaPanel1 = contador;
@@ -318,6 +325,13 @@ public class VentanaRegistroAdopcion extends JFrame {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
+					listaTemporal.clear();
+					for(int x = 0;x<listaMascotasParaMostrar.size();x++){
+						if(listaMascotasParaMostrar.get(x).getEstado().equals("ENADOPCION")){
+							listaTemporal.add(listaMascotasParaMostrar.get(x));
+						}	 
+					}
+					listaMascotasParaMostrar = listaTemporal;
 					tamanio = listaMascotasParaMostrar.size();
 					posicionMascotaPanel1 = contador;
 					posicionMascotaPanel2 = contador + 1;
