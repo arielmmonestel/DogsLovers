@@ -12,6 +12,7 @@ import java.util.*;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.text.StyledEditorKit.BoldAction;
 
 import java.util.Properties;
 
@@ -271,7 +272,21 @@ public class SistemasMascotas {
 
 	
 	
-	
+	public static boolean hayCoincidencias(String raza, String colorPelo, String colorOjos){
+		try {
+			buscarEnTodasLasMascotas();
+			getMascotasPorRaza(raza);
+			getMascotasPorColorDeOjos(colorOjos);
+			getMascotasPorColorDeOjos(colorOjos);
+			if(getMascotasFiltradas() !=null){
+				// enviar email			
+				return true;
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
 	
 	
 	

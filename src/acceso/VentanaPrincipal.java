@@ -79,16 +79,6 @@ import java.io.File;
 
 
 
-
-
-
-
-
-
-
-
-
-
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.JToolBar;
@@ -245,13 +235,7 @@ public static void main(String[] args) {
     private void initialize() {
     	
     	listaMascotasParaMostrar =  SistemasMascotas.getListaMascota();
-        posicionMascotaPanel1 = listaMascotasParaMostrar.size()-1;
-        System.out.println("pos1 = " + posicionMascotaPanel1);
-        posicionMascotaPanel2 = listaMascotasParaMostrar.size()-2; 
-        System.out.println("pos2 = " + posicionMascotaPanel2);
-        posicionMascotaPanel3 = listaMascotasParaMostrar.size()-3;
-        System.out.println("pos3 = " + posicionMascotaPanel3);
-        mascotaPanel1 = listaMascotasParaMostrar.get(posicionMascotaPanel1);
+        posicionMascotaPanel1 = listaMascotasParaMostrar.size()-1; posicionMascotaPanel2 = listaMascotasParaMostrar.size()-2; posicionMascotaPanel3 = listaMascotasParaMostrar.size()-3; mascotaPanel1 = listaMascotasParaMostrar.get(posicionMascotaPanel1);
         mascotaPanel2 = listaMascotasParaMostrar.get(posicionMascotaPanel2);
         mascotaPanel3 = listaMascotasParaMostrar.get(posicionMascotaPanel3);
         
@@ -334,14 +318,12 @@ public static void main(String[] args) {
         rdbtnTodas.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 if(rdbtnTodas.isSelected()){
-                opcEstado = " ";
-                opcTipo = " ";
-                opcRaza = " ";
-                
-                refrescarPaneles();
-                
-                                }
-            
+	                opcEstado = " ";
+	                opcTipo = " ";
+	                opcRaza = " ";
+	                
+	                refrescarPaneles();	              
+                }                
             }
         });
         
@@ -499,13 +481,7 @@ public static void main(String[] args) {
         		if(!llegoAlLimiteDerecho){
         		
         			llegoAlLimiteIzquierdo = false;
-	        		posicionMascotaPanel1 -= 3;
-	        		System.out.println("pos1 = " + posicionMascotaPanel1);
-	        		posicionMascotaPanel2 -= 3;
-	        		System.out.println("pos2 = " + posicionMascotaPanel2);
-	        		posicionMascotaPanel3 -= 3;
-	        		System.out.println("pos3 = " + posicionMascotaPanel3);
-	        		
+	        		posicionMascotaPanel1 -= 3; posicionMascotaPanel2 -= 3; posicionMascotaPanel3 -= 3;
 		        	if(posicionMascotaPanel1 < 0 || posicionMascotaPanel2 < 0 || posicionMascotaPanel3 < 0){
 		        		llegoAlLimiteDerecho = true;
 		        	}
@@ -552,13 +528,7 @@ public static void main(String[] args) {
 		        	}
 		        	else{
 		        		llegoAlLimiteDerecho = true;
-		        		posicionMascotaPanel1 += 3;
-		        		System.out.println("pos1 = " + posicionMascotaPanel1);
-		        		posicionMascotaPanel2 += 3;
-		        		System.out.println("pos2 = " + posicionMascotaPanel2);
-		        		posicionMascotaPanel3 += 3;
-		        		System.out.println("pos3 = " + posicionMascotaPanel3);
-		        	}
+		        		posicionMascotaPanel1 += 3; posicionMascotaPanel2 += 3; posicionMascotaPanel3 += 3; }
         		}
         	}
         });
@@ -586,8 +556,6 @@ public static void main(String[] args) {
         			panelTerceraMascota.setVisible(true);
         			llegoAlLimiteDerecho = false;
 	        		posicionMascotaPanel1 += 3;
-	        		System.out.println("pos1 = " + posicionMascotaPanel1);
-	        		
 	        		if(posicionMascotaPanel1 < listaMascotasParaMostrar.size()){	
 		        		mascotaPanel1 = listaMascotasParaMostrar.get(posicionMascotaPanel1);
 		        		lblFotoMascota1.setIcon(new ImageIcon(mascotaPanel1.getFoto()));
@@ -603,8 +571,6 @@ public static void main(String[] args) {
 	        		}
 
 	        		posicionMascotaPanel2 += 3;
-	        		System.out.println("pos2 = " + posicionMascotaPanel2);
-	        		
 	        		if(posicionMascotaPanel2 < listaMascotasParaMostrar.size()){
 		        		mascotaPanel2 = listaMascotasParaMostrar.get(posicionMascotaPanel2);
 		                lblFotoMascota_2.setIcon((new ImageIcon(mascotaPanel2.getFoto())));
@@ -620,8 +586,6 @@ public static void main(String[] args) {
 	        		}
 	        		
 	        		posicionMascotaPanel3 += 3;
-	        		System.out.println("pos3 = " + posicionMascotaPanel3);
-		        	
 		        	if(posicionMascotaPanel3 < listaMascotasParaMostrar.size()){
 		        		mascotaPanel3 = listaMascotasParaMostrar.get(posicionMascotaPanel3);
 		                lblFotoMascota_3.setIcon((new ImageIcon(mascotaPanel3.getFoto())));
@@ -655,7 +619,7 @@ public static void main(String[] args) {
         
         lblFondoPanelPrincipal = new JLabel("");
         lblFondoPanelPrincipal.setIcon(new ImageIcon("./imgs/fondoRegistro.png"));
-        lblFondoPanelPrincipal.setBounds(0, 0, 1362, 675);
+        lblFondoPanelPrincipal.setBounds(10, 0, 1362, 675);
         panelPrincipal.add(lblFondoPanelPrincipal);
         
         JLabel label_3 = new JLabel("");
@@ -678,7 +642,6 @@ public static void main(String[] args) {
         panelAgregarMascota.setVisible(false);
         
         comboBoxColorPelaje = new JComboBox();
-        //comboBoxColorPelaje.setModel(new DefaultComboBoxModel(Sistema.getListaColorDePelo()));
         try {
 			for(String obj: Sistema.getListaColorDePelo()){
 				comboBoxColorPelaje.addItem(obj);
@@ -785,7 +748,6 @@ public static void main(String[] args) {
         buttonGuardar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	 try {
-            
 	                nombre = textFieldNombreMascota.getText();
 	                chip = textFieldNumChip.getText();
 	                lugarVisto = comboBoxCanton.getSelectedItem().toString() + ", " + comboBoxProvincia.getSelectedItem().toString();
@@ -806,32 +768,28 @@ public static void main(String[] args) {
 	                    JOptionPane.showMessageDialog(panelAgregarMascota, "Ingrese un monto de recompensa");
 	                    return;
 	                }
-	               // if(Mascota.verificarChip(chip, estado)){
 	                if(SistemasMascotas.ChipYaEstaRegistrado(chip)){
 	                    JOptionPane.showMessageDialog(panelAgregarMascota, "Mascota ya ha sido registrada");
 	                    return ;
 	                }
-	                
-	                if(getFoto() == null){
-	                    
+	                if(getFoto() == null){           
 	                    JOptionPane.showMessageDialog(panelAgregarMascota, "Debe agregar fotografia");
 	                    return;
 	                }
 	                if( nombre == null){
 	                    JOptionPane.showMessageDialog(panelAgregarMascota, "Ingrese el nombre de la mascota");
 	                    return;
-	                }
-	                
-	                else{
+	                }else{
 	                    
 	                    Mascota NuevaMascota = new Mascota(estado, tipo, raza, nombre, chip, colorDePelo, colorDeOjos, getFoto(), lugarVisto, nota, fechaSuceso, recompensa, idEncargado);
-	                   
-	                   // Mascota.getListaDeMascotas().add(NuevaMascota);
-	                    //NuevaMascota.GuardarMascota(Mascota.getListaDeMascotas());
-	                   
-							SistemasMascotas.AgregarMascota(NuevaMascota);
-						
 	                    
+	                    if(SistemasMascotas.hayCoincidencias(raza, colorDePelo, colorDeOjos))
+	                    	JOptionPane.showMessageDialog(null, "Se encontran coincidencias. Se le enviara un correo con mas información");
+	                    	
+	                    
+	                    
+	                    SistemasMascotas.AgregarMascota(NuevaMascota);
+						
 	                    textFieldNombreMascota.setText(null);
 	                    textFieldNumChip.setText(null);
 	                    lblFotoMascota.setIcon(null);
@@ -1119,7 +1077,6 @@ public static void main(String[] args) {
          try {
 			comboBoxTipoMascota.setModel(new DefaultComboBoxModel(Sistema.getListaTipo()));
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
          
@@ -1131,15 +1088,7 @@ public static void main(String[] args) {
             	else{
 	            	try {
 	            	String opcTipo = (String)comboBoxTipoMascota.getSelectedItem();
-	            	System.out.println(opcTipo);
-	            	
-	            		//if(!opcTipo.equals("Elija un tipo")){
-	            		//	JOptionPane.showMessageDialog(null, "Eliga un tipo de masaCota");
-	            	//	/;
-	            		//}
-						comboBoxRazaMascota.setModel(new DefaultComboBoxModel(Sistema.getListaRazas(opcTipo)));
-						System.out.println("lis asaqui");
-					} catch (IOException e1) {
+						comboBoxRazaMascota.setModel(new DefaultComboBoxModel(Sistema.getListaRazas(opcTipo))); } catch (IOException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
@@ -1153,11 +1102,7 @@ public static void main(String[] args) {
         panelAgregarMascota.add(comboBoxTipoMascota);
         
        comboBoxRazaMascota = new JComboBox();
-       /* comboBoxRazaMascota.setModel(new DefaultComboBoxModel(new String[] {"Airedale Terrier" ,"Akita inu" ,"Alaskan malamute", "American Stafford","Shire Terrier","Basenji",
-                "Basset Hound","Beagle","Bichón Maltés","Boxer","Braco de Weimar","Bull Terrier","Bulldog francés","Bulldog inglés","Caniche","Carlino","Chihuahua","Chow-chow","Cocker Spaniel Americano","Cocker Spaniel inglés","Crestado chino","Dálmata","Dobermann","Dogo Aleman","Dogo Argentino","French Poodle","Golden retriever",
-                "Labrador Retrevier","Mastín Español","Mastín Napolitano","Pastor Alemán","Pequinés",
-                "Pinscher Pomerania","Rottweiler","Samoyedo","San Bernardo","Schnauzer","Setter inglés",
-                "Setter irlandés","Shar Pei","Shih Tzu","Siberian Husky","Otro"})) ; */
+
         
         comboBoxRazaMascota.setBounds(320, 272, 233, 20);
         panelAgregarMascota.add(comboBoxRazaMascota);
@@ -1173,20 +1118,16 @@ public static void main(String[] args) {
         panelAgregarMascota.add(textFieldNumChip);
         
         comboBoxColorOjos = new JComboBox();
-        //comboBoxColorOjos.setModel(new DefaultComboBoxModel(new String[] {"Cafes", "Azules", "Negros", "Grises", "Amarillos", "Verdes", "Celestes", "Dos Tonos ", "Otro"}));
 		try {
-			for(String obj: Sistema.getListaColorDeOjos()){
+			for(String obj: Sistema.getListaColorDeOjos())
 				comboBoxColorOjos.addItem(obj);
-
-			}
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
         comboBoxColorOjos.setBounds(320, 528, 233, 20);
         panelAgregarMascota.add(comboBoxColorOjos);
-        
+      
         
         rdbtnColones = new JRadioButton("\u20A1");
         rdbtnColones.setForeground(Color.WHITE);
@@ -1275,7 +1216,12 @@ public static void main(String[] args) {
         });
         
         comboBoxTipoMascotaCC = new JComboBox();
-        comboBoxTipoMascotaCC.setModel(new DefaultComboBoxModel(new String[] {"Canino", "Felino", "Ave", "Roedor", "Otro"}));
+        try {
+			comboBoxTipoMascotaCC.setModel(new DefaultComboBoxModel(Sistema.getListaTipo()));
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
         comboBoxTipoMascotaCC.setBounds(404, 280, 203, 19);
         panelAgregarCasaCuna.add(comboBoxTipoMascotaCC);
         

@@ -46,7 +46,7 @@ import javax.swing.JScrollPane;
 
 public class VentanaConfiguracion extends JFrame {
 	private JPanel contentPane;
-	private JTextField textFieldNuevoEstado;
+	private JTextField textFieldNuevoDato;
 	private ButtonGroup grupoAgregarNuevo = new ButtonGroup();
 	private JButton btnGuardar;
 	private JRadioButton rdbtnNuevoEstado;
@@ -110,9 +110,9 @@ public class VentanaConfiguracion extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				if(rdbtnNuevoEstado.isSelected()){
-					if(!textFieldNuevoEstado.getText().startsWith("Ingrese")){
+					if(!textFieldNuevoDato.getText().startsWith("Ingrese")){
 						try {
-							Sistema.agregarEstado(textFieldNuevoEstado.getText());
+							Sistema.agregarEstado(textFieldNuevoDato.getText());
 				
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
@@ -122,9 +122,9 @@ public class VentanaConfiguracion extends JFrame {
 				}
 				
 				if(rdbtnRaza.isSelected()){
-					if(!textFieldNuevoEstado.getText().startsWith("Ingrese")){
+					if(!textFieldNuevoDato.getText().startsWith("Ingrese")){
 						try {
-							Sistema.agregarRaza((String)comboBoxTipos.getSelectedItem(),textFieldNuevoEstado.getText());
+							Sistema.agregarRaza((String)comboBoxTipos.getSelectedItem(),textFieldNuevoDato.getText());
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -133,9 +133,9 @@ public class VentanaConfiguracion extends JFrame {
 				}
 				if(rdbtnNuevoTipo.isSelected())
 				{
-					if(!textFieldNuevoEstado.getText().startsWith("Ingrese")){
+					if(!textFieldNuevoDato.getText().startsWith("Ingrese")){
 						try {
-							Sistema.agregarTipo(textFieldNuevoEstado.getText());
+							Sistema.agregarTipo(textFieldNuevoDato.getText());
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -144,9 +144,9 @@ public class VentanaConfiguracion extends JFrame {
 					
 				}
 				if(rdbtnNuevoColorOjos.isSelected()){
-					if(!textFieldNuevoEstado.getText().startsWith("Ingrese")){
+					if(!textFieldNuevoDato.getText().startsWith("Ingrese")){
 						try {
-							Sistema.agregarColorDeOjos(textFieldNuevoEstado.getText());
+							Sistema.agregarColorDeOjos(textFieldNuevoDato.getText());
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -154,9 +154,9 @@ public class VentanaConfiguracion extends JFrame {
 					}
 				}
 				if(rdbtnNuevoColorDe.isSelected()){
-					if(!textFieldNuevoEstado.getText().startsWith("Ingrese")){
+					if(!textFieldNuevoDato.getText().startsWith("Ingrese")){
 						try {
-							Sistema.agregarColorDePelo(textFieldNuevoEstado.getText());
+							Sistema.agregarColorDePelo(textFieldNuevoDato.getText());
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -192,8 +192,19 @@ public class VentanaConfiguracion extends JFrame {
 		rdbtnRaza.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				textFieldNuevoEstado.removeAll();
-				textFieldNuevoEstado.setText("Ingrese la Nueva Raza");
+					
+					try {
+						comboBoxTipos.removeAll();
+						for(String str: Sistema.getListaTipo())
+								comboBoxTipos.setModel(new DefaultComboBoxModel(Sistema.getListaTipo()));
+								
+
+						textFieldNuevoDato.removeAll();					
+					textFieldNuevoDato.setText("Ingrese la Nueva Raza");
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 			}
 		});
 		rdbtnRaza.setFont(new Font("Khmer UI", Font.BOLD, 19));
@@ -203,24 +214,24 @@ public class VentanaConfiguracion extends JFrame {
 		grupoAgregarNuevo.add(rdbtnRaza);
 		panelNuevasCaracteristicas.add(rdbtnRaza);
 		
-		textFieldNuevoEstado = new JTextField();
-		textFieldNuevoEstado.setText("Ingrese el Nuevo Estado");
-		textFieldNuevoEstado.addMouseListener(new MouseAdapter() {
+		textFieldNuevoDato = new JTextField();
+		textFieldNuevoDato.setText("Ingrese el Nuevo Estado");
+		textFieldNuevoDato.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				textFieldNuevoEstado.setText(null);
+				textFieldNuevoDato.setText(null);
 			}
 		});
-		textFieldNuevoEstado.setBounds(357, 402, 241, 23);
-		panelNuevasCaracteristicas.add(textFieldNuevoEstado);
-		textFieldNuevoEstado.setColumns(10);
+		textFieldNuevoDato.setBounds(357, 402, 241, 23);
+		panelNuevasCaracteristicas.add(textFieldNuevoDato);
+		textFieldNuevoDato.setColumns(10);
 		
 		rdbtnNuevoColorDe = new JRadioButton("Color de Pelo");
 		rdbtnNuevoColorDe.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				textFieldNuevoEstado.removeAll();
-				textFieldNuevoEstado.setText("Ingrese el Nuevo Color de Pelo");
+				textFieldNuevoDato.removeAll();
+				textFieldNuevoDato.setText("Ingrese el Nuevo Color de Pelo");
 			}
 		});
 		rdbtnNuevoColorDe.setForeground(new Color(210, 180, 140));
@@ -234,8 +245,9 @@ public class VentanaConfiguracion extends JFrame {
 		rdbtnNuevoTipo.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				textFieldNuevoEstado.removeAll();
-				textFieldNuevoEstado.setText("Ingrese el Nuevo Tipo de Mascota");
+				
+				textFieldNuevoDato.removeAll();
+				textFieldNuevoDato.setText("Ingrese el Nuevo Tipo de Mascota");
 			}
 		});
 		rdbtnNuevoTipo.setForeground(new Color(210, 180, 140));
@@ -249,8 +261,8 @@ public class VentanaConfiguracion extends JFrame {
 		rdbtnNuevoColorOjos.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				textFieldNuevoEstado.removeAll();
-				textFieldNuevoEstado.setText("Ingrese el Nuevo Color de Ojos");
+				textFieldNuevoDato.removeAll();
+				textFieldNuevoDato.setText("Ingrese el Nuevo Color de Ojos");
 				
 			}
 		});
@@ -265,8 +277,8 @@ public class VentanaConfiguracion extends JFrame {
 		rdbtnNuevoEstado.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				textFieldNuevoEstado.removeAll();
-				textFieldNuevoEstado.setText("Ingrese el Nuevo Estado");
+				textFieldNuevoDato.removeAll();
+				textFieldNuevoDato.setText("Ingrese el Nuevo Estado");
 			}
 		});
 		rdbtnNuevoEstado.setSelected(true);
