@@ -192,7 +192,11 @@ public class SistemasMascotas {
 	public static void buscarEnTodasLasMascotas() throws IOException{leerMascota(); listaMascotasFiltradas = listaMascotas;} // llamar antes de cada busqueda
 	
 	public static ArrayList<Mascota> getMascotasPorEstado(String estado){
-			
+		try {
+			leerMascota();
+		} catch (IOException e) { 
+			e.printStackTrace();
+		}	
 		ArrayList<Mascota> mascotasFiltradas = new ArrayList<Mascota>(); 
 		if(estado==" ")
 	    	return listaMascotasFiltradas;
