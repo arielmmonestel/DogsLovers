@@ -88,161 +88,57 @@ import javax.swing.table.DefaultTableModel;
 
 import java.awt.event.MouseMotionAdapter;
 import java.awt.Choice;
-
-import javax.swing.ListSelectionModel;
+import java.awt.Panel;
 
 public class VentanaPrincipal {
 
-    private JFrame VentanaPrincipal;
-    private JPanel panelAgregarMascota;
-    private JPanel panelAgregarCasaCuna;
-    private JPanel panelConsultaDeMascotas;
-    private JPanel panelConsultaDeDonaciones;
-    private JTextField textFieldNombreMascota;
-    private JTextField textFieldNumChip;
-    private ButtonGroup estadoMascota = new ButtonGroup() ;
-    private ButtonGroup monedaDePago = new ButtonGroup() ;
-    private ButtonGroup VerMascotasPor = new ButtonGroup() ;
-    private ButtonGroup verUsuariosPor = new ButtonGroup();
-    private JRadioButton rdbtnColones;
-    private JRadioButton rdbtnDolares;
-    private JLabel lblMonto;
-    private JComboBox comboBoxRazaMascota;
-    private JRadioButton rdbtnEncontrada;
-    private JRadioButton rdbtnPerdida;
-    private JComboBox comboBoxCanton;
-    private JButton buttonGuardar;
-    private JButton buttonGuardarCC;
-    private JComboBox comboBoxTipoMascota;
-    private JEditorPane editorPaneNotas;
-    private  String estado;
-    private static String tipo;
-    private static String nombre = "";
-    private static String raza;
-    private static String chip = "";
-    private static String colorDePelo;
-    private static String colorDeOjos;
-    private static String foto = "";
-    private static String lugarVisto;
-    private static String nota;
-    private static String recompensa = "";
-    private static int idEncargado;
-    private static String fechaSuceso;
-    private JTextField textFieldMontoRecompensa;
-    private JComboBox comboBoxProvincia;
-    private static int IDUsuarioActivo = -1; //Para iniciar en un valor distinto a los posibles
-    private File archivoSeleccionado;
-    private JLabel lblFotoMascota;
-    private JSpinner spinnerDiaPerdida;
-    private JComboBox comboBoxMesPerdida;
-    private JSpinner spinnerAnioPerdida;
-    private JButton btnAgregarFoto;
-    private static String rutaImagenesMascotas = "./mascotas";
-    
-    private static String opcEstado = " ";
-    private static String opcTipo = " ";
-    private static String opcRaza = " ";
-    private static String opcColorDeOjos = " ";
-    private static String opcColorDePelo = " ";
-    /**
-     * @wbp.nonvisual location=314,-31
-     */
-    
-    private JLabel lblFecha_3;
-    private JLabel lblLugarSuceso_3;
-    private JPanel panelTerceraMascota;
-    private JLabel lblFotoMascota_3;
-    private JLabel lblTituloMascota_3;
-    private JTextArea lblNotas_3;
-    private JLabel lblFotoMascota_2;
-    private JLabel lblTituloMascota_2;
-    private JPanel panelSegundaMascota;
-    private JLabel lblLugar_2;
-    private JLabel lblFecha_2;
-    private JTextArea lblNotas2 ;
-    private JPanel panelPrimeraMascota;
-    private JLabel lblfechaSuceso;
-    private JLabel lblLugarSuceso1;
-    private JTextArea lblNotas_1;
-    private JLabel lblFotoMascota1;
-    private JLabel lbltitulomascota1;
-    private JComboBox comboBoxColorPelaje;
-    private JComboBox comboBoxColorOjos;
-    private JComboBox comboBoxTamanoMascotaCC;
-    private JComboBox comboBoxTipoMascotaCC;
-    private JCheckBox chckbxNoMedicamentosCC;
-    private JSpinner spinnerCantidadDeMascotaCC;
-    private JCheckBox chckbxNoAlimentosCC;
-    private JComboBox comboBoxProvinciaCasaCuna;
-    private JComboBox comboBoxCantonCasaCuna;
-    private JMenuItem mntmCasaCuna;
-    private JMenu mnRegistro;
-    private JLabel label_1;
-    private JLabel label_2;
-    private static ArrayList<Mascota>listaMascotasParaMostrar ;
-    private int posicionMascotaPanel1 ;
-    private int posicionMascotaPanel2 ;
-    private int posicionMascotaPanel3 ;
-    private Mascota mascotaPanel1 ;
-    private Mascota mascotaPanel2 ;
-    private Mascota mascotaPanel3 ;
-    private static boolean llegoAlLimiteDerecho = false;
-    private static boolean llegoAlLimiteIzquierdo = true;
-    private JButton btnFlechaDerecha;
-    private JTable tablaDeUsuarios;
-    private JTable tablaConsultaDonaciones;
-    private JScrollPane scrollPane_1;
-    private JLabel fondoConsultaUsuarios;
-    private JPanel panelConsultaDeUsuarios;
-    private JLabel lblMensajeListaVacia;
-    private DefaultTableModel modeloListaDeUsuarios;
-    private DefaultTableModel modeloListaDeMascotas;
-    private DefaultTableModel modeloListaDeDonaciones;
-    ImageIcon imgfotomascota1 ;
-    ImageIcon imgfotomascota2 ;
-    ImageIcon imgfotomascota3; 
-    static JMenu mnConfiguracin;
-   private static boolean esVisible = true;
-   private JRadioButton rdbtnTodosLosUsuarios;
-   private JRadioButton rdbtnUsuariosEnLaListaNegra;
-   private JMenuItem mntmAsociacinBeneficiaria;
-   private JLabel labelTituloAso;
-   private JTable tablaConsultaMascotas;
-   private JLabel lblPorRaza;
-   private JLabel lblPorColorDePelo;
-   private JLabel lblPorTipo;
-   private JLabel lblPorColorDeOjos;
-   private JTextField textFieldBuscarPorNumDeChip;
-   private JTextField textFieldBuscarPorAsociacion;
-   private JTextField textFieldBuscarPorDonador;
-   private JLabel lblLineaDivisoraPequenia;
-   private JButton btnBuscarConsulta;
-   private JTextField textFieldBuscarPorLugar;
-   private JScrollPane scrollPane_2;
-   private JButton btnVer_panel1;
-   private JButton btnVer_panel2;
-   private JButton btnVer_panel3;
-
-   
-
-
-public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() { 
-            public void run() {
-                try {
-                    
-                    
-                    VentanaPrincipal window = new VentanaPrincipal();
-                    window.VentanaPrincipal.setVisible(true);
-                    
-                   
-                } catch (Exception e) {
-                	
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
+	private JFrame VentanaPrincipal;
+	private JPanel panelAgregarMascota;
+	private JPanel panelAgregarCasaCuna;
+	private JPanel panelConsultaDeMascotas;
+	private JTextField textFieldNombreMascota;
+	private JTextField textFieldNumChip;
+	private ButtonGroup estadoMascota = new ButtonGroup();
+	private ButtonGroup monedaDePago = new ButtonGroup();
+	private ButtonGroup VerMascotasPor = new ButtonGroup();
+	private ButtonGroup verUsuariosPor = new ButtonGroup();
+	private JRadioButton rdbtnColones;
+	private JRadioButton rdbtnDolares;
+	private JLabel lblMonto;
+	private JComboBox comboBoxRazaMascota;
+	private JRadioButton rdbtnEncontrada;
+	private JRadioButton rdbtnPerdida;
+	private JComboBox comboBoxCanton;
+	private JButton buttonGuardar;
+	private JButton buttonGuardarCC;
+	private JComboBox comboBoxTipoMascota;
+	private JEditorPane editorPaneNotas;
+	private String estado;
+	private static String tipo;
+	private static String nombre = "";
+	private static String raza;
+	private static String chip = "";
+	private static String colorDePelo;
+	private static String colorDeOjos;
+	private static String foto = "";
+	private static String lugarVisto;
+	private static String nota;
+	private static String recompensa = "";
+	private static int idMascotaSeleccionada = -1; 
+	private static int idEncargado;
+	private static String fechaSuceso;
+	private JTextField textFieldMontoRecompensa;
+	private JComboBox comboBoxProvincia;
+	private static int IDUsuarioActivo = -1; // Para iniciar en un valor
+												// distinto a los posibles
+	
+	private File archivoSeleccionado;
+	private JLabel lblFotoMascota;
+	private JSpinner spinnerDiaPerdida;
+	private JComboBox comboBoxMesPerdida;
+	private JSpinner spinnerAnioPerdida;
+	private JButton btnAgregarFoto;
+	private static String rutaImagenesMascotas = "./mascotas";
 
 	private static String opcEstado = " ";
 	private static String opcTipo = " ";
@@ -324,14 +220,20 @@ public static void main(String[] args) {
 	private JButton btnVer_panel2;
 	private JButton btnVer_panel3;
 	private JLabel lblTituloDogsLovers;
-	private JLabel lblNewLabel;
-	private JLabel lblNewLabel_1;
-	private JLabel panelPerfilMascota_lblTipo;
-	private JLabel panelPerfilMascota_lblRaza;
-	private JLabel panelPerfilMascota_lblNombreMacota;
-	private JLabel panelPerfilMascota_lblEncargado;
-	private JLabel panelPerfilMacota_lblCorreo;
-	private JLabel panelPerfilMacota_lblTelefono;
+	private JLabel lbl_panelPerfilMascota_Foto;
+	private JLabel lbl_panelPerfilMascota_colorOjos;
+	private JLabel lbl_panelPerfilMascota_Tipo;
+	private JLabel lbl_panelPerfilMascota_Raza;
+	private JLabel lbl_panelPerfilMascota_lNombreMacota;
+	private JLabel lbl_panelPerfilMascota_Encargado;
+	private JLabel lbl_panelPerfilMacota_Correo;
+	private JLabel lbl_panelPerfilMacota_Telefono;
+	private JPanel panelPerfilMascota;
+	private JLabel lbl_id_macota1;
+	private JLabel lbl_id_mascota2;
+	private JLabel lbl_id_mascota3;
+	private JLabel lblColorOjos;
+	private JLabel lblColorPelo;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -429,6 +331,32 @@ public static void main(String[] args) {
         panelPrimeraMascota.setLayout(null);
         
         btnVer_panel1 = new JButton("Ver mascota");
+        btnVer_panel1.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		// ir a otro panel con el id  esta mascota! 
+        		
+        		panelPrincipal.setVisible(false);
+        		panelAgregarCasaCuna.setVisible(false);
+        		panelAgregarMascota.setVisible(false);
+        		panelConsultaDeUsuarios.setVisible(false);
+        		panelPerfilMascota.setVisible(true);
+        		idMascotaSeleccionada =  mascotaPanel1.getID(); 
+        		mascotaPanel1.getEstado();
+        		mascotaPanel1.getChip();
+        		mascotaPanel1.getColorDeOjos();
+        		mascotaPanel1.getColorDePelo();
+        		mascotaPanel1.getDiaSuceso();
+        		mascotaPanel1.getRaza();
+        		mascotaPanel1.getTipo();
+        		mascotaPanel1.getIdEncargado();
+        		mascotaPanel1.getRecompensa();
+        		mascotaPanel1.getNombre(); // nombreMascora
+        		
+        		
+        		
+        		cargarPanelPerfilMacota(idMascotaSeleccionada);
+        	}
+        });
         btnVer_panel1.setBounds(728, 107, 130, 23);
         panelPrimeraMascota.add(btnVer_panel1);
         
@@ -469,6 +397,11 @@ public static void main(String[] args) {
         lblFondoPanel1.setBounds(0, 0, 868, 141);
         panelPrimeraMascota.add(lblFondoPanel1);
         
+        lbl_id_macota1 = new JLabel("New label");
+        lbl_id_macota1.setVisible(false);
+        lbl_id_macota1.setBounds(672, 111, 46, 14);
+        panelPrimeraMascota.add(lbl_id_macota1);
+        
         panelSegundaMascota = new JPanel();
         panelSegundaMascota.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.BLACK, null, null, null));
         panelSegundaMascota.setLayout(null);
@@ -481,7 +414,7 @@ public static void main(String[] args) {
         
         lblNotas2 = new JTextArea(mascotaPanel2.getNota());
         lblNotas2.setEditable(false);
-        lblNotas2.setBounds(126, 40, 461, 74);
+        lblNotas2.setBounds(126, 40, 525, 74);
         panelSegundaMascota.add(lblNotas2);
         
         lblFotoMascota_2 = new JLabel();
@@ -509,6 +442,10 @@ public static void main(String[] args) {
         labelFondoPanel2.setIcon(new ImageIcon("./imgs/fondoPanelesPantallaPrincipal.png"));
         labelFondoPanel2.setBounds(0, 0, 868, 141);
         panelSegundaMascota.add(labelFondoPanel2);
+        
+        lbl_id_mascota2 = new JLabel("New label");
+        lbl_id_mascota2.setBounds(672, 111, 46, 14);
+        panelSegundaMascota.add(lbl_id_mascota2);
         
         panelTerceraMascota = new JPanel();
         panelTerceraMascota.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.BLACK, null, null, null));
@@ -555,6 +492,10 @@ public static void main(String[] args) {
         labelFondoPanel3.setIcon(new ImageIcon("./imgs/fondoPanelesPantallaPrincipal.png"));
         labelFondoPanel3.setBounds(0, 0, 868, 141);
         panelTerceraMascota.add(labelFondoPanel3);
+        
+        lbl_id_mascota3 = new JLabel("New label");
+        lbl_id_mascota3.setBounds(672, 111, 46, 14);
+        panelTerceraMascota.add(lbl_id_mascota3);
         
         btnFlechaDerecha = new JButton("");
         btnFlechaDerecha.addActionListener(new ActionListener() {
@@ -793,6 +734,7 @@ public static void main(String[] args) {
         	public void actionPerformed(ActionEvent arg0) {
         		opcColorDeOjos = (String)comboBoxOjos.getSelectedItem();
         		System.out.println(opcColorDeOjos);
+        		
         		if(opcColorDeOjos.equals("Todos")){
         			opcColorDeOjos = " ";
         			System.out.println("entro!!");
@@ -1016,7 +958,7 @@ public static void main(String[] args) {
 	                    
 	                    Mascota NuevaMascota = new Mascota(estado, tipo, raza, nombre, chip, colorDePelo, colorDeOjos, getFoto(), lugarVisto, nota, fechaSuceso, recompensa, idEncargado);
 	                    
-	                    if(SistemasMascotas.hayCoincidencias(raza, colorDePelo, colorDeOjos, estado))
+	                    if(SistemasMascotas.hayCoincidencias(raza, colorDePelo, colorDeOjos, estado,IDUsuarioActivo))
 	                    	JOptionPane.showMessageDialog(null, "Se encontran coincidencias. Se le enviara un correo con mas información");
 	                    	
 	                    
@@ -1316,18 +1258,13 @@ public static void main(String[] args) {
          
          comboBoxTipoMascota.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	if(comboBoxTipoMascota.getSelectedIndex() == 0){
-            		JOptionPane.showMessageDialog(null, "Por Favor, elija una Especie");
-            	}
-            	else{
 	            	try {
 	            	String opcTipo = (String)comboBoxTipoMascota.getSelectedItem();
 						comboBoxRazaMascota.setModel(new DefaultComboBoxModel(Sistema.getListaRazas(opcTipo))); } catch (IOException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 	            
-	            	}
+	            	
 	           }
          }
             
@@ -1656,8 +1593,6 @@ public static void main(String[] args) {
         		panelAgregarCasaCuna.setVisible(false);
         		panelAgregarMascota.setVisible(true);
         		panelConsultaDeUsuarios.setVisible(false);
-        		panelConsultaDeDonaciones.setVisible(false);
-        		
         	
             }
         });
@@ -1706,10 +1641,10 @@ public static void main(String[] args) {
         mntmConsultaUsuarios.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		panelPrincipal.setVisible(false);
+        		
         		panelAgregarCasaCuna.setVisible(false);
         		panelAgregarMascota.setVisible(false);
         		panelConsultaDeUsuarios.setVisible(true);
-        		panelConsultaDeDonaciones.setVisible(false);
         		
         		if(SistemasUsuarios.getListaDeUsuariosSize() == 0){
         			tablaDeUsuarios.setVisible(false);
@@ -1724,25 +1659,12 @@ public static void main(String[] args) {
         JMenuItem mntmConsultaMascota = new JMenuItem("Mascotas");
         mntmConsultaMascota.setIcon(new ImageIcon("./imgs/Pets-30.png"));         
         mnConsulta.add(mntmConsultaMascota);
-		mntmConsultaMascota.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				panelPrincipal.setVisible(false);
-				panelConsultaDeMascotas.setVisible(true);
-			}
-		});
-		
-        JMenuItem mntmConsultarDonaciones = new JMenuItem("Donaciones");
-        mnConsulta.add(mntmConsultarDonaciones);
-        mntmConsultarDonaciones.addActionListener(new ActionListener() {
+        mntmConsultaMascota.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		panelPrincipal.setVisible(false);
-        		panelAgregarCasaCuna.setVisible(false);
-        		panelAgregarMascota.setVisible(false);
-        		panelConsultaDeUsuarios.setVisible(false);
-        		panelConsultaDeDonaciones.setVisible(true);
+        		panelConsultaDeMascotas.setVisible(true);
         	}
         });
-        
         
         JMenuItem mntmConsutarCasaCuna = new JMenuItem("Casa Cuna");
         mntmConsutarCasaCuna.setIcon(new ImageIcon("./imgs/casaCuna.png"));
@@ -1774,11 +1696,6 @@ public static void main(String[] args) {
         mnAdopciones.add(mntmAdoptarUnaMascota);
         
         JMenuItem mntmCalificarUnaAdopcin = new JMenuItem("Calificar una Adopci\u00F3n");
-        mntmCalificarUnaAdopcin.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent arg0) {
-        		VentanaCalificarAdopcion.main(null);
-        	}
-        });
         mntmCalificarUnaAdopcin.setIcon(new ImageIcon("./imgs/Calificacion-32.png"));
         mnAdopciones.add(mntmCalificarUnaAdopcin);
         
@@ -1800,17 +1717,17 @@ public static void main(String[] args) {
         mnConfiguracin.add(mntmAdministracion);
         panelAgregarCasaCuna.setVisible(false);
 
-        /////////////////////////////////////// Inicio Codigo Consulta Mascotas //////////////////////////////////////////////////////
-                
+/////////////////////////////////////// Inicio Código Consulta Mascotas //////////////////////////////////////////////////////
+        
         panelConsultaDeMascotas = new JPanel();
         panelConsultaDeMascotas.setBackground(new Color(99,84,65));
         VentanaPrincipal.getContentPane().add(panelConsultaDeMascotas, "name_28003406149630");
         panelConsultaDeMascotas.setLayout(null);
-
+        
         scrollPane_2 = new JScrollPane();
         scrollPane_2.setBounds(567, 191, 749, 436);
         panelConsultaDeMascotas.add(scrollPane_2);
-        String[] columnaConsultaMascotas = {"ID", "Estado", "Tipo", "Raza", "Color de Pelo", "Color de Ojos", "Numero De Chip", "Lugar"};
+        String[] columnaConsultaMascotas = {"ID", "Estado", "Tipo", "Raza", "Color de Pelo", "Color de Ojos", "Número de chip", "Lugar"};
         String[] filaConsultaMascotas = new String[8];
         modeloListaDeMascotas = new DefaultTableModel(columnaConsultaMascotas, 0);
 		
@@ -1819,10 +1736,9 @@ public static void main(String[] args) {
 		    return false;  
 			} 
         };
-        tablaConsultaMascotas.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         scrollPane_2.setViewportView(tablaConsultaMascotas);
         tablaConsultaMascotas.setRowSelectionAllowed(true);
-        tablaConsultaMascotas.setCellSelectionEnabled(false);
+        tablaConsultaMascotas.setCellSelectionEnabled(true);
         tablaConsultaMascotas.setBorder(new LineBorder(new Color(189, 183, 107)));
         tablaConsultaMascotas.setForeground(new Color(139, 69, 19));
         tablaConsultaMascotas.setRowHeight(15);
@@ -1839,18 +1755,6 @@ public static void main(String[] args) {
         tablaConsultaMascotas.getColumnModel().getColumn(5).setPreferredWidth(100);
         tablaConsultaMascotas.getColumnModel().getColumn(6).setPreferredWidth(90);
         tablaConsultaMascotas.getColumnModel().getColumn(7).setPreferredWidth(160);
-        
-        tablaConsultaMascotas.addMouseListener(new MouseAdapter() {
-    		public void mouseClicked(MouseEvent e) {
-    			if (e.getClickCount() == 2) {
-    				JTable target = (JTable)e.getSource();
-    				int row = target.getSelectedRow();
-					int indiceDeMascota = Integer.parseInt(tablaConsultaMascotas.getModel().getValueAt(row, 0).toString());
-					// Aquí se abre una ventana de perfil de la mascota seleccionada
-    				
-    			}
-    		}
-    	});
         
         JLabel lblBuscarMascotas = new JLabel("Buscar mascotas:\r\n");
         lblBuscarMascotas.setForeground(new Color(189, 183, 107));
@@ -1977,127 +1881,8 @@ public static void main(String[] args) {
         btnBuscarConsulta = new JButton("Buscar\r\n");
         btnBuscarConsulta.setFont(new Font("Khmer UI", Font.PLAIN, 14));
         btnBuscarConsulta.setBounds(283, 571, 113, 32);
-        panelConsultaDeMascotas.add(btnBuscarConsulta); 
+        panelConsultaDeMascotas.add(btnBuscarConsulta);
         
-/////////////////////////////////////// Inicio Código Consulta Donaciones //////////////////////////////////////////////////////
-
-		panelConsultaDeDonaciones = new JPanel();
-		panelConsultaDeDonaciones.setBackground(new Color(99,84,65));
-		VentanaPrincipal.getContentPane().add(panelConsultaDeDonaciones, "name_28003406149630");
-		panelConsultaDeDonaciones.setLayout(null);
-		
-		scrollPane_2 = new JScrollPane();
-		scrollPane_2.setBounds(567, 191, 722, 436);
-		panelConsultaDeDonaciones.add(scrollPane_2);
-		String[] columnaConsultaDonaciones = {"Asociación", "Donador", "Cantidad Donada"};
-		String[] filaConsultaDonaciones = new String[3];
-		modeloListaDeDonaciones = new DefaultTableModel(columnaConsultaDonaciones, 0);
-		
-		tablaConsultaDonaciones = new JTable(){
-		public boolean isCellEditable(int row, int column){  
-		return false;  
-		} 
-		};
-		scrollPane_2.setViewportView(tablaConsultaDonaciones);
-		tablaConsultaDonaciones.setRowSelectionAllowed(true);
-		tablaConsultaDonaciones.setCellSelectionEnabled(true);
-		tablaConsultaDonaciones.setBorder(new LineBorder(new Color(189, 183, 107)));
-		tablaConsultaDonaciones.setForeground(new Color(139, 69, 19));
-		tablaConsultaDonaciones.setRowHeight(15);
-		tablaConsultaDonaciones.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		tablaConsultaDonaciones.setVisible(true);
-		tablaConsultaDonaciones.setEnabled(true);
-		modeloListaDeDonaciones = Sistema.cargarTablaDeDonaciones(filaConsultaDonaciones, modeloListaDeDonaciones);
-		tablaConsultaDonaciones.setModel(modeloListaDeDonaciones);
-		tablaConsultaDonaciones.getColumnModel().getColumn(0).setPreferredWidth(230);
-		tablaConsultaDonaciones.getColumnModel().getColumn(1).setPreferredWidth(380);
-		tablaConsultaDonaciones.getColumnModel().getColumn(2).setPreferredWidth(110);
-		tablaConsultaDonaciones.setRowHeight(25);
-		
-		JLabel lblPorDonador = new JLabel("DONADOR\r\n");
-		lblPorDonador.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPorDonador.setForeground(new Color(189, 183, 107));
-		lblPorDonador.setFont(new Font("Khmer UI", Font.BOLD, 14));
-		lblPorDonador.setBounds(76, 291, 72, 50);
-		panelConsultaDeDonaciones.add(lblPorDonador);
-		
-		JLabel lblBuscarDonaciones = new JLabel("Buscar donaciones:\r\n");
-		lblBuscarDonaciones.setForeground(new Color(189, 183, 107));
-		lblBuscarDonaciones.setFont(new Font("Khmer UI", Font.PLAIN, 20));
-		lblBuscarDonaciones.setHorizontalAlignment(SwingConstants.CENTER);
-		lblBuscarDonaciones.setBounds(30, 170, 200, 50);
-		panelConsultaDeDonaciones.add(lblBuscarDonaciones);
-		
-		JLabel lblTituloDonaciones = new JLabel("Donaciones");
-		lblTituloDonaciones.setForeground(new Color(189, 183, 107));
-		lblTituloDonaciones.setFont(new Font("Khmer UI", Font.BOLD, 47));
-		lblTituloDonaciones.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTituloDonaciones.setBounds(29, 26, 277, 80);
-		panelConsultaDeDonaciones.add(lblTituloDonaciones);
-		
-		JLabel lblLineaDivisoraGrande = new JLabel("__________________________________");
-		lblLineaDivisoraGrande.setForeground(new Color(107, 142, 35));
-		lblLineaDivisoraGrande.setFont(new Font("Tahoma", Font.BOLD, 60));
-		lblLineaDivisoraGrande.setBounds(42, -16, 1318, 227);
-		panelConsultaDeDonaciones.add(lblLineaDivisoraGrande);
-		
-		JLabel lblPorAsociacion = new JLabel("ASOCIACI\u00D3N");
-		lblPorAsociacion.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPorAsociacion.setForeground(new Color(189, 183, 107));
-		lblPorAsociacion.setFont(new Font("Khmer UI", Font.BOLD, 14));
-		lblPorAsociacion.setBounds(53, 235, 102, 50);
-		panelConsultaDeDonaciones.add(lblPorAsociacion);
-		
-		lblLineaDivisoraPequenia = new JLabel("_______________________________________________________________");
-		lblLineaDivisoraPequenia.setHorizontalAlignment(SwingConstants.CENTER);
-		lblLineaDivisoraPequenia.setForeground(new Color(189, 183, 107));
-		lblLineaDivisoraPequenia.setFont(new Font("Khmer UI", Font.BOLD, 14));
-		lblLineaDivisoraPequenia.setBounds(53, 421, 396, 50);
-		panelConsultaDeDonaciones.add(lblLineaDivisoraPequenia);
-		
-		textFieldBuscarPorAsociacion = new JTextField();
-		textFieldBuscarPorAsociacion.setBounds(171, 251, 240, 20);
-		panelConsultaDeDonaciones.add(textFieldBuscarPorAsociacion);
-		textFieldBuscarPorAsociacion.setColumns(10);
-		
-		textFieldBuscarPorDonador = new JTextField();
-		textFieldBuscarPorDonador.setColumns(10);
-		textFieldBuscarPorDonador.setBounds(171, 307, 240, 20);
-		panelConsultaDeDonaciones.add(textFieldBuscarPorDonador);
-		
-		btnBuscarConsulta = new JButton("Buscar\r\n");
-		btnBuscarConsulta.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-		
-		String filtroAsociacion = textFieldBuscarPorAsociacion.getText();
-		String filtroDonador = "";
-		ArrayList<Donacion> arregloFiltrado = Sistema.getListaDeDonaciones();
-		
-		if(filtroAsociacion != ""){
-		
-		arregloFiltrado = Sistema.buscarPorAsociacion(filtroAsociacion, arregloFiltrado);
-		}
-		
-		if(filtroDonador != ""){
-		
-		arregloFiltrado = Sistema.buscarPorDonador(filtroDonador, arregloFiltrado);
-		}
-		
-		modeloListaDeDonaciones.setRowCount(0);
-		modeloListaDeDonaciones = Sistema.crearModeloDeDonacionesFiltradas(arregloFiltrado);
-		tablaConsultaDonaciones.setModel(modeloListaDeDonaciones);
-		
-		}
-		});
-		btnBuscarConsulta.setFont(new Font("Khmer UI", Font.PLAIN, 14));
-		btnBuscarConsulta.setBounds(193, 381, 113, 32);
-		panelConsultaDeDonaciones.add(btnBuscarConsulta);
-		
-		tablaConsultaDonaciones.getColumnModel().getColumn(0).setPreferredWidth(230);
-		tablaConsultaDonaciones.getColumnModel().getColumn(1).setPreferredWidth(380);
-		tablaConsultaDonaciones.getColumnModel().getColumn(2).setPreferredWidth(110);
-
-
 //////////////////////////////////////Inicio Código Consulta Usuarios////////////////////////////////////////////////////
 
 		        
@@ -2218,7 +2003,7 @@ public static void main(String[] args) {
 		fondoConsultaUsuarios.setBounds(0, 1, 1362, 675);
 		panelConsultaDeUsuarios.add(fondoConsultaUsuarios);
 		
-		JPanel panelPerfilMascota = new JPanel();
+		panelPerfilMascota = new JPanel();
 		panelPerfilMascota.setBackground(new Color(99, 84,65));
 		VentanaPrincipal.getContentPane().add(panelPerfilMascota, "name_18610174723405");
 		panelPerfilMascota.setLayout(null);
@@ -2229,13 +2014,14 @@ public static void main(String[] args) {
 		lblTituloDogsLovers.setBounds(446, 11, 540, 110);
 		panelPerfilMascota.add(lblTituloDogsLovers);
 		
-		lblNewLabel = new JLabel("No hay foto disponible");
-		lblNewLabel.setBounds(44, 135, 117, 110);
-		panelPerfilMascota.add(lblNewLabel);
+		lbl_panelPerfilMascota_Foto = new JLabel("No hay foto disponible");
+		lbl_panelPerfilMascota_Foto.setBounds(44, 135, 117, 110);
+		panelPerfilMascota.add(lbl_panelPerfilMascota_Foto);
 		
-		lblNewLabel_1 = new JLabel("New label");
-		lblNewLabel_1.setBounds(108, 266, 46, 14);
-		panelPerfilMascota.add(lblNewLabel_1);
+		lbl_panelPerfilMascota_colorOjos = new JLabel("New label");
+		lbl_panelPerfilMascota_colorOjos.setFont(new Font("Khmer UI", Font.BOLD, 15));
+		lbl_panelPerfilMascota_colorOjos.setBounds(383, 291, 46, 14);
+		panelPerfilMascota.add(lbl_panelPerfilMascota_colorOjos);
 		
 		JLabel lblaa = new JLabel("Tipo");
 		lblaa.setBounds(263, 176, 31, 26);
@@ -2269,33 +2055,46 @@ public static void main(String[] args) {
 		panelPerfilMascota.add(label_15);
 		label_15.setFont(new Font("Khmer UI", Font.BOLD, 15));
 		
-		panelPerfilMascota_lblTipo = new JLabel("New label");
-		panelPerfilMascota_lblTipo.setBounds(462, 175, 169, 31);
-		panelPerfilMascota.add(panelPerfilMascota_lblTipo);
+		lbl_panelPerfilMascota_Tipo = new JLabel("New label");
+		lbl_panelPerfilMascota_Tipo.setFont(new Font("Khmer UI", Font.BOLD, 15));
+		lbl_panelPerfilMascota_Tipo.setBounds(383, 175, 169, 31);
+		panelPerfilMascota.add(lbl_panelPerfilMascota_Tipo);
 		
-		panelPerfilMascota_lblRaza = new JLabel("New label");
-		panelPerfilMascota_lblRaza.setBounds(462, 229, 169, 31);
-		panelPerfilMascota.add(panelPerfilMascota_lblRaza);
+		lbl_panelPerfilMascota_Raza = new JLabel("New label");
+		lbl_panelPerfilMascota_Raza.setFont(new Font("Khmer UI", Font.BOLD, 15));
+		lbl_panelPerfilMascota_Raza.setBounds(383, 229, 169, 31);
+		panelPerfilMascota.add(lbl_panelPerfilMascota_Raza);
 		
-		panelPerfilMascota_lblNombreMacota = new JLabel("New label");
-		panelPerfilMascota_lblNombreMacota.setBounds(33, 349, 169, 31);
-		panelPerfilMascota.add(panelPerfilMascota_lblNombreMacota);
+		lbl_panelPerfilMascota_lNombreMacota = new JLabel("New label");
+		lbl_panelPerfilMascota_lNombreMacota.setBounds(33, 349, 169, 31);
+		panelPerfilMascota.add(lbl_panelPerfilMascota_lNombreMacota);
 		
-		panelPerfilMascota_lblEncargado = new JLabel("New label");
-		panelPerfilMascota_lblEncargado.setBounds(817, 175, 169, 31);
-		panelPerfilMascota.add(panelPerfilMascota_lblEncargado);
+		lbl_panelPerfilMascota_Encargado = new JLabel("New label");
+		lbl_panelPerfilMascota_Encargado.setFont(new Font("Khmer UI", Font.BOLD, 15));
+		lbl_panelPerfilMascota_Encargado.setBounds(817, 175, 169, 31);
+		panelPerfilMascota.add(lbl_panelPerfilMascota_Encargado);
 		
-		panelPerfilMacota_lblCorreo = new JLabel("New label");
-		panelPerfilMacota_lblCorreo.setBounds(817, 228, 169, 31);
-		panelPerfilMascota.add(panelPerfilMacota_lblCorreo);
+		lbl_panelPerfilMacota_Correo = new JLabel("New label");
+		lbl_panelPerfilMacota_Correo.setFont(new Font("Khmer UI", Font.BOLD, 15));
+		lbl_panelPerfilMacota_Correo.setBounds(817, 228, 169, 31);
+		panelPerfilMascota.add(lbl_panelPerfilMacota_Correo);
 		
-		panelPerfilMacota_lblTelefono = new JLabel("New label");
-		panelPerfilMacota_lblTelefono.setBounds(817, 278, 169, 31);
-		panelPerfilMascota.add(panelPerfilMacota_lblTelefono);
+		lbl_panelPerfilMacota_Telefono = new JLabel("New label");
+		lbl_panelPerfilMacota_Telefono.setFont(new Font("Khmer UI", Font.BOLD, 15));
+		lbl_panelPerfilMacota_Telefono.setBounds(817, 278, 169, 31);
+		panelPerfilMascota.add(lbl_panelPerfilMacota_Telefono);
 		
-		JLabel lblNewLabel_2 = new JLabel("New label");
-		lblNewLabel_2.setBounds(263, 286, 46, 14);
-		panelPerfilMascota.add(lblNewLabel_2);
+		lblColorOjos = new JLabel();
+		lblColorOjos.setText("Color Ojos");
+		lblColorOjos.setFont(new Font("Khmer UI", Font.BOLD, 15));
+		lblColorOjos.setBounds(263, 286, 97, 26);
+		panelPerfilMascota.add(lblColorOjos);
+		
+		lblColorPelo = new JLabel();
+		lblColorPelo.setText("Color Pelo");
+		lblColorPelo.setFont(new Font("Khmer UI", Font.BOLD, 15));
+		lblColorPelo.setBounds(263, 337, 53, 26);
+		panelPerfilMascota.add(lblColorPelo);
 
 		
 
@@ -2420,6 +2219,12 @@ public static void main(String[] args) {
 		rutaImagenesMascotas = pRutaImagenesMascotas;
 	}
 
+	private void cargarPanelPerfilMacota(int id){
+		lbl_panelPerfilMascota_Raza.setText(SistemasMascotas.getRazaDeMascota(id));
+		//lbl_panelPerfilMascota_Tipo.setText(SistemasMascotas.get);
+		return;
+	}
+	
 	public void refrescarPaneles() {
 		try {
 			SistemasMascotas.buscarEnTodasLasMascotas();
@@ -2460,6 +2265,7 @@ public static void main(String[] args) {
 				lblFecha_3.setText(mascotaPanel3.getDiaSuceso());
 				lblNotas_3.setText(mascotaPanel3.getNota());
 				lblLugarSuceso_3.setText(mascotaPanel3.getLugarDelSuceso());
+				//lbl_id_mascota3.setText();
 				btnVer_panel3.setVisible(true);
 
 			} else {

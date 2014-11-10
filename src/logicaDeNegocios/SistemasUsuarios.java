@@ -440,5 +440,22 @@ public class SistemasUsuarios {
 		}
 		
 	}
+
+	public static String getEmailPorID(int idUsuario) {			
+		String email = "";
+		try {
+			leerUsuarios();
+			for(Usuario usuario: listaUsuarios){
+				if (usuario.getID() == idUsuario){
+					email =  usuario.getEmail();
+				}
+			}
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}return email;
+	
+	}
 	
 }

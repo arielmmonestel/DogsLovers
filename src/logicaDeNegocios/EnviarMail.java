@@ -33,7 +33,7 @@ public class EnviarMail {
             props.setProperty("mail.smtp.host", "smtp.gmail.com");
             props.setProperty("mail.smtp.starttls.enable", "true");
             props.setProperty("mail.smtp.port", "587");
-            props.setProperty("mail.smtp.user", "alejandrinabiblioteca172@gmail.com");
+            props.setProperty("mail.smtp.user", "dogs1lovers@gmail.com");
             props.setProperty("mail.smtp.auth", "true");
             props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
 
@@ -43,7 +43,7 @@ public class EnviarMail {
 
             // Construimos el mensaje
             MimeMessage message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("alejandrinabiblioteca172@gmail.com"));
+            message.setFrom(new InternetAddress("dogs1lovers@gmail.com"));
             message.addRecipient(
                 Message.RecipientType.TO,
                 new InternetAddress(correoDestinatario)); //Sitio de destino del msj
@@ -54,7 +54,7 @@ public class EnviarMail {
 
             // Lo enviamos.
             Transport t = session.getTransport("smtp");
-            t.connect("alejandrinabiblioteca172@gmail.com", "alejandrina123"); //Aqui va el correo de donde se va a enviar y la contrasena
+            t.connect("dogs1lovers@gmail.com", "46@5aF1o.Dogs"); //Aqui va el correo de donde se va a enviar y la contrasena
             t.sendMessage(message, message.getAllRecipients());
 
             // Cierre.

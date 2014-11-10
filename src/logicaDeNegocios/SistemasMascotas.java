@@ -317,26 +317,58 @@ public class SistemasMascotas {
 	
 	
 	public static boolean hayCoincidencias(String raza, String colorPelo, 
-			String colorOjos, String estado){
+			String colorOjos, String estado, int idDeQuienRegitra){
 		try {
+				String subject = " ";
+				String mensaje = " ";
+				String imagen = " ";
+			 
 				buscarEnTodasLasMascotas();
-				if(estado.equals("ENCONTRADO"))
-					getMascotasPorEstado("PERIDADAS");
+				if(estado.equals("ENCONTRADA")){
+					getMascotasPorEstado("PERDIDA");
+					System.out.println("if de Encontradas");
+				}
 				else
-					if(estado.equals("PERIDADAS")){
+					if(estado.equals("PERDIDA")){
 						getMascotasPorEstado("EN ADOPCIÓN");
 						ArrayList<Mascota> listaTemp = new ArrayList<Mascota>();
 						listaTemp = getMascotasFiltradas();
 						
 						buscarEnTodasLasMascotas();
 						getMascotasPorEstado("EN CASA CUNA");
-						listaMascotasFiltradas.addAll(listaTemp);					
+						listaMascotasFiltradas.addAll(listaTemp);
+						
+						ArrayList<Mascota> listaTemp1 = new ArrayList<Mascota>();
+						listaTemp1 = getMascotasFiltradas();
+						
+						buscarEnTodasLasMascotas();
+						getMascotasPorEstado("ENCONTRADA");						
+						listaMascotasFiltradas.addAll(listaTemp1);
+						System.out.println("if de perdidas");
+												
 					}
+				
 				getMascotasPorRaza(raza);
 				getMascotasPorColorDeOjos(colorOjos);
 				getMascotasPorColorDePelo(colorPelo);
+				
 				if(getMascotasFiltradas() !=null){
-					// enviar email			
+					  
+						for(Mascota obj: getMascotasFiltradas()){
+							subject = ""
+									+ "Es posible que " + SistemasUsuarios.getNombreCompletoDelUsuario(obj.getIdEncargado())
+									+ " conozca información de la mascota ingresada ";
+							imagen = obj.getFoto();
+							mensaje = "La mascota con el id " + obj.getID() + " en este momento esta bajo el cuido de  " 
+									+ SistemasUsuarios.getNombreCompletoDelUsuario(obj.getIdEncargado()) +  ".\n" 
+									+"Si desea comunicarse puede hacerlo al teléfono:  " 
+									+ SistemasUsuarios.getUsuario(obj.getIdEncargado()).getTelefono() 
+									+ ".\n " +"O al correo electrónico: " + SistemasUsuarios.getUsuario(obj.getIdEncargado()).getEmail()
+									+ "Dogs Lover no se hace responsable por falsa información."; 
+							
+							Sistema.enviarMailConAdjunto(SistemasUsuarios.getEmailPorID(idDeQuienRegitra), subject, mensaje, imagen);
+								
+					}
 					return true;
 			}
 		} catch (IOException e) {
