@@ -14,6 +14,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.SpinnerNumberModel;
@@ -27,7 +28,7 @@ import javax.swing.JButton;
 import logicaDeNegocios.*;
 
 
-public class VentanaEdicionMascota extends JFrame {
+public class VentanaEdicionMascota extends JFrame{
 
 	private JPanel contentPane;
 	private JTextField txtfldChip;
@@ -242,6 +243,11 @@ public class VentanaEdicionMascota extends JFrame {
 		JButton btnGuardar = new JButton("Guardar Cambios");
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				String estadoActual = SistemasMascotas.getMascota(IdMascotaAEditar).getEstado();
+//				if(estadoActual.equals("PERDIDA") && seleccionEstado.equals("RECUPERADA")){
+//					notificar();
+//				}
 				SistemasMascotas.getMascota(IdMascotaAEditar).setChip(txtfldChip.getText());
 				SistemasMascotas.getMascota(IdMascotaAEditar).setColorDeOjos(seleccionColorDeOjos);
 				SistemasMascotas.getMascota(IdMascotaAEditar).setColorDePelo(seleccionColorDePelo);
@@ -257,3 +263,4 @@ public class VentanaEdicionMascota extends JFrame {
 		contentPane.add(btnGuardar);
 	}
 }
+

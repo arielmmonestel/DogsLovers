@@ -1018,7 +1018,7 @@ public static void GuardarAsociacion()
 		}
    	}
 	
-public static void cargarTableAdopcionesACalificar(String[]columna,String[]filas,DefaultTableModel tableModel) throws IOException{
+    public static void cargarTableAdopcionesACalificar(String[]columna,String[]filas,DefaultTableModel tableModel) throws IOException{
  
    		for(Adopcion adopcion:SistemasAdopciones.getAdopciones()){
    			if(adopcion.getIdPersonaQueDaEnAdopcion() == VentanaPrincipal.getIDUsuarioActivo()){

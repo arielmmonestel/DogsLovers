@@ -98,7 +98,7 @@ public class VentanaPrincipal {
     private JFrame VentanaPrincipal;
     private JPanel panelAgregarMascota;
     private JPanel panelAgregarCasaCuna;
-    private JPanel panelConsultaDeMascotas;
+    //private JPanel panelConsultaDeMascotas;
     private JTextField textFieldNombreMascota;
     private JTextField textFieldNumChip;
     private ButtonGroup estadoMascota = new ButtonGroup();
@@ -1909,7 +1909,6 @@ public class VentanaPrincipal {
                 
                 panelAgregarCasaCuna.setVisible(false);
                 panelAgregarMascota.setVisible(false);
-                panelConsultaDeMascotas.setVisible(false);
                 panelConsultaDeUsuarios.setVisible(true);
                 
                 if(SistemasUsuarios.getListaDeUsuariosSize() == 0){
@@ -1958,7 +1957,6 @@ public class VentanaPrincipal {
                 		panelAgregarMascota.setVisible(false);
                 		panelConsultaDeUsuarios.setVisible(false);
                 		panelConsultaDeDonaciones.setVisible(true);
-                		panelConsultaDeMascotas.setVisible(true);
         	}
         });
         
