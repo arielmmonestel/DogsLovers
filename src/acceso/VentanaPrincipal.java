@@ -215,6 +215,7 @@ public class VentanaPrincipal {
     private JTextField textFieldBuscarPorNumDeChip;
     private JLabel lblLineaDivisoraPequenia;
     private JButton btnBuscarConsulta;
+    private JButton btnBuscarConsultaMascotas;
     private JTextField textFieldBuscarPorLugar;
     private JScrollPane scrollPane_2;
     private JButton btnVer_panel1;
@@ -261,6 +262,11 @@ public class VentanaPrincipal {
     private DefaultTableModel modeloListaDeDonaciones;
     private JTextField textFieldBuscarPorAsociacion;
     private JTextField textFieldBuscarPorDonador;
+    private JComboBox comboBoxPorEstado;
+    private JComboBox comboBoxPorRaza;
+    private JComboBox comboBoxPorPelo;
+    private JComboBox comboBoxPorTipo;
+    private JComboBox comboBoxPorColorOjos;
     
 
     public static void main(String[] args) {
@@ -1767,6 +1773,7 @@ public class VentanaPrincipal {
             }
         });
         
+        /*
         JMenuItem mntmConsultaMascota = new JMenuItem("Mascotas");
         mntmConsultaMascota.setIcon(new ImageIcon("./imgs/Pets-30.png"));         
         mnConsulta.add(mntmConsultaMascota);
@@ -1776,6 +1783,8 @@ public class VentanaPrincipal {
                 panelConsultaDeMascotas.setVisible(true);
             }
         });
+        
+        */
         
         JMenuItem mntmConsultarCasaCuna = new JMenuItem("Casa Cuna");
         mntmConsultarCasaCuna.setIcon(new ImageIcon("./imgs/casaCuna.png"));
@@ -2124,7 +2133,7 @@ public class VentanaPrincipal {
 		});
 
 ////////////////////////////////////Fin Código Consulta Casa Cuna //////////////////////////////////////////////////////  
-
+/*
 /////////////////////////////////////// Inicio Código Consulta Mascotas //////////////////////////////////////////////////////
         
         panelConsultaDeMascotas = new JPanel();
@@ -2199,14 +2208,14 @@ public class VentanaPrincipal {
         lblBuscarMascotas.setBounds(30, 170, 200, 50);
         panelConsultaDeMascotas.add(lblBuscarMascotas);
         
-        JComboBox comboBoxPorEstado = new JComboBox();
+        comboBoxPorEstado = new JComboBox();
         comboBoxPorEstado.setModel(new DefaultComboBoxModel(Sistema.arrayToString(Sistema.getListaEstados())));
         comboBoxPorEstado.setForeground(new Color(0, 0, 0));
         comboBoxPorEstado.setFont(new Font("Khmer UI", Font.PLAIN, 14));
         comboBoxPorEstado.setBounds(63, 427, 166, 20);
         panelConsultaDeMascotas.add(comboBoxPorEstado);
         
-        JComboBox comboBoxPorTipo = new JComboBox();
+        comboBoxPorTipo = new JComboBox();
         comboBoxPorTipo.setModel(new DefaultComboBoxModel(Sistema.getListaTipo()));
         comboBoxPorTipo.setForeground(Color.BLACK);
         comboBoxPorTipo.setFont(new Font("Khmer UI", Font.PLAIN, 14));
@@ -2214,22 +2223,22 @@ public class VentanaPrincipal {
         panelConsultaDeMascotas.add(comboBoxPorTipo);
         String tipoElegido = (String) comboBoxPorTipo.getSelectedItem();
         
-        JComboBox comboBoxPorRaza = new JComboBox();
+        comboBoxPorRaza = new JComboBox();
         comboBoxPorRaza.setModel(new DefaultComboBoxModel(Sistema.getListaRazas(tipoElegido)));
         comboBoxPorRaza.setForeground(Color.BLACK);
         comboBoxPorRaza.setFont(new Font("Khmer UI", Font.PLAIN, 14));
         comboBoxPorRaza.setBounds(63, 501, 166, 20);
         panelConsultaDeMascotas.add(comboBoxPorRaza);
         
-        JComboBox comboBoxPorColorOjos = new JComboBox();
+        comboBoxPorColorOjos = new JComboBox();
         comboBoxPorColorOjos.setModel(new DefaultComboBoxModel(Sistema.arrayToString(Sistema.getListaColorDeOjos())));
         comboBoxPorColorOjos.setForeground(Color.BLACK);
         comboBoxPorColorOjos.setFont(new Font("Khmer UI", Font.PLAIN, 14));
         comboBoxPorColorOjos.setBounds(283, 501, 166, 20);
         panelConsultaDeMascotas.add(comboBoxPorColorOjos);
         
-        JComboBox comboBoxPorPelo = new JComboBox();
-        comboBoxPorColorOjos.setModel(new DefaultComboBoxModel(Sistema.arrayToString(Sistema.getListaColorDeOjos())));
+        comboBoxPorPelo = new JComboBox();
+        comboBoxPorPelo.setModel(new DefaultComboBoxModel(Sistema.arrayToString(Sistema.getListaColorDePelo())));
         comboBoxPorPelo.setForeground(Color.BLACK);
         comboBoxPorPelo.setFont(new Font("Khmer UI", Font.PLAIN, 14));
         comboBoxPorPelo.setBounds(63, 577, 166, 20);
@@ -2314,10 +2323,17 @@ public class VentanaPrincipal {
         lblLineaDivisoraPequenia.setBounds(53, 324, 396, 50);
         panelConsultaDeMascotas.add(lblLineaDivisoraPequenia);
         
-        btnBuscarConsulta = new JButton("Buscar\r\n");
-        btnBuscarConsulta.setFont(new Font("Khmer UI", Font.PLAIN, 14));
-        btnBuscarConsulta.setBounds(283, 571, 113, 32);
-        panelConsultaDeMascotas.add(btnBuscarConsulta);
+        btnBuscarConsultaMascotas = new JButton("Buscar\r\n");
+        btnBuscarConsultaMascotas.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		//Aquí va toda la verificación de búsqueda compuesta
+        	}
+        });
+        btnBuscarConsultaMascotas.setFont(new Font("Khmer UI", Font.PLAIN, 14));
+        btnBuscarConsultaMascotas.setBounds(283, 571, 113, 32);
+        panelConsultaDeMascotas.add(btnBuscarConsultaMascotas);
+        
+        */
         
 //////////////////////////////////////Inicio Código Consulta Usuarios////////////////////////////////////////////////////
 
