@@ -298,15 +298,28 @@ public class SistemasMascotas {
 
 	
 	
-	public static boolean hayCoincidencias(String raza, String colorPelo, String colorOjos){
+	public static boolean hayCoincidencias(String raza, String colorPelo, 
+			String colorOjos, String estado){
 		try {
-			buscarEnTodasLasMascotas();
-			getMascotasPorRaza(raza);
-			getMascotasPorColorDeOjos(colorOjos);
-			getMascotasPorColorDeOjos(colorOjos);
-			if(getMascotasFiltradas() !=null){
-				// enviar email			
-				return true;
+				buscarEnTodasLasMascotas();
+				if(estado.equals("ENCONTRADO"))
+					getMascotasPorEstado("PERIDADAS");
+				else
+					if(estado.equals("PERIDADAS")){
+						getMascotasPorEstado("EN ADOPCIÓN");
+						ArrayList<Mascota> listaTemp = new ArrayList<Mascota>();
+						listaTemp = getMascotasFiltradas();
+						
+						buscarEnTodasLasMascotas();
+						getMascotasPorEstado("EN CASA CUNA");
+						listaMascotasFiltradas.addAll(listaTemp);					
+					}
+				getMascotasPorRaza(raza);
+				getMascotasPorColorDeOjos(colorOjos);
+				getMascotasPorColorDePelo(colorPelo);
+				if(getMascotasFiltradas() !=null){
+					// enviar email			
+					return true;
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -388,6 +401,8 @@ public class SistemasMascotas {
 		}
 		return arregloDeRetorno;
 	}
+
+	
 	
 	
 }
