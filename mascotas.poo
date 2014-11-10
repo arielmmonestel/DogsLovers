@@ -1,6 +1,6 @@
 ===>nuevo Mascota<===
 EN ADOPCION
-504
+0
 Canino
 BullDog Ingles
 Zoe
@@ -16,7 +16,7 @@ La encontrÃ© buscando alimento en la entrada de mi casa. Es una cachorra, presen
 false
 ===>nuevo Mascota<===
 PERDIDA
-505
+1
 Felino
 Angora Turco
 Filiberto
@@ -32,7 +32,7 @@ Es un gatito angora de ojos verde y azul, presenta un problema en los riÃ±ones y
 false
 ===>nuevo Mascota<===
 PERDIDA
-506
+2
 Canino
 Labrador
 Lucy
@@ -48,7 +48,7 @@ $  250
 false
 ===>nuevo Mascota<===
 PERDIDA
-507
+3
 Canino
 French Poodle
 Moza Sofia
@@ -64,7 +64,7 @@ Una perrita muy inquieta que se desapareciÃ³ cuando fuimos a visitar todos a mi 
 false
 ===>nuevo Mascota<===
 ADOPTADA
-508
+4
 Ave
 Canario
 Giaccomio
@@ -80,7 +80,7 @@ Me lo encontré caminando hacia casa con una ala lastimada. Lo hé curado pero no 
 false
 ===>nuevo Mascota<===
 PERDIDA
-509
+5
 Canino
 Labrador
 Marley
@@ -96,7 +96,7 @@ Hay recompensa de 80 000 por la mascota
 false
 ===>nuevo Mascota<===
 ENCONTRADA
-510
+6
 Canino
 null
 Monstruito
@@ -112,7 +112,7 @@ Quiza se envie a casaCuna
 false
 ===>nuevo Mascota<===
 PERDIDA
-511
+7
 Canino
 Siberian Husky
 Manuel
@@ -128,7 +128,7 @@ Central, San Jose
 false
 ===>nuevo Mascota<===
 PERDIDA
-512
+8
 Canino
 Dobermann
 Doby
@@ -144,7 +144,7 @@ Mora, San Jose
 false
 ===>nuevo Mascota<===
 PERDIDA
-513
+9
 Roedor
 Otro
 Uronsin
@@ -160,7 +160,7 @@ Buenos Aires, Puntarenas
 false
 ===>nuevo Mascota<===
 ENCONTRADA
-514
+10
 Canino
 American Stafford
 Gonther
@@ -176,7 +176,7 @@ El Perrito Presentaba algo de agresividad pero con el tiempo se ha ido calmando
 false
 ===>nuevo Mascota<===
 ENCONTRADA
-515
+11
 Felino
 Gato habana
 Sabana
@@ -192,7 +192,7 @@ null
 false
 ===>nuevo Mascota<===
 PERDIDA
-516
+12
 Roedor
 Erizo
 JuanPablo
@@ -208,7 +208,7 @@ San Rafael, Heredia
 false
 ===>nuevo Mascota<===
 ENCONTRADA
-517
+13
 Canino
 Golden retriever
 Nona
@@ -224,7 +224,7 @@ null
 false
 ===>nuevo Mascota<===
 PERDIDA
-518
+14
 Ave
 Loro
 Francisco
@@ -240,7 +240,7 @@ Grecia, Alajuela
 false
 ===>nuevo Mascota<===
 PERDIDA
-519
+15
 Felino
 Aleman de pelo largo
 Fifeilla
@@ -256,7 +256,7 @@ $ 50 000
 false
 ===>nuevo Mascota<===
 ENCONTRADA
-520
+16
 Roedor
 Otro
 
@@ -272,7 +272,7 @@ null
 false
 ===>nuevo Mascota<===
 ADOPTADA
-521
+17
 Ave
 Loro de Bolsillo
 Pajarutococo
@@ -285,4 +285,20 @@ La encontre perdida en un barco
 1/Agosto/2014.0
 null
 6
+false
+===>nuevo Mascota<===
+PERDIDA
+18
+Felino
+Otro
+Savanah
+1-856-899
+Dos Tonalidades 
+Cafes
+./mascotas/19.jpg
+Belén, Heredia
+Se escapó en una tarde de rayería.Recurro a D.L con esperanzas de encontrarlo
+31/Octubre/2014.0
+? 50 000
+7
 false
