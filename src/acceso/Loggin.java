@@ -84,6 +84,7 @@ public class Loggin extends JFrame {
 	 * Create the frame.
 	 */
 	public Loggin() {
+		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage("./imgs/Icono.png"));
 		setTitle("Login");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

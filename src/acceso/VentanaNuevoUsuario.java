@@ -277,62 +277,62 @@ public class VentanaNuevoUsuario extends JFrame {
 		
 		JLabel lblRepetirContrasea = DefaultComponentFactory.getInstance().createLabel("Repetir Contrase\u00F1a");
 		lblRepetirContrasea.setForeground(Color.WHITE);
-		lblRepetirContrasea.setFont(new Font("Batang", Font.BOLD, 19));
+		lblRepetirContrasea.setFont(new Font("Khmer UI", Font.BOLD, 19));
 		lblRepetirContrasea.setBounds(659, 324, 236, 23);
 		panelAgregarPersona.add(lblRepetirContrasea);
 		
 		JLabel lblTelefono = DefaultComponentFactory.getInstance().createLabel("Tel\u00E9fono");
 		lblTelefono.setForeground(Color.WHITE);
 		lblTelefono.setBounds(33, 557, 259, 23);
-		lblTelefono.setFont(new Font("Batang", Font.BOLD, 19));
+		lblTelefono.setFont(new Font("Khmer UI", Font.BOLD, 19));
 		panelAgregarPersona.add(lblTelefono);
 		
 		JLabel lblNewJgoodiesLabel = DefaultComponentFactory.getInstance().createLabel("Nuevo Nickname");
 		lblNewJgoodiesLabel.setForeground(Color.WHITE);
 		lblNewJgoodiesLabel.setBounds(659, 210, 259, 23);
-		lblNewJgoodiesLabel.setFont(new Font("Batang", Font.BOLD, 19));
+		lblNewJgoodiesLabel.setFont(new Font("Khmer UI", Font.BOLD, 19));
 		panelAgregarPersona.add(lblNewJgoodiesLabel);
 		
 		JLabel lblNuevaContrasena = DefaultComponentFactory.getInstance().createLabel("Nueva Contrase\u00F1a");
 		lblNuevaContrasena.setForeground(Color.WHITE);
 		lblNuevaContrasena.setBounds(659, 266, 259, 23);
-		lblNuevaContrasena.setFont(new Font("Batang", Font.BOLD, 19));
+		lblNuevaContrasena.setFont(new Font("Khmer UI", Font.BOLD, 19));
 		panelAgregarPersona.add(lblNuevaContrasena);
 		
 		JLabel lblMail = DefaultComponentFactory.getInstance().createLabel("Correo Electr\u00F3nico");
 		lblMail.setForeground(Color.WHITE);
 		lblMail.setBounds(33, 494, 259, 23);
-		lblMail.setFont(new Font("Batang", Font.BOLD, 19));
+		lblMail.setFont(new Font("Khmer UI", Font.BOLD, 19));
 		panelAgregarPersona.add(lblMail);
 		
 		JLabel lblSegundoApellido = DefaultComponentFactory.getInstance().createLabel("Segundo Apellido");
 		lblSegundoApellido.setForeground(Color.WHITE);
 		lblSegundoApellido.setBounds(33, 324, 259, 23);
-		lblSegundoApellido.setFont(new Font("Batang", Font.BOLD, 19));
+		lblSegundoApellido.setFont(new Font("Khmer UI", Font.BOLD, 19));
 		panelAgregarPersona.add(lblSegundoApellido);
 		
 		JLabel lblPrimerApellido = DefaultComponentFactory.getInstance().createLabel("Primer Apellido");
 		lblPrimerApellido.setForeground(Color.WHITE);
 		lblPrimerApellido.setBounds(33, 266, 259, 23);
-		lblPrimerApellido.setFont(new Font("Batang", Font.BOLD, 19));
+		lblPrimerApellido.setFont(new Font("Khmer UI", Font.BOLD, 19));
 		panelAgregarPersona.add(lblPrimerApellido);
 		
 		JLabel lblNombre = new JLabel("Nombre");
 		lblNombre.setForeground(Color.WHITE);
 		lblNombre.setBounds(33, 210, 259, 23);
-		lblNombre.setFont(new Font("Batang", Font.BOLD, 19));
+		lblNombre.setFont(new Font("Khmer UI", Font.BOLD, 19));
 		panelAgregarPersona.add(lblNombre);
 		
 		JLabel lblSe = DefaultComponentFactory.getInstance().createLabel("Sexo");
 		lblSe.setForeground(Color.WHITE);
 		lblSe.setBounds(33, 381, 259, 23);
-		lblSe.setFont(new Font("Batang", Font.BOLD, 19));
+		lblSe.setFont(new Font("Khmer UI", Font.BOLD, 19));
 		panelAgregarPersona.add(lblSe);
 		
 		JLabel lblFechaDeNacimiento = new JLabel("Fecha de Nacimiento");
 		lblFechaDeNacimiento.setForeground(Color.WHITE);
 		lblFechaDeNacimiento.setBounds(33, 436, 229, 23);
-		lblFechaDeNacimiento.setFont(new Font("Batang", Font.BOLD, 19));
+		lblFechaDeNacimiento.setFont(new Font("Khmer UI", Font.BOLD, 19));
 		panelAgregarPersona.add(lblFechaDeNacimiento);
 		
 		spinnerDia = new JSpinner();
