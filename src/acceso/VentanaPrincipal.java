@@ -197,6 +197,7 @@ public class VentanaPrincipal {
     private JLabel lblMensajeListaVacia;
     private DefaultTableModel modeloListaDeUsuarios;
     private DefaultTableModel modeloListaDeMascotas;
+    private DefaultTableModel modeloListaDeCasaCuna;
     ImageIcon imgfotomascota1;
     ImageIcon imgfotomascota2;
     ImageIcon imgfotomascota3;
@@ -240,6 +241,27 @@ public class VentanaPrincipal {
     private JButton buttonInicio_3;
     private JButton button_1;
     private JButton button_2;
+    private JPanel panelConsultaDeCasaCuna;
+    private JLabel lblLineaDivisoriaConsultaCasaCuna;
+    private JLabel lblTituloConsultaCasaCuna;
+    private JTable tablaConsultaCasaCuna;
+    private JScrollPane scrollPane_3;
+    private JLabel lblImagenCasaCuna;
+    private JLabel lblCasaCunaDe;
+    private JLabel lblEncargado;
+    private JLabel lblTelefono;
+    private JLabel lblEmail;
+    private JLabel lblDireccion;
+    private JLabel lblTituloCasaCunaAdmite;
+    private JLabel lblTipoQueAdmite;
+    private JLabel lblRazaQueAdmite;
+    private JLabel lblMensajeListaCasaCunaVacia;
+    private JPanel panelConsultaDeDonaciones;
+    private JTable tablaConsultaDonaciones;
+    private DefaultTableModel modeloListaDeDonaciones;
+    private JTextField textFieldBuscarPorAsociacion;
+    private JTextField textFieldBuscarPorDonador;
+    
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -1755,9 +1777,32 @@ public class VentanaPrincipal {
             }
         });
         
-        JMenuItem mntmConsutarCasaCuna = new JMenuItem("Casa Cuna");
-        mntmConsutarCasaCuna.setIcon(new ImageIcon("./imgs/casaCuna.png"));
-        mnConsulta.add(mntmConsutarCasaCuna);
+        JMenuItem mntmConsultarCasaCuna = new JMenuItem("Casa Cuna");
+        mntmConsultarCasaCuna.setIcon(new ImageIcon("./imgs/casaCuna.png"));
+        mntmConsultarCasaCuna.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		panelPrincipal.setVisible(false);
+        		panelAgregarCasaCuna.setVisible(false);
+        		panelAgregarMascota.setVisible(false);
+        		panelConsultaDeUsuarios.setVisible(false);
+        		panelConsultaDeDonaciones.setVisible(false);
+        		panelConsultaDeCasaCuna.setVisible(true);
+        	}
+        });
+        mnConsulta.add(mntmConsultarCasaCuna);
+        
+        JMenuItem mntmConsultarDonaciones = new JMenuItem("Donaciones");
+        mnConsulta.add(mntmConsultarDonaciones);
+        mntmConsultarDonaciones.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+                 		panelPrincipal.setVisible(false);
+                		panelAgregarCasaCuna.setVisible(false);
+                		panelAgregarMascota.setVisible(false);
+                		panelConsultaDeUsuarios.setVisible(false);
+                		panelConsultaDeDonaciones.setVisible(true);
+                		panelConsultaDeMascotas.setVisible(true);
+        	}
+        });
         
         JMenuItem mntmConsultarAsociacinBeneficiaria = new JMenuItem("Asociaci\u00F3n Beneficiaria");
         mntmConsultarAsociacinBeneficiaria.setIcon(new ImageIcon("./imgs/AsociBene32.png"));
@@ -1810,6 +1855,275 @@ public class VentanaPrincipal {
         mntmAdministracion.setIcon(new ImageIcon("./imgs/admin.png"));
         mnConfiguracin.add(mntmAdministracion);
         panelAgregarCasaCuna.setVisible(false);
+        
+        panelConsultaDeDonaciones = new JPanel();
+		panelConsultaDeDonaciones.setBackground(new Color(99,84,65));
+		VentanaPrincipal.getContentPane().add(panelConsultaDeDonaciones, "name_28003406149630");
+		panelConsultaDeDonaciones.setLayout(null);
+		
+		scrollPane_2 = new JScrollPane();
+		scrollPane_2.setBounds(567, 191, 722, 436);
+		panelConsultaDeDonaciones.add(scrollPane_2);
+		String[] columnaConsultaDonaciones = {"Asociación", "Donador", "Cantidad Donada"};
+		String[] filaConsultaDonaciones = new String[3];
+		modeloListaDeDonaciones = new DefaultTableModel(columnaConsultaDonaciones, 0);
+		
+		tablaConsultaDonaciones = new JTable(){
+		public boolean isCellEditable(int row, int column){  
+		return false;  
+		} 
+		};
+		scrollPane_2.setViewportView(tablaConsultaDonaciones);
+		tablaConsultaDonaciones.setRowSelectionAllowed(true);
+		tablaConsultaDonaciones.setCellSelectionEnabled(true);
+		tablaConsultaDonaciones.setBorder(new LineBorder(new Color(189, 183, 107)));
+		tablaConsultaDonaciones.setForeground(new Color(139, 69, 19));
+		tablaConsultaDonaciones.setRowHeight(15);
+		tablaConsultaDonaciones.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		tablaConsultaDonaciones.setVisible(true);
+		tablaConsultaDonaciones.setEnabled(true);
+		modeloListaDeDonaciones = Sistema.cargarTablaDeDonaciones(filaConsultaDonaciones, modeloListaDeDonaciones);
+		tablaConsultaDonaciones.setModel(modeloListaDeDonaciones);
+		tablaConsultaDonaciones.getColumnModel().getColumn(0).setPreferredWidth(230);
+		tablaConsultaDonaciones.getColumnModel().getColumn(1).setPreferredWidth(380);
+		tablaConsultaDonaciones.getColumnModel().getColumn(2).setPreferredWidth(110);
+		tablaConsultaDonaciones.setRowHeight(25);
+
+		
+		JLabel lblPorDonador = new JLabel("DONADOR\r\n");
+		lblPorDonador.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPorDonador.setForeground(new Color(189, 183, 107));
+		lblPorDonador.setFont(new Font("Khmer UI", Font.BOLD, 14));
+		lblPorDonador.setBounds(76, 291, 72, 50);
+		panelConsultaDeDonaciones.add(lblPorDonador);
+		
+		JLabel lblBuscarDonaciones = new JLabel("Buscar donaciones:\r\n");
+		lblBuscarDonaciones.setForeground(new Color(189, 183, 107));
+		lblBuscarDonaciones.setFont(new Font("Khmer UI", Font.PLAIN, 20));
+		lblBuscarDonaciones.setHorizontalAlignment(SwingConstants.CENTER);
+		lblBuscarDonaciones.setBounds(30, 170, 200, 50);
+		panelConsultaDeDonaciones.add(lblBuscarDonaciones);
+		
+		JLabel lblTituloDonaciones = new JLabel("Donaciones");
+		lblTituloDonaciones.setForeground(new Color(189, 183, 107));
+		lblTituloDonaciones.setFont(new Font("Khmer UI", Font.BOLD, 47));
+		lblTituloDonaciones.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTituloDonaciones.setBounds(29, 26, 277, 80);
+		panelConsultaDeDonaciones.add(lblTituloDonaciones);
+		
+		JLabel lblLineaDivisoraGrande = new JLabel("__________________________________");
+		lblLineaDivisoraGrande.setForeground(new Color(107, 142, 35));
+		lblLineaDivisoraGrande.setFont(new Font("Tahoma", Font.BOLD, 60));
+		lblLineaDivisoraGrande.setBounds(42, -16, 1318, 227);
+		panelConsultaDeDonaciones.add(lblLineaDivisoraGrande);
+		
+		JLabel lblPorAsociacion = new JLabel("ASOCIACI\u00D3N");
+		lblPorAsociacion.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPorAsociacion.setForeground(new Color(189, 183, 107));
+		lblPorAsociacion.setFont(new Font("Khmer UI", Font.BOLD, 14));
+		lblPorAsociacion.setBounds(53, 235, 102, 50);
+		panelConsultaDeDonaciones.add(lblPorAsociacion);
+		
+		lblLineaDivisoraPequenia = new JLabel("_______________________________________________________________");
+		lblLineaDivisoraPequenia.setHorizontalAlignment(SwingConstants.CENTER);
+		lblLineaDivisoraPequenia.setForeground(new Color(189, 183, 107));
+		lblLineaDivisoraPequenia.setFont(new Font("Khmer UI", Font.BOLD, 14));
+		lblLineaDivisoraPequenia.setBounds(53, 421, 396, 50);
+		panelConsultaDeDonaciones.add(lblLineaDivisoraPequenia);
+		
+		textFieldBuscarPorAsociacion = new JTextField();
+		textFieldBuscarPorAsociacion.setBounds(171, 251, 240, 20);
+		panelConsultaDeDonaciones.add(textFieldBuscarPorAsociacion);
+		textFieldBuscarPorAsociacion.setColumns(10);
+		
+		textFieldBuscarPorDonador = new JTextField();
+		textFieldBuscarPorDonador.setColumns(10);
+		textFieldBuscarPorDonador.setBounds(171, 307, 240, 20);
+		panelConsultaDeDonaciones.add(textFieldBuscarPorDonador);
+		
+		btnBuscarConsulta = new JButton("Buscar\r\n");
+		btnBuscarConsulta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+				String filtroAsociacion = textFieldBuscarPorAsociacion.getText();
+				String filtroDonador = "";
+				ArrayList<Donacion> arregloFiltrado = Sistema.getListaDeDonaciones();
+				
+				if(filtroAsociacion != ""){
+				
+					arregloFiltrado = Sistema.buscarPorAsociacion(filtroAsociacion, arregloFiltrado);
+				}
+				
+				if(filtroDonador != ""){
+				
+					arregloFiltrado = Sistema.buscarPorDonador(filtroDonador, arregloFiltrado);
+				}
+				
+				modeloListaDeDonaciones.setRowCount(0);
+				modeloListaDeDonaciones = Sistema.crearModeloDeDonacionesFiltradas(arregloFiltrado);
+				tablaConsultaDonaciones.setModel(modeloListaDeDonaciones);
+				tablaConsultaDonaciones.getColumnModel().getColumn(0).setPreferredWidth(230);
+				tablaConsultaDonaciones.getColumnModel().getColumn(1).setPreferredWidth(380);
+				tablaConsultaDonaciones.getColumnModel().getColumn(2).setPreferredWidth(110);   
+			}
+		});
+		btnBuscarConsulta.setFont(new Font("Khmer UI", Font.PLAIN, 14));
+		btnBuscarConsulta.setBounds(193, 381, 113, 32);
+		panelConsultaDeDonaciones.add(btnBuscarConsulta);
+		
+		tablaConsultaDonaciones.getColumnModel().getColumn(0).setPreferredWidth(230);
+		tablaConsultaDonaciones.getColumnModel().getColumn(1).setPreferredWidth(380);
+		tablaConsultaDonaciones.getColumnModel().getColumn(2).setPreferredWidth(110);      
+       
+////////////////////////////////////// Inicio Código Consulta Casa Cuna ////////////////////////////////////////////////////
+        
+        panelConsultaDeCasaCuna = new JPanel();
+		panelConsultaDeCasaCuna.setBackground(new Color(99,84, 65));
+		VentanaPrincipal.getContentPane().add(panelConsultaDeCasaCuna, "name_154826621946393");
+		panelConsultaDeCasaCuna.setLayout(null);
+		
+		lblTituloConsultaCasaCuna = new JLabel("Casas Cuna");
+		lblTituloConsultaCasaCuna.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTituloConsultaCasaCuna.setForeground(new Color(189, 183, 107));
+		lblTituloConsultaCasaCuna.setFont(new Font("Khmer UI", Font.BOLD, 47));
+		lblTituloConsultaCasaCuna.setBounds(42, 42, 277, 80);
+		panelConsultaDeCasaCuna.add(lblTituloConsultaCasaCuna);
+		
+		scrollPane_3 = new JScrollPane();
+		scrollPane_3.setBounds(78, 206, 526, 416);
+		panelConsultaDeCasaCuna.add(scrollPane_3);
+		
+		lblImagenCasaCuna = new JLabel("New label");
+		lblImagenCasaCuna.setBounds(670, 206, 200, 205);
+		panelConsultaDeCasaCuna.add(lblImagenCasaCuna);
+		
+		lblCasaCunaDe = new JLabel("Casa cuna de ");
+		lblCasaCunaDe.setForeground(new Color(189, 183, 107));
+		lblCasaCunaDe.setFont(new Font("Khmer UI", Font.BOLD, 25));
+		lblCasaCunaDe.setBounds(907, 207, 419, 50);
+		panelConsultaDeCasaCuna.add(lblCasaCunaDe);
+		
+		lblEncargado = new JLabel("Encargado: ");
+		lblEncargado.setForeground(new Color(189, 183, 107));
+		lblEncargado.setFont(new Font("Khmer UI", Font.PLAIN, 17));
+		lblEncargado.setBounds(907, 268, 277, 39);
+		panelConsultaDeCasaCuna.add(lblEncargado);
+		
+		lblTelefono = new JLabel("Tel\u00E9fono:");
+		lblTelefono.setForeground(new Color(189, 183, 107));
+		lblTelefono.setFont(new Font("Khmer UI", Font.PLAIN, 17));
+		lblTelefono.setBounds(907, 303, 277, 39);
+		panelConsultaDeCasaCuna.add(lblTelefono);
+		
+		lblEmail = new JLabel("E-Mail:");
+		lblEmail.setForeground(new Color(189, 183, 107));
+		lblEmail.setFont(new Font("Khmer UI", Font.PLAIN, 17));
+		lblEmail.setBounds(907, 340, 277, 32);
+		panelConsultaDeCasaCuna.add(lblEmail);
+		
+		lblDireccion = new JLabel("Direcci\u00F3n:");
+		lblDireccion.setForeground(new Color(189, 183, 107));
+		lblDireccion.setFont(new Font("Khmer UI", Font.PLAIN, 17));
+		lblDireccion.setBounds(907, 370, 343, 32);
+		panelConsultaDeCasaCuna.add(lblDireccion);
+		
+		lblTituloCasaCunaAdmite = new JLabel("Esta casa cuna admite:");
+		lblTituloCasaCunaAdmite.setForeground(new Color(189, 183, 107));
+		lblTituloCasaCunaAdmite.setFont(new Font("Khmer UI", Font.PLAIN, 19));
+		lblTituloCasaCunaAdmite.setBounds(670, 448, 200, 50);
+		panelConsultaDeCasaCuna.add(lblTituloCasaCunaAdmite);
+		
+		lblTipoQueAdmite = new JLabel("- ");
+		lblTipoQueAdmite.setForeground(new Color(189, 183, 107));
+		lblTipoQueAdmite.setFont(new Font("Khmer UI", Font.PLAIN, 17));
+		lblTipoQueAdmite.setBounds(670, 504, 200, 50);
+		panelConsultaDeCasaCuna.add(lblTipoQueAdmite);
+		
+//		lblRazaQueAdmite = new JLabel("- ");
+//		lblRazaQueAdmite.setForeground(new Color(189, 183, 107));
+//		lblRazaQueAdmite.setFont(new Font("Khmer UI", Font.PLAIN, 13));
+//		lblRazaQueAdmite.setBounds(670, 546, 200, 50);
+//		panelConsultaDeCasaCuna.add(lblRazaQueAdmite);
+		
+		
+		String[] columnaConsultaCasaCuna = {"ID", "Encargado", "Cantidad de Mascotas", "Cupos Disponibles"};
+		String[] filaConsultaCasaCuna = new String[4];
+		modeloListaDeCasaCuna = new DefaultTableModel(columnaConsultaCasaCuna, 0);
+		
+		tablaConsultaCasaCuna = new JTable(){
+			public boolean isCellEditable(int row, int column){
+				return false;
+			}
+		};
+		scrollPane_3.setViewportView(tablaConsultaCasaCuna);
+		tablaConsultaCasaCuna.setRowSelectionAllowed(true);
+		tablaConsultaCasaCuna.setCellSelectionEnabled(true);
+		tablaConsultaCasaCuna.setBorder(new LineBorder(new Color(189, 183, 107)));
+		tablaConsultaCasaCuna.setForeground(new Color(139, 69, 19));
+		tablaConsultaCasaCuna.setRowHeight(15);
+		tablaConsultaCasaCuna.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		tablaConsultaCasaCuna.setVisible(true);
+		tablaConsultaCasaCuna.setEnabled(true);
+		tablaConsultaCasaCuna.setRowHeight(25);
+		Sistema.cargarTablaDeCasaCuna(filaConsultaCasaCuna, modeloListaDeCasaCuna);
+		tablaConsultaCasaCuna.setModel(modeloListaDeCasaCuna);
+		
+		lblLineaDivisoriaConsultaCasaCuna = new JLabel("__________________________________");
+		lblLineaDivisoriaConsultaCasaCuna.setForeground(new Color(107, 142, 35));
+		lblLineaDivisoriaConsultaCasaCuna.setFont(new Font("Tahoma", Font.BOLD, 60));
+		lblLineaDivisoriaConsultaCasaCuna.setBounds(68, -14, 1318, 227);
+		panelConsultaDeCasaCuna.add(lblLineaDivisoriaConsultaCasaCuna);
+		
+		lblMensajeListaCasaCunaVacia = new JLabel("En este momento no hay casas cuna registradas.");
+		lblMensajeListaCasaCunaVacia.setFont(new Font("Khmer UI", Font.PLAIN, 20));
+		lblMensajeListaCasaCunaVacia.setForeground(new Color(189, 183, 107));
+		lblMensajeListaCasaCunaVacia.setBounds(58, 143, 507, 50);
+		lblMensajeListaCasaCunaVacia.setVisible(false);
+		panelConsultaDeCasaCuna.add(lblMensajeListaCasaCunaVacia);
+		
+		tablaConsultaCasaCuna.getColumnModel().getColumn(0).setPreferredWidth(40);
+		tablaConsultaCasaCuna.getColumnModel().getColumn(1).setPreferredWidth(210);
+		tablaConsultaCasaCuna.getColumnModel().getColumn(2).setPreferredWidth(120);
+		tablaConsultaCasaCuna.getColumnModel().getColumn(3).setPreferredWidth(150);
+		
+		if(Sistema.getListaDeCasasCuna().isEmpty()){
+			lblMensajeListaCasaCunaVacia.setVisible(true);
+		}else{
+			int indiceDeUsuario = Integer.parseInt(tablaConsultaCasaCuna.getModel().getValueAt(0, 0).toString());
+			Usuario usuarioDeCasaCunaActual = SistemasUsuarios.getUsuario(indiceDeUsuario);
+			CasaCuna casaCunaActual = Sistema.getCasaCunaPorIdDeUsuario(indiceDeUsuario);
+			lblCasaCunaDe.setText("Casa Cuna de " + usuarioDeCasaCunaActual.getNombreUsuario());
+			lblEncargado.setText("Encargado: " + usuarioDeCasaCunaActual.getNombre() + " " + 
+												 usuarioDeCasaCunaActual.getPrimerApellido());
+			lblTelefono.setText("Teléfono: " + usuarioDeCasaCunaActual.getTelefono());
+			lblEmail.setText("E-Mail: " + usuarioDeCasaCunaActual.getEmail());
+			lblDireccion.setText("Dirección: " + casaCunaActual.getDireccion());
+			lblTipoQueAdmite.setText("- " + casaCunaActual.getTipoMascota());
+			//lblRazaQueAdmite.setText("- " + casaCunaActual.getRazaMascota()):
+		}
+		
+		tablaConsultaCasaCuna.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				if (e.getClickCount() == 2) {
+					JTable target = (JTable)e.getSource();
+					int row = target.getSelectedRow();
+					int indiceDeUsuario = Integer.parseInt(tablaConsultaCasaCuna.getModel().getValueAt(row, 0).toString());
+					Usuario usuarioDeCasaCunaActual = SistemasUsuarios.getUsuario(indiceDeUsuario);
+					CasaCuna casaCunaActual = Sistema.getCasaCunaPorIdDeUsuario(indiceDeUsuario);
+					
+					lblCasaCunaDe.setText("Casa Cuna de " + usuarioDeCasaCunaActual.getNombreUsuario());
+					lblEncargado.setText("Encargado: " + usuarioDeCasaCunaActual.getNombre() + " " + 
+														 usuarioDeCasaCunaActual.getPrimerApellido());
+					lblTelefono.setText("Teléfono: " + usuarioDeCasaCunaActual.getTelefono());
+					lblEmail.setText("E-Mail: " + usuarioDeCasaCunaActual.getEmail());
+					lblDireccion.setText("Dirección: " + casaCunaActual.getDireccion());
+					lblTipoQueAdmite.setText("- " + casaCunaActual.getTipoMascota());
+					//lblRazaQueAdmite.setText("- " + casaCunaActual.getRazaMascota()):
+				}
+			}
+		});
+
+////////////////////////////////////Fin Código Consulta Casa Cuna //////////////////////////////////////////////////////  
 
 /////////////////////////////////////// Inicio Código Consulta Mascotas //////////////////////////////////////////////////////
         
@@ -1921,12 +2235,12 @@ public class VentanaPrincipal {
         comboBoxPorPelo.setBounds(63, 577, 166, 20);
         panelConsultaDeMascotas.add(comboBoxPorPelo);
         
-        JLabel lblMascotas = new JLabel("Mascotas");
-        lblMascotas.setForeground(new Color(189, 183, 107));
-        lblMascotas.setFont(new Font("Khmer UI", Font.BOLD, 47));
-        lblMascotas.setHorizontalAlignment(SwingConstants.CENTER);
-        lblMascotas.setBounds(21, 26, 277, 80);
-        panelConsultaDeMascotas.add(lblMascotas);
+        JLabel lblTituloMascotas = new JLabel("Mascotas");
+        lblTituloMascotas.setForeground(new Color(189, 183, 107));
+        lblTituloMascotas.setFont(new Font("Khmer UI", Font.BOLD, 47));
+        lblTituloMascotas.setHorizontalAlignment(SwingConstants.CENTER);
+        lblTituloMascotas.setBounds(21, 26, 277, 80);
+        panelConsultaDeMascotas.add(lblTituloMascotas);
         
         JLabel label = new JLabel("__________________________________");
         label.setForeground(new Color(107, 142, 35));
