@@ -910,7 +910,7 @@ public class VentanaRegistroAdopcion extends JFrame {
             listaUsuarios = SistemasUsuarios.getUsuarios();
 
             JLabel lblMostrarPor = new JLabel("Mostrar  Por:");
-            lblMostrarPor.setFont(new Font("Batang", Font.BOLD, 12));
+            lblMostrarPor.setFont(new Font("Khmer UI", Font.BOLD, 15));
             lblMostrarPor.setBounds(40, 176, 137, 20);
             panelMascotaAdopcion.add(lblMostrarPor);
 

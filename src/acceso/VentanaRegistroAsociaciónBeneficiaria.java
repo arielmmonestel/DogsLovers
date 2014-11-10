@@ -22,6 +22,7 @@ import java.io.IOException;
 
 import logicaDeNegocios.Asociacion;
 import logicaDeNegocios.Sistema;
+import java.awt.Font;
 
 public class VentanaRegistroAsociaciónBeneficiaria extends JFrame {
 
@@ -65,25 +66,35 @@ public class VentanaRegistroAsociaciónBeneficiaria extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel label = new JLabel("Nombre de la Asociaci\u00F3n :");
-		label.setBounds(30, 136, 264, 31);
-		contentPane.add(label);
+		JLabel lblNombre = new JLabel("Nombre ");
+		lblNombre.setForeground(Color.WHITE);
+		lblNombre.setFont(new Font("Khmer UI", Font.BOLD, 19));
+		lblNombre.setBounds(30, 136, 264, 31);
+		contentPane.add(lblNombre);
 		
-		JLabel label_1 = new JLabel("Direcci\u00F3n :");
-		label_1.setBounds(30, 178, 264, 31);
-		contentPane.add(label_1);
+		JLabel lblDireccin = new JLabel("Direcci\u00F3n ");
+		lblDireccin.setForeground(Color.WHITE);
+		lblDireccin.setFont(new Font("Khmer UI", Font.BOLD, 19));
+		lblDireccin.setBounds(30, 178, 264, 31);
+		contentPane.add(lblDireccin);
 		
-		JLabel label_2 = new JLabel("Tel\u00E9fono :");
-		label_2.setBounds(30, 220, 264, 31);
-		contentPane.add(label_2);
+		JLabel lblTelfono = new JLabel("Tel\u00E9fono ");
+		lblTelfono.setForeground(Color.WHITE);
+		lblTelfono.setFont(new Font("Khmer UI", Font.BOLD, 19));
+		lblTelfono.setBounds(30, 220, 264, 31);
+		contentPane.add(lblTelfono);
 		
-		JLabel label_3 = new JLabel("N\u00FAmero de Cuenta:");
-		label_3.setBounds(30, 262, 264, 31);
-		contentPane.add(label_3);
+		JLabel lblNmeroDeCuenta = new JLabel("N\u00FAmero de Cuenta");
+		lblNmeroDeCuenta.setForeground(Color.WHITE);
+		lblNmeroDeCuenta.setFont(new Font("Khmer UI", Font.BOLD, 19));
+		lblNmeroDeCuenta.setBounds(30, 262, 264, 31);
+		contentPane.add(lblNmeroDeCuenta);
 		
-		JLabel label_4 = new JLabel("P\u00E1gina Web :");
-		label_4.setBounds(30, 304, 264, 31);
-		contentPane.add(label_4);
+		JLabel lblPginaWeb = new JLabel("P\u00E1gina Web ");
+		lblPginaWeb.setForeground(Color.WHITE);
+		lblPginaWeb.setFont(new Font("Khmer UI", Font.BOLD, 19));
+		lblPginaWeb.setBounds(30, 304, 264, 31);
+		contentPane.add(lblPginaWeb);
 		
 		textFieldNombreAsociacion = new JTextField();
 		textFieldNombreAsociacion.setBounds(208, 141, 163, 20);

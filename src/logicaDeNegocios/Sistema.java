@@ -262,7 +262,7 @@ public static void GuardarAsociacion()
 		return false;
 	}
 
-	public static ArrayList<CasaCuna>  getCastacuna() throws IOException{
+	public static ArrayList<CasaCuna>  getListaDeCasasCuna() throws IOException{
 		leerCasaCuna();
 		return listaCasasCuna;
 	}
@@ -829,6 +829,38 @@ public static void GuardarAsociacion()
 	
 	
 	// cambiar  
+	
+	
+ ///////////////////////////////////////////// Casas Cuna //////////////////////////////////////////////////////////
+	
+	
+	public static CasaCuna getCasaCunaPorIdDeUsuario(int idUsuario){
+		for(CasaCuna obj : listaCasasCuna){
+			if(obj.getIdUsuarioCasaCuna() == idUsuario){
+				return obj;
+			}
+		}
+		return null;
+	}
+
+	
+	public static DefaultTableModel cargarTablaDeCasaCuna(String[]datos, DefaultTableModel tableModel) throws IOException{
+//		String[] datos = new String[4];
+//		DefaultTableModel tableModel = new DefaultTableModel();
+		for(int i = 0; i < getListaDeCasasCuna().size(); i++){
+			CasaCuna casaCunaTemp = getListaDeCasasCuna().get(i);
+			Usuario usuarioEncargado = SistemasUsuarios.getUsuario(casaCunaTemp.getIdUsuarioCasaCuna());
+			datos[0] = Integer.toString(usuarioEncargado.getID());
+			datos[1] = usuarioEncargado.getNombre() + " " + usuarioEncargado.getPrimerApellido() + " " + usuarioEncargado.getSegundoApellido(); 
+			datos[2] = Integer.toString(casaCunaTemp.getCantMascota());
+			datos[3] = Integer.toString(casaCunaTemp.getCamposDiponibles());
+			tableModel.addRow(datos);
+			
+		}
+		return tableModel;
+	}
+	
+	
 	
   /////////////////////////////////////////// Donaciones ///////////////////////////////////////////////////
     

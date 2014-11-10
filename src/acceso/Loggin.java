@@ -84,6 +84,7 @@ public class Loggin extends JFrame {
 	 * Create the frame.
 	 */
 	public Loggin() {
+		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage("./imgs/Icono.png"));
 		setTitle("Login");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -139,6 +140,32 @@ public class Loggin extends JFrame {
 				}
 			}
 		});
+		
+		JButton btnquinesSomos = new JButton("\u00BFQui\u00E9nes Somos?");
+		btnquinesSomos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				VentanaInformacionDL.main(null);
+			}
+		});
+		btnquinesSomos.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				btnquinesSomos.setForeground(Color.WHITE);
+			}
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				btnquinesSomos.setForeground(Color.BLUE);
+			}
+		});
+		btnquinesSomos.setForeground(Color.WHITE);
+		btnquinesSomos.setFont(new Font("Khmer UI", Font.BOLD, 11));
+		btnquinesSomos.setFocusable(false);
+		btnquinesSomos.setFocusTraversalKeysEnabled(false);
+		btnquinesSomos.setFocusPainted(false);
+		btnquinesSomos.setContentAreaFilled(false);
+		btnquinesSomos.setBorderPainted(false);
+		btnquinesSomos.setBounds(414, 0, 138, 23);
+		contentPane.add(btnquinesSomos);
 		
 		btnIngresar.setBounds(154, 302, 245, 62);
 		contentPane.add(btnIngresar);
