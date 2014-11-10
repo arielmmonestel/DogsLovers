@@ -89,6 +89,9 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.Choice;
 import java.awt.Panel;
+import javax.swing.JTextPane;
+import java.awt.TextField;
+import javax.swing.JList;
 
 public class VentanaPrincipal {
 
@@ -169,7 +172,7 @@ public class VentanaPrincipal {
 	private JLabel lbltitulomascota1;
 	private JComboBox comboBoxColorPelaje;
 	private JComboBox comboBoxColorOjos;
-	private JComboBox comboBoxTamanoMascotaCC;
+	private JComboBox comboBoxRazasCC;
 	private JComboBox comboBoxTipoMascotaCC;
 	private JCheckBox chckbxNoMedicamentosCC;
 	private JSpinner spinnerCantidadDeMascotaCC;
@@ -234,6 +237,8 @@ public class VentanaPrincipal {
 	private JLabel lbl_id_mascota3;
 	private JLabel lblColorOjos;
 	private JLabel lblColorPelo;
+	private JTextArea textAreaRazasCC;
+	private JScrollPane scrollPane_3;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -922,6 +927,12 @@ public class VentanaPrincipal {
         buttonGuardar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	 try {
+            		 
+            		 int opc = JOptionPane.showConfirmDialog(null, "Desea ver la lista de casas cuna que reciben esta mascota");
+	               		if (opc == JOptionPane.YES_NO_OPTION){
+	               	  		return;
+	               		}
+            		 
 	                nombre = textFieldNombreMascota.getText();
 	                chip = textFieldNumChip.getText();
 	                lugarVisto = comboBoxCanton.getSelectedItem().toString() + ", " + comboBoxProvincia.getSelectedItem().toString();
@@ -958,10 +969,20 @@ public class VentanaPrincipal {
 	                    
 	                    Mascota NuevaMascota = new Mascota(estado, tipo, raza, nombre, chip, colorDePelo, colorDeOjos, getFoto(), lugarVisto, nota, fechaSuceso, recompensa, idEncargado);
 	                    
-	                    if(SistemasMascotas.hayCoincidencias(raza, colorDePelo, colorDeOjos, estado,IDUsuarioActivo))
+	                    if(SistemasMascotas.hayCoincidencias(raza, colorDePelo, colorDeOjos, estado, IDUsuarioActivo))
 	                    	JOptionPane.showMessageDialog(null, "Se encontran coincidencias. Se le enviara un correo con mas información");
 	                    	
-	                    
+	                    if(estado.equals("ENCONTRADA")){
+	                    	int opc1 = JOptionPane.showConfirmDialog(null, "Desea ver la lista de casas cuna que reciben esta mascota");
+	                    	  if (opc1 == JOptionPane.YES_NO_OPTION){
+	                    		  System.out.println("si");
+	                    		  return;
+	                    	  }else{
+	                    		  System.out.println("no");
+	                    		  return;
+	                    	  }
+	                    	 
+	                    }
 	                    
 	                    SistemasMascotas.AgregarMascota(NuevaMascota);
 						
@@ -1339,8 +1360,9 @@ public class VentanaPrincipal {
             public void actionPerformed(ActionEvent arg0) {
             	//try {
 	              
-            	String tamanoMascota = (String) comboBoxTamanoMascotaCC.getSelectedItem();
+            	String tamanoMascota = (String) comboBoxRazasCC.getSelectedItem();
 	            String tipoMascota =(String) comboBoxTipoMascotaCC.getSelectedItem();
+	            
 	            Boolean necesitaDonacion = verificarNecesitaDonacion();
 	            Boolean necesitaMedicamentos = verificarNecesitaMedicamentos();
 	            int cantMascotas =(int) spinnerCantidadDeMascotaCC.getValue();
@@ -1379,13 +1401,44 @@ public class VentanaPrincipal {
         });
         
         comboBoxTipoMascotaCC = new JComboBox();
-        try {
-			comboBoxTipoMascotaCC.setModel(new DefaultComboBoxModel(Sistema.getListaTipo()));
+        comboBoxTipoMascotaCC.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		try {
+        		String opcTipo = (String)comboBoxTipoMascotaCC.getSelectedItem();  
+        		System.out.println(opcTipo);
+        		String datos = "Todos,";
+        		
+					for(String str : Sistema.getListaRazas(opcTipo))
+					    datos += str + ",";
+			
+                comboBoxRazasCC.setModel(new DefaultComboBoxModel(datos.split(",")));
+        		} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+        		
+        	}
+        });
+          try {
+        	
+        	
+        	String opcTipo = (String)comboBoxTipoMascotaCC.getSelectedItem();        		
+        	String datosCC = "Eliga un tipo,";
+    		
+				for(String str : Sistema.getListaTipo())
+				    datosCC += str + ",";
+                  
+			comboBoxTipoMascotaCC.setModel(new DefaultComboBoxModel(datosCC.split(",")));
+			
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-        comboBoxTipoMascotaCC.setBounds(404, 280, 203, 19);
+        
+        textAreaRazasCC = new JTextArea();
+        textAreaRazasCC.setBounds(191, 365, -132, -43);
+        panelAgregarCasaCuna.add(textAreaRazasCC);
+        comboBoxTipoMascotaCC.setBounds(404, 184, 203, 19);
         panelAgregarCasaCuna.add(comboBoxTipoMascotaCC);
         
         JLabel labelIcono = new JLabel("");
@@ -1417,7 +1470,7 @@ public class VentanaPrincipal {
         buttonGuardarCC.setPressedIcon(new ImageIcon("./imgs/save-32.png"));
         buttonGuardarCC.setRolloverIcon(new ImageIcon("./imgs/save-64.png"));
         buttonGuardarCC.setIcon(new ImageIcon("./imgs/save-48.png"));
-        buttonGuardarCC.setBounds(1036, 558, 109, 78);
+        buttonGuardarCC.setBounds(1030, 558, 109, 78);
         panelAgregarCasaCuna.add(buttonGuardarCC);
         
         chckbxNoAlimentosCC = new JCheckBox("No");
@@ -1476,32 +1529,37 @@ public class VentanaPrincipal {
         lblDireccionCasaCuna.setBounds(749, 312, 203, 23);
         panelAgregarCasaCuna.add(lblDireccionCasaCuna);
         
-        JLabel lblTamaoDeMascota = new JLabel("Tama\u00F1o de Mascota a Recibir");
+        JLabel lblTamaoDeMascota = new JLabel("Razas de  mascota que recibe");
         lblTamaoDeMascota.setForeground(Color.WHITE);
         lblTamaoDeMascota.setFont(new Font("Khmer UI", Font.BOLD, 19));
-        lblTamaoDeMascota.setBounds(69, 182, 270, 23);
+        lblTamaoDeMascota.setBounds(68, 239, 270, 23);
         panelAgregarCasaCuna.add(lblTamaoDeMascota);
         
         lblTipoDeMascota = new JLabel("Tipo de Mascota");
         lblTipoDeMascota.setForeground(Color.WHITE);
         lblTipoDeMascota.setFont(new Font("Khmer UI", Font.BOLD, 19));
-        lblTipoDeMascota.setBounds(69, 276, 146, 23);
+        lblTipoDeMascota.setBounds(69, 179, 146, 23);
         panelAgregarCasaCuna.add(lblTipoDeMascota);
         
         JLabel lblCantidadDeMascotas = new JLabel("\u00BFCu\u00E1ntas Mascotas Podr\u00E9 Recibir? ");
         lblCantidadDeMascotas.setForeground(Color.WHITE);
         lblCantidadDeMascotas.setFont(new Font("Khmer UI", Font.BOLD, 19));
-        lblCantidadDeMascotas.setBounds(69, 372, 319, 23);
+        lblCantidadDeMascotas.setBounds(68, 396, 319, 23);
         panelAgregarCasaCuna.add(lblCantidadDeMascotas);
         
-        comboBoxTamanoMascotaCC = new JComboBox();
-        comboBoxTamanoMascotaCC.setModel(new DefaultComboBoxModel(new String[] {"Peque\u00F1a(s)", "Mediana(s)", "Grande(s)"}));
-        comboBoxTamanoMascotaCC.setBounds(404, 182, 203, 22);
-        panelAgregarCasaCuna.add(comboBoxTamanoMascotaCC);
+        comboBoxRazasCC = new JComboBox();
+        comboBoxRazasCC.setModel(new DefaultComboBoxModel(new String[] {"  "}));
+        comboBoxRazasCC.setBounds(404, 242, 203, 22);
+        panelAgregarCasaCuna.add(comboBoxRazasCC);
+        
+      /*  for(String str : Sistema.getListaRazas("Canino"))
+        	datos += str + ",";
+        String razasCC[] = datos.split(",");
+    	comboBoxRazasCC.setModel(new DefaultComboBoxModel(razasCC));*/
         
         spinnerCantidadDeMascotaCC = new JSpinner();
         spinnerCantidadDeMascotaCC.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
-        spinnerCantidadDeMascotaCC.setBounds(404, 372, 54, 20);
+        spinnerCantidadDeMascotaCC.setBounds(404, 400, 54, 20);
         panelAgregarCasaCuna.add(spinnerCantidadDeMascotaCC);
         
         comboBoxProvinciaCasaCuna = new JComboBox();
@@ -1556,9 +1614,126 @@ public class VentanaPrincipal {
         lblCantn.setBounds(749, 438, 69, 14);
         panelAgregarCasaCuna.add(lblCantn);
         
+        scrollPane_3 = new JScrollPane();
+        scrollPane_3.setBounds(404, 312, 203, 67);
+        panelAgregarCasaCuna.add(scrollPane_3);
+        
+        JTextPane textPaneRazaCC = new JTextPane();
+        scrollPane_3.setViewportView(textPaneRazaCC);
+        textPaneRazaCC.setEditable(false);
+        
+        JButton btnAgregaRazaCC = new JButton("Agregar");
+        btnAgregaRazaCC.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		String razas = textPaneRazaCC.getText();
+        		String opcRazas = (String)comboBoxRazasCC.getSelectedItem();
+        		String opcTipoCC = (String)comboBoxTipoMascotaCC.getSelectedItem();
+        		try {
+        			boolean yaEstaAgregado = false;
+	        		if(opcRazas.equals("Todos")){	        			
+	        			opcRazas= "";
+	        			if(razas.equals(""))
+	        				for(String str: Sistema.getListaRazas(opcTipoCC)){
+	        					if(razas.equals(""))
+	        						razas = str;		
+	        					razas += ", " + str;
+	        					}
+	        			else{
+		        				
+		        				for(String str: Sistema.getListaRazas(opcTipoCC)){
+		        					yaEstaAgregado = false;
+										for(String str1: razas.split(", "))
+											if((str.equals(str1)))
+												yaEstaAgregado = true;
+										if(!yaEstaAgregado){
+											razas += ", " + str;
+										}
+		        				}
+	        			}
+	        			
+	        			textPaneRazaCC.setText(razas);        			        			
+	        		}else
+	        			if(razas.equals(""))
+	        				textPaneRazaCC.setText(opcRazas);
+	        			else{
+	        			System.out.println(opcRazas);
+	        			
+	        			for(String str: razas.split(", ")){
+	        				if(str.equals(opcRazas)){
+	        					yaEstaAgregado = true;
+	        					break;
+	        				}
+	        			}
+	        			if(!yaEstaAgregado){
+	        				razas =  textPaneRazaCC.getText()+", "+opcRazas;
+	        				textPaneRazaCC.setText(razas);
+	        			}
+	        			}
+        		} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+        	}
+        	
+        });
+        btnAgregaRazaCC.setBounds(404, 278, 91, 23);
+        panelAgregarCasaCuna.add(btnAgregaRazaCC);
+        
+        JButton btnQuitarRazaCC = new JButton("Quitar");
+        btnQuitarRazaCC.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+	        		try {
+		        		String razas = textPaneRazaCC.getText();
+		        		String nuevaRazas = "";
+		        		String opcRazas = (String)comboBoxRazasCC.getSelectedItem();
+		        		String opcTipo = (String)comboBoxTipoMascotaCC.getSelectedItem();
+	        			boolean estaAgregado = false;
+
+		        		
+		        		if(opcRazas.equals("Todos")){
+		        			
+		        			
+								for(String str: razas.split(", ") ){									
+									estaAgregado = false;
+									for(String str1:Sistema.getListaRazas(opcTipo)){
+										if(str.equals(str1)){
+											estaAgregado = true;
+											break;
+										}
+									}									
+									if(!estaAgregado){
+										if(nuevaRazas.equals(""))
+				        					nuevaRazas =  str;
+				        				else
+				        					nuevaRazas += ", "+str;
+									}
+								}
+							        			        			
+		        		}else        					        		
+		        			for(String str: razas.split(", ")){
+		        				
+			        			if(!(str.equals(opcRazas))){
+			        				if(nuevaRazas.equals(""))
+			        					nuevaRazas =  str;
+			        				else
+			        					nuevaRazas += ", "+str;
+			        			}
+			        		}
+		        		
+		        		textPaneRazaCC.setText(nuevaRazas);
+	        		} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+        		      		        		
+        	}
+        });
+        btnQuitarRazaCC.setBounds(515, 278, 91, 23);
+        panelAgregarCasaCuna.add(btnQuitarRazaCC);
         
         
-//////////////////////////////////////*fin codigo Casa Cuna*/////////////////////////////////////////////////////////////////
+        
+//////////////////////////////////////*fin código Casa Cuna*/////////////////////////////////////////////////////////////////
 
         
         JMenuBar menuBar = new JMenuBar();

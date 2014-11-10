@@ -249,8 +249,8 @@ public class SistemasMascotas {
 	public static ArrayList<Mascota> getMascotasPorTipo(String tipo){
 
 	    ArrayList<Mascota> mascotasFiltradas = new ArrayList<Mascota>();
-	    
-	    if(tipo.equals(" "))
+	    if(tipo != null)//////////////////////////////////////////////////////////////////////////////////////
+	    if( tipo.equals(" "))
 	    	return listaMascotasFiltradas;
 	    
 	    for(Mascota obj:listaMascotasFiltradas)
@@ -262,16 +262,17 @@ public class SistemasMascotas {
 	
 	public static ArrayList<Mascota> getMascotasPorRaza(String raza){
 		ArrayList<Mascota> mascotasFiltradas = new ArrayList<Mascota>();
-		if(!(raza.equals(" ")))
-		{
-			for(Mascota obj:listaMascotasFiltradas)
-				if (obj.getRaza().equals(raza))
-						{System.out.println("filtré un -"+raza);
-		               	mascotasFiltradas.add(obj);
-						}
-			return listaMascotasFiltradas = mascotasFiltradas;
-			
-		}   
+		if(!(raza == null)) ////////////////////////////////////////////////////////////////////////////////////
+			if(!(raza.equals(" ")))
+			{
+				for(Mascota obj:listaMascotasFiltradas)
+					if (obj.getRaza().equals(raza))
+							{System.out.println("filtré un -"+raza);
+			               	mascotasFiltradas.add(obj);
+							}
+				return listaMascotasFiltradas = mascotasFiltradas;
+				
+			}   
 		return listaMascotasFiltradas;
 	}	
 	
