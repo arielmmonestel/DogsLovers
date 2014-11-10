@@ -90,6 +90,7 @@ import javax.swing.table.DefaultTableModel;
 
 import java.awt.event.MouseMotionAdapter;
 import java.awt.Choice;
+import javax.swing.ListSelectionModel;
 
 public class VentanaPrincipal {
 
@@ -1712,9 +1713,10 @@ public static void main(String[] args) {
 		    return false;  
 			} 
         };
+        tablaConsultaMascotas.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         scrollPane_2.setViewportView(tablaConsultaMascotas);
         tablaConsultaMascotas.setRowSelectionAllowed(true);
-        tablaConsultaMascotas.setCellSelectionEnabled(true);
+        tablaConsultaMascotas.setCellSelectionEnabled(false);
         tablaConsultaMascotas.setBorder(new LineBorder(new Color(189, 183, 107)));
         tablaConsultaMascotas.setForeground(new Color(139, 69, 19));
         tablaConsultaMascotas.setRowHeight(15);
@@ -1731,6 +1733,18 @@ public static void main(String[] args) {
         tablaConsultaMascotas.getColumnModel().getColumn(5).setPreferredWidth(100);
         tablaConsultaMascotas.getColumnModel().getColumn(6).setPreferredWidth(90);
         tablaConsultaMascotas.getColumnModel().getColumn(7).setPreferredWidth(160);
+        
+        tablaConsultaMascotas.addMouseListener(new MouseAdapter() {
+    		public void mouseClicked(MouseEvent e) {
+    			if (e.getClickCount() == 2) {
+    				JTable target = (JTable)e.getSource();
+    				int row = target.getSelectedRow();
+					int indiceDeMascota = Integer.parseInt(tablaConsultaMascotas.getModel().getValueAt(row, 0).toString());
+					// Aquí se abre una ventana de perfil de la mascota seleccionada
+    				
+    			}
+    		}
+    	});
         
         JLabel lblBuscarMascotas = new JLabel("Buscar mascotas:\r\n");
         lblBuscarMascotas.setForeground(new Color(189, 183, 107));

@@ -1,7 +1,6 @@
 package acceso;
 
 import java.awt.BorderLayout;
-
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
@@ -147,21 +146,25 @@ public class VentanaEdicionMascota extends JFrame {
 		cmbxTipo.setModel(new DefaultComboBoxModel(Sistema.getListaTipo()));
 		cmbxTipo.setBounds(122, 168, 143, 20);
 		contentPane.add(cmbxTipo);
+		String seleccionTipo = cmbxTipo.getSelectedItem().toString();
 		
 		cmbxRaza = new JComboBox();
 		cmbxRaza.setModel(new DefaultComboBoxModel(Sistema.getListaRazas(cmbxTipo.getSelectedItem().toString())));
 		cmbxRaza.setBounds(122, 238, 143, 20);
 		contentPane.add(cmbxRaza);
+		String seleccionRaza = cmbxRaza.getSelectedItem().toString();
 		
 		cmbxColorOjos = new JComboBox();
 		cmbxColorOjos.setModel(new DefaultComboBoxModel(Sistema.arrayToString(Sistema.getListaColorDeOjos())));
 		cmbxColorOjos.setBounds(122, 344, 143, 20);
 		contentPane.add(cmbxColorOjos);
+		String seleccionColorDeOjos = cmbxColorOjos.getSelectedItem().toString();
 		
 		cmbxColorPelo = new JComboBox();
 		cmbxColorPelo.setModel(new DefaultComboBoxModel(Sistema.arrayToString(Sistema.getListaColorDePelo())));
 		cmbxColorPelo.setBounds(122, 421, 143, 20);
 		contentPane.add(cmbxColorPelo);
+		String seleccionColorDePelo = cmbxColorPelo.getSelectedItem().toString();
 		
 		cmbxProvincia = new JComboBox();
 		cmbxProvincia.setModel(new DefaultComboBoxModel(new String[] {"San Jose", "Alajuela", "Cartago", "Heredia", "Puntarenas", "Limon", "Guanacaste"}));
@@ -194,12 +197,14 @@ public class VentanaEdicionMascota extends JFrame {
         });
 		cmbxProvincia.setBounds(515, 211, 153, 20);
 		contentPane.add(cmbxProvincia);
+		String seleccionProvincia = cmbxProvincia.getSelectedItem().toString();
 		
 		cmbxCanton = new JComboBox();
 		cmbxCanton.setModel(new DefaultComboBoxModel(new String[] {"Central","Escazú","Desamparados","Puriscal","Tarrazú","Aserrí","Mora","Goicoechea","Santa Ana","Alajuelita",
 													"Coronado","Acosta","Tibás","Moravia","Montes de Oca","Turrubares", "Dota","Curridabat","Perez Zeledón","León Cortés"}));    
 		cmbxCanton.setBounds(515, 254, 153, 20);
 		contentPane.add(cmbxCanton);
+		String seleccionCanton = cmbxCanton.getSelectedItem().toString();
 		
 		JLabel lblProvincia = new JLabel("Provincia:");
 		lblProvincia.setForeground(new Color(189, 183, 107));
@@ -213,22 +218,41 @@ public class VentanaEdicionMascota extends JFrame {
 		lblCantn.setBounds(449, 238, 70, 50);
 		contentPane.add(lblCantn);
 		
+		String lugarElegido = (String)cmbxCanton.getSelectedItem() + ", " + (String)cmbxProvincia.getSelectedItem();
+		
 		spinnerDia = new JSpinner();
 		spinnerDia.setModel(new SpinnerNumberModel(1, 1, 31, 1));
-		spinnerDia.setBounds(137, 490, 29, 20);
+		spinnerDia.setBounds(127, 490, 39, 20);
 		contentPane.add(spinnerDia);
 		
 		spinnerMes = new JSpinner();
 		spinnerMes.setModel(new SpinnerNumberModel(1, 1, 12, 1));
-		spinnerMes.setBounds(181, 490, 29, 20);
+		spinnerMes.setBounds(181, 490, 39, 20);
 		contentPane.add(spinnerMes);
 		
 		spinnerAnio = new JSpinner();
 		spinnerAnio.setModel(new SpinnerNumberModel(2014, 1990, 2014, 1));
-		spinnerAnio.setBounds(220, 490, 29, 20);
+		spinnerAnio.setBounds(233, 490, 63, 20);
 		contentPane.add(spinnerAnio);
 		
+		String fechaElegida = spinnerDia.getValue().toString() + "/" + 
+							  spinnerMes.getValue().toString() + "/" +
+							  spinnerAnio.getValue().toString();
+		
 		JButton btnGuardar = new JButton("Guardar Cambios");
+		btnGuardar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				SistemasMascotas.getMascota(IdMascotaAEditar).setChip(txtfldChip.getText());
+				SistemasMascotas.getMascota(IdMascotaAEditar).setColorDeOjos(seleccionColorDeOjos);
+				SistemasMascotas.getMascota(IdMascotaAEditar).setColorDePelo(seleccionColorDePelo);
+				SistemasMascotas.getMascota(IdMascotaAEditar).setLugarVisto(lugarElegido);
+				SistemasMascotas.getMascota(IdMascotaAEditar).setNota(txtPaneNota.getText());
+				SistemasMascotas.getMascota(IdMascotaAEditar).setRaza(seleccionRaza);
+				SistemasMascotas.getMascota(IdMascotaAEditar).setTipo(seleccionTipo);
+				SistemasMascotas.getMascota(IdMascotaAEditar).setRecompensa(txtfldRecompensa.getText());
+				SistemasMascotas.getMascota(IdMascotaAEditar).setDiaSuceso(fechaElegida);
+			}
+		});
 		btnGuardar.setBounds(530, 508, 143, 20);
 		contentPane.add(btnGuardar);
 	}
