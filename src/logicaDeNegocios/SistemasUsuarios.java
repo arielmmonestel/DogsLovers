@@ -417,4 +417,28 @@ public class SistemasUsuarios {
 		
 	}
 	
+	public static void verificarCalificacion(int idUsuario, int calificacion){
+		
+		try {
+			leerUsuarios();
+			for(Usuario usuario: listaUsuarios){
+				if (usuario.getID() == idUsuario){
+					if(calificacion < 3){
+						usuario.setCalificacion(calificacion);
+						usuario.setEstaEnListaNegra(true);
+						JOptionPane.showMessageDialog(null, "Calificación registrada correctamente.");
+					}else{
+						usuario.setCalificacion(calificacion);
+						JOptionPane.showMessageDialog(null, "Calificación registrada correctamente. El usuario fue añadido a Lista Negra");
+					}
+				}
+			}
+			GuardarUsuario();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
 }

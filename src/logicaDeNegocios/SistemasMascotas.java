@@ -38,7 +38,7 @@ public class SistemasMascotas {
 	static FileReader lectura = null;
 	static BufferedReader bufferLectura = null;
 	static JFrame frame = new JFrame();
-	public static int idMascota = 0;
+	public static int idMascota;
 
 	public static ArrayList<Mascota> getListaMascota(){
 		return listaMascotas;
@@ -50,7 +50,7 @@ public class SistemasMascotas {
     	try
     	{
     		listaMascotas.clear();    
-    		
+    		idMascota = 0;
     		if (archivo.exists())
     		{			
 	    		lectura = new FileReader (archivo);
@@ -100,6 +100,7 @@ public class SistemasMascotas {
     	FileWriter escribir = null;
     	PrintWriter pw = null;
     	size  = 0;
+    	idMascota = 0;
     	try
     	{		
     		escribir = new FileWriter(rutaMascotas,false);
@@ -169,6 +170,23 @@ public class SistemasMascotas {
 		}
 		return foto;
 	}
+	
+	public static String getNombreMascota(int idMascota){
+		String nombre= "";
+		try {
+			leerMascota();
+			for(Mascota mascota:listaMascotas){
+				if(mascota.getID() == idMascota){
+					nombre = mascota.getNombre();
+				}
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return nombre;
+	}
+	
 	
 	public static Mascota buscarPorChip(String numChip){
 		

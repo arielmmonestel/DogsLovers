@@ -308,7 +308,7 @@ public static void GuardarAsociacion()
     	    inStream.close();
     	    outStream.close();
 		} catch (IOException noHayArchivo) {
-			JOptionPane.showMessageDialog(null, "No se pudo copiar la imagen seleccionada.\n" + noHayArchivo.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+	
 		}
 	}
 	
@@ -477,7 +477,8 @@ public static void GuardarAsociacion()
     			String dato = "" ;
     			while((dato = bufferLectura.readLine())!=null)    			
     				listaEstados.add(dato);	    				
-    		}                		
+
+    		}
     	}catch(Exception e){
     		e.printStackTrace();  
     	}finally
@@ -542,7 +543,8 @@ public static void GuardarAsociacion()
     			String dato = "" ;
     			while((dato = bufferLectura.readLine())!=null)    			
     				listaColorDeOjos.add(dato);	    				
-    		}                		
+
+    		}
     	}catch(Exception e){
     		e.printStackTrace();  
     	}finally
@@ -597,7 +599,10 @@ public static void GuardarAsociacion()
     			String dato = "" ;
     			while((dato = bufferLectura.readLine())!=null)    			
     				listaColorDePelo.add(dato);	    				
-    		}                 		
+
+    		}               		
+
+    		
     	}catch(Exception e){
     		e.printStackTrace();  
     	}finally
@@ -825,7 +830,7 @@ public static void GuardarAsociacion()
 	
 	// cambiar  
 	
-    /////////////////////////////////////////// Donaciones ///////////////////////////////////////////////////
+  /////////////////////////////////////////// Donaciones ///////////////////////////////////////////////////
     
    	public static ArrayList<Donacion> getListaDeDonaciones(){
    		return listaDeDonaciones;
@@ -838,6 +843,60 @@ public static void GuardarAsociacion()
    	public static void agregarDonacion(Donacion pDonacion){
    		listaDeDonaciones.add(pDonacion);
    		
+   	}
+   	
+   	public static void getDonacion(int pIndice){
+   		listaDeDonaciones.get(pIndice);
+   	}
+   	
+   	public static DefaultTableModel crearModeloDeDonacionesFiltradas(ArrayList<Donacion> pArreglo){
+   		String[] columna = {"Asociación", "Donador", "Cantidad Donada"};
+   		String[] datos = new String[3];
+   		DefaultTableModel modeloNuevo = new DefaultTableModel(columna, 0);
+   		for(int i = 0; i < pArreglo.size(); i++){
+   			Donacion donacionTemp = pArreglo.get(i);
+   			datos[0] = donacionTemp.getAsociacionBeneficiada().getNombre();
+   			datos[1] = donacionTemp.getDonador().getNombre() + " " + 
+   					   donacionTemp.getDonador().getPrimerApellido() + " " +
+   					   donacionTemp.getDonador().getSegundoApellido();
+   			datos[2] = Integer.toString(donacionTemp.getCantidadDonada());
+   			modeloNuevo.addRow(datos);
+   		}
+   		return modeloNuevo;
+   	}
+   	
+   	public static ArrayList<Donacion> buscarPorAsociacion(String filtro, ArrayList<Donacion> arregloAFiltrar){
+   		ArrayList<Donacion> arregloFiltrado = new ArrayList<Donacion>();
+   		for(Donacion obj : arregloAFiltrar){
+   			if(obj.getAsociacionBeneficiada().getNombre().contains(filtro)){
+   				arregloFiltrado.add(obj);
+   			}
+   		}
+   		return arregloFiltrado;
+   	}
+   	
+   	public static ArrayList<Donacion> buscarPorDonador(String filtro, ArrayList<Donacion> arregloAFiltrar){
+   		ArrayList<Donacion> arregloFiltrado = new ArrayList<Donacion>();
+   		for(Donacion obj : arregloAFiltrar){
+   			if(obj.getDonador().getNombre().contains(filtro) || obj.getDonador().getNombreUsuario().contains(filtro)){
+   				arregloFiltrado.add(obj);
+   			}
+   		}
+   		return arregloFiltrado;
+   	}
+   	
+   	public static DefaultTableModel cargarTablaDeDonaciones(String[]datos, DefaultTableModel tableModel) throws IOException{
+   		
+   		for(int i = 0 ; i < getListaDeDonacionesSize() ; i++){
+   			Donacion donacionTemp = listaDeDonaciones.get(i);
+			datos[0] = donacionTemp.getAsociacionBeneficiada().getNombre();
+			datos[1] = donacionTemp.getDonador().getNombre() +
+					   donacionTemp.getDonador().getPrimerApellido() +
+					   donacionTemp.getDonador().getSegundoApellido();
+			datos[2] = Integer.toString(donacionTemp.getCantidadDonada());
+			tableModel.addRow(datos);
+		}
+   		return tableModel;
    	}
    	
    	
@@ -926,6 +985,19 @@ public static void GuardarAsociacion()
    			tableModel.addRow(filas);
 		}
    	}
+	
+public static void cargarTableAdopcionesACalificar(String[]columna,String[]filas,DefaultTableModel tableModel) throws IOException{
+ 
+   		for(Adopcion adopcion:SistemasAdopciones.getAdopciones()){
+   			if(adopcion.getIdPersonaQueDaEnAdopcion() == VentanaPrincipal.getIDUsuarioActivo()){
+   			filas[0] =SistemasUsuarios.getNombreUsuario(adopcion.getIdAdoptante()); 
+   			filas[1] =SistemasUsuarios.getNombreCompletoDelUsuario(adopcion.getIdAdoptante());
+   			filas[2] =Integer.toString(SistemasUsuarios.getCalificacion(adopcion.getIdAdoptante()));
+   			tableModel.addRow(filas);
+   			}
+		}
+   	}
+
 
 	public static DefaultTableModel cargarTablaDeMascotas(String[]datos, DefaultTableModel tableModel) throws IOException{
 	   		
