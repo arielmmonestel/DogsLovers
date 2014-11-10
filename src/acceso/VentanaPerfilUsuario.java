@@ -25,9 +25,6 @@ public class VentanaPerfilUsuario extends JFrame {
 	
 	public VentanaPerfilUsuario(int idUsuarioDelPerfil) {
 		
-		System.out.println("el id de usuaro es: ");
-		System.out.println(idUsuarioDelPerfil);
-		
 		setTitle("Perfil de Usuario");
 		setResizable(false);
 		setBounds(100, 100, 758, 597);

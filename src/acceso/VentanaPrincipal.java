@@ -90,6 +90,7 @@ import javax.swing.table.DefaultTableModel;
 
 import java.awt.event.MouseMotionAdapter;
 import java.awt.Choice;
+import javax.swing.ListSelectionModel;
 
 public class VentanaPrincipal {
 
@@ -97,6 +98,7 @@ public class VentanaPrincipal {
     private JPanel panelAgregarMascota;
     private JPanel panelAgregarCasaCuna;
     private JPanel panelConsultaDeMascotas;
+    private JPanel panelConsultaDeDonaciones;
     private JTextField textFieldNombreMascota;
     private JTextField textFieldNumChip;
     private ButtonGroup estadoMascota = new ButtonGroup() ;
@@ -189,12 +191,14 @@ public class VentanaPrincipal {
     private static boolean llegoAlLimiteIzquierdo = true;
     private JButton btnFlechaDerecha;
     private JTable tablaDeUsuarios;
+    private JTable tablaConsultaDonaciones;
     private JScrollPane scrollPane_1;
     private JLabel fondoConsultaUsuarios;
     private JPanel panelConsultaDeUsuarios;
     private JLabel lblMensajeListaVacia;
     private DefaultTableModel modeloListaDeUsuarios;
     private DefaultTableModel modeloListaDeMascotas;
+    private DefaultTableModel modeloListaDeDonaciones;
     ImageIcon imgfotomascota1 ;
     ImageIcon imgfotomascota2 ;
     ImageIcon imgfotomascota3; 
@@ -210,6 +214,8 @@ public class VentanaPrincipal {
    private JLabel lblPorTipo;
    private JLabel lblPorColorDeOjos;
    private JTextField textFieldBuscarPorNumDeChip;
+   private JTextField textFieldBuscarPorAsociacion;
+   private JTextField textFieldBuscarPorDonador;
    private JLabel lblLineaDivisoraPequenia;
    private JButton btnBuscarConsulta;
    private JTextField textFieldBuscarPorLugar;
@@ -1544,7 +1550,7 @@ public static void main(String[] args) {
         		panelAgregarCasaCuna.setVisible(false);
         		panelAgregarMascota.setVisible(true);
         		panelConsultaDeUsuarios.setVisible(false);
-        		panelConsultaDeMascotas.setVisible(false);
+        		panelConsultaDeDonaciones.setVisible(false);
         		
         	
             }
@@ -1597,7 +1603,7 @@ public static void main(String[] args) {
         		panelAgregarCasaCuna.setVisible(false);
         		panelAgregarMascota.setVisible(false);
         		panelConsultaDeUsuarios.setVisible(true);
-        		panelConsultaDeMascotas.setVisible(false);
+        		panelConsultaDeDonaciones.setVisible(false);
         		
         		if(SistemasUsuarios.getListaDeUsuariosSize() == 0){
         			tablaDeUsuarios.setVisible(false);
@@ -1612,16 +1618,25 @@ public static void main(String[] args) {
         JMenuItem mntmConsultaMascota = new JMenuItem("Mascotas");
         mntmConsultaMascota.setIcon(new ImageIcon("./imgs/Pets-30.png"));         
         mnConsulta.add(mntmConsultaMascota);
-        mntmConsultaMascota.addActionListener(new ActionListener() {
+		mntmConsultaMascota.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panelPrincipal.setVisible(false);
+				panelConsultaDeMascotas.setVisible(true);
+			}
+		});
+		
+        JMenuItem mntmConsultarDonaciones = new JMenuItem("Donaciones");
+        mnConsulta.add(mntmConsultarDonaciones);
+        mntmConsultarDonaciones.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		panelPrincipal.setVisible(false);
         		panelAgregarCasaCuna.setVisible(false);
         		panelAgregarMascota.setVisible(false);
         		panelConsultaDeUsuarios.setVisible(false);
-        		panelConsultaDeMascotas.setVisible(true);
-        		
+        		panelConsultaDeDonaciones.setVisible(true);
         	}
         });
+        
         
         JMenuItem mntmConsutarCasaCuna = new JMenuItem("Casa Cuna");
         mntmConsutarCasaCuna.setIcon(new ImageIcon("./imgs/casaCuna.png"));
@@ -1679,17 +1694,17 @@ public static void main(String[] args) {
         mnConfiguracin.add(mntmAdministracion);
         panelAgregarCasaCuna.setVisible(false);
 
-/////////////////////////////////////// Inicio Código Consulta Mascotas //////////////////////////////////////////////////////
-        
+        /////////////////////////////////////// Inicio Codigo Consulta Mascotas //////////////////////////////////////////////////////
+                
         panelConsultaDeMascotas = new JPanel();
         panelConsultaDeMascotas.setBackground(new Color(99,84,65));
         VentanaPrincipal.getContentPane().add(panelConsultaDeMascotas, "name_28003406149630");
         panelConsultaDeMascotas.setLayout(null);
-        
+
         scrollPane_2 = new JScrollPane();
         scrollPane_2.setBounds(567, 191, 749, 436);
         panelConsultaDeMascotas.add(scrollPane_2);
-        String[] columnaConsultaMascotas = {"ID", "Estado", "Tipo", "Raza", "Color de Pelo", "Color de Ojos", "Número de chip", "Lugar"};
+        String[] columnaConsultaMascotas = {"ID", "Estado", "Tipo", "Raza", "Color de Pelo", "Color de Ojos", "Numero De Chip", "Lugar"};
         String[] filaConsultaMascotas = new String[8];
         modeloListaDeMascotas = new DefaultTableModel(columnaConsultaMascotas, 0);
 		
@@ -1698,9 +1713,10 @@ public static void main(String[] args) {
 		    return false;  
 			} 
         };
+        tablaConsultaMascotas.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         scrollPane_2.setViewportView(tablaConsultaMascotas);
         tablaConsultaMascotas.setRowSelectionAllowed(true);
-        tablaConsultaMascotas.setCellSelectionEnabled(true);
+        tablaConsultaMascotas.setCellSelectionEnabled(false);
         tablaConsultaMascotas.setBorder(new LineBorder(new Color(189, 183, 107)));
         tablaConsultaMascotas.setForeground(new Color(139, 69, 19));
         tablaConsultaMascotas.setRowHeight(15);
@@ -1717,6 +1733,18 @@ public static void main(String[] args) {
         tablaConsultaMascotas.getColumnModel().getColumn(5).setPreferredWidth(100);
         tablaConsultaMascotas.getColumnModel().getColumn(6).setPreferredWidth(90);
         tablaConsultaMascotas.getColumnModel().getColumn(7).setPreferredWidth(160);
+        
+        tablaConsultaMascotas.addMouseListener(new MouseAdapter() {
+    		public void mouseClicked(MouseEvent e) {
+    			if (e.getClickCount() == 2) {
+    				JTable target = (JTable)e.getSource();
+    				int row = target.getSelectedRow();
+					int indiceDeMascota = Integer.parseInt(tablaConsultaMascotas.getModel().getValueAt(row, 0).toString());
+					// Aquí se abre una ventana de perfil de la mascota seleccionada
+    				
+    			}
+    		}
+    	});
         
         JLabel lblBuscarMascotas = new JLabel("Buscar mascotas:\r\n");
         lblBuscarMascotas.setForeground(new Color(189, 183, 107));
@@ -1843,8 +1871,127 @@ public static void main(String[] args) {
         btnBuscarConsulta = new JButton("Buscar\r\n");
         btnBuscarConsulta.setFont(new Font("Khmer UI", Font.PLAIN, 14));
         btnBuscarConsulta.setBounds(283, 571, 113, 32);
-        panelConsultaDeMascotas.add(btnBuscarConsulta);
+        panelConsultaDeMascotas.add(btnBuscarConsulta); 
         
+/////////////////////////////////////// Inicio Código Consulta Donaciones //////////////////////////////////////////////////////
+
+		panelConsultaDeDonaciones = new JPanel();
+		panelConsultaDeDonaciones.setBackground(new Color(99,84,65));
+		VentanaPrincipal.getContentPane().add(panelConsultaDeDonaciones, "name_28003406149630");
+		panelConsultaDeDonaciones.setLayout(null);
+		
+		scrollPane_2 = new JScrollPane();
+		scrollPane_2.setBounds(567, 191, 722, 436);
+		panelConsultaDeDonaciones.add(scrollPane_2);
+		String[] columnaConsultaDonaciones = {"Asociación", "Donador", "Cantidad Donada"};
+		String[] filaConsultaDonaciones = new String[3];
+		modeloListaDeDonaciones = new DefaultTableModel(columnaConsultaDonaciones, 0);
+		
+		tablaConsultaDonaciones = new JTable(){
+		public boolean isCellEditable(int row, int column){  
+		return false;  
+		} 
+		};
+		scrollPane_2.setViewportView(tablaConsultaDonaciones);
+		tablaConsultaDonaciones.setRowSelectionAllowed(true);
+		tablaConsultaDonaciones.setCellSelectionEnabled(true);
+		tablaConsultaDonaciones.setBorder(new LineBorder(new Color(189, 183, 107)));
+		tablaConsultaDonaciones.setForeground(new Color(139, 69, 19));
+		tablaConsultaDonaciones.setRowHeight(15);
+		tablaConsultaDonaciones.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		tablaConsultaDonaciones.setVisible(true);
+		tablaConsultaDonaciones.setEnabled(true);
+		modeloListaDeDonaciones = Sistema.cargarTablaDeDonaciones(filaConsultaDonaciones, modeloListaDeDonaciones);
+		tablaConsultaDonaciones.setModel(modeloListaDeDonaciones);
+		tablaConsultaDonaciones.getColumnModel().getColumn(0).setPreferredWidth(230);
+		tablaConsultaDonaciones.getColumnModel().getColumn(1).setPreferredWidth(380);
+		tablaConsultaDonaciones.getColumnModel().getColumn(2).setPreferredWidth(110);
+		tablaConsultaDonaciones.setRowHeight(25);
+		
+		JLabel lblPorDonador = new JLabel("DONADOR\r\n");
+		lblPorDonador.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPorDonador.setForeground(new Color(189, 183, 107));
+		lblPorDonador.setFont(new Font("Khmer UI", Font.BOLD, 14));
+		lblPorDonador.setBounds(76, 291, 72, 50);
+		panelConsultaDeDonaciones.add(lblPorDonador);
+		
+		JLabel lblBuscarDonaciones = new JLabel("Buscar donaciones:\r\n");
+		lblBuscarDonaciones.setForeground(new Color(189, 183, 107));
+		lblBuscarDonaciones.setFont(new Font("Khmer UI", Font.PLAIN, 20));
+		lblBuscarDonaciones.setHorizontalAlignment(SwingConstants.CENTER);
+		lblBuscarDonaciones.setBounds(30, 170, 200, 50);
+		panelConsultaDeDonaciones.add(lblBuscarDonaciones);
+		
+		JLabel lblTituloDonaciones = new JLabel("Donaciones");
+		lblTituloDonaciones.setForeground(new Color(189, 183, 107));
+		lblTituloDonaciones.setFont(new Font("Khmer UI", Font.BOLD, 47));
+		lblTituloDonaciones.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTituloDonaciones.setBounds(29, 26, 277, 80);
+		panelConsultaDeDonaciones.add(lblTituloDonaciones);
+		
+		JLabel lblLineaDivisoraGrande = new JLabel("__________________________________");
+		lblLineaDivisoraGrande.setForeground(new Color(107, 142, 35));
+		lblLineaDivisoraGrande.setFont(new Font("Tahoma", Font.BOLD, 60));
+		lblLineaDivisoraGrande.setBounds(42, -16, 1318, 227);
+		panelConsultaDeDonaciones.add(lblLineaDivisoraGrande);
+		
+		JLabel lblPorAsociacion = new JLabel("ASOCIACI\u00D3N");
+		lblPorAsociacion.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPorAsociacion.setForeground(new Color(189, 183, 107));
+		lblPorAsociacion.setFont(new Font("Khmer UI", Font.BOLD, 14));
+		lblPorAsociacion.setBounds(53, 235, 102, 50);
+		panelConsultaDeDonaciones.add(lblPorAsociacion);
+		
+		lblLineaDivisoraPequenia = new JLabel("_______________________________________________________________");
+		lblLineaDivisoraPequenia.setHorizontalAlignment(SwingConstants.CENTER);
+		lblLineaDivisoraPequenia.setForeground(new Color(189, 183, 107));
+		lblLineaDivisoraPequenia.setFont(new Font("Khmer UI", Font.BOLD, 14));
+		lblLineaDivisoraPequenia.setBounds(53, 421, 396, 50);
+		panelConsultaDeDonaciones.add(lblLineaDivisoraPequenia);
+		
+		textFieldBuscarPorAsociacion = new JTextField();
+		textFieldBuscarPorAsociacion.setBounds(171, 251, 240, 20);
+		panelConsultaDeDonaciones.add(textFieldBuscarPorAsociacion);
+		textFieldBuscarPorAsociacion.setColumns(10);
+		
+		textFieldBuscarPorDonador = new JTextField();
+		textFieldBuscarPorDonador.setColumns(10);
+		textFieldBuscarPorDonador.setBounds(171, 307, 240, 20);
+		panelConsultaDeDonaciones.add(textFieldBuscarPorDonador);
+		
+		btnBuscarConsulta = new JButton("Buscar\r\n");
+		btnBuscarConsulta.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+		
+		String filtroAsociacion = textFieldBuscarPorAsociacion.getText();
+		String filtroDonador = "";
+		ArrayList<Donacion> arregloFiltrado = Sistema.getListaDeDonaciones();
+		
+		if(filtroAsociacion != ""){
+		
+		arregloFiltrado = Sistema.buscarPorAsociacion(filtroAsociacion, arregloFiltrado);
+		}
+		
+		if(filtroDonador != ""){
+		
+		arregloFiltrado = Sistema.buscarPorDonador(filtroDonador, arregloFiltrado);
+		}
+		
+		modeloListaDeDonaciones.setRowCount(0);
+		modeloListaDeDonaciones = Sistema.crearModeloDeDonacionesFiltradas(arregloFiltrado);
+		tablaConsultaDonaciones.setModel(modeloListaDeDonaciones);
+		
+		}
+		});
+		btnBuscarConsulta.setFont(new Font("Khmer UI", Font.PLAIN, 14));
+		btnBuscarConsulta.setBounds(193, 381, 113, 32);
+		panelConsultaDeDonaciones.add(btnBuscarConsulta);
+		
+		tablaConsultaDonaciones.getColumnModel().getColumn(0).setPreferredWidth(230);
+		tablaConsultaDonaciones.getColumnModel().getColumn(1).setPreferredWidth(380);
+		tablaConsultaDonaciones.getColumnModel().getColumn(2).setPreferredWidth(110);
+
+
 //////////////////////////////////////Inicio Código Consulta Usuarios////////////////////////////////////////////////////
 
 		        
