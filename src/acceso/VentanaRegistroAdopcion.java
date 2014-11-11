@@ -336,7 +336,7 @@ public class VentanaRegistroAdopcion extends JFrame {
 	          
 	          labelDelAdoptante = new JLabel("<FotoDelAdoptante>");
 	          labelDelAdoptante.setFont(new Font("Khmer UI", Font.BOLD, 15));
-	          labelDelAdoptante.setBounds(20, 446, 146, 137);
+	          labelDelAdoptante.setBounds(10, 452, 146, 137);
 	          panelRegistrarAdopcion.add(labelDelAdoptante);
 	          
 	          JLabel lblNombreDelAdoptante = new JLabel("<NombreDelAdoptante>");
@@ -360,7 +360,7 @@ public class VentanaRegistroAdopcion extends JFrame {
 	          JLabel labelTelefonoDelAdoptante = new JLabel("<TelefonoDelAdoptante>");
 	          labelTelefonoDelAdoptante.setText("Telefono: "+ SistemasUsuarios.getTelefonoDelUsuario(idUsuarioActivo));
 	          labelTelefonoDelAdoptante.setFont(new Font("Khmer UI", Font.BOLD, 15));
-	          labelTelefonoDelAdoptante.setBounds(272, 602, 391, 26);
+	          labelTelefonoDelAdoptante.setBounds(329, 591, 391, 26);
 	          panelRegistrarAdopcion.add(labelTelefonoDelAdoptante);
 	          
 	          btnGuardarAdopcion = new JButton("");
