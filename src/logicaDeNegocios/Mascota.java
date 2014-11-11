@@ -11,7 +11,7 @@ import java.util.Calendar;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-public class Mascota {
+public class Mascota{
 	
 	
 	
@@ -78,8 +78,9 @@ public class Mascota {
 		return estado;
 	}
 
-	public void setEstado(String string) {
-		estado = string;
+	public void setEstado(String pEstado) {
+		//notifyObservers(pEstado);
+		estado = pEstado;
 	}
 
 	public String getTipo() {

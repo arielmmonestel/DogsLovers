@@ -1019,6 +1019,7 @@ public static void GuardarAsociacion()
 		}
    	}
 	
+
 public static void cargarTableAsociacionBeneficiaria(String[]columna,String[]filas,DefaultTableModel tableModel)throws IOException{
    		
    		for(Asociacion asociacion:getListaAsociaciones()){
