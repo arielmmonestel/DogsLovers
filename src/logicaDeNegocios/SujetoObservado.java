@@ -1,3 +1,16 @@
+
+/*Autores:
+*Ariel Montero 
+*Giaccomo Ubaldo
+*Fabián Monge
+*Jefri Cárdenas
+*Fecha de Creacion: 21/10/2014
+*
+*Descripción: Esta es la interfaz SujetoObservado, implementada con el proósito de poner el patrón Observador en el programa.
+*
+*/
+
+
 package logicaDeNegocios;
 
 import java.util.ArrayList;

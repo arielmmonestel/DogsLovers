@@ -1,3 +1,18 @@
+
+
+/*Autores:
+*Ariel Montero 
+*Giaccomo Ubaldo
+*Fabián Monge
+*Jefri Cárdenas
+*Fecha de Creacion: 21/10/2014
+*
+*Descripción: Esta es la clase Mascota, su función es englobar el concepto de mascotas.
+*
+*/
+
+
+
 package logicaDeNegocios;
 import java.io.BufferedReader;
 import java.io.File;

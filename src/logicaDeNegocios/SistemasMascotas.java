@@ -1,3 +1,17 @@
+
+/*Autores:
+*Ariel Montero 
+*Giaccomo Ubaldo
+*Fabián Monge
+*Jefri Cárdenas
+*Fecha de Creacion: 21/10/2014
+*
+*Descripción: Esta es la clase SistemasMascotas, se ocupa de toda la parte del sistemas dedicada a mascotas.
+*
+*/
+
+
+
 package logicaDeNegocios;
 
 import java.io.BufferedReader;

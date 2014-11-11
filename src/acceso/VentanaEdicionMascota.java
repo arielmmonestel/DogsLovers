@@ -1,3 +1,18 @@
+
+
+/*Autores:
+*Ariel Montero 
+*Giaccomo Ubaldo
+*Fabián Monge
+*Jefri Cárdenas
+*Fecha de Creacion: 4/11/2014
+*
+*Descripción: Esta es la clase VentanaEdicionMascota, su función es abrir une ventana para editar la información de una mascota.
+*
+*/
+
+
+
 package acceso;
 
 import java.awt.BorderLayout;
@@ -248,6 +263,12 @@ public class VentanaEdicionMascota extends JFrame{
 //				if(estadoActual.equals("PERDIDA") && seleccionEstado.equals("RECUPERADA")){
 //					notificar();
 //				}
+				
+				try {
+					SistemasMascotas.leerMascota();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
 				SistemasMascotas.getMascota(IdMascotaAEditar).setChip(txtfldChip.getText());
 				SistemasMascotas.getMascota(IdMascotaAEditar).setColorDeOjos(seleccionColorDeOjos);
 				SistemasMascotas.getMascota(IdMascotaAEditar).setColorDePelo(seleccionColorDePelo);
@@ -257,6 +278,8 @@ public class VentanaEdicionMascota extends JFrame{
 				SistemasMascotas.getMascota(IdMascotaAEditar).setTipo(seleccionTipo);
 				SistemasMascotas.getMascota(IdMascotaAEditar).setRecompensa(txtfldRecompensa.getText());
 				SistemasMascotas.getMascota(IdMascotaAEditar).setDiaSuceso(fechaElegida);
+				SistemasMascotas.GuardarMascota();
+				dispose();
 			}
 		});
 		btnGuardar.setBounds(530, 508, 143, 20);

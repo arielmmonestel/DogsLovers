@@ -1,3 +1,17 @@
+
+
+/*Autores:
+*Ariel Montero 
+*Giaccomo Ubaldo
+*Fabián Monge
+*Jefri Cárdenas
+*Fecha de Creacion: 4/11/2014
+*
+*Descripción: Esta es la clase VentanaNuevoUsuario, su función es registrar nuevos usuarios en una ventana aparte.
+*
+*/
+
+
 package acceso;
 import java.awt.Color;
 import java.awt.Component;

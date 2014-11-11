@@ -1,3 +1,19 @@
+
+
+/*Autores:
+*Ariel Montero 
+*Giaccomo Ubaldo
+*Fabián Monge
+*Jefri Cárdenas
+*Fecha de Creacion: 4/11/2014
+*
+*Descripción: Esta es la clase VentanaPrincipal, contiene todos los paneles principales, los cuáles son mayormente de consulta
+*y registro. Desde aquí se va a todas las demás ventanas y paneles.
+*
+*/
+
+
+
 package acceso;
 
 import acceso.*;
@@ -3115,7 +3131,18 @@ JButton btninicioConsulta11 = new JButton("Inicio");
         btnPanelPerfilMascota_Adoptar.setBounds(43, 391, 91, 23);
         panelPerfilMascota.add(btnPanelPerfilMascota_Adoptar);
         
-        btnPanelPerfilMascota_Editar = new JButton("Editar");
+
+        JButton btnPanelPerfilMascota_Editar = new JButton("Editar");
+        btnPanelPerfilMascota_Editar.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		try {
+					VentanaEdicionMascota ventanaEdicion = new VentanaEdicionMascota(idMascApop);
+					ventanaEdicion.setVisible(true);
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+        	}
+        });
         btnPanelPerfilMascota_Editar.setBounds(620, 340, 91, 23);
         panelPerfilMascota.add(btnPanelPerfilMascota_Editar);
         

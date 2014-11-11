@@ -1,3 +1,19 @@
+
+
+/*Autores:
+*Ariel Montero 
+*Giaccomo Ubaldo
+*Fabián Monge
+*Jefri Cárdenas
+*Fecha de Creacion: 21/10/2014
+*
+*Descripción: Esta es la clase SistemasAdopciones, su función es manejar la parte del sistema que se ocupa de las adopciones.
+*
+*/
+
+
+
+
 package logicaDeNegocios;
 
 import java.io.BufferedReader;

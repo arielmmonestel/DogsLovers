@@ -1,3 +1,19 @@
+
+
+/*Autores:
+*Ariel Montero 
+*Giaccomo Ubaldo
+*Fabián Monge
+*Jefri Cárdenas
+*Fecha de Creacion: 21/10/2014
+*
+*Descripción: Esta es la clase CasaCuna, esta clase engloba el concepto de casas cuna, que son las que se registran en el programa
+*con el propósito de brindar albergue a otras mascotas encontradas o en adopción
+*
+*/
+
+
+
 package logicaDeNegocios;
 import java.io.BufferedReader;
 import java.io.File;

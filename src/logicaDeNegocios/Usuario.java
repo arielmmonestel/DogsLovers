@@ -1,3 +1,18 @@
+
+
+/*Autores:
+*Ariel Montero 
+*Giaccomo Ubaldo
+*Fabián Monge
+*Jefri Cárdenas
+*Fecha de Creacion: 21/10/2014
+*
+*Descripción: Esta es la clase Usuarios, engloba el concepto de Usuarios en el sistema.
+*
+*/
+
+
+
 package logicaDeNegocios;
 
 import java.io.BufferedReader;
@@ -134,7 +149,6 @@ public class Usuario extends Persona{
 		System.out.println("Al hacer reportar");
 		System.out.println(idUsuario);
 		System.out.println(SistemasUsuarios.getUsuario(idUsuario).estaEnListaNegra());
-		ListaNegra.agregarAListaNegra(SistemasUsuarios.getUsuario(idUsuario));
 		SistemasUsuarios.GuardarUsuario();
 	}
 	

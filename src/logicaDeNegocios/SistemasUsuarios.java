@@ -1,3 +1,18 @@
+
+
+/*Autores:
+*Ariel Montero 
+*Giaccomo Ubaldo
+*Fabián Monge
+*Jefri Cárdenas
+*Fecha de Creacion: 21/10/2014
+*
+*Descripción: Esta es la clase SistemasUsuarios, se ocupa de toda la parte dedicada del sistema a los usuarios.
+*
+*/
+
+
+
 package logicaDeNegocios;
 
 import java.io.BufferedReader;

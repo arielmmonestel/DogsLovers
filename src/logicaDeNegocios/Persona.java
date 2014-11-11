@@ -1,3 +1,18 @@
+
+
+/*Autores:
+*Ariel Montero 
+*Giaccomo Ubaldo
+*Fabián Monge
+*Jefri Cárdenas
+*Fecha de Creacion: 21/10/2014
+*
+*Descripción: Esta es la clase Donación, su función es englobar el concepto de personas.
+*
+*/
+
+
+
 package logicaDeNegocios;
 
 public class Persona {
