@@ -332,13 +332,10 @@ public class VentanaPrincipal {
         btnCerrarSesion.setFont(new Font("Khmer UI", Font.BOLD, 11));
         btnCerrarSesion.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                
                 IDUsuarioActivo = -1;
                 VentanaPrincipal.dispose();
                 Loggin log  = new Loggin();
                 log.setVisible(true);
-                
-                
             }
         });
         btnCerrarSesion.addMouseListener(new MouseAdapter() {
@@ -1906,7 +1903,7 @@ public class VentanaPrincipal {
         JMenuItem mntmConsutaMiPerfil = new JMenuItem("Mi Perfil");
         mntmConsutaMiPerfil.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                VentanaPerfilUsuario ventanaMiPerfil = new VentanaPerfilUsuario(IDUsuarioActivo);
+                VentanaPerfilUsuario ventanaMiPerfil = new VentanaPerfilUsuario(IDUsuarioActivo, IDUsuarioActivo);
                 ventanaMiPerfil.setVisible(true);
             }
         });
@@ -2596,7 +2593,7 @@ public class VentanaPrincipal {
                 }else{
                     idUsuarioDelPerfil = ListaNegra.getUsuario(tablaDeUsuarios.getSelectedRow()).getID();
                 }
-                VentanaPerfilUsuario ventanaDePerfil = new VentanaPerfilUsuario(idUsuarioDelPerfil);
+                VentanaPerfilUsuario ventanaDePerfil = new VentanaPerfilUsuario(idUsuarioDelPerfil, IDUsuarioActivo);
                 ventanaDePerfil.setVisible(true);
             }
         }
@@ -2618,6 +2615,7 @@ public class VentanaPrincipal {
                     modeloListaDeUsuarios.setRowCount(0);
                     modeloListaDeUsuarios = Sistema.cargarTablaDeUsuarios(fila, modeloListaDeUsuarios);
                     tablaDeUsuarios.setModel(modeloListaDeUsuarios);
+                    tablaDeUsuarios.repaint();
                 }
             }
         });
@@ -2636,6 +2634,7 @@ public class VentanaPrincipal {
                     modeloListaDeUsuarios.setRowCount(0);
                     modeloListaDeUsuarios = Sistema.cargarTablaDeUsuariosEnListaNegra(fila, modeloListaDeUsuarios);
                     tablaDeUsuarios.setModel(modeloListaDeUsuarios);
+                    tablaDeUsuarios.repaint();
                 }
             }
         });

@@ -127,11 +127,15 @@ public class Usuario extends Persona{
 //		Sistema.agregarAdopcion(new Adopcion(this, Mascota pMascota));
 //	}
 	
-	public void reportar(int idUsuario, String pMotivo){
-		Usuario usuarioReportado = SistemasUsuarios.getUsuario(idUsuario);
+	public void reportar(int idUsuario, String pMotivo) throws IOException{
+		SistemasUsuarios.leerUsuarios();
 		Sistema.agregarReporte(new Reporte(this, idUsuario, pMotivo));
-		usuarioReportado.setEstaEnListaNegra(true);
-		ListaNegra.agregarAListaNegra(usuarioReportado);
+		SistemasUsuarios.getUsuario(idUsuario).setEstaEnListaNegra(true);
+		System.out.println("Al hacer reportar");
+		System.out.println(idUsuario);
+		System.out.println(SistemasUsuarios.getUsuario(idUsuario).estaEnListaNegra());
+		ListaNegra.agregarAListaNegra(SistemasUsuarios.getUsuario(idUsuario));
+		SistemasUsuarios.GuardarUsuario();
 	}
 	
 	
