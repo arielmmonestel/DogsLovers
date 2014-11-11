@@ -33,7 +33,7 @@ import javax.mail.internet.MimeMultipart;
 
 
 import acceso.VentanaPrincipal;
-import acceso.VentanaRegistroAdopcion;
+
 
 
 
@@ -70,6 +70,7 @@ public class Sistema {
 	
 	private static int idAsociacion;
 	private static String rutaAsociaciones = "./Asociaciones.poo";
+	private static String RutaImagenesAdoptantes = "./Adoptantes";
 	public static ArrayList<Asociacion> listaAsociaciones=  new ArrayList<Asociacion>() ;
 	
 	File archivo = null;
@@ -797,7 +798,7 @@ public static void GuardarAsociacion()
     public static void asignarIDFotoAdoptante() {
         try {
            SistemasAdopciones.leerAdopcion();
-         VentanaRegistroAdopcion.setFotoAdoptante("./Adoptantes/" + String.valueOf(SistemasAdopciones.getListaDeAdopcionesSize()+1)+".jpg");
+           VentanaPrincipal.setFotoAdoptante("./Adoptantes/" + String.valueOf(SistemasAdopciones.getListaDeAdopcionesSize()+1)+".jpg");
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -807,7 +808,7 @@ public static void GuardarAsociacion()
 
     }
 	public static void crearCarpetaImagenesAdoptantes() {
-		   File archivo = new File (VentanaRegistroAdopcion.getRutaImagenesAdoptantes());
+		   File archivo = new File (RutaImagenesAdoptantes);
 
 	        if(!archivo.exists())
 	        {
