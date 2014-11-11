@@ -89,8 +89,11 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.Choice;
 import java.awt.Panel;
+
 import javax.swing.JTextPane;
+
 import java.awt.TextField;
+
 import javax.swing.JList;
 
 public class VentanaPrincipal {
@@ -231,7 +234,7 @@ public class VentanaPrincipal {
     private JLabel lbl_panelPerfilMascota_Raza;
     private JLabel lbl_panelPerfilMascota_lNombreMacota;
     private JLabel lbl_panelPerfilMascota_Encargado;
-    private JLabel lbl_panelPerfilMacota_Correo;
+    private JLabel lbl_panelPerfilMascota_Correo;
     private JLabel lbl_panelPerfilMacota_Telefono;
     private JPanel panelPerfilMascota;
     private JLabel lbl_id_macota1;
@@ -277,9 +280,34 @@ public class VentanaPrincipal {
 	private JComboBox comboBoxRazasCC;
 	private JTextArea textAreaRazasCC;
 
+	private Panel panelAdoptar;
+	private JButton button;
+	private JLabel label;
+	private JLabel lblPanelAdop_Raza;
+	private JLabel lblPanelAdop_Tipo;
+	private JLabel label_8;
+	private JLabel lblPanelAdop_Encargado;
+	private JLabel label_11;
+	private JLabel label_12;
+	private JLabel lblPanelAdop_nombAdoptante;
+	private JButton btnPanelAdop_Guardar;
+	private JLabel label_19;
+	private JTextField textFieldlPanelAdop_NuevoNombre;
 
-    
-
+	String estadoApop = "";
+	String chipApop = "";
+	String  ojosApop = "";
+	String  peloApop = "";
+	String  diaSucesApopo= "";
+	String razaApop = "";
+	String  tipoApop = "";
+	String  recompensaApop = "";
+	String nombreMascitApopa= "";
+	String  correoApop = "";
+	String recomensaApop ="";
+	int  idEngcardoApop = -1;
+	int  idMascApop = -1;
+	
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -375,6 +403,7 @@ public class VentanaPrincipal {
         panelPrimeraMascota.setLayout(null);
         
         btnVer_panel1 = new JButton("Ver mascota");
+        
         btnVer_panel1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 // ir a otro panel con el id  esta mascota! 
@@ -384,21 +413,27 @@ public class VentanaPrincipal {
                 panelAgregarMascota.setVisible(false);
                 panelConsultaDeUsuarios.setVisible(false);
                 panelPerfilMascota.setVisible(true);
-                idMascotaSeleccionada =  mascotaPanel1.getID(); 
-                mascotaPanel1.getEstado();
-                mascotaPanel1.getChip();
-                mascotaPanel1.getColorDeOjos();
-                mascotaPanel1.getColorDePelo();
-                mascotaPanel1.getDiaSuceso();
-                mascotaPanel1.getRaza();
-                mascotaPanel1.getTipo();
-                mascotaPanel1.getIdEncargado();
-                mascotaPanel1.getRecompensa();
-                mascotaPanel1.getNombre(); // nombreMascora
+                idMascApop =  mascotaPanel1.getID(); 
+                String estado  =  mascotaPanel1.getEstado();
+             	chipApop = mascotaPanel1.getChip();
+             	ojosApop = mascotaPanel1.getColorDeOjos();
+             	peloApop = mascotaPanel1.getColorDePelo();
+             	  diaSucesApopo = mascotaPanel1.getDiaSuceso();
+             	razaApop = mascotaPanel1.getRaza();
+             	tipoApop = mascotaPanel1.getTipo();
+             	recompensaApop = mascotaPanel1.getRecompensa();
+             	nombreMascitApopa =  mascotaPanel1.getNombre();
+             	//String  correo =mascotaPanel1.get
+             	idEngcardoApop = mascotaPanel1.getIdEncargado();
+             	recomensaApop = mascotaPanel1.getRecompensa();    
+             	correoApop = SistemasUsuarios.getCorreoDelUsuario(idEncargado);              
+  
+ 
+             			
+  
                 
-                
-                
-                cargarPanelPerfilMacota(idMascotaSeleccionada);
+                cargarPanelPerfilMascota(idMascApop, estado,chipApop,ojosApop,peloApop,diaSucesApopo,
+                		razaApop,tipoApop,recompensaApop,idEngcardoApop);
             }
         });
         btnVer_panel1.setBounds(728, 107, 130, 23);
@@ -456,6 +491,41 @@ public class VentanaPrincipal {
         panelPrincipal.add(panelSegundaMascota);
         
         btnVer_panel2 = new JButton("Ver mascota");
+        btnVer_panel2.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		
+        		
+        		
+        		
+        		panelPrincipal.setVisible(false);
+                panelPrincipal.setVisible(false);
+                panelAgregarCasaCuna.setVisible(false);
+                panelAgregarMascota.setVisible(false);
+                panelConsultaDeUsuarios.setVisible(false);
+                panelPerfilMascota.setVisible(true);
+                idMascApop =  mascotaPanel2.getID(); 
+                String estado  =  mascotaPanel2.getEstado();
+             	chipApop = mascotaPanel2.getChip();
+             	ojosApop = mascotaPanel2.getColorDeOjos();
+             	peloApop = mascotaPanel2.getColorDePelo();
+             	  diaSucesApopo = mascotaPanel2.getDiaSuceso();
+             	razaApop = mascotaPanel2.getRaza();
+             	tipoApop = mascotaPanel2.getTipo();
+             	recompensaApop = mascotaPanel2.getRecompensa();
+             	nombreMascitApopa =  mascotaPanel2.getNombre();
+
+             	idEngcardoApop = mascotaPanel2.getIdEncargado();
+             	recomensaApop = mascotaPanel2.getRecompensa();    
+             	correoApop = SistemasUsuarios.getCorreoDelUsuario(idEncargado);    
+
+             	cargarPanelPerfilMascota(idMascApop, estado,chipApop,ojosApop,peloApop,diaSucesApopo,
+                		razaApop,tipoApop,recompensaApop,idEngcardoApop);
+        		
+        		
+        		
+        		
+        	}
+        });
         btnVer_panel2.setBounds(728, 107, 130, 23);
         panelSegundaMascota.add(btnVer_panel2);
         
@@ -504,6 +574,34 @@ public class VentanaPrincipal {
         panelPrincipal.add(panelTerceraMascota);
         
         btnVer_panel3 = new JButton("Ver mascota");
+        btnVer_panel3.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		
+        		panelPrincipal.setVisible(false);
+                panelPrincipal.setVisible(false);
+                panelAgregarCasaCuna.setVisible(false);
+                panelAgregarMascota.setVisible(false);
+                panelConsultaDeUsuarios.setVisible(false);
+                panelPerfilMascota.setVisible(true);
+                idMascApop =  mascotaPanel3.getID(); 
+                String estado  =  mascotaPanel3.getEstado();
+             	chipApop = mascotaPanel3.getChip();
+             	ojosApop = mascotaPanel3.getColorDeOjos();
+             	peloApop = mascotaPanel3.getColorDePelo();
+             	  diaSucesApopo = mascotaPanel3.getDiaSuceso();
+             	razaApop = mascotaPanel3.getRaza();
+             	tipoApop = mascotaPanel3.getTipo();
+             	recompensaApop = mascotaPanel3.getRecompensa();
+             	nombreMascitApopa =  mascotaPanel3.getNombre();
+             	idEngcardoApop = mascotaPanel3.getIdEncargado();
+             	recomensaApop = mascotaPanel3.getRecompensa();    
+             	correoApop = SistemasUsuarios.getCorreoDelUsuario(idEncargado);    
+
+             	cargarPanelPerfilMascota(idMascApop, estado,chipApop,ojosApop,peloApop,diaSucesApopo,
+                		razaApop,tipoApop,recompensaApop,idEngcardoApop);
+        		
+        	}
+        });
         btnVer_panel3.setBounds(728, 107, 130, 23);
         panelTerceraMascota.add(btnVer_panel3);
         
@@ -1914,9 +2012,7 @@ public class VentanaPrincipal {
         mnConsulta.add(mntmConsultaUsuarios);
         mntmConsultaUsuarios.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                panelPrincipal.setVisible(false);
-                panelAgregarCasaCuna.setVisible(false);
-                panelAgregarMascota.setVisible(false);
+              
                 panelConsultaDeUsuarios.setVisible(true);
                 panelConsultaAsociacionBeneficiaria.setVisible(false);
                 panelConsultaDeCasaCuna.setVisible(false);
@@ -2730,13 +2826,13 @@ public class VentanaPrincipal {
         
         lbl_panelPerfilMascota_Encargado = new JLabel("New label");
         lbl_panelPerfilMascota_Encargado.setFont(new Font("Khmer UI", Font.BOLD, 15));
-        lbl_panelPerfilMascota_Encargado.setBounds(817, 175, 169, 31);
+        lbl_panelPerfilMascota_Encargado.setBounds(817, 175, 290, 31);
         panelPerfilMascota.add(lbl_panelPerfilMascota_Encargado);
         
-        lbl_panelPerfilMacota_Correo = new JLabel("New label");
-        lbl_panelPerfilMacota_Correo.setFont(new Font("Khmer UI", Font.BOLD, 15));
-        lbl_panelPerfilMacota_Correo.setBounds(817, 228, 169, 31);
-        panelPerfilMascota.add(lbl_panelPerfilMacota_Correo);
+        lbl_panelPerfilMascota_Correo = new JLabel("New label");
+        lbl_panelPerfilMascota_Correo.setFont(new Font("Khmer UI", Font.BOLD, 15));
+        lbl_panelPerfilMascota_Correo.setBounds(817, 228, 290, 31);
+        panelPerfilMascota.add(lbl_panelPerfilMascota_Correo);
         
         lbl_panelPerfilMacota_Telefono = new JLabel("New label");
         lbl_panelPerfilMacota_Telefono.setFont(new Font("Khmer UI", Font.BOLD, 15));
@@ -2813,6 +2909,163 @@ public class VentanaPrincipal {
 		
         table = new JTable(tableModel);
         scrollPane_4.setViewportView(table);
+
+        JButton btnPanelPerfilMascota_Adoptar = new JButton("Adoptar");
+        btnPanelPerfilMascota_Adoptar.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {        	      
+        		 VentanaRegistroAdopcion ventanaRegistroAdopcion;
+               //  try {
+                	 
+                	 panelPerfilMascota.setVisible(false);
+                	 panelAdoptar.setVisible(true);
+                	 
+                	 
+                	 lblPanelAdop_Encargado.setText("Encargado:\t" + SistemasUsuarios.getNombreCompletoDelUsuario(idEngcardoApop));
+                	 lblPanelAdop_nombAdoptante.setText("Mi nombre:\t" + SistemasUsuarios.getNombreCompletoDelUsuario(IDUsuarioActivo));
+                	 lblPanelAdop_Raza.setText("Raza:\t"+razaApop);
+                	// lblPanelAdop_
+                	 
+                	 /*	
+    String estadoApop = "";	+
+	String chipApop = "";	+
+	String  ojosApop = "";+
+	String  peloApop = "";
+	String  diaSucesApopo= "";
+	String razaApop = "";
+	String  tipoApop = "";
+	String  recompensaApop = "";
+	String nombreMascitApopa= "";
+	String  correoApop = "";
+	String recomensaApop ="";
+	int  idEngcardoApop = -1;
+	int  idMascApop = -1;
+	*/
+                	 
+                	 
+                	 
+                	 
+                     //ventanaRegistroAdopcion = new VentanaRegistroAdopcion();
+                     //ventanaRegistroAdopcion.setVisible(true);
+                     //ventanaRegistroAdopcion.setLocation(posicionMascotaPanel1, posicionMascotaPanel1);
+                   
+                     
+                     // ventanaRegistroAdopcion.setContentPane(pane);
+                     
+        		
+        		/*panelMascotaAdopcion.setVisible(false);
+                panelRegistrarAdopcion.setVisible(true);
+                idUsuarioActivo=VentanaPrincipal.getIDUsuarioActivo();
+                idMascota = mascotaPanel1.getID();
+               /*fotoAdoptante,fotoConvivencia/
+                idUsuarioQueCalifica = mascotaPanel1.getIdEncargado();
+                labelRazaMAscotaAdopccion.setText("Raza: "+SistemasMascotas.getRazaDeMascota(idMascota));
+                labelTipoMascotaAdopcion.setText("Tipo: " + SistemasMascotas.getTipoDeMascota(idMascota));
+                labelEncargadoActual.setText("Encargado Actual: " + SistemasUsuarios.getNombreCompletoDelUsuario(idUsuarioQueCalifica));
+                imgfotomascotaAdoptar = imgfotomascota1;
+                labelFotoMascotaAdopcion.setIcon(new ImageIcon(imgfotomascotaAdoptar.getImage().getScaledInstance(106,119,Image.SCALE_SMOOTH)));
+                */
+                     
+               //  } catch (IOException e) {
+               //      
+                //     e.printStackTrace();
+              //   }
+
+        	}
+        });
+        btnPanelPerfilMascota_Adoptar.setBounds(43, 391, 91, 23);
+        panelPerfilMascota.add(btnPanelPerfilMascota_Adoptar);
+        
+        JButton btnPanelPerfilMascota_Editar = new JButton("Editar");
+        btnPanelPerfilMascota_Editar.setBounds(620, 340, 91, 23);
+        panelPerfilMascota.add(btnPanelPerfilMascota_Editar);
+        
+        panelAdoptar = new Panel();
+        panelAdoptar.setBackground(new Color(139, 69, 19));
+        panelAdoptar.setLayout(null);
+        VentanaPrincipal.getContentPane().add(panelAdoptar, "name_14710320391029");
+        
+        btnPanelAdop_Guardar = new JButton("");
+        btnPanelAdop_Guardar.setIcon(new ImageIcon("./imgs/save-48.png"));
+        btnPanelAdop_Guardar.setToolTipText("Guardar Adopcion");
+        btnPanelAdop_Guardar.setOpaque(false);
+        btnPanelAdop_Guardar.setIconTextGap(-3);
+        btnPanelAdop_Guardar.setHorizontalTextPosition(SwingConstants.CENTER);
+        btnPanelAdop_Guardar.setFocusPainted(false);
+        btnPanelAdop_Guardar.setContentAreaFilled(false);
+        btnPanelAdop_Guardar.setBorderPainted(false);
+        btnPanelAdop_Guardar.setBorder(null);
+        btnPanelAdop_Guardar.setBounds(853, 548, 105, 64);
+        panelAdoptar.add(btnPanelAdop_Guardar);
+        
+        button = new JButton("");
+        button.setToolTipText("Agregar imagen de la mascota");
+        button.setRequestFocusEnabled(false);
+        button.setOpaque(false);
+        button.setFocusable(false);
+        button.setFocusTraversalKeysEnabled(false);
+        button.setFocusPainted(false);
+        button.setContentAreaFilled(false);
+        button.setBorderPainted(false);
+        button.setBounds(339, 503, 75, 65);
+        panelAdoptar.add(button);
+        
+        label = new JLabel("Registrar Adopci\u00F3n");
+        label.setForeground(new Color(210, 180, 140));
+        label.setFont(new Font("Khmer UI", Font.BOLD, 35));
+        label.setBounds(156, 119, 379, 93);
+        panelAdoptar.add(label);
+        
+        label_4 = new JLabel("");
+        label_4.setIcon(new ImageIcon("./imgs/Logo.png"));
+        label_4.setHorizontalAlignment(SwingConstants.CENTER);
+        label_4.setBounds(354, 0, 457, 108);
+        panelAdoptar.add(label_4);
+        
+        lblPanelAdop_Raza = new JLabel();
+        lblPanelAdop_Raza.setText("Raza: ");
+        lblPanelAdop_Raza.setFont(new Font("Khmer UI", Font.BOLD, 15));
+        lblPanelAdop_Raza.setBounds(424, 301, 185, 26);
+        panelAdoptar.add(lblPanelAdop_Raza);
+        
+        lblPanelAdop_Tipo = new JLabel("Especie: ");
+        lblPanelAdop_Tipo.setFont(new Font("Khmer UI", Font.BOLD, 15));
+        lblPanelAdop_Tipo.setBounds(424, 249, 185, 26);
+        panelAdoptar.add(lblPanelAdop_Tipo);
+        
+        label_8 = new JLabel("");
+        label_8.setFont(new Font("Khmer UI", Font.BOLD, 15));
+        label_8.setBounds(172, 233, 146, 137);
+        panelAdoptar.add(label_8);
+        
+        lblPanelAdop_Encargado = new JLabel("Encargado Actual: ");
+        lblPanelAdop_Encargado.setFont(new Font("Khmer UI", Font.BOLD, 15));
+        lblPanelAdop_Encargado.setBounds(424, 351, 393, 26);
+        panelAdoptar.add(lblPanelAdop_Encargado);
+        
+        label_11 = new JLabel("Fecha de la Adopci\u00F3n: 10/11/2014");
+        label_11.setFont(new Font("Khmer UI", Font.BOLD, 15));
+        label_11.setBounds(424, 210, 290, 26);
+        panelAdoptar.add(label_11);
+        
+        label_12 = new JLabel("<FotoDelAdoptante>");
+        label_12.setFont(new Font("Khmer UI", Font.BOLD, 15));
+        label_12.setBounds(172, 446, 146, 137);
+        panelAdoptar.add(label_12);
+        
+        lblPanelAdop_nombAdoptante = new JLabel("Nombre del Adoptante:");
+        lblPanelAdop_nombAdoptante.setFont(new Font("Khmer UI", Font.BOLD, 15));
+        lblPanelAdop_nombAdoptante.setBounds(424, 458, 391, 26);
+        panelAdoptar.add(lblPanelAdop_nombAdoptante);
+        
+        label_19 = new JLabel("Nuevo Nombre de la Mascota: ");
+        label_19.setFont(new Font("Khmer UI", Font.BOLD, 15));
+        label_19.setBounds(424, 400, 249, 26);
+        panelAdoptar.add(label_19);
+        
+        textFieldlPanelAdop_NuevoNombre = new JTextField();
+        textFieldlPanelAdop_NuevoNombre.setColumns(10);
+        textFieldlPanelAdop_NuevoNombre.setBounds(694, 400, 128, 20);
+        panelAdoptar.add(textFieldlPanelAdop_NuevoNombre);
 
         
 
@@ -2937,9 +3190,29 @@ public class VentanaPrincipal {
         rutaImagenesMascotas = pRutaImagenesMascotas;
     }
 
-    private void cargarPanelPerfilMacota(int id){
-        lbl_panelPerfilMascota_Raza.setText(SistemasMascotas.getRazaDeMascota(id));
-        //lbl_panelPerfilMascota_Tipo.setText(SistemasMascotas.get);
+    private void cargarPanelPerfilMascota(int idMascota, String estado, String chip, String ojos,
+    		String pelo, String diaSuceso, String raza, String tipo, String recomensa, int idEngcardo){
+       
+    	
+    	lbl_panelPerfilMascota_Raza.setText(raza);
+        lbl_panelPerfilMascota_colorOjos.setText(ojos);
+        
+        lbl_panelPerfilMascota_Encargado.setText(SistemasUsuarios.getNombreCompletoDelUsuario(idEngcardo));
+        lbl_panelPerfilMascota_lNombreMacota.setText(SistemasMascotas.getNombreMascota(idMascota));
+        lbl_panelPerfilMascota_Tipo.setText(tipo);
+        lbl_panelPerfilMascota_Correo.setText(SistemasUsuarios.getEmailPorID(idEngcardo));
+        lbl_panelPerfilMacota_Telefono.setText(SistemasUsuarios.getTelefonoDelUsuario(idEngcardo));
+        
+        imgfotomascota1 = new ImageIcon(SistemasMascotas.getFotoMascota(idMascota));
+        lbl_panelPerfilMascota_Foto.setIcon(new ImageIcon(SistemasMascotas.getFotoMascota(idMascota)));
+        
+        /*
+         *
+		imgfotomascota1 = new ImageIcon(mascotaPanel1.getFoto());
+        lblFotoMascota1 = new JLabel();                 
+        lblFotoMascota1.setIcon(new ImageIcon(imgfotomascota1.getImage().getScaledInstance(106,119,Image.SCALE_SMOOTH)));
+        
+         * */
         return;
     }
     
