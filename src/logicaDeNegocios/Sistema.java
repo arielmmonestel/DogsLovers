@@ -165,6 +165,7 @@ public static void GuardarAsociacion()
 	}
 }
 
+	public static ArrayList<Asociacion> getListaAsociaciones()throws IOException{leerAsociaciones();return listaAsociaciones;}
 
 
 	private static void GuardarCasaCuna() 
@@ -1014,6 +1015,16 @@ public static void GuardarAsociacion()
    			filas[0] =Integer.toString(usuarioTemp.getID()); 
    			filas[1] =usuarioTemp.getNombre() + " " + usuarioTemp.getPrimerApellido();
    			filas[2] = usuarioTemp.getNombreUsuario();
+   			tableModel.addRow(filas);
+		}
+   	}
+	
+public static void cargarTableAsociacionBeneficiaria(String[]columna,String[]filas,DefaultTableModel tableModel)throws IOException{
+   		
+   		for(Asociacion asociacion:getListaAsociaciones()){
+   			filas[0] =asociacion.getNombre(); 
+   			filas[1] =asociacion.getTelefono();
+   			filas[2] = asociacion.getPaginaWeb();
    			tableModel.addRow(filas);
 		}
    	}

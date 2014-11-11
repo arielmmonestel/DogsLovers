@@ -267,6 +267,10 @@ public class VentanaPrincipal {
     private JComboBox comboBoxPorPelo;
     private JComboBox comboBoxPorTipo;
     private JComboBox comboBoxPorColorOjos;
+    private JPanel panelConsultaAsociacionBeneficiaria;
+    private JLabel lblAsociacionesBeneficiarias;
+    private JLabel label_4;
+    private JTable table;
     
 
     public static void main(String[] args) {
@@ -1705,11 +1709,15 @@ public class VentanaPrincipal {
         mntmMascota.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
     
-                panelPrincipal.setVisible(false);
+            	panelPrincipal.setVisible(false);
                 panelAgregarCasaCuna.setVisible(false);
                 panelAgregarMascota.setVisible(true);
                 panelConsultaDeUsuarios.setVisible(false);
-            
+                panelConsultaAsociacionBeneficiaria.setVisible(false);
+                panelConsultaDeCasaCuna.setVisible(false);
+                panelConsultaDeDonaciones.setVisible(false);
+                panelConsultaDeMascotas.setVisible(false);
+                panelPerfilMascota.setVisible(false);
             }
         });
         mnRegistro.add(mntmMascota);
@@ -1721,6 +1729,11 @@ public class VentanaPrincipal {
                 panelAgregarCasaCuna.setVisible(true);
                 panelAgregarMascota.setVisible(false);
                 panelConsultaDeUsuarios.setVisible(false);
+                panelConsultaAsociacionBeneficiaria.setVisible(false);
+                panelConsultaDeCasaCuna.setVisible(false);
+                panelConsultaDeDonaciones.setVisible(false);
+                panelConsultaDeMascotas.setVisible(false);
+                panelPerfilMascota.setVisible(false);
             
             }
         });
@@ -1758,10 +1771,15 @@ public class VentanaPrincipal {
             public void actionPerformed(ActionEvent e) {
                 panelPrincipal.setVisible(false);
                 
+                panelPrincipal.setVisible(false);
                 panelAgregarCasaCuna.setVisible(false);
                 panelAgregarMascota.setVisible(false);
-                panelConsultaDeMascotas.setVisible(false);
                 panelConsultaDeUsuarios.setVisible(true);
+                panelConsultaAsociacionBeneficiaria.setVisible(false);
+                panelConsultaDeCasaCuna.setVisible(false);
+                panelConsultaDeDonaciones.setVisible(false);
+                panelConsultaDeMascotas.setVisible(false);
+                panelPerfilMascota.setVisible(false);
                 
                 if(SistemasUsuarios.getListaDeUsuariosSize() == 0){
                     tablaDeUsuarios.setVisible(false);
@@ -1791,11 +1809,14 @@ public class VentanaPrincipal {
         mntmConsultarCasaCuna.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
         		panelPrincipal.setVisible(false);
-        		panelAgregarCasaCuna.setVisible(false);
-        		panelAgregarMascota.setVisible(false);
-        		panelConsultaDeUsuarios.setVisible(false);
-        		panelConsultaDeDonaciones.setVisible(false);
-        		panelConsultaDeCasaCuna.setVisible(true);
+                panelAgregarCasaCuna.setVisible(false);
+                panelAgregarMascota.setVisible(false);
+                panelConsultaDeUsuarios.setVisible(false);
+                panelConsultaAsociacionBeneficiaria.setVisible(false);
+                panelConsultaDeCasaCuna.setVisible(true);
+                panelConsultaDeDonaciones.setVisible(false);
+                panelConsultaDeMascotas.setVisible(false);
+                panelPerfilMascota.setVisible(false);
         	}
         });
         mnConsulta.add(mntmConsultarCasaCuna);
@@ -1804,16 +1825,31 @@ public class VentanaPrincipal {
         mnConsulta.add(mntmConsultarDonaciones);
         mntmConsultarDonaciones.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-                 		panelPrincipal.setVisible(false);
-                		panelAgregarCasaCuna.setVisible(false);
-                		panelAgregarMascota.setVisible(false);
-                		panelConsultaDeUsuarios.setVisible(false);
-                		panelConsultaDeDonaciones.setVisible(true);
-                		panelConsultaDeMascotas.setVisible(true);
+        		panelPrincipal.setVisible(false);
+                panelAgregarCasaCuna.setVisible(false);
+                panelAgregarMascota.setVisible(false);
+                panelConsultaDeUsuarios.setVisible(false);
+                panelConsultaAsociacionBeneficiaria.setVisible(false);
+                panelConsultaDeCasaCuna.setVisible(false);
+                panelConsultaDeDonaciones.setVisible(true);
+                panelConsultaDeMascotas.setVisible(false);
+                panelPerfilMascota.setVisible(false);
         	}
         });
         
         JMenuItem mntmConsultarAsociacinBeneficiaria = new JMenuItem("Asociaci\u00F3n Beneficiaria");
+        mntmConsultarAsociacinBeneficiaria.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		panelPrincipal.setVisible(false);
+                panelAgregarCasaCuna.setVisible(false);
+                panelAgregarMascota.setVisible(false);
+                panelConsultaDeUsuarios.setVisible(false);
+                panelConsultaAsociacionBeneficiaria.setVisible(true);
+                panelConsultaDeCasaCuna.setVisible(false);
+                panelConsultaDeDonaciones.setVisible(false);
+                panelPerfilMascota.setVisible(false);
+        	}
+        });
         mntmConsultarAsociacinBeneficiaria.setIcon(new ImageIcon("./imgs/AsociBene32.png"));
         mnConsulta.add(mntmConsultarAsociacinBeneficiaria);
         
@@ -1923,7 +1959,7 @@ public class VentanaPrincipal {
 		JLabel lblLineaDivisoraGrande = new JLabel("__________________________________");
 		lblLineaDivisoraGrande.setForeground(new Color(107, 142, 35));
 		lblLineaDivisoraGrande.setFont(new Font("Tahoma", Font.BOLD, 60));
-		lblLineaDivisoraGrande.setBounds(42, -16, 1318, 227);
+		lblLineaDivisoraGrande.setBounds(39, 40, 1318, 115);
 		panelConsultaDeDonaciones.add(lblLineaDivisoraGrande);
 		
 		JLabel lblPorAsociacion = new JLabel("ASOCIACI\u00D3N");
@@ -2604,6 +2640,36 @@ public class VentanaPrincipal {
         button_2.setBorderPainted(false);
         button_2.setBounds(1251, 0, 111, 23);
         panelPerfilMascota.add(button_2);
+        
+        panelConsultaAsociacionBeneficiaria = new JPanel();
+        panelConsultaAsociacionBeneficiaria.setBackground(new Color(99, 84, 65));
+        VentanaPrincipal.getContentPane().add(panelConsultaAsociacionBeneficiaria, "name_138632040347788");
+        panelConsultaAsociacionBeneficiaria.setLayout(null);
+        
+        lblAsociacionesBeneficiarias = new JLabel("Asociaciones Beneficiarias");
+        lblAsociacionesBeneficiarias.setBounds(43, 72, 609, 54);
+        lblAsociacionesBeneficiarias.setHorizontalAlignment(SwingConstants.CENTER);
+        lblAsociacionesBeneficiarias.setForeground(new Color(189, 183, 107));
+        lblAsociacionesBeneficiarias.setFont(new Font("Khmer UI", Font.BOLD, 47));
+        panelConsultaAsociacionBeneficiaria.add(lblAsociacionesBeneficiarias);
+        
+        label_4 = new JLabel("__________________________________");
+        label_4.setForeground(new Color(107, 142, 35));
+        label_4.setFont(new Font("Tahoma", Font.BOLD, 60));
+        label_4.setBounds(43, 72, 1318, 115);
+        panelConsultaAsociacionBeneficiaria.add(label_4);
+        
+        JScrollPane scrollPane_4 = new JScrollPane();
+        scrollPane_4.setBounds(65, 214, 792, 329);
+        panelConsultaAsociacionBeneficiaria.add(scrollPane_4);
+        String[] columnas = {"Nombre","Teléfono","Pagina Web"};
+		String[] filas = new String[3];
+		DefaultTableModel tableModel = new DefaultTableModel(columnas,0);
+		Sistema.cargarTableAsociacionBeneficiaria(columnas, filas, tableModel);
+		
+		
+        table = new JTable(tableModel);
+        scrollPane_4.setViewportView(table);
 
         
 
