@@ -200,7 +200,6 @@ public class VentanaPrincipal {
     private JButton btnFlechaDerecha;
     private JTable tablaDeUsuarios;
     private JScrollPane scrollPane_1;
-    private JLabel fondoConsultaUsuarios;
     private JPanel panelConsultaDeUsuarios;
     private JLabel lblMensajeListaVacia;
     private DefaultTableModel modeloListaDeUsuarios;
@@ -1584,6 +1583,38 @@ public class VentanaPrincipal {
         buttonGuardarCC.setFocusable(false);
         buttonGuardarCC.setFocusTraversalKeysEnabled(false);
         buttonGuardarCC.setFocusPainted(false);
+        
+       JButton btnInicio45 = new JButton("Inicio");
+        btnInicio45.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                panelAgregarCasaCuna.setVisible(false);
+                panelPrincipal.setVisible(true);
+            }
+        });
+        btnInicio45.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseExited(MouseEvent arg0) {
+            
+                btnInicio45.setForeground(Color.WHITE);
+                 
+            }
+            
+            public void mouseEntered(MouseEvent arg0) {
+                
+                btnInicio45.setForeground(Color.BLUE);
+                
+            }
+        });
+        btnInicio45.setForeground(Color.WHITE);
+        btnInicio45.setFont(new Font("Khmer UI", Font.BOLD, 11));
+        btnInicio45.setFocusable(false);
+        btnInicio45.setFocusTraversalKeysEnabled(false);
+        btnInicio45.setFocusPainted(false);
+        btnInicio45.setContentAreaFilled(false);
+        btnInicio45.setBorderPainted(false);
+        btnInicio45.setBounds(1251, 0, 111, 23);
+        panelAgregarCasaCuna.add(btnInicio45);
+
                 
         JButton CancelarOperacion = new JButton("");
         CancelarOperacion.addActionListener(new ActionListener() {
@@ -2132,6 +2163,38 @@ public class VentanaPrincipal {
 		VentanaPrincipal.getContentPane().add(panelConsultaDeDonaciones, "name_28003406149630");
 		panelConsultaDeDonaciones.setLayout(null);
 		
+		
+		JButton btnInicio455 = new JButton("Inicio");
+        btnInicio455.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                panelConsultaDeDonaciones.setVisible(false);
+                panelPrincipal.setVisible(true);
+            }
+        });
+         btnInicio455.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseExited(MouseEvent arg0) {
+            
+                btnInicio455.setForeground(Color.WHITE);
+                 
+            }
+            
+            public void mouseEntered(MouseEvent arg0) {
+                
+                btnInicio455.setForeground(Color.BLUE);
+                
+            }
+        });
+        btnInicio455.setForeground(Color.WHITE);
+        btnInicio455.setFont(new Font("Khmer UI", Font.BOLD, 11));
+        btnInicio455.setFocusable(false);
+        btnInicio455.setFocusTraversalKeysEnabled(false);
+        btnInicio455.setFocusPainted(false);
+        btnInicio455.setContentAreaFilled(false);
+        btnInicio455.setBorderPainted(false);
+        btnInicio455.setBounds(1251, 0, 111, 23);
+        panelConsultaDeDonaciones.add(btnInicio455);
+		
 		scrollPane_2 = new JScrollPane();
 		scrollPane_2.setBounds(567, 191, 722, 436);
 		panelConsultaDeDonaciones.add(scrollPane_2);
@@ -2252,6 +2315,38 @@ public class VentanaPrincipal {
 		panelConsultaDeCasaCuna.setBackground(new Color(99,84, 65));
 		VentanaPrincipal.getContentPane().add(panelConsultaDeCasaCuna, "name_154826621946393");
 		panelConsultaDeCasaCuna.setLayout(null);
+		
+
+JButton btninicioConsulta = new JButton("Inicio");
+        btninicioConsulta.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                panelConsultaDeCasaCuna.setVisible(false);
+                panelPrincipal.setVisible(true);
+            }
+        });
+        btninicioConsulta.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseExited(MouseEvent arg0) {
+            
+                btninicioConsulta.setForeground(Color.WHITE);
+                 
+            }
+            
+            public void mouseEntered(MouseEvent arg0) {
+                
+                btninicioConsulta.setForeground(Color.BLUE);
+                
+            }
+        });
+        btninicioConsulta.setForeground(Color.WHITE);
+        btninicioConsulta.setFont(new Font("Khmer UI", Font.BOLD, 11));
+        btninicioConsulta.setFocusable(false);
+        btninicioConsulta.setFocusTraversalKeysEnabled(false);
+        btninicioConsulta.setFocusPainted(false);
+        btninicioConsulta.setContentAreaFilled(false);
+        btninicioConsulta.setBorderPainted(false);
+        btninicioConsulta.setBounds(1251, 0, 111, 23);
+        panelConsultaDeCasaCuna.add(btninicioConsulta);
 		
 		lblTituloConsultaCasaCuna = new JLabel("Casas Cuna");
 		lblTituloConsultaCasaCuna.setHorizontalAlignment(SwingConstants.CENTER);
@@ -2601,6 +2696,7 @@ public class VentanaPrincipal {
 
                 
         panelConsultaDeUsuarios = new JPanel();
+        panelConsultaDeUsuarios.setBackground(new Color(99, 84, 65));
         VentanaPrincipal.getContentPane().add(panelConsultaDeUsuarios, "name_154826621946393");
         panelConsultaDeUsuarios.setLayout(null);
         
@@ -2742,11 +2838,6 @@ public class VentanaPrincipal {
         lblVerListaPor.setBounds(784, 226, 193, 25);
         panelConsultaDeUsuarios.add(lblVerListaPor);
         
-        fondoConsultaUsuarios = new JLabel("");
-        fondoConsultaUsuarios.setIcon(new ImageIcon("./imgs/fondoRegistro.png"));
-        fondoConsultaUsuarios.setBounds(0, 1, 1362, 675);
-        panelConsultaDeUsuarios.add(fondoConsultaUsuarios);
-        
         panelPerfilMascota = new JPanel();
         panelPerfilMascota.setBackground(new Color(99, 84,65));
         VentanaPrincipal.getContentPane().add(panelPerfilMascota, "name_18610174723405");
@@ -2870,6 +2961,38 @@ public class VentanaPrincipal {
         VentanaPrincipal.getContentPane().add(panelConsultaAsociacionBeneficiaria, "name_138632040347788");
         panelConsultaAsociacionBeneficiaria.setLayout(null);
         
+
+JButton btninicioConsulta11 = new JButton("Inicio");
+        btninicioConsulta11.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                panelConsultaAsociacionBeneficiaria.setVisible(false);
+                panelPrincipal.setVisible(true);
+            }
+        });
+        btninicioConsulta11.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseExited(MouseEvent arg0) {
+            
+                btninicioConsulta11.setForeground(Color.WHITE);
+                 
+            }
+            
+            public void mouseEntered(MouseEvent arg0) {
+                
+                btninicioConsulta11.setForeground(Color.BLUE);
+                
+            }
+        });
+        btninicioConsulta11.setForeground(Color.WHITE);
+        btninicioConsulta11.setFont(new Font("Khmer UI", Font.BOLD, 11));
+        btninicioConsulta11.setFocusable(false);
+        btninicioConsulta11.setFocusTraversalKeysEnabled(false);
+        btninicioConsulta11.setFocusPainted(false);
+        btninicioConsulta11.setContentAreaFilled(false);
+        btninicioConsulta11.setBorderPainted(false);
+        btninicioConsulta11.setBounds(1251, 0, 111, 23);
+        panelConsultaAsociacionBeneficiaria.add(btninicioConsulta11);
+        
         lblAsociacionesBeneficiarias = new JLabel("Asociaciones Beneficiarias");
         lblAsociacionesBeneficiarias.setBounds(43, 72, 609, 54);
         lblAsociacionesBeneficiarias.setHorizontalAlignment(SwingConstants.CENTER);
@@ -2921,7 +3044,40 @@ public class VentanaPrincipal {
         panelAdoptar.setLayout(null);
         VentanaPrincipal.getContentPane().add(panelAdoptar, "name_14710320391029");
         
+        JButton btninicioConsulta111 = new JButton("Inicio");
+        btninicioConsulta111.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                panelAdoptar.setVisible(false);
+                panelPrincipal.setVisible(true);
+            }
+        });
+        btninicioConsulta111.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseExited(MouseEvent arg0) {
+            
+                btninicioConsulta111.setForeground(Color.WHITE);
+                 
+            }
+            
+            public void mouseEntered(MouseEvent arg0) {
+                
+                btninicioConsulta111.setForeground(Color.BLUE);
+                
+            }
+        });
+        btninicioConsulta111.setForeground(Color.WHITE);
+        btninicioConsulta111.setFont(new Font("Khmer UI", Font.BOLD, 11));
+        btninicioConsulta111.setFocusable(false);
+        btninicioConsulta111.setFocusTraversalKeysEnabled(false);
+        btninicioConsulta111.setFocusPainted(false);
+        btninicioConsulta111.setContentAreaFilled(false);
+        btninicioConsulta111.setBorderPainted(false);
+        btninicioConsulta111.setBounds(1251, 0, 111, 23);
+        panelAdoptar.add(btninicioConsulta111);
+        
         btnPanelAdop_Guardar = new JButton("");
+        btnPanelAdop_Guardar.setPressedIcon(new ImageIcon("./imgs/save-32.png"));
+        btnPanelAdop_Guardar.setRolloverIcon(new ImageIcon("./imgs/save-64.png"));
         btnPanelAdop_Guardar.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
         		
