@@ -1,3 +1,17 @@
+
+/*Autores:
+*Ariel Montero 
+*Giaccomo Ubaldo
+*Fabián Monge
+*Jefri Cárdenas
+*Fecha de Creacion: 4/11/2014
+*
+*Descripción: Esta es la clase VentanaPerfilUsuario, su función es abrir una ventana que muestre la información de un usuario
+*
+*/
+
+
+
 package acceso;
 
 import java.awt.BorderLayout;
@@ -160,6 +174,10 @@ public class VentanaPerfilUsuario extends JFrame {
 		contentPane.add(btnReportar);
 		
 		JButton btnEditar = new JButton("Editar");
+		btnEditar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		if(idUsuarioActivo != idUsuarioDelPerfil){
 			btnEditar.setEnabled(false);
 			btnEditar.setVisible(false);

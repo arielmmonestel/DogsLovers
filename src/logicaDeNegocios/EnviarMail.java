@@ -1,3 +1,17 @@
+
+
+/*Autores:
+*Ariel Montero 
+*Giaccomo Ubaldo
+*Fabián Monge
+*Jefri Cárdenas
+*Fecha de Creacion: 21/10/2014
+*
+*Descripción: Esta es la clase EnviarMail, su función es ocuparse de todo lo relacionado al envío de correos a otros usuarios.
+*
+*/
+
+
 package logicaDeNegocios;
 
 import java.util.Properties;

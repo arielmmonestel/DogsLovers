@@ -1,3 +1,15 @@
+
+/*Autores:
+*Ariel Montero 
+*Giaccomo Ubaldo
+*Fabián Monge
+*Jefri Cárdenas
+*Fecha de Creacion: 4/11/2014
+*
+*Descripción: Esta es la clase Loggin, su función es abrir una ventana que permita al usuario loguearse o registrarse en el programa.
+*
+*/
+
 package acceso;
 
 import acceso.*;
@@ -11,14 +23,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 
 import javax.swing.JLabel;
-
-
-
-//import com.jgoodies.forms.factories.DefaultComponentFactory;
-
-
-
-
 
 
 

@@ -1,3 +1,19 @@
+
+
+/*Autores:
+*Ariel Montero 
+*Giaccomo Ubaldo
+*Fabián Monge
+*Jefri Cárdenas
+*Fecha de Creacion: 21/10/2014
+*
+*Descripción: Esta es la clase Sistema, engloba el concepto de el sistema en general y cumple las funciones de este rol.
+*
+*/
+
+
+
+
 package logicaDeNegocios;
 import java.io.BufferedReader;
 import java.io.File;

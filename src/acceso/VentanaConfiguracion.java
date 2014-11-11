@@ -1,3 +1,17 @@
+
+
+/*Autores:
+*Ariel Montero 
+*Giaccomo Ubaldo
+*Fabián Monge
+*Jefri Cárdenas
+*Fecha de Creacion: 4/11/2014
+*
+*Descripción: Esta es la clase VentanaConfiguracion, su función es abrir una ventana que permita manejar ciertos ajustes al administrador
+*como la lista negra y la adición de nuevas razas y tipos de mascotas.
+*
+*/
+
 package acceso;
 
 import java.awt.BorderLayout;

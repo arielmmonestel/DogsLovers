@@ -1,3 +1,18 @@
+
+
+/*Autores:
+*Ariel Montero 
+*Giaccomo Ubaldo
+*Fabián Monge
+*Jefri Cárdenas
+*Fecha de Creacion: 21/10/2014
+*
+*Descripción: Esta es la clase ListaNegra, su función es englobar el concepto de una lista negra a la que van los usuarios reportados
+*o con bajas calificaciones.
+*
+*/
+
+
 package logicaDeNegocios;
 import java.io.IOException;
 import java.util.ArrayList;
