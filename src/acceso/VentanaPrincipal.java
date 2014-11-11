@@ -338,6 +338,8 @@ public class VentanaPrincipal {
 
     private void initialize() throws IOException {
         
+    	//if(SistemasUsuarios. IDUsuarioActivo
+        
         listaMascotasParaMostrar =  SistemasMascotas.getListaMascota();
         posicionMascotaPanel1 = listaMascotasParaMostrar.size()-1; posicionMascotaPanel2 = listaMascotasParaMostrar.size()-2; posicionMascotaPanel3 = listaMascotasParaMostrar.size()-3; mascotaPanel1 = listaMascotasParaMostrar.get(posicionMascotaPanel1);
         mascotaPanel2 = listaMascotasParaMostrar.get(posicionMascotaPanel2);
@@ -1117,11 +1119,11 @@ public class VentanaPrincipal {
 
             	 try {
             		 
-            		 int opc = JOptionPane.showConfirmDialog(null, "Desea ver la lista de casas cuna que reciben esta mascota");
+            		/* int opc = JOptionPane.showConfirmDialog(null, "Desea ver la lista de casas cuna que reciben esta mascota");
 	               		if (opc == JOptionPane.YES_NO_OPTION){
 	               	  		return;
 	               		}
-            		 
+            		 */
 	                nombre = textFieldNombreMascota.getText();
 	                chip = textFieldNumChip.getText();
 	                lugarVisto = comboBoxCanton.getSelectedItem().toString() + ", " + comboBoxProvincia.getSelectedItem().toString();
@@ -1144,7 +1146,43 @@ public class VentanaPrincipal {
 	                    return;
 	                }
 	                if(SistemasMascotas.ChipYaEstaRegistrado(chip)){
-	                    JOptionPane.showMessageDialog(panelAgregarMascota, "Mascota ya ha sido registrada");
+	                	
+	                	JOptionPane.showMessageDialog(panelAgregarMascota, "Mascota ya ha sido registrada,\nse le "
+	                			+ "enviara un correo con mas información.\n Por favor espero unos segundos");
+	                	
+	                	String subject = "Dogs Lovers - Mascota Encontrada";
+	                	int idMascota = SistemasMascotas.getIDporChip(chip); 
+	                	String nombreEncargado =  SistemasMascotas.getNickEncargadoActual(idMascota);	                	
+	                	
+	                	int idEncargado = SistemasUsuarios.getIdPorNickName(nombreEncargado);
+	                	
+	                	String emailEncargado = SistemasUsuarios.getCorreoDelUsuario(idEncargado);
+	                	String emailUsuarioAcutal = SistemasUsuarios.getCorreoDelUsuario(IDUsuarioActivo);
+						String imagen = SistemasMascotas.getFotoMascota(idMascota);
+						String mensaje = "Una mascota recienteme ingresada por "
+								+  SistemasUsuarios.getNombreCompletoDelUsuario(IDUsuarioActivo) +" con el el correo "
+								+ emailUsuarioAcutal + " y el teléfono "
+								+ SistemasUsuarios.getTelefonoDelUsuario(IDUsuarioActivo)
+								+ ".\nYa ha sido registrada por " 
+								+ nombreEncargado   
+								+"\n Si desea comunicarse puede hacerlo al teléfono:  " 
+								+ SistemasUsuarios.getTelefonoDelUsuario(idEncargado) 
+								+ ".\n " +"O al correo electrónico: " + emailEncargado
+								+ " Gracias por ayudarnos."; 						
+						
+						System.out.println(emailUsuarioAcutal);
+						System.out.println(emailEncargado);
+						
+						Sistema.enviarMailConAdjunto(emailUsuarioAcutal, subject, mensaje,  imagen);
+						//Sistema.enviarMailConAdjunto("fabian1mg@gmail.com", subject, mensaje,  imagen);
+						
+						Sistema.enviarMailConAdjunto(emailEncargado, subject, mensaje,  imagen);
+						//Sistema.enviarMailConAdjunto("fabian1mg@gmail.com", subject, mensaje,  imagen);
+	                	
+	                	
+						
+						
+	                	JOptionPane.showMessageDialog(panelAgregarMascota, "Mascota ya ha sido registrada,\nse Se le ha eviado un correo");
 	                    return ;
 	                }
 	                if(getFoto() == null){           

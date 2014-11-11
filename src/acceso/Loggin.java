@@ -109,6 +109,7 @@ public class Loggin extends JFrame {
 		btnIngresar.setIcon(new ImageIcon("./imgs/BotonIngresarTamanioMedio.png"));
 		btnIngresar.addActionListener(new ActionListener() {
 			
+			
 			public void actionPerformed(ActionEvent e) {
 				String entradaUsuario = textFieldNombreUsuario.getText();
 				String entradaContrasenia = passwordFieldContrasenaUsuario.getText();

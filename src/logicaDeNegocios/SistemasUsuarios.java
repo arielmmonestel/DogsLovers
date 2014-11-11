@@ -131,6 +131,12 @@ public class SistemasUsuarios {
     }
 	
 	public static Usuario getUsuario(int indice){
+		try {
+			leerUsuarios();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return listaUsuarios.get(indice);
 	}
   
@@ -212,6 +218,7 @@ public class SistemasUsuarios {
 
 		return false;
 	}
+
 	public static ArrayList<Usuario> getNoAdministradores(){
 		
 		ArrayList<Usuario> listaDeNoAdministradores = new ArrayList<Usuario>();
@@ -448,6 +455,7 @@ public class SistemasUsuarios {
 			for(Usuario usuario: listaUsuarios){
 				if (usuario.getID() == idUsuario){
 					email =  usuario.getEmail();
+					return email;
 				}
 			}
 			
