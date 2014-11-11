@@ -1,3 +1,14 @@
+/*Autores:
+*Ariel Montero 
+*Giaccomo Ubaldo
+*Fabián Monge
+*Jefri Cárdenas
+*Fecha de Creacion: 1/11/2014
+*
+*Descripción: Esta es la clase lista negra  , su función principal es guardar la lista negra y bridar los datos de la misma.
+*
+*/
+
 package logicaDeNegocios;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -60,7 +71,7 @@ public class ListaNegra {
 			SistemasUsuarios.GuardarUsuario();
 			listaNegra.add(pUsuario.getID());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 	}
@@ -73,13 +84,13 @@ public class ListaNegra {
 				if (usuario.getNombreUsuario().equals(string)){
 					
 					usuario.setEstaEnListaNegra(false);
-					//ListaNegra.getListaNegra().remove(usuario.getID());
+					
 					
 				}
-				//borrardeListaNegra(usuario.getID());
+				
 			}SistemasUsuarios.GuardarUsuario();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		SistemasUsuarios.GuardarUsuario();

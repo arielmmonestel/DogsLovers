@@ -219,7 +219,7 @@ public class SistemasUsuarios {
 		try {
 			leerUsuarios();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		for(Usuario usuario:listaUsuarios){
@@ -231,7 +231,7 @@ public class SistemasUsuarios {
 		
 	}
 
-	//public static void todasLasPersonas() throws IOException{leerUsuarios(); listaUsuariosFiltradas = listaUsuarios;} // llamar antes de cada busqueda
+	
 	
 	public static Usuario buscarUsuarioPorEmail(String email){
 		try {
@@ -291,7 +291,7 @@ public class SistemasUsuarios {
 		try {
 			leerUsuarios();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		String nombreUsuario = "";
@@ -317,7 +317,7 @@ public class SistemasUsuarios {
 			}
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		
@@ -336,7 +336,7 @@ public class SistemasUsuarios {
 				}
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		
@@ -376,7 +376,7 @@ public class SistemasUsuarios {
 				}
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		
@@ -388,7 +388,7 @@ public class SistemasUsuarios {
 		try {
 			leerUsuarios();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		int calificacionUsuario = 0;
@@ -410,7 +410,7 @@ public class SistemasUsuarios {
 			}
 			GuardarUsuario();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		
@@ -435,7 +435,7 @@ public class SistemasUsuarios {
 			}
 			GuardarUsuario();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		
@@ -452,7 +452,7 @@ public class SistemasUsuarios {
 			}
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}return email;
 	

@@ -1,3 +1,14 @@
+/*Autores:
+*Ariel Montero 
+*Giaccomo Ubaldo
+*Fabián Monge
+*Jefri Cárdenas
+*Fecha de Creacion: 4/11/2014
+*
+*Descripción: Esta es la clase Loggin , su función es instanciar la ventana "Loggin"
+*
+*/
+
 package acceso;
 
 import acceso.*;
@@ -14,7 +25,7 @@ import javax.swing.JLabel;
 
 
 
-//import com.jgoodies.forms.factories.DefaultComponentFactory;
+
 
 
 

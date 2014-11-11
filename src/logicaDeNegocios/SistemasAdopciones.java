@@ -1,3 +1,15 @@
+
+/*Autores:
+*Ariel Montero 
+*Giaccomo Ubaldo
+*Fabián Monge
+*Jefri Cárdenas
+*Fecha de Creacion: 4/11/2014
+*
+*Descripción: Esta es la clase Sistema Adopciones , su función General es procesar todos los datos de Adopciones para mostrarlos en pantalla
+*				o para guardarlos en memoria
+*/
+
 package logicaDeNegocios;
 
 import java.io.BufferedReader;
@@ -29,7 +41,7 @@ public class SistemasAdopciones {
 		try {
 			leerAdopcion();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		return listaAdopciones.size();

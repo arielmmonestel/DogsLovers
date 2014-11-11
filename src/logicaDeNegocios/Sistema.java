@@ -1,3 +1,15 @@
+/*Autores:
+*Ariel Montero 
+*Giaccomo Ubaldo
+*Fabián Monge
+*Jefri Cárdenas
+*Fecha de Creacion: 6/11/2014
+*
+*Descripción: Esta es la clase Sistema , su función general es administrar todos los datos en comun y procesarlos para mostrar en pantalla
+*
+*/
+
+
 package logicaDeNegocios;
 import java.io.BufferedReader;
 import java.io.File;

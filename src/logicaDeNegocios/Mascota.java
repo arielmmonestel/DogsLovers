@@ -1,3 +1,15 @@
+/*Autores:
+*Ariel Montero 
+*Giaccomo Ubaldo
+*Fabián Monge
+*Jefri Cárdenas
+*Fecha de Creacion: 15/10/2014
+*
+*Descripción: Esta es la clase  Mascota , su función es instanciar objetos de tipo Mascota.
+*
+*/
+
+
 package logicaDeNegocios;
 import java.io.BufferedReader;
 import java.io.File;

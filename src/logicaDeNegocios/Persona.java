@@ -1,19 +1,17 @@
+
+/*Autores:
+*Ariel Montero 
+*Giaccomo Ubaldo
+*Fabián Monge
+*Jefri Cárdenas
+*Fecha de Creacion: 4/11/2014
+*
+*Descripción: Esta es la clase Persona, su función es instanciar personas y que sea la clase madre de Usuario
+*
+*/
 package logicaDeNegocios;
 
 public class Persona {
-/*-int ID
--String nombre
--String primerApellido
--String segundoApellido
--String nombre
--String password
--String Sexo
--String phone
--String email
--String DireccionResidencia
--CasaCuna CasaCuna //Si el usuario es casa cuna. aqui van todos los atributos de esa clase
--boolean blackList
-*/
 
 	private String nombre;
 	private String primerApellido;
@@ -27,7 +25,7 @@ public class Persona {
 	
 
 	public Persona() {
-		// TODO Auto-generated constructor stub
+
 	}
 	
 	public  Persona(String pNombre,String pPrimerApellido, String pSegundoApellido,String pSexo, String pTelefono,

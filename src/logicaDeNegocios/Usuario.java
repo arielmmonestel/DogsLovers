@@ -1,3 +1,15 @@
+/*Autores:
+*Ariel Montero 
+*Giaccomo Ubaldo
+*Fabián Monge
+*Jefri Cárdenas
+*Fecha de Creacion: 4/11/2014
+*
+*Descripción: Esta es la clase Usuario , su función general es instanciar objetos de tipo Usuario. Hereda de Persona
+*
+*/
+
+
 package logicaDeNegocios;
 
 import java.io.BufferedReader;
@@ -108,25 +120,7 @@ public class Usuario extends Persona{
 		calificacion = pCalificacion;
 	}
 
-	/*public static ArrayList<Usuario> getListaDeUsuarios() {
-		return listaDeUsuarios;
-	}
-
-	public static void agregarUsuario(Usuario pUsuario) {
-		listaDeUsuarios.add(pUsuario);
-	}
-	
-	public static int getListaDeUsuariosSize(){
-		return listaDeUsuarios.size();
-	}*/	
-	
-	
-	//////////////////////////////////// Acciones de Usuario /////////////////////////////////////////////////////////
-	
-//	public void adoptar(Mascota pMascota){
-//		Sistema.agregarAdopcion(new Adopcion(this, Mascota pMascota));
-//	}
-	
+		
 	public void reportar(int idUsuario, String pMotivo) throws IOException{
 		SistemasUsuarios.leerUsuarios();
 		Sistema.agregarReporte(new Reporte(this, idUsuario, pMotivo));

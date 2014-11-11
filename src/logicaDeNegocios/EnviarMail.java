@@ -1,3 +1,15 @@
+/*Autores:
+*Ariel Montero 
+*Giaccomo Ubaldo
+*Fabián Monge
+*Jefri Cárdenas
+*Fecha de Creacion: 4/11/2014
+*
+*Descripción: Esta es la clase EnviarMail , su función es enviar correos sin adjunto
+*
+*/
+
+
 package logicaDeNegocios;
 
 import java.util.Properties;

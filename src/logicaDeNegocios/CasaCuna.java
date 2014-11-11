@@ -1,3 +1,15 @@
+/*Autores:
+*Ariel Montero 
+*Giaccomo Ubaldo
+*Fabián Monge
+*Jefri Cárdenas
+*Fecha de Creacion: 4/11/2014
+*
+*Descripción: Esta es la clase Casa Cuna , su función es instanciar objetos Casas Cuna
+*
+*/
+
+
 package logicaDeNegocios;
 import java.io.BufferedReader;
 import java.io.File;
@@ -17,16 +29,13 @@ public class CasaCuna {
 	private String tipoMascota;
 	private boolean necesitaDonacion;
 	private boolean necesitaMedicamentos;
-	
 	private int cantMascota; //Cantidad de mascotas que ha recibido
 	private int camposDiponibles; //  cantidad de mascotas que puede recibir
-	//private ArrayList<Integer> IDMascotasqueTengo; //Creo que para saber las mascotas que tengo en casa cuna,basta con escoger todas las mascotas que estan en estado "ENCASACUNA" y tienen el id del usuario encagardo
 	private String direccion;
 	private int idUsuarioCasaCuna;
 	private static ArrayList<CasaCuna> listaCasasCuna = new ArrayList<CasaCuna>();
 	private static String rutaCasaCuna = "./casaCuna.poo";	
-
-	File archivo = null;
+	public File archivo = null;
 	static FileReader lectura = null;
 	static BufferedReader bufferLectura = null;
 	static JFrame frame = new JFrame();
@@ -103,13 +112,6 @@ public class CasaCuna {
 	public void setCamposDiponibles(int camposDiponibles) {
 		this.camposDiponibles = camposDiponibles;
 	}
-/*	public ArrayList<Integer> getIDMascotasqueTengo() {
-		return IDMascotasqueTengo;
-	}
-	public void setIDMascotasqueTengo(ArrayList<Integer> iDMascotasqueTengo) {
-		//IDMascotasqueTengo = iDMascotasqueTengo;
-	}
-*/
-  
+ 
 
 }

@@ -1,3 +1,17 @@
+/*Autores:
+*Ariel Montero 
+*Giaccomo Ubaldo
+*Fabián Monge
+*Jefri Cárdenas
+*Fecha de Creacion: 4/11/2014
+*
+*Descripción: Esta es la clase Asociación , su función es instanciar objetos asociaciones
+*
+*/
+
+
+
+
 package logicaDeNegocios;
 
 import java.util.ArrayList;

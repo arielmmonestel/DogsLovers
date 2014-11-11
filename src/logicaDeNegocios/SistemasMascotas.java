@@ -1,3 +1,16 @@
+/*Autores:
+*Ariel Montero 
+*Giaccomo Ubaldo
+*Fabián Monge
+*Jefri Cárdenas
+*Fecha de Creacion: 4/11/2014
+*
+*Descripción: Esta es la clase Sistamas Mascotas , su función general es mostrar todos los datos de la mascota em pantalla y guardarlos en memoria.
+*
+*/
+
+
+
 package logicaDeNegocios;
 
 import java.io.BufferedReader;
@@ -165,7 +178,7 @@ public class SistemasMascotas {
 				}
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		return foto;
@@ -181,7 +194,7 @@ public class SistemasMascotas {
 				}
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		return nombre;
@@ -211,7 +224,7 @@ public class SistemasMascotas {
 		try {
 		
 			leerMascota();
-			Mascota mascotaEncontradaPorChip = new Mascota();
+			
 			
 			for(Mascota obj:listaMascotas)
 				if (obj.getChip().equals(numChip))
@@ -249,7 +262,7 @@ public class SistemasMascotas {
 	public static ArrayList<Mascota> getMascotasPorTipo(String tipo){
 
 	    ArrayList<Mascota> mascotasFiltradas = new ArrayList<Mascota>();
-	    if(tipo != null)//////////////////////////////////////////////////////////////////////////////////////
+	    if(tipo != null)
 	    if( tipo.equals(" "))
 	    	return listaMascotasFiltradas;
 	    
@@ -262,7 +275,7 @@ public class SistemasMascotas {
 	
 	public static ArrayList<Mascota> getMascotasPorRaza(String raza){
 		ArrayList<Mascota> mascotasFiltradas = new ArrayList<Mascota>();
-		if(!(raza == null)) ////////////////////////////////////////////////////////////////////////////////////
+		if(!(raza == null)) 
 			if(!(raza.equals(" ")))
 			{
 				for(Mascota obj:listaMascotasFiltradas)
@@ -388,7 +401,7 @@ public class SistemasMascotas {
 				}
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		return raza;
@@ -405,7 +418,7 @@ public class SistemasMascotas {
 				}
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		return tipo;
@@ -425,7 +438,7 @@ public class SistemasMascotas {
 			}
 			encargado = SistemasUsuarios.getNombreCompletoDelUsuario(idEncargado);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		return encargado;

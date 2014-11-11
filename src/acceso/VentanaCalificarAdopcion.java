@@ -1,4 +1,4 @@
-        package acceso;
+ package acceso;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
