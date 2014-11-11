@@ -58,7 +58,7 @@ public class VentanaInformacionDL extends JFrame {
 		JTextPane txtpnsomosEstudiantesDe = new JTextPane();
 		txtpnsomosEstudiantesDe.setFont(new Font("Khmer UI", Font.BOLD, 14));
 		txtpnsomosEstudiantesDe.setForeground(Color.WHITE);
-		txtpnsomosEstudiantesDe.setText("      Somos  estudiantes de la carrera de Ingenier\u00EDa en Computaci\u00F3n  del Instituto Tecnol\u00F3gico de Costa Rica. \r\n      Esta aplicaci\u00F3n de escritorio es  creada para el proyecto n\u00FAmero tres del curso de Programaci\u00F3n Orientada a Objetos.\r\n      Deseamos que sea una herramienta para todas aquellas personas amantes de los animales, deseosas de encontrar a sus mascotas o cooperar reportando las encontradas.\r\n      Si desea obtener m\u00E1s informaci\u00F3n sobre nosotros, lo puede hacer al correo electr\u00F3nico dogs1lovers@gmail.com.\r\n\r\n\r\nEquipo de Dogs Lovers.\r\n");
+		txtpnsomosEstudiantesDe.setText("      Somos  estudiantes de la carrera de Ingenier\u00EDa en Computaci\u00F3n  del Instituto Tecnol\u00F3gico de Costa Rica. \r\n      Esta aplicaci\u00F3n de escritorio es  creada para el proyecto n\u00FAmero tres del curso de Programaci\u00F3n Orientada a Objetos.\r\n      Deseamos que sea una herramienta para todas aquellas personas amantes de los animales, deseosas de encontrar a sus mascotas o cooperar reportando las encontradas.\r\n      Si desea obtener m\u00E1s informaci\u00F3n sobre nosotros, lo puede hacer al correo electr\u00F3nico dogs1lovers@gmail.com.\r\n\r\n\r\n-Equipo de Dogs Lovers.\r\n");
 		txtpnsomosEstudiantesDe.setBounds(10, 11, 395, 249);
 		txtpnsomosEstudiantesDe.setBackground(null);
 		contentPane.add(txtpnsomosEstudiantesDe);

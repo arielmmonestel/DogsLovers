@@ -56,7 +56,6 @@ public class VentanaNuevoUsuario extends JFrame {
 	private JPasswordField passwordFieldRepeatPass;
 	private JComboBox comboBoxMes; 
 	private JLabel lblIcono;
-	private JLabel labelFondo;
 	private JLabel labelIcono;
 	Loggin loguearse;
 	private static int IDUsuarios=0;
@@ -106,7 +105,6 @@ public class VentanaNuevoUsuario extends JFrame {
 		
 		setLocation(new Point(0, 0));
 		setRootPaneCheckingEnabled(false);
-		setAlwaysOnTop(true);
 		setTitle("Nuevo Usuario");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1387, 730);
@@ -124,7 +122,7 @@ public class VentanaNuevoUsuario extends JFrame {
 		JPanel panelAgregarPersona = new JPanel();
 		panelAgregarPersona.setBounds(0, 0, 1380, 742);
 		contentPane.add(panelAgregarPersona);
-		panelAgregarPersona.setBackground(Color.GRAY);
+		panelAgregarPersona.setBackground(new Color(99, 84,65));
 		panelAgregarPersona.setBorder(null);
 		panelAgregarPersona.setLayout(null);
 		
@@ -493,13 +491,6 @@ public class VentanaNuevoUsuario extends JFrame {
 		labelIcono.setIcon(new ImageIcon("./imgs/Icono.png"));
 		labelIcono.setBounds(573, 11, 176, 144);
 		panelAgregarPersona.add(labelIcono);
-		
-		labelFondo = new JLabel("");
-		labelFondo.setVerifyInputWhenFocusTarget(false);
-		labelFondo.setVerticalAlignment(SwingConstants.TOP);
-		labelFondo.setIcon(new ImageIcon("./imgs/fondoRegistro.png"));
-		labelFondo.setBounds(0, 0, 5296, 2504);
-		panelAgregarPersona.add(labelFondo);
 		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{textFieldNombre, textFieldApellidoUno, textFieldApellidoDos, spinnerDia, comboBoxMes, spinnerAnio, textFieldCorreo, textFieldTelefono, textFieldUsuario, passwordFieldNewPass, passwordFieldRepeatPass, lblFechaDeNacimiento, btnRegistrarme}));
 		
 	
