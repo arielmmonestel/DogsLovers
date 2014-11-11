@@ -18,12 +18,14 @@ import javax.swing.JButton;
 
 import logicaDeNegocios.*;
 import javax.swing.SwingConstants;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class VentanaPerfilUsuario extends JFrame {
 
 	private JPanel contentPane;
 	
-	public VentanaPerfilUsuario(int idUsuarioDelPerfil) {
+	public VentanaPerfilUsuario(int idUsuarioDelPerfil, int idUsuarioActivo) {
 		
 		setTitle("Perfil de Usuario");
 		setResizable(false);
@@ -144,10 +146,24 @@ public class VentanaPerfilUsuario extends JFrame {
 		}
 		
 		JButton btnReportar = new JButton("Reportar");
+		if(idUsuarioActivo == idUsuarioDelPerfil){
+			btnReportar.setEnabled(false);
+			btnReportar.setVisible(false);
+		}
+		btnReportar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				VentanaReporte ventanaDeReporte = new VentanaReporte(idUsuarioDelPerfil, idUsuarioActivo);
+				ventanaDeReporte.setVisible(true);
+			}
+		});
 		btnReportar.setBounds(611, 518, 89, 23);
 		contentPane.add(btnReportar);
 		
 		JButton btnEditar = new JButton("Editar");
+		if(idUsuarioActivo != idUsuarioDelPerfil){
+			btnEditar.setEnabled(false);
+			btnEditar.setVisible(false);
+		}
 		btnEditar.setBounds(611, 484, 89, 23);
 		contentPane.add(btnEditar);
 		
