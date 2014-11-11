@@ -1,3 +1,325 @@
+<<<<<<< HEAD
+===>nuevo Mascota<===
+EN ADOPCION
+0
+Canino
+BullDog Ingles
+Zoe
+555-666-854
+Blanco
+Cafes
+./mascotas/0.jpg
+TibÃ¡s, San Jose
+La encontrÃ© buscando alimento en la entrada de mi casa. Es una cachorra, presenta desnutriciÃ³n pero se esta recuperando.
+20/Setiembre/2014.0
+""
+0
+false
+===>nuevo Mascota<===
+PERDIDA
+1
+Felino
+Angora Turco
+Filiberto
+""
+Blanco
+Cafes
+./mascotas/1.jpg
+San Rafael, Heredia
+Es un gatito angora de ojos verde y azul, presenta un problema en los riÃ±ones y le cuesta digerir alimentos
+12/Octubre/2014.0
+? 50 000
+1
+false
+===>nuevo Mascota<===
+PERDIDA
+2
+Canino
+Labrador
+Lucy
+""
+Amarillo
+Cafes
+./mascotas/2.jpg
+Desamparados, San Jose
+Es una perrita labrador, se desapareciÃ³ al perseguir un gato en la calle, por las cercanias de la iglesia de Desamparados.
+7/Julio/2014.0
+$  250
+2
+false
+===>nuevo Mascota<===
+PERDIDA
+3
+Canino
+French Poodle
+Moza Sofia
+566-998-885
+Blanco
+Amarillos
+./mascotas/3.jpg
+Central, Puntarenas
+Una perrita muy inquieta que se desapareciÃ³ cuando fuimos a visitar todos a mi  familia en Puntarenas. Tiene los ojos amarillos y las ppatas alargadas. Es muy vulnerable y delicada
+29/Agosto/2014.0
+? 1 000 000
+2
+false
+===>nuevo Mascota<===
+ADOPTADA
+4
+Ave
+Canario
+Giaccomio
+""
+Otro
+Negros
+./mascotas/4.jpg
+San Isidro, Heredia
+Me lo encontré caminando hacia casa con una ala lastimada. Lo hé curado pero no he dado con su dueño.
+13/Abril/2014.0
+""
+0
+false
+===>nuevo Mascota<===
+PERDIDA
+5
+Canino
+Labrador
+Marley
+888-999-7897
+Amarillo
+Cafes
+./mascotas/5.jpg
+Aserrí, San Jose
+Hay recompensa de 80 000 por la mascota
+1/Mayo/2014.0
+? 80 000
+0
+false
+===>nuevo Mascota<===
+ENCONTRADA
+6
+Canino
+null
+Monstruito
+888
+Amarillo
+Cafes
+./mascotas/6.jpg
+Central, San Jose
+Quiza se envie a casaCuna
+1/Enero/2014.0
+? 80 000
+2
+false
+===>nuevo Mascota<===
+PERDIDA
+7
+Canino
+Siberian Husky
+Manuel
+null
+Negro
+Cafes
+./mascotas/8.jpg
+Central, San Jose
+
+1/Enero/2014.0
+? 
+3
+false
+===>nuevo Mascota<===
+PERDIDA
+8
+Canino
+Dobermann
+Doby
+48875524
+Negro
+Cafes
+./mascotas/9.jpg
+Mora, San Jose
+
+10/Julio/2014.0
+? 
+1
+false
+===>nuevo Mascota<===
+EN CASA CUNA
+9
+Roedor
+Otro
+Uronsin
+2222
+Dos Tonalidades
+Otro
+./mascotas/10.jpg
+Buenos Aires, Puntarenas
+
+1/Junio/2014.0
+? 
+3
+false
+===>nuevo Mascota<===
+ENCONTRADA
+10
+Canino
+American Stafford
+Gonther
+88-5841
+Cafe
+Negros
+./mascotas/11.jpg
+Belén, Heredia
+El Perrito Presentaba algo de agresividad pero con el tiempo se ha ido calmando
+13/Julio/2014.0
+""
+4
+false
+===>nuevo Mascota<===
+ENCONTRADA
+11
+Felino
+Gato habana
+Sabana
+4654-888
+Negro
+Amarillos
+./mascotas/12.jpg
+Tarrazú, San Jose
+Me asuste dema porque pense que el gatito queria darme mala suerte, lo lleve a la veterinaria y le hicieron lectura de chip
+31/Octubre/2014.0
+null
+2
+false
+===>nuevo Mascota<===
+PERDIDA
+12
+Roedor
+Erizo
+JuanPablo
+null
+Dos Tonalidades
+Negros
+./mascotas/13.jpg
+San Rafael, Heredia
+:( Extrano mi Erizo, se escapo de su bolita la semana pasada
+16/Agosto/2014.0
+? 50 000
+1
+false
+===>nuevo Mascota<===
+ENCONTRADA
+13
+Canino
+Golden retriever
+Nona
+888-445-66
+Cafe
+Dos Tonos 
+./mascotas/14.jpg
+Grecia, Alajuela
+Lo encontre con una patita danada, ya esta curado. Es muy carinoso y jugueton. Ocupa un espacio mas grande, por esa razon lo dare en adopcion
+21/Setiembre/2014.0
+null
+4
+false
+===>nuevo Mascota<===
+PERDIDA
+14
+Ave
+Loro
+Francisco
+null
+Otro
+Negros
+./mascotas/15.jpg
+Grecia, Alajuela
+ Aún  tengo la esperanza de encontrarlo, por eso recurro a Dogs Lovers.Lo asustaron las bombetas de año nuevo y huyó de mi casa.
+31/Diciembre/2013.0
+? 
+4
+false
+===>nuevo Mascota<===
+PERDIDA
+15
+Felino
+Aleman de pelo largo
+Fifeilla
+8-88808
+Manchado
+Amarillos
+./mascotas/16.jpg
+San Rafael, Heredia
+Extrano mi gatito :(
+1/Noviembre/2014.0
+$ 50 000
+0
+false
+===>nuevo Mascota<===
+ENCONTRADA
+16
+Roedor
+Otro
+
+null
+Dos Tonalidades 
+Cafes
+./mascotas/17.jpg
+Mora, San Jose
+La encontre en un basurero guardada en su jaula. Alguien decidio abandonarla
+1/Junio/2014.0
+null
+2
+false
+===>nuevo Mascota<===
+ADOPTADA
+17
+Ave
+Loro de Bolsillo
+Pajarutococo
+null
+Dos Tonalidades 
+Cafes
+./mascotas/18.jpg
+Central, Limon
+La encontre perdida en un barco
+1/Agosto/2014.0
+null
+6
+false
+===>nuevo Mascota<===
+PERDIDA
+18
+Felino
+Otro
+Savanah
+1-856-899
+Dos Tonalidades 
+Cafes
+./mascotas/19.jpg
+Belén, Heredia
+Se escapó en una tarde de rayería.Recurro a D.L con esperanzas de encontrarlo
+31/Octubre/2014.0
+? 50 000
+7
+false
+===>nuevo Mascota<===
+ENCONTRADA
+19
+Canino
+Chihuahua
+Perlita
+877925
+Blanco 
+Negros
+./mascotas/20.jpg
+Golfito, Puntarenas
+Me la encontre cuando andaba trayendo electrodomesticos para vender.
+15/Julio/2014.0
+null
+0
+false
+=======
 ===>nuevo Mascota<===
 EN ADOPCION
 0
@@ -303,18 +625,19 @@ Se escapó en una tarde de rayería.Recurro a D.L con esperanzas de encontrarlo
 7
 false
 ===>nuevo Mascota<===
-ADOPTADA
+ENCONTRADA
 19
 Canino
-Chihuahua
-Franca Maria
+Airedale Terrier
+Perlita
 877925
-Blanco 
-Negros
+Otro
+Otro
 ./mascotas/20.jpg
-Golfito, Puntarenas
-Me la encontre cuando andaba trayendo electrodomesticos para vender.
-15/Julio/2014.0
+Central, San Jose
+Me la encontre cuando andaba trayendo electrodomesticos para vender. Ayuda por favor.
+1/1/2014
 null
-31
+0
 false
+>>>>>>> origin/master

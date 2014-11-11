@@ -1,11 +1,18 @@
+
 /*Autores:
 *Ariel Montero 
 *Giaccomo Ubaldo
 *Fabián Monge
 *Jefri Cárdenas
+<<<<<<< HEAD
 *Fecha de Creacion: 4/11/2014
 *
 *Descripción: Esta es la clase EnviarMail , su función es enviar correos sin adjunto
+=======
+*Fecha de Creacion: 21/10/2014
+*
+*Descripción: Esta es la clase EnviarMail, su función es ocuparse de todo lo relacionado al envío de correos a otros usuarios.
+>>>>>>> origin/master
 *
 */
 
@@ -35,6 +42,12 @@ public class EnviarMail {
    	  
      }
      
+ 	
+ 	public static String emailG = "dogsloverspoo@gmail.com";
+ 	public static String passG = "dogslovers1234";
+ 	
+     
+     
           public static void enviarMail(){
 
           try
@@ -45,7 +58,7 @@ public class EnviarMail {
             props.setProperty("mail.smtp.host", "smtp.gmail.com");
             props.setProperty("mail.smtp.starttls.enable", "true");
             props.setProperty("mail.smtp.port", "587");
-            props.setProperty("mail.smtp.user", "dogs1lovers@gmail.com");
+            props.setProperty("mail.smtp.user", emailG);
             props.setProperty("mail.smtp.auth", "true");
             props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
 
@@ -55,7 +68,7 @@ public class EnviarMail {
 
             // Construimos el mensaje
             MimeMessage message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("dogs1lovers@gmail.com"));
+            message.setFrom(new InternetAddress(emailG));
             message.addRecipient(
                 Message.RecipientType.TO,
                 new InternetAddress(correoDestinatario)); //Sitio de destino del msj
@@ -66,7 +79,7 @@ public class EnviarMail {
 
             // Lo enviamos.
             Transport t = session.getTransport("smtp");
-            t.connect("dogs1lovers@gmail.com", "46@5aF1o.Dogs"); //Aqui va el correo de donde se va a enviar y la contrasena
+            t.connect(emailG, passG); //Aqui va el correo de donde se va a enviar y la contrasena
             t.sendMessage(message, message.getAllRecipients());
 
             // Cierre.

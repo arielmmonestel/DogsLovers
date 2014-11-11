@@ -1,14 +1,20 @@
+
 /*Autores:
 *Ariel Montero 
 *Giaccomo Ubaldo
 *Fabián Monge
 *Jefri Cárdenas
+<<<<<<< HEAD
 *Fecha de Creacion: 4/11/2014
 *
 *Descripción: Esta es la clase Usuario , su función general es instanciar objetos de tipo Usuario. Hereda de Persona
+=======
+*Fecha de Creacion: 21/10/2014
+*
+*Descripción: Esta es la clase Usuarios, engloba el concepto de Usuarios en el sistema.
+>>>>>>> origin/master
 *
 */
-
 
 package logicaDeNegocios;
 
@@ -128,7 +134,6 @@ public class Usuario extends Persona{
 		System.out.println("Al hacer reportar");
 		System.out.println(idUsuario);
 		System.out.println(SistemasUsuarios.getUsuario(idUsuario).estaEnListaNegra());
-		ListaNegra.agregarAListaNegra(SistemasUsuarios.getUsuario(idUsuario));
 		SistemasUsuarios.GuardarUsuario();
 	}
 	

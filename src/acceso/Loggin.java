@@ -5,7 +5,11 @@
 *Jefri Cárdenas
 *Fecha de Creacion: 4/11/2014
 *
+<<<<<<< HEAD
 *Descripción: Esta es la clase Loggin , su función es instanciar la ventana "Loggin"
+=======
+*Descripción: Esta es la clase Loggin, su función es abrir una ventana que permita al usuario loguearse o registrarse en el programa.
+>>>>>>> origin/master
 *
 */
 
@@ -22,16 +26,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 
 import javax.swing.JLabel;
-
-
-
-
-
-
-
-
-
-
 
 import java.awt.Font;
 
@@ -120,6 +114,7 @@ public class Loggin extends JFrame {
 		btnIngresar.setIcon(new ImageIcon("./imgs/BotonIngresarTamanioMedio.png"));
 		btnIngresar.addActionListener(new ActionListener() {
 			
+			
 			public void actionPerformed(ActionEvent e) {
 				String entradaUsuario = textFieldNombreUsuario.getText();
 				String entradaContrasenia = passwordFieldContrasenaUsuario.getText();
@@ -128,8 +123,8 @@ public class Loggin extends JFrame {
 					
 					dispose();
 					
-					
-					VentanaPrincipal.main(null);
+					VentanaPrincipal
+					.main(null);
 					VentanaPrincipal.setIDUsuarioActivo(SistemasUsuarios.getIdPorNickName(entradaUsuario));
 					
 					if(SistemasUsuarios.verificarEsAdministrador(entradaUsuario)){

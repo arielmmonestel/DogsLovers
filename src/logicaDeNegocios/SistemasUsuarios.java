@@ -1,3 +1,18 @@
+
+
+/*Autores:
+*Ariel Montero 
+*Giaccomo Ubaldo
+*Fabián Monge
+*Jefri Cárdenas
+*Fecha de Creacion: 21/10/2014
+*
+*Descripción: Esta es la clase SistemasUsuarios, se ocupa de toda la parte dedicada del sistema a los usuarios.
+*
+*/
+
+
+
 package logicaDeNegocios;
 
 import java.io.BufferedReader;
@@ -131,6 +146,12 @@ public class SistemasUsuarios {
     }
 	
 	public static Usuario getUsuario(int indice){
+		try {
+			leerUsuarios();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return listaUsuarios.get(indice);
 	}
   
@@ -212,6 +233,7 @@ public class SistemasUsuarios {
 
 		return false;
 	}
+
 	public static ArrayList<Usuario> getNoAdministradores(){
 		
 		ArrayList<Usuario> listaDeNoAdministradores = new ArrayList<Usuario>();
@@ -287,6 +309,7 @@ public class SistemasUsuarios {
 		}
 		return -1;
 	}
+
 	public static String getNombreUsuario(int id){
 		try {
 			leerUsuarios();
@@ -448,6 +471,7 @@ public class SistemasUsuarios {
 			for(Usuario usuario: listaUsuarios){
 				if (usuario.getID() == idUsuario){
 					email =  usuario.getEmail();
+					return email;
 				}
 			}
 			

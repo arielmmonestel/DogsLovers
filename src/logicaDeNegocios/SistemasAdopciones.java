@@ -1,9 +1,9 @@
-
 /*Autores:
 *Ariel Montero 
 *Giaccomo Ubaldo
 *Fabián Monge
 *Jefri Cárdenas
+<<<<<<< HEAD
 *Fecha de Creacion: 4/11/2014
 *
 *Descripción: Esta es la clase Sistema Adopciones , su función General es procesar todos los datos de Adopciones para mostrarlos en pantalla

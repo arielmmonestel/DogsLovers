@@ -1,11 +1,18 @@
+
 /*Autores:
 *Ariel Montero 
 *Giaccomo Ubaldo
 *Fabián Monge
 *Jefri Cárdenas
+<<<<<<< HEAD
 *Fecha de Creacion: 15/10/2014
 *
 *Descripción: Esta es la clase  Mascota , su función es instanciar objetos de tipo Mascota.
+=======
+*Fecha de Creacion: 21/10/2014
+*
+*Descripción: Esta es la clase Mascota, su función es englobar el concepto de mascotas.
+>>>>>>> origin/master
 *
 */
 

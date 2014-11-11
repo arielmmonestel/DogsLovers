@@ -1,14 +1,21 @@
+
 /*Autores:
 *Ariel Montero 
 *Giaccomo Ubaldo
 *Fabián Monge
 *Jefri Cárdenas
+<<<<<<< HEAD
 *Fecha de Creacion: 4/11/2014
 *
 *Descripción: Esta es la clase Casa Cuna , su función es instanciar objetos Casas Cuna
+=======
+*Fecha de Creacion: 21/10/2014
+*
+*Descripción: Esta es la clase CasaCuna, esta clase engloba el concepto de casas cuna, que son las que se registran en el programa
+*con el propósito de brindar albergue a otras mascotas encontradas o en adopción
+>>>>>>> origin/master
 *
 */
-
 
 package logicaDeNegocios;
 import java.io.BufferedReader;

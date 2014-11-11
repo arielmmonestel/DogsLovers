@@ -1,9 +1,9 @@
-
 /*Autores:
 *Ariel Montero 
 *Giaccomo Ubaldo
 *Fabián Monge
 *Jefri Cárdenas
+<<<<<<< HEAD
 *Fecha de Creacion: 4/11/2014
 *
 *Descripción: Esta es la clase Persona, su función es instanciar personas y que sea la clase madre de Usuario

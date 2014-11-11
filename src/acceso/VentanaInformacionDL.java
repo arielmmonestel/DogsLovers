@@ -1,3 +1,15 @@
+
+/*Autores:
+*Ariel Montero 
+*Giaccomo Ubaldo
+*Fabián Monge
+*Jefri Cárdenas
+*Fecha de Creacion: 4/11/2014
+*
+*Descripción: Esta es la clase VentanaInformacionDL, no tiene funcionalidad
+*
+*/
+
 package acceso;
 
 import java.awt.BorderLayout;

@@ -1,3 +1,19 @@
+
+
+/*Autores:
+*Ariel Montero 
+*Giaccomo Ubaldo
+*Fabián Monge
+*Jefri Cárdenas
+*Fecha de Creacion: 4/11/2014
+*
+*Descripción: Esta es la clase VentanaPrincipal, contiene todos los paneles principales, los cuáles son mayormente de consulta
+*y registro. Desde aquí se va a todas las demás ventanas y paneles.
+*
+*/
+
+
+
 package acceso;
 
 import acceso.*;
@@ -313,8 +329,10 @@ public class VentanaPrincipal {
 	private String fotoConvivencia;
 	private int idUsuarioQueCalifica;
 	private JButton buttonAgregarFoto;
+	private JButton btnPanelPerfilMascota_Adoptar;
+	private JButton btnPanelPerfilMascota_Editar;
 	
-    public static void main(String[] args) {
+   public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
@@ -329,7 +347,6 @@ public class VentanaPrincipal {
             }
         });
     }
-
     public VentanaPrincipal() throws IOException {
         try {
             SistemasMascotas.leerMascota();
@@ -343,6 +360,8 @@ public class VentanaPrincipal {
     }
 
     private void initialize() throws IOException {
+        
+    	//if(SistemasUsuarios. IDUsuarioActivo
         
         listaMascotasParaMostrar =  SistemasMascotas.getListaMascota();
         posicionMascotaPanel1 = listaMascotasParaMostrar.size()-1; posicionMascotaPanel2 = listaMascotasParaMostrar.size()-2; posicionMascotaPanel3 = listaMascotasParaMostrar.size()-3; mascotaPanel1 = listaMascotasParaMostrar.get(posicionMascotaPanel1);
@@ -434,9 +453,21 @@ public class VentanaPrincipal {
              	recomensaApop = mascotaPanel1.getRecompensa();    
              	correoApop = SistemasUsuarios.getCorreoDelUsuario(idEncargado);              
   
- 
-             			
-  
+             	btnPanelPerfilMascota_Adoptar.setVisible(true);
+             	System.out.println(estado);
+	
+             	if(mascotaPanel1.getEstado().equals("EN ADOPCION"))
+             		btnPanelPerfilMascota_Adoptar.setVisible(true);
+             	else	 
+             	if(mascotaPanel1.getEstado().equals("EN CASA CUNA"))
+         			btnPanelPerfilMascota_Adoptar.setVisible(true);         		
+             	else{
+             		btnPanelPerfilMascota_Adoptar.setVisible(false);
+             	}     
+             	if(ListaNegra.estaEnListaNegra(IDUsuarioActivo));
+         			btnPanelPerfilMascota_Adoptar.setVisible(false);	
+         			
+         		
                 
                 cargarPanelPerfilMascota(idMascApop, estado,chipApop,ojosApop,peloApop,diaSucesApopo,
                 		razaApop,tipoApop,recompensaApop,idEngcardoApop);
@@ -527,8 +558,20 @@ public class VentanaPrincipal {
              	cargarPanelPerfilMascota(idMascApop, estado,chipApop,ojosApop,peloApop,diaSucesApopo,
                 		razaApop,tipoApop,recompensaApop,idEngcardoApop);
         		
-        		
-        		
+             	  
+             	btnPanelPerfilMascota_Adoptar.setVisible(true);
+             	System.out.println(estado);
+
+             	if(mascotaPanel2.getEstado().equals("EN ADOPCION"))
+             		btnPanelPerfilMascota_Adoptar.setVisible(true);
+             	else	 
+             	if(mascotaPanel2.getEstado().equals("EN CASA CUNA"))
+         			btnPanelPerfilMascota_Adoptar.setVisible(true);         		
+             	else{
+             		btnPanelPerfilMascota_Adoptar.setVisible(false);
+             	}     
+             	if(ListaNegra.estaEnListaNegra(IDUsuarioActivo));
+         			btnPanelPerfilMascota_Adoptar.setVisible(false);	
         		
         	}
         });
@@ -603,9 +646,26 @@ public class VentanaPrincipal {
              	recomensaApop = mascotaPanel3.getRecompensa();    
              	correoApop = SistemasUsuarios.getCorreoDelUsuario(idEncargado);    
 
-             	cargarPanelPerfilMascota(idMascApop, estado,chipApop,ojosApop,peloApop,diaSucesApopo,
-                		razaApop,tipoApop,recompensaApop,idEngcardoApop);
-        		
+             	  
+             	btnPanelPerfilMascota_Adoptar.setVisible(true);
+             	
+             	
+             	btnPanelPerfilMascota_Adoptar.setVisible(true);
+             	System.out.println(estado);
+             	if(estado.equals("EN ADOPCION"))
+             		btnPanelPerfilMascota_Adoptar.setVisible(true);
+             	else	 
+             	if(estado.equals("EN CASA CUNA"))
+         			btnPanelPerfilMascota_Adoptar.setVisible(true);         		
+             	else{
+             		btnPanelPerfilMascota_Adoptar.setVisible(false);
+             	}     
+             	if(ListaNegra.estaEnListaNegra(IDUsuarioActivo));
+         			btnPanelPerfilMascota_Adoptar.setVisible(false);	
+             	
+         			cargarPanelPerfilMascota(idMascApop, estado,chipApop,ojosApop,peloApop,diaSucesApopo,
+                    		razaApop,tipoApop,recompensaApop,idEngcardoApop);
+                 	
         	}
         });
         btnVer_panel3.setBounds(728, 107, 130, 23);
@@ -1120,11 +1180,11 @@ public class VentanaPrincipal {
 
             	 try {
             		 
-            		 int opc = JOptionPane.showConfirmDialog(null, "Desea ver la lista de casas cuna que reciben esta mascota");
+            		/* int opc = JOptionPane.showConfirmDialog(null, "Desea ver la lista de casas cuna que reciben esta mascota");
 	               		if (opc == JOptionPane.YES_NO_OPTION){
 	               	  		return;
 	               		}
-            		 
+            		 */
 	                nombre = textFieldNombreMascota.getText();
 	                chip = textFieldNumChip.getText();
 	                lugarVisto = comboBoxCanton.getSelectedItem().toString() + ", " + comboBoxProvincia.getSelectedItem().toString();
@@ -1147,7 +1207,43 @@ public class VentanaPrincipal {
 	                    return;
 	                }
 	                if(SistemasMascotas.ChipYaEstaRegistrado(chip)){
-	                    JOptionPane.showMessageDialog(panelAgregarMascota, "Mascota ya ha sido registrada");
+	                	
+	                	JOptionPane.showMessageDialog(panelAgregarMascota, "Mascota ya ha sido registrada,\nse le "
+	                			+ "enviara un correo con mas información.\n Por favor espero unos segundos");
+	                	
+	                	String subject = "Dogs Lovers - Mascota Encontrada";
+	                	int idMascota = SistemasMascotas.getIDporChip(chip); 
+	                	String nombreEncargado =  SistemasMascotas.getNickEncargadoActual(idMascota);	                	
+	                	
+	                	int idEncargado = SistemasUsuarios.getIdPorNickName(nombreEncargado);
+	                	
+	                	String emailEncargado = SistemasUsuarios.getCorreoDelUsuario(idEncargado);
+	                	String emailUsuarioAcutal = SistemasUsuarios.getCorreoDelUsuario(IDUsuarioActivo);
+						String imagen = SistemasMascotas.getFotoMascota(idMascota);
+						String mensaje = "Una mascota recienteme ingresada por "
+								+  SistemasUsuarios.getNombreCompletoDelUsuario(IDUsuarioActivo) +" con el el correo "
+								+ emailUsuarioAcutal + " y el teléfono "
+								+ SistemasUsuarios.getTelefonoDelUsuario(IDUsuarioActivo)
+								+ ".\nYa ha sido registrada por " 
+								+ nombreEncargado   
+								+"\n Si desea comunicarse puede hacerlo al teléfono:  " 
+								+ SistemasUsuarios.getTelefonoDelUsuario(idEncargado) 
+								+ ".\n " +"O al correo electrónico: " + emailEncargado
+								+ " Gracias por ayudarnos."; 						
+						
+						System.out.println(emailUsuarioAcutal);
+						System.out.println(emailEncargado);
+						
+						Sistema.enviarMailConAdjunto(emailUsuarioAcutal, subject, mensaje,  imagen);
+						//Sistema.enviarMailConAdjunto("fabian1mg@gmail.com", subject, mensaje,  imagen);
+						
+						Sistema.enviarMailConAdjunto(emailEncargado, subject, mensaje,  imagen);
+						//Sistema.enviarMailConAdjunto("fabian1mg@gmail.com", subject, mensaje,  imagen);
+	                	
+	                	
+						
+						
+	                	JOptionPane.showMessageDialog(panelAgregarMascota, "Mascota ya ha sido registrada,\nse Se le ha eviado un correo");
 	                    return ;
 	                }
 	                if(getFoto() == null){           
@@ -3018,7 +3114,7 @@ JButton btninicioConsulta11 = new JButton("Inicio");
         table = new JTable(tableModel);
         scrollPane_4.setViewportView(table);
 
-        JButton btnPanelPerfilMascota_Adoptar = new JButton("Adoptar");
+        btnPanelPerfilMascota_Adoptar = new JButton("Adoptar");
         btnPanelPerfilMascota_Adoptar.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {        	      
                 	 panelPerfilMascota.setVisible(false);
@@ -3035,7 +3131,18 @@ JButton btninicioConsulta11 = new JButton("Inicio");
         btnPanelPerfilMascota_Adoptar.setBounds(43, 391, 91, 23);
         panelPerfilMascota.add(btnPanelPerfilMascota_Adoptar);
         
+
         JButton btnPanelPerfilMascota_Editar = new JButton("Editar");
+        btnPanelPerfilMascota_Editar.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		try {
+					VentanaEdicionMascota ventanaEdicion = new VentanaEdicionMascota(idMascApop);
+					ventanaEdicion.setVisible(true);
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+        	}
+        });
         btnPanelPerfilMascota_Editar.setBounds(620, 340, 91, 23);
         panelPerfilMascota.add(btnPanelPerfilMascota_Editar);
         
@@ -3380,6 +3487,11 @@ JButton btninicioConsulta11 = new JButton("Inicio");
         lbl_panelPerfilMacota_Telefono.setText(SistemasUsuarios.getTelefonoDelUsuario(idEngcardo));
         imgfotomascota40 = new  ImageIcon(SistemasMascotas.getFotoMascota(idMascota)) ;
         lbl_panelPerfilMascota_Foto.setIcon(new ImageIcon(imgfotomascota40.getImage().getScaledInstance(170,199,Image.SCALE_SMOOTH)));
+        
+        btnPanelPerfilMascota_Editar.setVisible(false);
+        if( idEngcardoApop != IDUsuarioActivo)	
+ 			btnPanelPerfilMascota_Editar.setVisible(false);
+ 		
         
         /*
          *

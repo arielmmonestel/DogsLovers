@@ -1,3 +1,18 @@
+
+/*Autores:
+*Ariel Montero 
+*Giaccomo Ubaldo
+*Fabián Monge
+*Jefri Cárdenas
+*Fecha de Creacion: 4/11/2014
+*
+*Descripción: Esta es la clase VentanaReporte, su función es abrir una ventana para definir el motivo de un reporte y finalizar el mismo.
+*
+*/
+
+
+
+
 package acceso;
 
 import java.awt.BorderLayout;
@@ -5,6 +20,7 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -80,6 +96,8 @@ public class VentanaReporte extends JFrame {
 		contentPane.add(lblEscribeElMotivo);
 		
 		JButton btnReportar = new JButton("Reportar");
+		btnReportar.setIcon(new ImageIcon("./imgs/ReportarGrande.png"));
+		btnReportar.setIcon(new ImageIcon("./imgs/ReportarPequenio.png"));
 		btnReportar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				

@@ -1,13 +1,21 @@
+
 /*Autores:
 *Ariel Montero 
 *Giaccomo Ubaldo
 *Fabián Monge
 *Jefri Cárdenas
+<<<<<<< HEAD
 *Fecha de Creacion: 4/11/2014
 *
 *Descripción: Esta es la clase Adopción  , su función es instanciar adopciones.
+=======
+*Fecha de Creacion: 21/10/2014
+*
+*Descripción: Esta es la clase Adopción, su función es englobar el concepto de adopciones de mascotas.
+>>>>>>> origin/master
 *
 */
+
 
 
 package logicaDeNegocios;

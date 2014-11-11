@@ -1,4 +1,17 @@
- package acceso;
+
+/*Autores:
+*Ariel Montero 
+*Giaccomo Ubaldo
+*Fabián Monge
+*Jefri Cárdenas
+*Fecha de Creacion: 4/11/2014
+*
+*Descripción: Esta es la clase Loggin, su función es abrir una ventana que permita calificar adoptantes de mascotas
+*
+*/
+
+package acceso;
+
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;

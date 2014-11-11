@@ -1,11 +1,19 @@
+
 /*Autores:
 *Ariel Montero 
 *Giaccomo Ubaldo
 *Fabián Monge
 *Jefri Cárdenas
+<<<<<<< HEAD
 *Fecha de Creacion: 4/11/2014
 *
 *Descripción: Esta es la clase Donacion  , su función es instanciar objetos de tipo donación
+=======
+*Fecha de Creacion: 21/10/2014
+*
+*Descripción: Esta es la clase Donación, su función es englobar el concepto de donaciones a otras asociaciones
+*por parte de los usuarios.
+>>>>>>> origin/master
 *
 */
 

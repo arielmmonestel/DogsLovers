@@ -1,3 +1,17 @@
+
+/*Autores:
+*Ariel Montero 
+*Giaccomo Ubaldo
+*Fabián Monge
+*Jefri Cárdenas
+*Fecha de Creacion: 4/11/2014
+*
+*Descripción: Esta es la clase VentanaRegistroAsociacionBeneficiaria, su función es mostrar una ventana que permita registrar asociaciones
+*
+*/
+
+
+
 package acceso;
 
 import java.awt.BorderLayout;

@@ -1,14 +1,21 @@
+
 /*Autores:
 *Ariel Montero 
 *Giaccomo Ubaldo
 *Fabián Monge
 *Jefri Cárdenas
+<<<<<<< HEAD
 *Fecha de Creacion: 4/11/2014
 *
 *Descripción: Esta es la clase Asociación , su función es instanciar objetos asociaciones
+=======
+*Fecha de Creacion: 21/10/2014
+*
+*Descripción: Esta es la clase Asociación, su función es englobar el concepto de asociaciones que velan por el bienestar de los
+*animales y reciben donaciones por parte de los usuarios.
+>>>>>>> origin/master
 *
 */
-
 
 
 
