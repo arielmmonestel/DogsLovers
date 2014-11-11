@@ -294,6 +294,7 @@ public class SistemasUsuarios {
 		}
 		return -1;
 	}
+
 	public static String getNombreUsuario(int id){
 		try {
 			leerUsuarios();

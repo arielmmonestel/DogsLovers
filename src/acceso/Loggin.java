@@ -118,8 +118,8 @@ public class Loggin extends JFrame {
 					
 					dispose();
 					
-					
-					VentanaPrincipal.main(null);
+					VentanaPrincipal
+					.main(null);
 					VentanaPrincipal.setIDUsuarioActivo(SistemasUsuarios.getIdPorNickName(entradaUsuario));
 					
 					if(SistemasUsuarios.verificarEsAdministrador(entradaUsuario)){

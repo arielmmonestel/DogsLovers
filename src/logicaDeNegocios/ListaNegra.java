@@ -84,6 +84,7 @@ public class ListaNegra {
 		}
 		SistemasUsuarios.GuardarUsuario();
 	}
+
 	public static void borrardeListaNegra(int idUsuario){
 		for(int i=0; i< ListaNegra.getListaSize();i++){
 			if (ListaNegra.getListaNegra().get(i) ==idUsuario){
@@ -98,6 +99,14 @@ public class ListaNegra {
 	public static boolean estaEnListaNegra(Usuario pUsuario){
 		getListaNegra();
 		if(listaNegra.contains(pUsuario.getID())){
+			return true;
+		}
+		return false;
+	}
+	
+	public static boolean estaEnListaNegra(int ID){
+		getListaNegra();
+		if(listaNegra.contains(ID)){
 			return true;
 		}
 		return false;
