@@ -73,6 +73,18 @@ public class VentanaEdicionMascota extends JFrame{
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		JComboBox comboBoxEstadoMascota = new JComboBox();
+		comboBoxEstadoMascota.setModel(new DefaultComboBoxModel(new String[] {"PERDIDA", "ENCONTRADA", "FAllECIDA", "EN CASA CUNA", "ADOPTADA", "EN ADOPCION"}));
+		comboBoxEstadoMascota.setBounds(122, 107, 143, 20);
+		contentPane.add(comboBoxEstadoMascota);
+		String seleccionEstado = comboBoxEstadoMascota.getSelectedItem().toString(); 
+		
+		JLabel labelEstadoMAscota = new JLabel("Estado");
+		labelEstadoMAscota.setForeground(new Color(189, 183, 107));
+		labelEstadoMAscota.setFont(new Font("Khmer UI", Font.PLAIN, 15));
+		labelEstadoMAscota.setBounds(69, 91, 48, 50);
+		contentPane.add(labelEstadoMAscota);
+		
 		JLabel lblTituloEdicion = new JLabel("Edici\u00F3n\r\n");
 		lblTituloEdicion.setForeground(new Color(189, 183, 107));
 		lblTituloEdicion.setHorizontalAlignment(SwingConstants.CENTER);
@@ -268,7 +280,7 @@ public class VentanaEdicionMascota extends JFrame{
 					SistemasMascotas.leerMascota();
 				} catch (IOException e1) {
 					e1.printStackTrace();
-				}
+				}SistemasMascotas.getMascota(IdMascotaAEditar).setEstado(seleccionEstado);
 				SistemasMascotas.getMascota(IdMascotaAEditar).setChip(txtfldChip.getText());
 				SistemasMascotas.getMascota(IdMascotaAEditar).setColorDeOjos(seleccionColorDeOjos);
 				SistemasMascotas.getMascota(IdMascotaAEditar).setColorDePelo(seleccionColorDePelo);

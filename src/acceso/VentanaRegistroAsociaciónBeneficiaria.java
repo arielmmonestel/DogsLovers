@@ -50,7 +50,7 @@ public class VentanaRegistroAsociaciónBeneficiaria extends JFrame {
 
 	/**
 	 * Launch the application.
-	 */
+	 *//*
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -67,6 +67,7 @@ public class VentanaRegistroAsociaciónBeneficiaria extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	
 	public VentanaRegistroAsociaciónBeneficiaria() {
 		setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
 		setAlwaysOnTop(true);

@@ -87,7 +87,7 @@ public class VentanaNuevoUsuario extends JFrame {
 		}
 		return respuesta;
 	}
-	
+/*	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

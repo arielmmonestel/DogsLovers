@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/master
 /*Autores:
 *Ariel Montero 
 *Giaccomo Ubaldo

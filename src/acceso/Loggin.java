@@ -5,12 +5,6 @@
 *Jefri Cárdenas
 *Fecha de Creacion: 4/11/2014
 *
-<<<<<<< HEAD
-*Descripción: Esta es la clase Loggin , su función es instanciar la ventana "Loggin"
-=======
-*Descripción: Esta es la clase Loggin, su función es abrir una ventana que permita al usuario loguearse o registrarse en el programa.
->>>>>>> origin/master
-*
 */
 
 package acceso;
@@ -24,7 +18,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
-
 import javax.swing.JLabel;
 
 import java.awt.Font;
@@ -56,6 +49,7 @@ import logicaDeNegocios.EnviarMail;
 import logicaDeNegocios.Mascota;
 import logicaDeNegocios.SistemasUsuarios;
 import logicaDeNegocios.Usuario;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -118,26 +112,37 @@ public class Loggin extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String entradaUsuario = textFieldNombreUsuario.getText();
 				String entradaContrasenia = passwordFieldContrasenaUsuario.getText();
+				
 
 				if(SistemasUsuarios.verificarUsuarioYContrasena(entradaUsuario, entradaContrasenia)){
 					
 					dispose();
 					
-					VentanaPrincipal
-					.main(null);
-					VentanaPrincipal.setIDUsuarioActivo(SistemasUsuarios.getIdPorNickName(entradaUsuario));
-					
-					if(SistemasUsuarios.verificarEsAdministrador(entradaUsuario)){
-					
-						VentanaPrincipal.setEsVisible(true);
+					try {
+						VentanaPrincipal.setNombreUsuarioActivo(entradaUsuario);
+						VentanaPrincipal window = new VentanaPrincipal();
+	                    window.VentanaPrincipal.setVisible(true);
+	                    VentanaPrincipal.setIDUsuarioActivo(SistemasUsuarios.getIdPorNickName(entradaUsuario));
 						
+						
+						if(SistemasUsuarios.verificarEsAdministrador(entradaUsuario)){
+						
+							VentanaPrincipal.setEsVisible(true);
+							
+						}
+						
+						else{
+						
+							VentanaPrincipal.setEsVisible(false);
+							
+						}
+					
+					
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
 					}
 					
-					else{
-					
-						VentanaPrincipal.setEsVisible(false);
-						
-					}
 				}
 				
 				else{
@@ -150,7 +155,8 @@ public class Loggin extends JFrame {
 		JButton btnquinesSomos = new JButton("\u00BFQui\u00E9nes Somos?");
 		btnquinesSomos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				VentanaInformacionDL.main(null);
+				VentanaInformacionDL bla = new  VentanaInformacionDL(); 
+				bla.setVisible(true);
 			}
 		});
 		btnquinesSomos.addMouseListener(new MouseAdapter() {

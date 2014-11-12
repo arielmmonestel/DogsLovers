@@ -1,6 +1,5 @@
-<<<<<<< HEAD
 ===>nuevo Mascota<===
-EN ADOPCION
+EN ADOPCIONes
 0
 Canino
 BullDog Ingles
@@ -307,22 +306,21 @@ false
 ENCONTRADA
 19
 Canino
-Chihuahua
+Airedale Terrier
 Perlita
 877925
-Blanco 
-Negros
+Otro
+Otro
 ./mascotas/20.jpg
-Golfito, Puntarenas
-Me la encontre cuando andaba trayendo electrodomesticos para vender.
-15/Julio/2014.0
+Central, San Jose
+Me la encontre cuando andaba trayendo electrodomesticos .
+1/1/2014
 null
 0
 false
-=======
 ===>nuevo Mascota<===
 EN ADOPCION
-0
+20
 Canino
 BullDog Ingles
 Zoe
@@ -338,7 +336,7 @@ La encontrÃ© buscando alimento en la entrada de mi casa. Es una cachorra, presen
 false
 ===>nuevo Mascota<===
 PERDIDA
-1
+21
 Felino
 Angora Turco
 Filiberto
@@ -354,7 +352,7 @@ Es un gatito angora de ojos verde y azul, presenta un problema en los riÃ±ones y
 false
 ===>nuevo Mascota<===
 PERDIDA
-2
+22
 Canino
 Labrador
 Lucy
@@ -370,7 +368,7 @@ $  250
 false
 ===>nuevo Mascota<===
 PERDIDA
-3
+23
 Canino
 French Poodle
 Moza Sofia
@@ -386,7 +384,7 @@ Una perrita muy inquieta que se desapareciÃ³ cuando fuimos a visitar todos a mi 
 false
 ===>nuevo Mascota<===
 ADOPTADA
-4
+24
 Ave
 Canario
 Giaccomio
@@ -402,7 +400,7 @@ Me lo encontré caminando hacia casa con una ala lastimada. Lo hé curado pero no 
 false
 ===>nuevo Mascota<===
 PERDIDA
-5
+25
 Canino
 Labrador
 Marley
@@ -418,7 +416,7 @@ Hay recompensa de 80 000 por la mascota
 false
 ===>nuevo Mascota<===
 ENCONTRADA
-6
+26
 Canino
 null
 Monstruito
@@ -434,7 +432,7 @@ Quiza se envie a casaCuna
 false
 ===>nuevo Mascota<===
 PERDIDA
-7
+27
 Canino
 Siberian Husky
 Manuel
@@ -450,7 +448,7 @@ Central, San Jose
 false
 ===>nuevo Mascota<===
 PERDIDA
-8
+28
 Canino
 Dobermann
 Doby
@@ -466,7 +464,7 @@ Mora, San Jose
 false
 ===>nuevo Mascota<===
 PERDIDA
-9
+29
 Roedor
 Otro
 Uronsin
@@ -482,7 +480,7 @@ Buenos Aires, Puntarenas
 false
 ===>nuevo Mascota<===
 ENCONTRADA
-10
+30
 Canino
 American Stafford
 Gonther
@@ -498,7 +496,7 @@ El Perrito Presentaba algo de agresividad pero con el tiempo se ha ido calmando
 false
 ===>nuevo Mascota<===
 ENCONTRADA
-11
+31
 Felino
 Gato habana
 Sabana
@@ -514,7 +512,7 @@ null
 false
 ===>nuevo Mascota<===
 PERDIDA
-12
+32
 Roedor
 Erizo
 JuanPablo
@@ -530,7 +528,7 @@ San Rafael, Heredia
 false
 ===>nuevo Mascota<===
 ENCONTRADA
-13
+33
 Canino
 Golden retriever
 Nona
@@ -546,7 +544,7 @@ null
 false
 ===>nuevo Mascota<===
 PERDIDA
-14
+34
 Ave
 Loro
 Francisco
@@ -562,7 +560,7 @@ Grecia, Alajuela
 false
 ===>nuevo Mascota<===
 PERDIDA
-15
+35
 Felino
 Aleman de pelo largo
 Fifeilla
@@ -578,7 +576,7 @@ $ 50 000
 false
 ===>nuevo Mascota<===
 ENCONTRADA
-16
+36
 Roedor
 Otro
 
@@ -594,7 +592,7 @@ null
 false
 ===>nuevo Mascota<===
 ADOPTADA
-17
+37
 Ave
 Loro de Bolsillo
 Pajarutococo
@@ -610,7 +608,7 @@ null
 false
 ===>nuevo Mascota<===
 PERDIDA
-18
+38
 Felino
 Otro
 Savanah
@@ -626,7 +624,7 @@ Se escapó en una tarde de rayería.Recurro a D.L con esperanzas de encontrarlo
 false
 ===>nuevo Mascota<===
 ENCONTRADA
-19
+39
 Canino
 Airedale Terrier
 Perlita
@@ -635,9 +633,8 @@ Otro
 Otro
 ./mascotas/20.jpg
 Central, San Jose
-Me la encontre cuando andaba trayendo electrodomesticos para vender. Ayuda por favor.
+Me la encontre cuando andaba trayendo electrodomesticos . Ayuda por favor.
 1/1/2014
 null
 0
 false
->>>>>>> origin/master
